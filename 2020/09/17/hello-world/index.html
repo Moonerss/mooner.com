@@ -158,6 +158,27 @@
         
 
 
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
 
 
 
