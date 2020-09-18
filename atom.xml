@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-09-17T11:02:03.377Z</updated>
+  <updated>2020-09-18T06:57:58.303Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Cox回归分析</title>
+    <link href="http://example.com/2020/09/18/cox-regression/"/>
+    <id>http://example.com/2020/09/18/cox-regression/</id>
+    <published>2020-09-18T06:29:11.000Z</published>
+    <updated>2020-09-18T06:57:58.303Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Cox回归分析是在生存分析中最常用的影响因素分析，回归模型的前提假设只有一个：分析的因素必须满足&lt;strong&gt;比例风险假设&lt;/strong&gt;，即协变量不随时间的变化而变化。  &lt;/p&gt;
+&lt;h2 id=&quot;Cox比例风险模型&quot;&gt;&lt;a href=&quot;#Cox比例风险模型&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Survival" scheme="http://example.com/categories/Survival/"/>
+    
+    
+    <category term="Cox" scheme="http://example.com/tags/Cox/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
