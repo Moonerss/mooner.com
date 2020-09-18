@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>卡方检验 | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">卡方检验</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2018-11-12
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/stats/" title="stats">
+                    <b>#</b> stats
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="卡方检验"><a href="#卡方检验" class="headerlink" title="卡方检验"></a>卡方检验</h2><p>卡方检验(Chi-square test/Chi-Square Goodness-of-Fit Test)  </p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>卡方检验是一种非参数假设检验，主要用于比较两个分类变量的关联性分析，其根本思想就是在于比较理论频数和实际频数的吻合程度或拟合优度问题。  </p>
+<p>它在分类资料统计推断中的应用，包括：两个率或两个构成比比较的卡方检验；多个率或多个构成比比较的卡方检验以及分类资料的相关分析等。  </p>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><p>卡方检验是以χ2分布为基础的一种假设检验方法，它的原假设H0是：观察频数与期望频数没有差别。  </p>
+<p>首先假设H0成立，基于此前提下计算出χ2值，它表示观察值与理论值之间的偏离程度。根据χ2分布及自由度可以确定在H0假设成立的情况下获得当前统计量及更极端情况的概率P。如果P值很小，说明观察值与理论值偏离程度太大，应当拒绝无效假设，表示比较资料之间有显著差异；否则就不能拒绝无效假设，尚不能认为样本所代表的实际情况和理论假设有差别。  </p>
+<h4 id="卡方值的计算与意义"><a href="#卡方值的计算与意义" class="headerlink" title="卡方值的计算与意义"></a>卡方值的计算与意义</h4><p>对于χ2统计量的计算，最初是由英国统计学家Karl Pearson在1900年首次提出的，因此也称之为Pearson χ2，其计算公式为<br>$$<br>\chi^2=\sum \frac{(A-E)^2}{E}=\sum_{i=1}^k \frac{(A_i-E_i)^2}{E_i}=\sum_{i=1}^k \frac{(A_i-np_i)^2}{np_i}　　(i=1，2，3，…，k)<br>$$</p>
+<blockquote>
+<p>其中，Ai为i水平的观察频数，Ei为i水平的期望频数，n为总频数，pi为i水平的期望频率。i水平的期望频数Ei等于总频数n×i水平的期望概率pi，k为单元格数。当n比较大时，χ2统计量近似服从k-1(计算Ei时用到的参数个数)个自由度的卡方分布。  </p>
+</blockquote>
+<p>由卡方的计算公式可知，当观察频数与期望频数完全一致时，χ2值为0；观察频数与期望频数越接近，两者之间的差异越小，χ2值越小；反之，观察频数与期望频数差别越大，两者之间的差异越大，χ2值越大。换言之，大的χ2值表明观察频数远离期望频数，即表明远离假设。小的χ2值表明观察频数接近期望频数，接近假设。因此，χ2是观察频数与期望频数之间距离的一种度量指标，也是假设成立与否的度量指标。如果χ2值“小”，研究者就倾向于不拒绝H0；如果χ2值大，就倾向于拒绝H0。至于χ2在每个具体研究中究竟要大到什么程度才能拒绝H0，则要借助于卡方分布求出所对应的P值来确定。  </p>
+<h4 id="样本量要求"><a href="#样本量要求" class="headerlink" title="样本量要求"></a>样本量要求</h4><p>卡方分布本身是连续型分布，但是在分类资料的统计分析中，显然频数只能以整数形式出现，因此计算出的统计量是非连续的。只有当样本量比较充足时，才可以忽略两者问的差异，否则将可能导致较大的偏差具体而言，一般认为对于卡方检验中的每一个单元格，要求其最小期望频数均大于1，且至少有4／5的单元格期望频数大于5，此时使用卡方分布计算出的概率值才是准确的。如果数据不符合要求，可以采用Fisher精确检验计算。  </p>
+<h3 id="卡方检验类型"><a href="#卡方检验类型" class="headerlink" title="卡方检验类型"></a>卡方检验类型</h3><h4 id="四格表资料的卡方检验"><a href="#四格表资料的卡方检验" class="headerlink" title="四格表资料的卡方检验"></a>四格表资料的卡方检验</h4><p>四格表资料的卡方检验用于进行两个率或两个构成比的比较。  </p>
+<p>(1) 公式  </p>
+<p>若四格表资料四个格子的频数分别为a，b，c，d，则四格表资料卡方检验的卡方值=<br>$$<br>(ad-bc)^2 \times n/(a+b)(c+d)(a+c)(b+d)<br>$$<br>自由度v=(行数-1)(列数-1)  </p>
+<p>(2)  应用条件  </p>
+<p>要求样本含量应大于40且每个格子中的理论频数不应小于5。当样本含量大于40但理论频数有小于5的情况时卡方值需要校正，当样本含量小于40时只能用Fisher精确检验计算概率。  </p>
+<h4 id="行×列表资料的卡方检验"><a href="#行×列表资料的卡方检验" class="headerlink" title="行×列表资料的卡方检验"></a>行×列表资料的卡方检验</h4><p>行×列表资料的卡方检验用于多个率或多个构成比的比较。  </p>
+<p>(1) 公式    </p>
+<p>r行c列表资料卡方检验的卡方值:<br>$$<br>n[(A_{11}/n_1n_1+A_{12}/n_1n_2+\cdots+A_{rc}/n_rn_c)-1]<br>$$<br>(2) 应用条件  </p>
+<p>要求每个格子中的理论频数T均大于5或1&lt;T&lt;5的格子数不超过总格子数的1/5。当有T&lt;1或1&lt;T&lt;5的格子较多时，可采用并行并列、删行删列、增大样本含量的办法使其符合行×列表资料卡方检验的应用条件。  </p>
+<h4 id="列联表资料的卡方检验"><a href="#列联表资料的卡方检验" class="headerlink" title="列联表资料的卡方检验"></a>列联表资料的卡方检验</h4><p>同一组对象，观察每一个个体对两种分类方法的表现，结果构成双向交叉排列的统计表就是列联表。  </p>
+<h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><ul>
+<li>检验某个连续变量的分布是否与某种理论分布相一致。  </li>
+<li>检验某个分类变量各类的出现概率是否等于指定概率。  </li>
+<li>检验某两个分类变量是否相互独立。(最常见到的）  </li>
+<li>检验某两种方法的结果是否一致。  </li>
+</ul>
+<h3 id="应用条件"><a href="#应用条件" class="headerlink" title="应用条件"></a>应用条件</h3><ol>
+<li>所有的理论数T≥5并且总样本量n≥40，用Pearson卡方进行检验。  </li>
+<li>如果理论数T＜5但T≥1，并且1≥40，用连续性校正的卡方进行检验。  </li>
+<li>如果有理论数T＜1或n＜40，则用Fisher’s检验。  </li>
+</ol>
+<hr>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://wiki.mbalib.com/wiki/%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C">卡方检验-MBA智库百科</a>  </p>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2018/11/05/r-format/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2018-11-12
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/stats/" title="stats">
+                        <b>#</b> stats
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2018/11/20/markdown/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C"><span class="toc-text">卡方检验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="toc-text">基本思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%A1%E6%96%B9%E5%80%BC%E7%9A%84%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%84%8F%E4%B9%89"><span class="toc-text">卡方值的计算与意义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%A6%81%E6%B1%82"><span class="toc-text">样本量要求</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C%E7%B1%BB%E5%9E%8B"><span class="toc-text">卡方检验类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E6%A0%BC%E8%A1%A8%E8%B5%84%E6%96%99%E7%9A%84%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C"><span class="toc-text">四格表资料的卡方检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%8C%C3%97%E5%88%97%E8%A1%A8%E8%B5%84%E6%96%99%E7%9A%84%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C"><span class="toc-text">行×列表资料的卡方检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%81%94%E8%A1%A8%E8%B5%84%E6%96%99%E7%9A%84%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C"><span class="toc-text">列联表资料的卡方检验</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E9%80%94"><span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="toc-text">应用条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

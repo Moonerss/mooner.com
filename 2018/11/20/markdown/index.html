@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>Markdown常用语法 | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Markdown常用语法</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2018-11-20
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/Markdown/" title="Markdown">
+                    <b>#</b> Markdown
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><ol>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFmarkdown">什么是Markdown</a></li>
+<li><a href="#%E4%BA%9A%E4%BC%A6%C2%B7%E6%96%AF%E6%B2%83%E8%8C%A8%E7%9A%84%E4%BC%A0%E5%A5%87%E4%BA%BA%E7%94%9F">亚伦·斯沃茨的传奇人生</a></li>
+<li><a href="#markdown%E7%9A%84%E4%BC%98%E7%82%B9">Markdown的优点</a></li>
+<li><a href="#markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95">Markdown常用语法</a></li>
+<li><a href="#%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95">扩展语法</a>  </li>
+</ol>
+<h3 id="什么是Markdown"><a href="#什么是Markdown" class="headerlink" title="什么是Markdown"></a>什么是Markdown</h3><p><strong>Markdown</strong>是一种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BD%BB%E9%87%8F%E7%BA%A7%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80">轻量级标记语言</a>，创始人为<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B4%84%E7%BF%B0%C2%B7%E6%A0%BC%E9%AD%AF%E4%BC%AF">约翰·格鲁伯</a>（英语：John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/XHTML">XHTML</a>（或者<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTML">HTML</a>）文档”。作为一种小型标记语言，Markdown很容易阅读，也很容易使用普通的文本编辑器编辑。  </p>
+<p><strong>Markdown</strong>也可以理解为将以MARKDOWN语法编写的语言转换成HTML内容的工具。  </p>
+<h3 id="亚伦·斯沃茨的传奇人生"><a href="#亚伦·斯沃茨的传奇人生" class="headerlink" title="亚伦·斯沃茨的传奇人生"></a>亚伦·斯沃茨的传奇人生</h3><p><strong>Markdown</strong>是由<a target="_blank" rel="noopener" href="http://www.aaronsw.com/"><strong>Aaron Swartz</strong></a>和<strong>John Gruber</strong>共同设计的，<strong>Aaron Swartz</strong>就是那位于2013年自杀,有着<strong>开挂</strong>一般传奇人生经历的美国程序员。死后也被追授入<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E9%9A%9B%E7%B6%B2%E8%B7%AF%E5%90%8D%E4%BA%BA%E5%A0%82">互联网名人堂</a>。维基百科对他的评价是：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BE%8E%E5%9B%BD">美国</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%94%B5%E8%84%91%E7%A8%8B%E5%BA%8F%E5%91%98">计算机程序员</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BC%81%E4%B8%9A%E5%AE%B6">企业家</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BD%9C%E5%AE%B6">作家</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E6%94%BF%E6%B2%BB%E6%B4%BB%E5%8A%A8%E8%80%85&action=edit&redlink=1">政治活动者</a>和互联网<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E9%BB%91%E5%AE%A2%E4%B8%BB%E4%B9%89&action=edit&redlink=1">黑客主义者</a>  </p>
+<p>他的一生足以让我们膜拜：  </p>
+<ul>
+<li>13岁时，斯沃茨赢得为创办“有用、有教育意义、协作而非商业的网站”的年轻人而设的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=ArsDigita_Prize&action=edit&redlink=1">ArsDigita</a>奖。</li>
+<li>14岁时，斯沃茨加入编写早期版本的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/RSS">RSS</a>1.0版本的工作组。</li>
+<li><strong>2004</strong>年入读<strong>斯坦福</strong>，2005年暑假之后就退学创业。。。</li>
+<li><strong>2005</strong>年创建<a target="_blank" rel="noopener" href="http://infogami.org/">Infogami</a>，之后与<a target="_blank" rel="noopener" href="http://www.reddit.com/">Reddit</a>合并成为其合伙人，斯沃茨被给予公司联合创始人的头衔。</li>
+<li>2008 年，斯沃茨创办了 Watchdog.net，“会咬人的优秀政府类网站”（”the good government site with teeth”），用于汇集政治人物相关的数据起来并进行数据可视化。此外，他最著名的项目之一是《DeadDrop》（之后更名为《<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=SecureDrop&action=edit&redlink=1">SecureDrop</a>》），一个致力于帮助记者和线人（<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%91%8A%E5%AF%86%E8%80%85">告密者</a>）安全沟通的平台。</li>
+<li>2010年创立求进会（Demand Progress），积极参与禁止网络盗版法案（SOPA）活动，最终该提案被撤回。<ul>
+<li><strong>2011</strong>年7月19日，因被控从MIT和JSTOR下载480万篇学术论文并以免费形式上传于网络被捕。</li>
+<li><strong>2013</strong>年1月自杀身亡，死后仍然影响着世界各地的黑客。</li>
+<li><strong>科里·多克托罗的评价</strong>：亚伦拥有无以伦比的政治洞见力、技术能力和处理人、事的智能。我认为他本可以彻底改变美国（及世界）政治。不过——他的遗产仍然可以在将来对政治做出影响。  </li>
+</ul>
+</li>
+</ul>
+<div align = center>
+    <img src = "/images/markdown/220px-Aaron_Swartz_profile.jpg"/>
+</div>  
+
+
+
+<h3 id="Markdown的优点"><a href="#Markdown的优点" class="headerlink" title="Markdown的优点"></a>Markdown的优点</h3><ul>
+<li>易读（看起来舒服）、易写（语法简单）、易更改<strong>纯文本</strong></li>
+<li>与HTML兼容，是属于程序员的Word</li>
+<li>排版方便</li>
+<li>越来越多的网站支持Markdown。（主要还是写博客方便😜）  </li>
+</ul>
+<h3 id="Markdown常用语法"><a href="#Markdown常用语法" class="headerlink" title="Markdown常用语法"></a>Markdown常用语法</h3><h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><p>标题一般有两种形式：<br>1）使用<code>=</code>和<code>-</code>标记一级和二级标题。</p>
+<blockquote>
+<p>一级标题  </p>
+<p><code>========= </code>  </p>
+<p>二级标题  </p>
+<p><code>---------</code>  </p>
+</blockquote>
+<p>效果：</p>
+<blockquote>
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2></blockquote>
+<p>2）使用<code>#</code>，可表示1-6级标题。</p>
+<blockquote>
+<p><code># 一级标题</code> </p>
+<p><code>## 二级标题</code>    </p>
+<p><code>### 三级标题</code>  </p>
+<p><code>#### 四级标题</code>  </p>
+<p><code>##### 五级标题</code>  </p>
+<p><code>###### 六级标题</code></p>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<h1 id="一级标题-1"><a href="#一级标题-1" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题-1"><a href="#二级标题-1" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
+<h4 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h4><p>Markdown的段落前后都要有空行，如果要段内强制换行，需要使用<strong>两个以上</strong><code>空格键</code>加上<code>回车键</code>  </p>
+<h4 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h4><p>在段落的每行或者只在第一行使用符号<code>&gt;</code>,还可使用多个嵌套引用，如：</p>
+<blockquote>
+<p>&gt;区块引用<br>&gt;&gt; 嵌套引用</p>
+</blockquote>
+<p>效果：</p>
+<blockquote>
+<p>区块引用</p>
+<blockquote>
+<p>嵌套引用  </p>
+</blockquote>
+</blockquote>
+<h4 id="插入代码块"><a href="#插入代码块" class="headerlink" title="插入代码块"></a>插入代码块</h4><p>代码区块的建立有两种方法：<br>1）在每行加上4个空格或者一个制表符，如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello Markdown</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>:和普通段落之间需要单独保留空行。  </p>
+<p>2）使用三个**```** 来作为代码开始的标志，如：</p>
+<blockquote>
+<p>```<br>Hello Markdown<br>```</p>
+</blockquote>
+<p>效果如下：  </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello Markdown</span><br></pre></td></tr></table></figure>
+
+<h4 id="黑体和斜体"><a href="#黑体和斜体" class="headerlink" title="黑体和斜体"></a>黑体和斜体</h4><p>在强调内容两侧分别加上<code>*</code>或者<code>_</code>，如：</p>
+<blockquote>
+<p>*斜体*，<em>斜体</em>    </p>
+<p>*<em>粗体\</em>*，<strong>粗体</strong></p>
+</blockquote>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><p><strong>无序列表</strong><br>使用<code>·</code>、<code>+</code>、或<code>-</code>标记无序列表，如：    </p>
+<blockquote>
+<p>-（+*） 第一项  </p>
+<p>-（+*） 第二项  </p>
+<p>-（+*）第三项  </p>
+</blockquote>
+<p><strong>注意</strong>：标记后面最少有一个_空格_或_制表符_。若不在引用区块中，必须和前方段落之间存在空行。  </p>
+<p>效果：  </p>
+<blockquote>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项  </li>
+</ul>
+</blockquote>
+<p>有序列表的标记方式是将上述的符号换成数字,并辅以<code>.</code>，如：  </p>
+<blockquote>
+<p>1 . 第一项<br>2 . 第二项<br>3 . 第三项      </p>
+</blockquote>
+<p>效果：  </p>
+<blockquote>
+<ol>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项  </li>
+</ol>
+</blockquote>
+<h4 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h4><p>分割线最常使用就是三个或以上<code>*</code>，还可以使用<code>-</code>和<code>_</code>。  </p>
+<p><strong>注意</strong>： 第一二级标题会自带分割线  </p>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p>链接可以由两种形式生成：<strong>行内式</strong>和<strong>参考式</strong>。  </p>
+<p><strong>行内式</strong>：  </p>
+<blockquote>
+<p> [**Aaron Swartz**](<a target="_blank" rel="noopener" href="http://www.aaronsw.com//">http://www.aaronsw.com/\</a>)    </p>
+</blockquote>
+<p>效果：  </p>
+<p><a target="_blank" rel="noopener" href="http://www.aaronsw.com/"><strong>Aaron Swartz</strong></a>  </p>
+<p><strong>参考式</strong>：<br>就是以参考的形式给出链接  </p>
+<blockquote>
+<p>[**Aaron Swartz**][1]  </p>
+<p>[**亚伦·斯沃茨**][2]  </p>
+</blockquote>
+<p>效果：  </p>
+<p><a target="_blank" rel="noopener" href="http://www.aaronsw.com/"><strong>Aaron Swartz</strong></a><br><a target="_blank" rel="noopener" href="http://www.aaronsw.com/"><strong>亚伦·斯沃茨</strong></a>  </p>
+<h4 id="图像插入"><a href="#图像插入" class="headerlink" title="图像插入"></a>图像插入</h4><p>插入图片的语法和插入超链接的语法基本一致，只是在最前面多一个 <code>!</code>。也可分为行内式和参考式两种。   </p>
+<blockquote>
+<p>![亚伦·斯沃茨](<a target="_blank" rel="noopener" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Aaron_Swartz_profile.jpg/220px-Aaron_Swartz_profile.jpg/">https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Aaron_Swartz_profile.jpg/220px-Aaron_Swartz_profile.jpg\</a>)</p>
+</blockquote>
+<p>Markdown 不支持指定图片的显示大小，不过可以通过直接插入<code>&lt;img /&gt;</code>标签来指定相关属性。  </p>
+<h4 id="字符转义"><a href="#字符转义" class="headerlink" title="字符转义"></a>字符转义</h4><p>反斜线（<code>\</code>）用于插入在 Markdown 语法中有特殊作用的字符。  </p>
+<h4 id="行内代码块"><a href="#行内代码块" class="headerlink" title="行内代码块"></a>行内代码块</h4><p>起到标记作用。如：  </p>
+<blockquote>
+<p>`hello`</p>
+</blockquote>
+<p>效果：  </p>
+<blockquote>
+<p><code>hello</code>  </p>
+</blockquote>
+<h3 id="扩展语法"><a href="#扩展语法" class="headerlink" title="扩展语法"></a>扩展语法</h3><h4 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h4><p>使用<code>~~</code>表示  </p>
+<blockquote>
+<p>~<del>删除线</del>  </p>
+</blockquote>
+<p>效果：</p>
+<blockquote>
+<p><del>删除线</del></p>
+</blockquote>
+<h4 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h4><p>使用<code>|</code>表示表格纵向边界，表头和表内容用<code>-</code>隔开，并可用<code>:</code>进行对齐设置，两边都有<code>:</code>则表示居中，若不加<code>:</code>则默认左对齐。  </p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| left | center | right |</span><br><span class="line">| :--- | :----: | ----: |</span><br><span class="line">| aaaa | bbbbbb | ccccc |</span><br><span class="line">| a    | b      | c     |</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">left</th>
+<th align="left">center</th>
+<th align="left">right</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">aaaa</td>
+<td align="left">bbbbbb</td>
+<td align="left">ccccc</td>
+</tr>
+<tr>
+<td align="left">a</td>
+<td align="left">b</td>
+<td align="left">c</td>
+</tr>
+</tbody></table>
+<p>表格中不仅可以加入字符，还可以是链接等信息。  </p>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2018/11/12/chisq/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2018-11-20
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/Markdown/" title="Markdown">
+                        <b>#</b> Markdown
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2018/11/22/updateR/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMarkdown"><span class="toc-text">什么是Markdown</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%9A%E4%BC%A6%C2%B7%E6%96%AF%E6%B2%83%E8%8C%A8%E7%9A%84%E4%BC%A0%E5%A5%87%E4%BA%BA%E7%94%9F"><span class="toc-text">亚伦·斯沃茨的传奇人生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Markdown%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-text">Markdown的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="toc-text">Markdown常用语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E9%A2%98"><span class="toc-text">标题</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">一级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">二级标题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98-1"><span class="toc-text">一级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98-1"><span class="toc-text">二级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">三级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">四级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%94%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">五级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%85%AD%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">六级标题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AE%B5%E8%90%BD"><span class="toc-text">段落</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E5%BC%95%E7%94%A8"><span class="toc-text">区块引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-text">插入代码块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%91%E4%BD%93%E5%92%8C%E6%96%9C%E4%BD%93"><span class="toc-text">黑体和斜体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%89%B2%E7%BA%BF"><span class="toc-text">分割线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5"><span class="toc-text">链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E6%8F%92%E5%85%A5"><span class="toc-text">图像插入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E8%BD%AC%E4%B9%89"><span class="toc-text">字符转义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-text">行内代码块</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95"><span class="toc-text">扩展语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%BA%BF"><span class="toc-text">删除线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC"><span class="toc-text">表格</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>
