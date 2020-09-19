@@ -36,6 +36,44 @@
   </entry>
   
   <entry>
+    <title>Orchestrating Single-Cell Analysis (二)</title>
+    <link href="http://example.com/2020/08/12/single-cell-i/"/>
+    <id>http://example.com/2020/08/12/single-cell-i/</id>
+    <published>2020-08-11T16:00:00.000Z</published>
+    <updated>2020-09-19T00:23:33.559Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;scRNA-seq analysis workflow&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
+    
+    
+    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scRNA的细胞质控</title>
+    <link href="http://example.com/2020/08/12/quality-control/"/>
+    <id>http://example.com/2020/08/12/quality-control/</id>
+    <published>2020-08-11T16:00:00.000Z</published>
+    <updated>2020-09-19T00:20:14.191Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Quality Control  &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
+    
+    
+    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
+    
+  </entry>
+  
+  <entry>
     <title>单尾还是双尾检验</title>
     <link href="http://example.com/2020/08/10/one-tail/"/>
     <id>http://example.com/2020/08/10/one-tail/</id>
@@ -48,6 +86,52 @@
     
     
     <category term="statistics" scheme="http://example.com/categories/statistics/"/>
+    
+    
+    <category term="stats" scheme="http://example.com/tags/stats/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Orchestrating Single-Cell Analysis (一)</title>
+    <link href="http://example.com/2020/08/10/single-cell-ii/"/>
+    <id>http://example.com/2020/08/10/single-cell-ii/</id>
+    <published>2020-08-09T16:00:00.000Z</published>
+    <updated>2020-09-19T00:42:59.794Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;单细胞数据结构  &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
+    
+    
+    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>R 语言统计检验函数汇总</title>
+    <link href="http://example.com/2020/07/31/r-stats/"/>
+    <id>http://example.com/2020/07/31/r-stats/</id>
+    <published>2020-07-30T16:00:00.000Z</published>
+    <updated>2020-09-19T00:12:01.201Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h2 id=&quot;连续型数据&quot;&gt;&lt;a href=&quot;#连续型数据&quot; class=&quot;headerlink&quot; title=&quot;连续型数据&quot;&gt;&lt;/a&gt;连续型数据&lt;/h2&gt;&lt;h3 id=&quot;基于分布的检验&quot;&gt;&lt;a href=&quot;#基于分布的检验&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
     
     
     <category term="stats" scheme="http://example.com/tags/stats/"/>
@@ -110,87 +194,11 @@
   </entry>
   
   <entry>
-    <title>Screen命令的使用</title>
-    <link href="http://example.com/2019/04/04/screen/"/>
-    <id>http://example.com/2019/04/04/screen/</id>
-    <published>2019-04-03T16:00:00.000Z</published>
-    <updated>2020-09-18T11:48:42.770Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;screen常用命令&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Linux" scheme="http://example.com/categories/Linux/"/>
-    
-    
-    <category term="screen" scheme="http://example.com/tags/screen/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R的文件操作</title>
-    <link href="http://example.com/2019/04/01/file-r/"/>
-    <id>http://example.com/2019/04/01/file-r/</id>
-    <published>2019-03-31T16:00:00.000Z</published>
-    <updated>2020-09-18T11:47:55.811Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;在R中操作文件  &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="base" scheme="http://example.com/tags/base/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Jekyll-theme-next添加Valine评论系统</title>
-    <link href="http://example.com/2019/03/18/valine/"/>
-    <id>http://example.com/2019/03/18/valine/</id>
-    <published>2019-03-18T11:42:02.000Z</published>
-    <updated>2020-09-18T11:43:30.204Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;给Jekyll添加Valine评论系统&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Jekyll" scheme="http://example.com/categories/Jekyll/"/>
-    
-    
-    <category term="blog" scheme="http://example.com/tags/blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅识apply家族</title>
-    <link href="http://example.com/2019/03/11/apply/"/>
-    <id>http://example.com/2019/03/11/apply/</id>
-    <published>2019-03-11T11:35:05.000Z</published>
-    <updated>2020-09-18T12:02:52.965Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;apply 家族函数&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="base" scheme="http://example.com/tags/base/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>tryCatch抓取错误</title>
-    <link href="http://example.com/2019/03/06/trycatch/"/>
-    <id>http://example.com/2019/03/06/trycatch/</id>
-    <published>2019-03-06T11:20:32.000Z</published>
-    <updated>2020-09-18T11:26:20.515Z</updated>
+    <title>分类变量和连续变量的相关性计算</title>
+    <link href="http://example.com/2020/06/01/classificated-continonus/"/>
+    <id>http://example.com/2020/06/01/classificated-continonus/</id>
+    <published>2020-05-31T16:00:00.000Z</published>
+    <updated>2020-09-19T00:45:10.490Z</updated>
     
     
       
@@ -207,63 +215,19 @@
     
     
     
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>数据拆分与合并</title>
-    <link href="http://example.com/2019/03/05/split-combn/"/>
-    <id>http://example.com/2019/03/05/split-combn/</id>
-    <published>2019-03-04T16:00:00.000Z</published>
-    <updated>2020-09-18T11:16:36.330Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;长宽数据格式的转换&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="base" scheme="http://example.com/tags/base/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>超几何分布和二项分布</title>
-    <link href="http://example.com/2019/02/21/hypergeometric/"/>
-    <id>http://example.com/2019/02/21/hypergeometric/</id>
-    <published>2019-02-21T11:08:00.000Z</published>
-    <updated>2020-09-18T11:08:53.797Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-&lt;h2 id=&quot;超几何分布&quot;&gt;&lt;a href=&quot;#超几何分布&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
     <category term="statistics" scheme="http://example.com/categories/statistics/"/>
     
     
-    <category term="stats" scheme="http://example.com/tags/stats/"/>
+    <category term="correlation" scheme="http://example.com/tags/correlation/"/>
     
   </entry>
   
   <entry>
-    <title>Fisher精确检验</title>
-    <link href="http://example.com/2019/02/19/fisher/"/>
-    <id>http://example.com/2019/02/19/fisher/</id>
-    <published>2019-02-19T11:06:34.000Z</published>
-    <updated>2020-09-18T11:07:15.733Z</updated>
+    <title>R语言基础设置</title>
+    <link href="http://example.com/2020/06/01/r-base-set/"/>
+    <id>http://example.com/2020/06/01/r-base-set/</id>
+    <published>2020-05-31T16:00:00.000Z</published>
+    <updated>2020-09-19T00:02:24.571Z</updated>
     
     
       
@@ -272,61 +236,10 @@
         
     <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
 
-&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="statistics" scheme="http://example.com/categories/statistics/"/>
-    
-    
-    <category term="stats" scheme="http://example.com/tags/stats/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>富集分析</title>
-    <link href="http://example.com/2019/02/18/enrichment/"/>
-    <id>http://example.com/2019/02/18/enrichment/</id>
-    <published>2019-02-18T11:05:24.000Z</published>
-    <updated>2020-09-18T11:06:10.258Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
 
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="statistics" scheme="http://example.com/categories/statistics/"/>
-    
-    
-    <category term="stats" scheme="http://example.com/tags/stats/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>paste()和paste0()用法</title>
-    <link href="http://example.com/2019/01/16/paste/"/>
-    <id>http://example.com/2019/01/16/paste/</id>
-    <published>2019-01-16T10:41:19.000Z</published>
-    <updated>2020-09-18T11:02:30.564Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
 
-&lt;h3 id=&quot;函数用法&quot;&gt;&lt;a href=&quot;#函数用法&quot; class=&quot;headerlink&quot; title=&quot;函数用法&quot;&gt;&lt;/a&gt;函数用法&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;paste (…, sep = “ “, collapse =</summary>
+&lt;p&gt;在R语言中，为了方便使用，可以对其进行个性化设置，优化使用体验。    &lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
         
       
     
@@ -335,16 +248,14 @@
     <category term="R" scheme="http://example.com/categories/R/"/>
     
     
-    <category term="base" scheme="http://example.com/tags/base/"/>
-    
   </entry>
   
   <entry>
-    <title>绘图配色</title>
-    <link href="http://example.com/2019/01/07/color/"/>
-    <id>http://example.com/2019/01/07/color/</id>
-    <published>2019-01-07T10:37:24.000Z</published>
-    <updated>2020-09-18T10:38:35.538Z</updated>
+    <title>Markdown语法说明</title>
+    <link href="http://example.com/2020/05/30/markdown-synathx/"/>
+    <id>http://example.com/2020/05/30/markdown-synathx/</id>
+    <published>2020-05-29T16:00:00.000Z</published>
+    <updated>2020-09-18T23:57:56.445Z</updated>
     
     
       
@@ -355,62 +266,7 @@
 
 
 
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;本篇文章主要收集R语言绘图配色可能用到的一些方案，网站等信息，持续更新ing…. </summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="color" scheme="http://example.com/tags/color/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R的更新</title>
-    <link href="http://example.com/2018/11/22/updateR/"/>
-    <id>http://example.com/2018/11/22/updateR/</id>
-    <published>2018-11-21T16:00:00.000Z</published>
-    <updated>2020-09-18T12:08:37.578Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="base" scheme="http://example.com/tags/base/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Markdown常用语法</title>
-    <link href="http://example.com/2018/11/20/markdown/"/>
-    <id>http://example.com/2018/11/20/markdown/</id>
-    <published>2018-11-20T00:00:00.000Z</published>
-    <updated>2020-09-18T12:07:26.747Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-&lt;h3 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot; title=&quot;摘要&quot;&gt;&lt;/a&gt;摘要&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;a</summary>
+&lt;h1 id=&quot;Markdown-文件&quot;&gt;&lt;a href=&quot;#Markdown-文件&quot; class=&quot;headerlink&quot; title=&quot;Markdown 文件&quot;&gt;&lt;/a&gt;Markdown 文件&lt;/h1&gt;&lt;p&gt;&lt;img</summary>
         
       
     
@@ -424,11 +280,11 @@
   </entry>
   
   <entry>
-    <title>卡方检验</title>
-    <link href="http://example.com/2018/11/12/chisq/"/>
-    <id>http://example.com/2018/11/12/chisq/</id>
-    <published>2018-11-11T16:00:00.000Z</published>
-    <updated>2020-09-18T08:05:01.220Z</updated>
+    <title>基因ID转换相关知识</title>
+    <link href="http://example.com/2020/05/29/id-convert/"/>
+    <id>http://example.com/2020/05/29/id-convert/</id>
+    <published>2020-05-28T16:00:00.000Z</published>
+    <updated>2020-09-19T00:00:46.404Z</updated>
     
     
       
@@ -437,34 +293,35 @@
         
     <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
 
-&lt;h2 id=&quot;卡方检验&quot;&gt;&lt;a href=&quot;#卡方检验&quot; class=&quot;headerlink&quot; title=&quot;卡方检验&quot;&gt;&lt;/a&gt;卡方检验&lt;/h2&gt;&lt;p&gt;卡方检验(Chi-square test/Chi-Square</summary>
+
+
+&lt;h2 id=&quot;Ensembl-ID-辨识&quot;&gt;&lt;a href=&quot;#Ensembl-ID-辨识&quot; class=&quot;headerlink&quot; title=&quot;Ensembl ID 辨识&quot;&gt;&lt;/a&gt;Ensembl ID</summary>
         
       
     
     
     
-    <category term="statistics" scheme="http://example.com/categories/statistics/"/>
+    <category term="IDconvert" scheme="http://example.com/categories/IDconvert/"/>
     
     
-    <category term="stats" scheme="http://example.com/tags/stats/"/>
+    <category term="gene" scheme="http://example.com/tags/gene/"/>
     
   </entry>
   
   <entry>
-    <title>R语言代码规范</title>
-    <link href="http://example.com/2018/11/05/r-format/"/>
-    <id>http://example.com/2018/11/05/r-format/</id>
-    <published>2018-11-04T16:00:00.000Z</published>
-    <updated>2020-09-18T12:05:48.024Z</updated>
+    <title>dplyr学习笔记(三)</title>
+    <link href="http://example.com/2020/05/28/dplyr-iii/"/>
+    <id>http://example.com/2020/05/28/dplyr-iii/</id>
+    <published>2020-05-27T16:00:00.000Z</published>
+    <updated>2020-09-18T13:38:27.455Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-&lt;p&gt;R语言是一门主要用于统计计算和绘图的高级编程语言. 在使用R时，好的代码编写和注释规范，可以提高代码的可读性和工作效率.</summary>
+    <summary type="html">&lt;p&gt;对于数据进行操作时，往往不限于单个数据的操作，多数情况需要对数据进行整合，过滤，标准化。在&lt;code&gt;dplyr&lt;/code&gt;包中，提供了一系列的快捷操作，用于两个数据之间的操作处理  &lt;/p&gt;
+&lt;h2 id=&quot;合并-join-操作&quot;&gt;&lt;a</summary>
         
       
     
@@ -473,16 +330,37 @@
     <category term="R" scheme="http://example.com/categories/R/"/>
     
     
-    <category term="base" scheme="http://example.com/tags/base/"/>
+    <category term="tidyverse" scheme="http://example.com/tags/tidyverse/"/>
+    
+    <category term="dplyr" scheme="http://example.com/tags/dplyr/"/>
     
   </entry>
   
   <entry>
-    <title>R for beginners学习笔记</title>
-    <link href="http://example.com/2018/10/27/r-beginner/"/>
-    <id>http://example.com/2018/10/27/r-beginner/</id>
-    <published>2018-10-27T07:58:38.000Z</published>
-    <updated>2020-09-18T08:03:05.351Z</updated>
+    <title>ggpubr使用指南(一)</title>
+    <link href="http://example.com/2020/05/28/ggpubr-i/"/>
+    <id>http://example.com/2020/05/28/ggpubr-i/</id>
+    <published>2020-05-27T16:00:00.000Z</published>
+    <updated>2020-09-18T13:54:22.965Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;code&gt;ggpubr&lt;/code&gt; 是由 &lt;strong&gt;Alboukadel Kassambara&lt;/strong&gt; 开发的一款非常优秀的基于&lt;code&gt;ggplot2&lt;/code&gt;作图的可视化R包，一行命令即可简单方便的绘制出符合出版物要求的图形。</summary>
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    
+    <category term="plot" scheme="http://example.com/tags/plot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ggpubr使用指南(二)</title>
+    <link href="http://example.com/2020/05/28/ggpubr-ii/"/>
+    <id>http://example.com/2020/05/28/ggpubr-ii/</id>
+    <published>2020-05-27T16:00:00.000Z</published>
+    <updated>2020-09-18T23:56:51.365Z</updated>
     
     
       
@@ -491,7 +369,9 @@
         
     <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
 
-&lt;h2 id=&quot;R-for-beginners&quot;&gt;&lt;a href=&quot;#R-for-beginners&quot; class=&quot;headerlink&quot; title=&quot;R for beginners&quot;&gt;&lt;/a&gt;&lt;strong&gt;R for</summary>
+
+
+&lt;h2 id=&quot;使用ggmaplot函数绘制火山图&quot;&gt;&lt;a href=&quot;#使用ggmaplot函数绘制火山图&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -500,7 +380,150 @@
     <category term="R" scheme="http://example.com/categories/R/"/>
     
     
-    <category term="base" scheme="http://example.com/tags/base/"/>
+    <category term="plot" scheme="http://example.com/tags/plot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dplyr学习笔记(一)</title>
+    <link href="http://example.com/2020/05/27/dplyr-i/"/>
+    <id>http://example.com/2020/05/27/dplyr-i/</id>
+    <published>2020-05-26T16:00:00.000Z</published>
+    <updated>2020-09-18T13:31:02.284Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;dplyr&quot;&gt;&lt;a href=&quot;#dplyr&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    
+    <category term="tidyverse" scheme="http://example.com/tags/tidyverse/"/>
+    
+    <category term="dplyr" scheme="http://example.com/tags/dplyr/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dplyr学习笔记(二)</title>
+    <link href="http://example.com/2020/05/27/dplyr-ii/"/>
+    <id>http://example.com/2020/05/27/dplyr-ii/</id>
+    <published>2020-05-26T16:00:00.000Z</published>
+    <updated>2020-09-18T13:35:19.147Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+
+
+
+&lt;p&gt;在&lt;code&gt;dplyr&lt;/code&gt;中提供的动词语法与其他操作进行连接，可以实现更加复杂的数据操作  &lt;/p&gt;
+&lt;h2 id=&quot;group操作&quot;&gt;&lt;a href=&quot;#group操作&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    
+    <category term="tidyverse" scheme="http://example.com/tags/tidyverse/"/>
+    
+    <category term="dplyr" scheme="http://example.com/tags/dplyr/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>inferCNV 推断拷贝数</title>
+    <link href="http://example.com/2020/01/09/inferCNV/"/>
+    <id>http://example.com/2020/01/09/inferCNV/</id>
+    <published>2020-01-09T01:33:04.000Z</published>
+    <updated>2020-09-19T00:54:50.080Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;inferCNV使用流程&quot;&gt;&lt;a href=&quot;#inferCNV使用流程&quot; class=&quot;headerlink&quot; title=&quot;inferCNV使用流程&quot;&gt;&lt;/a&gt;inferCNV使用流程&lt;/h2&gt;&lt;h3 id=&quot;inferCNV简介&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
+    
+    
+    <category term="R" scheme="http://example.com/tags/R/"/>
+    
+    <category term="inferCNV" scheme="http://example.com/tags/inferCNV/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>复合饼图</title>
+    <link href="http://example.com/2020/01/07/pie/"/>
+    <id>http://example.com/2020/01/07/pie/</id>
+    <published>2020-01-07T10:50:13.000Z</published>
+    <updated>2020-09-19T01:02:07.535Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;复合图形可以给出更多的信息，并且更能够观察数据之间的联系。一般所说的复合饼图包括以下两种：  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;散点复合饼图&lt;/strong&gt;（compound scatter and pie chart）可以展示三个数据变量的信息：(x, y,</summary>
+        
+      
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    
+    <category term="R" scheme="http://example.com/tags/R/"/>
+    
+    <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>R graphics cookbook</title>
+    <link href="http://example.com/2019/12/28/cookbook/"/>
+    <id>http://example.com/2019/12/28/cookbook/</id>
+    <published>2019-12-28T06:41:18.000Z</published>
+    <updated>2020-09-19T01:00:40.382Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;R语言绘制基础图形&quot;&gt;&lt;a href=&quot;#R语言绘制基础图形&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    
+    <category term="R" scheme="http://example.com/tags/R/"/>
+    
+    <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
     
   </entry>
   

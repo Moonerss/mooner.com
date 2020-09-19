@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>inferCNV 推断拷贝数 | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">inferCNV 推断拷贝数</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-01-09
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/R/" title="R">
+                    <b>#</b> R
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/inferCNV/" title="inferCNV">
+                    <b>#</b> inferCNV
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="inferCNV使用流程"><a href="#inferCNV使用流程" class="headerlink" title="inferCNV使用流程"></a>inferCNV使用流程</h2><h3 id="inferCNV简介"><a href="#inferCNV简介" class="headerlink" title="inferCNV简介"></a>inferCNV简介</h3><p><strong>inferCNV</strong>可以被用于单细胞RNA-seq数据识别大规模的染色体拷贝数变异，如：整个染色体或是大染色体片段的获得和缺失。主要是通过与一组参考“正常”细胞相比，探索肿瘤基因组不同位置基因表达强度来实现。生成的热图可以显示每条染色体的相对表达强度。通过与正常细胞相比，很容易看出肿瘤基因组哪些区域表达过于丰富或者不够丰富。  </p>
+<h3 id="inferCNV安装"><a href="#inferCNV安装" class="headerlink" title="inferCNV安装"></a>inferCNV安装</h3><p>安装inferCNV需要同时安装<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/">JAGS</a> package.  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!requireNamespace(<span class="string">&quot;BiocManager&quot;</span>, quietly = <span class="literal">TRUE</span>))</span><br><span class="line">     install.packages(<span class="string">&quot;BiocManager&quot;</span>)</span><br><span class="line">BiocManager::install(<span class="string">&quot;infercnv&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="inferCNV运行"><a href="#inferCNV运行" class="headerlink" title="inferCNV运行"></a>inferCNV运行</h3><p>inferCNV可以通过两步进行运行：  </p>
+<p><strong>首先需要创建一个inferCNV对象</strong>。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">infercnv_obj = CreateInfercnvObject(raw_counts_matrix=system.file(<span class="string">&quot;extdata&quot;</span>, <span class="string">&quot;oligodendroglioma_expression_downsampled.counts.matrix.gz&quot;</span>, package = <span class="string">&quot;infercnv&quot;</span>),</span><br><span class="line">                                    annotations_file=system.file(<span class="string">&quot;extdata&quot;</span>,            <span class="string">&quot;oligodendroglioma_annotations_downsampled.txt&quot;</span>, package = <span class="string">&quot;infercnv&quot;</span>),</span><br><span class="line">                                    delim=<span class="string">&quot;\t&quot;</span>,</span><br><span class="line">                                    gene_order_file=system.file(<span class="string">&quot;extdata&quot;</span>, <span class="string">&quot;gencode_downsampled.EXAMPLE_ONLY_DONT_REUSE.txt&quot;</span>, package = <span class="string">&quot;infercnv&quot;</span>), ref_group_names=c(<span class="string">&quot;Microglia/Macrophage&quot;</span>,<span class="string">&quot;Oligodendrocytes (non-malignant)&quot;</span>)) </span><br></pre></td></tr></table></figure>
+
+<p>需要的输入文件有三个：  </p>
+<ul>
+<li><p><strong>Raw Counts Matrix for Genes x Cells</strong></p>
+<p><strong>inferCNV</strong>可以兼容来自<code>smart-seq2</code>和<code>10x genmoic</code>等单细胞测序平台的数据，count矩阵必须行是基因，列是细胞的矩阵，格式如下：  </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MGH54_P16_F12</th>
+<th>MGH54_P12_C10</th>
+<th>MGH54_P11_C11</th>
+<th>MGH54_P15_D06</th>
+<th>…</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A2M</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>…</td>
+</tr>
+<tr>
+<td>AAAS</td>
+<td>0</td>
+<td>37</td>
+<td>30</td>
+<td>21</td>
+<td>…</td>
+</tr>
+<tr>
+<td>AACS</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>…</td>
+</tr>
+<tr>
+<td>AADAT</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>Sample annotation file</strong>  </p>
+<p>样本注释文件包括两列：第一列是细胞名字，第二列是细胞的类型，以<code>tab</code>分割。如果已知正常细胞的类型，可以给出具体的细胞类型，并且，在进行计算时，每一种细胞类型都将作为单独的正常细胞存在，而不是整合成一个正常的类型。同样，如果并不能详细的获得正常细胞的类型，可以将其统称为normal，作为统一的正常细胞类型。对于恶性细胞需要标记为<code>malignant_&#123;patient&#125;</code>的形式。使它们在聚类时可以聚在一起。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MGH54_P2_C12    Microglia&#x2F;Macrophage</span><br><span class="line">MGH36_P6_F03    Microglia&#x2F;Macrophage</span><br><span class="line">MGH54_P16_F12   Oligodendrocytes (non-malignant)</span><br><span class="line">MGH54_P12_C10   Oligodendrocytes (non-malignant)</span><br><span class="line">MGH36_P1_B02    malignant_MGH36</span><br><span class="line">MGH36_P1_H10    malignant_MGH36</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Gene ordering file</strong>  </p>
+<p>Gene ordering文件提供每个基因的染色体位置信息，使用<code>tab</code>分割。要分析的count矩阵中的每个基因都应该在这个基因排序文件中提供相应的基因名称和位置信息。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WASH7P  chr1    14363   29806</span><br><span class="line">LINC00115       chr1    761586  762902</span><br><span class="line">NOC2L   chr1    879584  894689</span><br><span class="line">MIR200A chr1    1103243 1103332</span><br><span class="line">SDF4    chr1    1152288 1167411</span><br><span class="line">UBE2J2  chr1    1189289 1209265</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>注意，如果没有参考的正常细胞，可以设置<code>ref_group_names=NULL</code>，使用所有细胞的平均表达作为参考基线。</p>
+<p>此外，inferCNV默认已经去除低质量的细胞，如果要进一步进行最大或最小count值的过滤，可以设置<code>min_max_counts_per_cell=c(1e5,1e6)</code>  </p>
+</blockquote>
+<p><strong>在创建<code>infercnv_obj</code>对象之后，使用内置的<code>infercnv::run()</code>方法运行标准的infercnv过程：</strong>  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">infercnv_obj = infercnv::run(infercnv_obj,</span><br><span class="line">                             cutoff=<span class="number">1</span>, <span class="comment"># cutoff=1 works well for Smart-seq2, and cutoff=0.1 works well for 10x Genomics</span></span><br><span class="line">                             out_dir=tempfile(), </span><br><span class="line">                             cluster_by_groups=<span class="literal">TRUE</span>, </span><br><span class="line">                             denoise=<span class="literal">TRUE</span>,</span><br><span class="line">                             HMM=<span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>cutoff</code>决定了哪个基因可以被用于infercnv分析  </p>
+<p><code>cluster_by_groups</code>可以根据细胞注释文件对细胞进行聚类  </p>
+<h3 id="inferCNV降噪处理"><a href="#inferCNV降噪处理" class="headerlink" title="inferCNV降噪处理"></a>inferCNV降噪处理</h3><p>降噪处理可以降低噪声对与表达的影响，同时保留在肿瘤细胞中的表达  </p>
+<ol>
+<li><p>使用固定阈值过滤  </p>
+<p>可以使用<code>noise_filter</code>参数设定一个特定的偏离均值的阈值  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">infercnv_obj = infercnv::run(infercnv_obj,</span><br><span class="line">                             cutoff=<span class="number">1</span>, <span class="comment"># cutoff=1 works well for Smart-seq2, and cutoff=0.1 works well for 10x Genomics</span></span><br><span class="line">                             out_dir=out_dir, </span><br><span class="line">                             cluster_by_groups=<span class="literal">T</span>, </span><br><span class="line">                             plot_steps=<span class="literal">F</span>,</span><br><span class="line">                             denoise=<span class="literal">T</span>, <span class="comment">## de noise</span></span><br><span class="line">                             noise_filter=<span class="number">0.1</span>   <span class="comment">## hard thresholds</span></span><br><span class="line">                             )</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/inferCNV/denoise_hard_filter.png" alt="p1">  </p>
+</li>
+</ol>
+<ol start="2">
+<li><p>使用动态阈值过滤  </p>
+<p>默认情况下，用于去噪的硬边界是基于剩余的正常表达值的标准差来计算的。这个阈值可以使用<code>sd_amplifier</code>参数进行调整。例如，我们可以使用1.5 *标准差的过滤如下:  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">infercnv_obj = infercnv::run(infercnv_obj,</span><br><span class="line">                             cutoff=<span class="number">1</span>, <span class="comment"># cutoff=1 works well for Smart-seq2, and cutoff=0.1 works well for 10x Genomics</span></span><br><span class="line">                             out_dir=out_dir, </span><br><span class="line">                             cluster_by_groups=<span class="literal">T</span>, </span><br><span class="line">                             plot_steps=<span class="literal">F</span>,</span><br><span class="line">                             denoise=<span class="literal">T</span>,</span><br><span class="line">                             sd_amplifier=<span class="number">1.5</span>  <span class="comment">## set dynamic thresholding based on the standard deviation value.</span></span><br><span class="line">                             )</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/inferCNV/denoise_dynamic_sd.png" alt="p2">    </p>
+</li>
+</ol>
+<h3 id="基于HMM的CNV预测方法"><a href="#基于HMM的CNV预测方法" class="headerlink" title="基于HMM的CNV预测方法"></a>基于HMM的CNV预测方法</h3><p>inferCNV当前支持两种基于HMM的CNV预测方法（i3和i6）。两种方法可以通过<code>infercnv::run()</code>函数中的<code>HMM_type</code>参数进行设定，默认为<code>HMM_type=&#39;i6</code>  </p>
+<p>两种方法的操作对象都是对<code>CreateInfercnvObject()</code>函数计算出来的<code>infercnv</code>对象进行处理。  </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/broadinstitute/infercnv/wiki/infercnv-i3-HMM-type">i3 HMM</a>: 包括CNV的三种状态： 拷贝数缺失（deletion）、拷贝数中立（neutral）、拷贝数扩增（amplification ）  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/broadinstitute/infercnv/wiki/infercnv-i6-HMM-type">i6 HMM</a>: 包括更加精细定义六种CNV改变状态：  </p>
+<ul>
+<li>0x: complete loss </li>
+<li>0.5x: loss of one copy  </li>
+<li>1x: neutral  </li>
+<li>1.5x: addition of one copy  </li>
+<li>2x: addition of two copies  </li>
+<li>3x: essentially a placeholder for &gt;2x copies but modeled as 3x  </li>
+</ul>
+</blockquote>
+<h3 id="CNV-region预测报告"><a href="#CNV-region预测报告" class="headerlink" title="CNV region预测报告"></a>CNV region预测报告</h3><p>CNV的推断预测结果包含在以下文件夹中：  </p>
+<ul>
+<li><p><code>HMM_CNV_predictions.*.pred_cnv_regions.dat</code> ：包含CNV区域坐标、状态分配和细胞分组的摘要信息。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cell_group_name                         cnv_name        state   chr     start   end</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr1-region_2   0.5     chr1    3696784 144612683</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr1-region_4   1.5     chr1    151336778       156213123</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr3-region_7   1.5     chr3    3168600 10285427</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr3-region_9   1.5     chr3    45429998        49460186</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr4-region_11  0.5     chr4    53179   187134610</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr5-region_13  1.5     chr5    134181370       177037348</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><code>HMM_CNV_predictions.*.cell_groupings</code>: 提供肿瘤subcluster和细胞成员的对应关系  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cell_group_name                         cell</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      MGH36_P3_E06</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      MGH36_P10_E07</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      MGH36_P3_C04</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      MGH36_P3_A09</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      MGH36_P2_A08</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      MGH36_P10_B08</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      MGH36_P8_H09</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><code>HMM_CNV_predictions.*.pred_cnv_genes.dat</code>: 包含每个细胞、每个基因的CNV状态分级情况  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cell_group_name                         gene_region_name state   gene    chr     start   end</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr1-region_2   0.5     DFFB    chr1    3696784 3713068</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr1-region_2   0.5     C1orf174        chr1    3773845 3801993</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr1-region_2   0.5     RPL22   chr1    3805689 3816857</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr1-region_2   0.5     ICMT    chr1    6241329 6269449</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr1-region_2   0.5     ACOT7   chr1    6281253 6296032</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr1-region_2   0.5     NOL9    chr1    6324329 6454451</span><br><span class="line">malignant_MGH36.malignant_MGH36_s1      chr1-region_2   0.5     KLHL21  chr1    6581407 6614595</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><code>HMM_CNV_predictions.*.genes_used.dat</code>: 提供在分析中使用的基因列表  </li>
+</ul>
+<h3 id="推断肿瘤subclusters"><a href="#推断肿瘤subclusters" class="headerlink" title="推断肿瘤subclusters"></a>推断肿瘤subclusters</h3><p>通过设置 <code>infercnv::run(analysis_mode=&#39;subclusters&#39;)</code>, inferCNV会试着根据CNV改变的模式对细胞进行聚类。  </p>
+<p>在inferCNV中，使用的聚类方式为层次聚类（hierarchical clustering），根据层次聚类树划分不同的subcluster。有三个参数可以影响层次聚类划分的结果：  </p>
+<ul>
+<li><code>infercnv::run(hclust_method=&#39;ward.D2&#39;)</code>：层次聚类使用的方法，支持所有的<code>hclust</code>方法。目前作者认为<code>ward.D2</code>的效果最好  </li>
+<li><code>infercnv::run(tumor_subcluster_partition_method=&#39;random_trees&#39;)</code>：划分层次聚类树的方法。可选的方法为：<code>random_trees</code>, <code>qnorm</code>  </li>
+<li><code>infercnv::run(tumor_subcluster_pval=0.05)</code>:用于确定分层树中的切割点的设置  </li>
+</ul>
+<h3 id="inferCNV的输出"><a href="#inferCNV的输出" class="headerlink" title="inferCNV的输出"></a>inferCNV的输出</h3><p>通过inferCNV的<code>run</code>函数运行后，会产生一些输出文件：  </p>
+<ul>
+<li><code>infercnv.preliminary.png</code>:初步的inferCNV图像  </li>
+<li><code>infercnv.png </code>：采用去噪方法，生成最终的热图  </li>
+<li><code>infercnv.references.txt</code>：“正常”细胞矩阵数据值  </li>
+<li><code>infercnv.observations.txt</code>：肿瘤细胞数据值  </li>
+<li><code>infercnv.observation_groupings.txt</code>：聚类后的肿瘤细胞关系  </li>
+<li><code>infercnv.observations_dendrogram.txt </code>：肿瘤细胞聚类树状结构图  </li>
+</ul>
+<h3 id="解读inferCNV图像"><a href="#解读inferCNV图像" class="headerlink" title="解读inferCNV图像"></a>解读inferCNV图像</h3><p>通过inferCNV会得到类似于下面的聚类图：  </p>
+<p><img src="/images/inferCNV/infercnv.png" alt="p3">    </p>
+<p>正常细胞的表达值绘制在顶部的热图中，肿瘤细胞绘制在底部的热图中，基因从左到右排列在染色体上。将正常的细胞表达数据从肿瘤细胞表达数据中减去，产生差异，其中染色体区域扩增为红色块，染色体区域缺失为蓝色块。  </p>
+<hr>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://github.com/broadinstitute/infercnv/wiki">https://github.com/broadinstitute/infercnv/wiki</a>  </p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/01/07/pie/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-01-09
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/R/" title="R">
+                        <b>#</b> R
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/inferCNV/" title="inferCNV">
+                        <b>#</b> inferCNV
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/05/27/dplyr-ii/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#inferCNV%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-text">inferCNV使用流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#inferCNV%E7%AE%80%E4%BB%8B"><span class="toc-text">inferCNV简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inferCNV%E5%AE%89%E8%A3%85"><span class="toc-text">inferCNV安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inferCNV%E8%BF%90%E8%A1%8C"><span class="toc-text">inferCNV运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inferCNV%E9%99%8D%E5%99%AA%E5%A4%84%E7%90%86"><span class="toc-text">inferCNV降噪处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EHMM%E7%9A%84CNV%E9%A2%84%E6%B5%8B%E6%96%B9%E6%B3%95"><span class="toc-text">基于HMM的CNV预测方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CNV-region%E9%A2%84%E6%B5%8B%E6%8A%A5%E5%91%8A"><span class="toc-text">CNV region预测报告</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E6%96%AD%E8%82%BF%E7%98%A4subclusters"><span class="toc-text">推断肿瘤subclusters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inferCNV%E7%9A%84%E8%BE%93%E5%87%BA"><span class="toc-text">inferCNV的输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E8%AF%BBinferCNV%E5%9B%BE%E5%83%8F"><span class="toc-text">解读inferCNV图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

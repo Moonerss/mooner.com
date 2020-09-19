@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>组合多张ggplot2图片 | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">组合多张ggplot2图片</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2018-05-23
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/ggplot2/" title="ggplot2">
+                    <b>#</b> ggplot2
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>在同一页面上安排<strong>多张ggplot2</strong>图片时，普通的标准R函数<code>par()</code>和<code>layout</code>已经不能使用。  </p>
+<p>目前基本的解决办法是使用名叫<code>ggExtra</code>的R包，它包含以下功能：  </p>
+<ul>
+<li><code>grid.arrange（）</code>和<code>arrangeGrob（）</code>可以在一个页面上排列多个ggplots  </li>
+<li><code>marrangeGrob（）</code>可用于在多个页面上排列多个ggplots  </li>
+</ul>
+<p>但是，这些功能不会尝试对齐绘图面板; 相反，这些图只是简单地放置在网格中，因此轴不对齐。  </p>
+<p>因此我们可以使用<code>ggpubr</code>包提供的<code>ggarrange（）</code>函数来实现多个ggplot图画的排布，并且提供统一的共同图例。  </p>
+<h2 id="创建图片"><a href="#创建图片" class="headerlink" title="创建图片"></a>创建图片</h2><p>使用演示数据集 <em><strong>ToothGrowth</strong></em> 和 <em><strong>mtcars</strong></em>创建多个图形：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Box plot (bp)</span></span><br><span class="line">bxp &lt;- ggboxplot(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">                 color = <span class="string">&quot;dose&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>)</span><br><span class="line">bxp</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Dot plot (dp)</span></span><br><span class="line">dp &lt;- ggdotplot(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">                 color = <span class="string">&quot;dose&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>, binwidth = <span class="number">1</span>)</span><br><span class="line">dp</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-2-2.png" alt="plot of chunk unnamed-chunk-2"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data(<span class="string">&quot;mtcars&quot;</span>)</span><br><span class="line">mtcars$name &lt;- rownames(mtcars)</span><br><span class="line">mtcars$cyl &lt;- as.factor(mtcars$cyl)</span><br><span class="line">head(mtcars[, c(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;wt&quot;</span>, <span class="string">&quot;mpg&quot;</span>, <span class="string">&quot;cyl&quot;</span>)])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##                                name   wt  mpg cyl</span><br><span class="line">## Mazda RX4                 Mazda RX4 2.62 21.0   6</span><br><span class="line">## Mazda RX4 Wag         Mazda RX4 Wag 2.88 21.0   6</span><br><span class="line">## Datsun 710               Datsun 710 2.32 22.8   4</span><br><span class="line">## Hornet 4 Drive       Hornet 4 Drive 3.21 21.4   6</span><br><span class="line">## Hornet Sportabout Hornet Sportabout 3.44 18.7   8</span><br><span class="line">## Valiant                     Valiant 3.46 18.1   6</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Bar plot (bp)</span></span><br><span class="line">bp &lt;- ggbarplot(mtcars, x = <span class="string">&quot;name&quot;</span>, y = <span class="string">&quot;mpg&quot;</span>,</span><br><span class="line">          fill = <span class="string">&quot;cyl&quot;</span>,               <span class="comment"># change fill color by cyl</span></span><br><span class="line">          color = <span class="string">&quot;white&quot;</span>,            <span class="comment"># Set bar border colors to white</span></span><br><span class="line">          palette = <span class="string">&quot;jco&quot;</span>,            <span class="comment"># jco journal color palett. see ?ggpar</span></span><br><span class="line">          sort.val = <span class="string">&quot;asc&quot;</span>,           <span class="comment"># Sort the value in ascending order</span></span><br><span class="line">          sort.by.groups = <span class="literal">TRUE</span>,      <span class="comment"># Sort inside each group</span></span><br><span class="line">          x.text.angle = <span class="number">90</span>           <span class="comment"># Rotate vertically x axis texts</span></span><br><span class="line">          )</span><br><span class="line">bp + font(<span class="string">&quot;x.text&quot;</span>, size = <span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Scatter plots (sp)</span></span><br><span class="line">sp &lt;- ggscatter(mtcars, x = <span class="string">&quot;wt&quot;</span>, y = <span class="string">&quot;mpg&quot;</span>,</span><br><span class="line">                add = <span class="string">&quot;reg.line&quot;</span>,               <span class="comment"># Add regression line</span></span><br><span class="line">                conf.int = <span class="literal">TRUE</span>,                <span class="comment"># Add confidence interval</span></span><br><span class="line">                color = <span class="string">&quot;cyl&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>, <span class="comment"># Color by groups &quot;cyl&quot;</span></span><br><span class="line">                shape = <span class="string">&quot;cyl&quot;</span>                   <span class="comment"># Change point shape by groups &quot;cyl&quot;</span></span><br><span class="line">                )+</span><br><span class="line">  stat_cor(aes(color = cyl), label.x = <span class="number">3</span>)       <span class="comment"># Add correlation coefficient</span></span><br><span class="line">sp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## &#96;geom_smooth()&#96; using formula &#39;y ~ x&#39;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-4-2.png" alt="plot of chunk unnamed-chunk-4"></p>
+<h2 id="组合多张图片在一个面板上"><a href="#组合多张图片在一个面板上" class="headerlink" title="组合多张图片在一个面板上"></a>组合多张图片在一个面板上</h2><p>使用<code>ggpubr</code>包的<code>ggarrange（）</code>进行以下操作：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ggarrange(bxp, dp, bp + rremove(<span class="string">&quot;x.text&quot;</span>), </span><br><span class="line">          labels = c(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>),</span><br><span class="line">          ncol = <span class="number">2</span>, nrow = <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5"></p>
+<h2 id="给图片添加注释"><a href="#给图片添加注释" class="headerlink" title="给图片添加注释"></a>给图片添加注释</h2><p><code>ggpubr</code>包提供了函数<code>annotate_figure()</code>可以对面板中图片整体或任意图片添加一定量的注释展示效果如下图:  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">figure &lt;- ggarrange(sp, bp + font(<span class="string">&quot;x.text&quot;</span>, size = <span class="number">10</span>),</span><br><span class="line">                    ncol = <span class="number">1</span>, nrow = <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## &#96;geom_smooth()&#96; using formula &#39;y ~ x&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">annotate_figure(figure,</span><br><span class="line">                top = text_grob(<span class="string">&quot;Visualizing mpg&quot;</span>, color = <span class="string">&quot;red&quot;</span>, face = <span class="string">&quot;bold&quot;</span>, size = <span class="number">14</span>),</span><br><span class="line">                bottom = text_grob(<span class="string">&quot;Data source: \n mtcars data set&quot;</span>, color = <span class="string">&quot;blue&quot;</span>,</span><br><span class="line">                                   hjust = <span class="number">1</span>, x = <span class="number">1</span>, face = <span class="string">&quot;italic&quot;</span>, size = <span class="number">10</span>),</span><br><span class="line">                left = text_grob(<span class="string">&quot;Figure arranged using ggpubr&quot;</span>, color = <span class="string">&quot;green&quot;</span>, rot = <span class="number">90</span>),</span><br><span class="line">                right = <span class="string">&quot;I&#x27;m done, thanks :-)!&quot;</span>,</span><br><span class="line">                fig.lab = <span class="string">&quot;Figure 1&quot;</span>, fig.lab.face = <span class="string">&quot;bold&quot;</span></span><br><span class="line">                )</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6"></p>
+<h2 id="图片对齐"><a href="#图片对齐" class="headerlink" title="图片对齐"></a>图片对齐</h2><p>最经典的例子就是在绘制生存曲线时，把risk table放在生存曲线图的下边。此时，我们需要调节表和图的大小和相对位置，使其分布更为合理  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fit survival curves</span></span><br><span class="line"><span class="keyword">library</span>(survival)</span><br><span class="line">fit &lt;- survfit( Surv(time, status) ~ adhere, data = colon )</span><br><span class="line"><span class="comment"># Plot survival curves</span></span><br><span class="line"><span class="keyword">library</span>(survminer)</span><br><span class="line">ggsurv &lt;- ggsurvplot(fit, data = colon, </span><br><span class="line">                     palette = <span class="string">&quot;jco&quot;</span>,                              <span class="comment"># jco palette</span></span><br><span class="line">                     pval = <span class="literal">TRUE</span>, pval.coord = c(<span class="number">500</span>, <span class="number">0.4</span>),        <span class="comment"># Add p-value</span></span><br><span class="line">                     risk.table = <span class="literal">TRUE</span>                            <span class="comment"># Add risk table</span></span><br><span class="line">                     )</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Warning: Vectorized input to &#96;element_text()&#96; is not officially supported.</span><br><span class="line">## Results may be unexpected or may change in future versions of ggplot2.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ggarrange(ggsurv$plot, ggsurv$table, heights = c(<span class="number">2</span>, <span class="number">0.7</span>),</span><br><span class="line">          ncol = <span class="number">1</span>, nrow = <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7"></p>
+<p>此时，我们可以看出图和表并不是完全垂直对齐的，要对齐他们需要调用<code>align</code>参数  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ggarrange(ggsurv$plot, ggsurv$table, heights = c(<span class="number">2</span>, <span class="number">0.7</span>),</span><br><span class="line">          ncol = <span class="number">1</span>, nrow = <span class="number">2</span>, align = <span class="string">&quot;v&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8"></p>
+<h2 id="改变图形的行列布局排布"><a href="#改变图形的行列布局排布" class="headerlink" title="改变图形的行列布局排布"></a>改变图形的行列布局排布</h2><h3 id="使用ggpubr包"><a href="#使用ggpubr包" class="headerlink" title="使用ggpubr包"></a>使用<code>ggpubr</code>包</h3><p>我们将使用嵌套的<code>ggarrange（）</code>函数来更改图的列/行跨度。  </p>
+<p>例如，我们使用下边的代码可以实现这样的布局  </p>
+<ul>
+<li>散点图（sp）将位于第一行并跨越两列  </li>
+<li>箱形图（bxp）和点图（dp）将首先排列，并且将在第二行中生活两列不同的列  </li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ggarrange(sp,                                                 <span class="comment"># First row with scatter plot</span></span><br><span class="line">          ggarrange(bxp, dp, ncol = <span class="number">2</span>, labels = c(<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>)), <span class="comment"># Second row with box and dot plots</span></span><br><span class="line">          nrow = <span class="number">2</span>, </span><br><span class="line">          labels = <span class="string">&quot;A&quot;</span>                                        <span class="comment"># Labels of the scatter plot</span></span><br><span class="line">          )</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## &#96;geom_smooth()&#96; using formula &#39;y ~ x&#39;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9"></p>
+<h3 id="使用cowplot包"><a href="#使用cowplot包" class="headerlink" title="使用cowplot包"></a>使用<code>cowplot</code>包</h3><p>函数<code>ggdraw（）+ draw_plot（）+ draw_plot_label（）</code>的组合可用于将图形放置在特定大小的特定位置。  </p>
+<p><code>ggdraw（）</code>可以初始化一个空的绘图画布，默认情况是这样的：  </p>
+<p><img src="%22../../img/canva.png%22" alt="canva">  </p>
+<p><code>draw_plot（）</code>可以将绘图放置在绘图画布上的某处：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">draw_plot(plot, x = <span class="number">0</span>, y = <span class="number">0</span>, width = <span class="number">1</span>, height = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>draw_plot_label()</code> 可以向图的左上角添加绘图标签。它可以处理带有关联坐标的标签向量。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">draw_plot_label(label, x = <span class="number">0</span>, y = <span class="number">1</span>, size = <span class="number">16</span>, <span class="keyword">...</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果需要组合多张图形，可以通过类似于下边的代码来实现：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(<span class="string">&quot;cowplot&quot;</span>)</span><br><span class="line">ggdraw() +</span><br><span class="line">  draw_plot(bxp, x = <span class="number">0</span>, y = <span class="number">.5</span>, width = <span class="number">.5</span>, height = <span class="number">.5</span>) +</span><br><span class="line">  draw_plot(dp, x = <span class="number">.5</span>, y = <span class="number">.5</span>, width = <span class="number">.5</span>, height = <span class="number">.5</span>) +</span><br><span class="line">  draw_plot(bp, x = <span class="number">0</span>, y = <span class="number">0</span>, width = <span class="number">1</span>, height = <span class="number">0.5</span>) +</span><br><span class="line">  draw_plot_label(label = c(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>), size = <span class="number">15</span>,</span><br><span class="line">                  x = c(<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">0</span>), y = c(<span class="number">1</span>, <span class="number">1</span>, <span class="number">0.5</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12"></p>
+<h3 id="使用gridExtra包"><a href="#使用gridExtra包" class="headerlink" title="使用gridExtra包"></a>使用<code>gridExtra</code>包</h3><p><code>gridExtra</code>包的使用方法和<code>ggpubr</code>包类似  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(<span class="string">&quot;gridExtra&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## Attaching package: &#39;gridExtra&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## The following object is masked from &#39;package:dplyr&#39;:</span><br><span class="line">## </span><br><span class="line">##     combine</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grid.arrange(sp,                             <span class="comment"># First row with one plot spaning over 2 columns</span></span><br><span class="line">             arrangeGrob(bxp, dp, ncol = <span class="number">2</span>), <span class="comment"># Second row with 2 plots in 2 different columns</span></span><br><span class="line">             nrow = <span class="number">2</span>)       </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## &#96;geom_smooth()&#96; using formula &#39;y ~ x&#39;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13"></p>
+<p>我们同样可以使用<code>gird.arrange()</code>函数中的<code>lay_matrix</code>参数来设置，使用方法如下：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grid.arrange(bp,                                    <span class="comment"># bar plot spaning two columns</span></span><br><span class="line">             bxp, sp,                               <span class="comment"># box plot and scatter plot</span></span><br><span class="line">             ncol = <span class="number">2</span>, nrow = <span class="number">2</span>, </span><br><span class="line">             layout_matrix = rbind(c(<span class="number">1</span>,<span class="number">1</span>), c(<span class="number">2</span>,<span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## &#96;geom_smooth()&#96; using formula &#39;y ~ x&#39;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-14-1.png" alt="plot of chunk unnamed-chunk-14"></p>
+<blockquote>
+<p>在上面的R代码中，layout_matrix是一个2×2矩阵（2列和2行）。 第一行全是1，这是第一幅图占的地方，横跨两列; 第二行包含分别占据一列的图2和图3  </p>
+</blockquote>
+<p>此时，如果需要对图形进行注释，<code>ggpubr</code>包已经不足以实现，需要我们使用<code>cowplot</code>包来进行进一步的注释  </p>
+<p>需要注意的是<code>grid.arrange（）</code>/ <code>arrangeGrob（）</code>输出的是一个<code>gtable</code>，首先需要使用<code>ggpubr</code>包中的<code>as_ggplot（）</code>函数将其转换为<code>ggplot</code>。 接下来，就可以使用函数<code>draw_plot_label（）</code>对其进行注释。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(<span class="string">&quot;gridExtra&quot;</span>)</span><br><span class="line"><span class="keyword">library</span>(<span class="string">&quot;cowplot&quot;</span>)</span><br><span class="line"><span class="comment"># Arrange plots using arrangeGrob</span></span><br><span class="line"><span class="comment"># returns a gtable (gt)</span></span><br><span class="line">gt &lt;- arrangeGrob(bp,                               <span class="comment"># bar plot spaning two columns</span></span><br><span class="line">             bxp, sp,                               <span class="comment"># box plot and scatter plot</span></span><br><span class="line">             ncol = <span class="number">2</span>, nrow = <span class="number">2</span>, </span><br><span class="line">             layout_matrix = rbind(c(<span class="number">1</span>,<span class="number">1</span>), c(<span class="number">2</span>,<span class="number">3</span>)))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## &#96;geom_smooth()&#96; using formula &#39;y ~ x&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add labels to the arranged plots</span></span><br><span class="line">p &lt;- as_ggplot(gt) +                                <span class="comment"># transform to a ggplot</span></span><br><span class="line">  draw_plot_label(label = c(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>), size = <span class="number">15</span>,</span><br><span class="line">                  x = c(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>), y = c(<span class="number">1</span>, <span class="number">0.5</span>, <span class="number">0.5</span>)) <span class="comment"># Add labels</span></span><br><span class="line">p</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15"></p>
+<blockquote>
+<p>在上面的R代码中，我们使用了<code>arrangeGrob（）</code>而不<code>是grid.arrange（）</code>。<br>请注意，这两个函数的主要区别在于，<code>grid.arrange（）</code>会自动绘制排列好的图<br>由于我们要在绘制之前注释已排列的图，因此在这种情况下，函数<code>arrangeGrob（）</code>是首选。  </p>
+</blockquote>
+<h2 id="使用grid包"><a href="#使用grid包" class="headerlink" title="使用grid包"></a>使用<code>grid</code>包</h2><p>通过函数<code>grid.layout（）</code>，可以使用<code>gridR</code>包创建复杂的图像布局。 它还提供了函数<code>viewport（）</code>来定义布局上图像的区域或位置。 函数<code>print（）</code>用于将图放置在指定区域中。  </p>
+<p>总结起来共以下5个顺序步骤：  </p>
+<ol>
+<li>创建绘图：p1，p2，p3，…  </li>
+<li>使用函数<code>grid.newpage（）</code>创建画板  </li>
+<li>创建画板布局2X2 - 列数= 2; 行数= 2  </li>
+<li>定义图像输出位置：画板中图像显示的区域  </li>
+<li>在画板中输出显示图片  </li>
+</ol>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(grid)</span><br><span class="line"><span class="comment"># Move to a new page</span></span><br><span class="line">grid.newpage()</span><br><span class="line"><span class="comment"># Create layout : nrow = 3, ncol = 2</span></span><br><span class="line">pushViewport(viewport(layout = grid.layout(nrow = <span class="number">3</span>, ncol = <span class="number">2</span>)))</span><br><span class="line"><span class="comment"># A helper function to define a region on the layout</span></span><br><span class="line">define_region &lt;- <span class="keyword">function</span>(row, col)&#123;</span><br><span class="line">  viewport(layout.pos.row = row, layout.pos.col = col)</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment"># Arrange the plots</span></span><br><span class="line">print(sp, vp = define_region(row = <span class="number">1</span>, col = <span class="number">1</span>:<span class="number">2</span>))   <span class="comment"># Span over two columns</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## &#96;geom_smooth()&#96; using formula &#39;y ~ x&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(bxp, vp = define_region(row = <span class="number">2</span>, col = <span class="number">1</span>))</span><br><span class="line">print(dp, vp = define_region(row = <span class="number">2</span>, col = <span class="number">2</span>))</span><br><span class="line">print(bp + rremove(<span class="string">&quot;x.text&quot;</span>), vp = define_region(row = <span class="number">3</span>, col = <span class="number">1</span>:<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16"></p>
+<h2 id="通用图例的设定"><a href="#通用图例的设定" class="headerlink" title="通用图例的设定"></a>通用图例的设定</h2><p>在我们绘制的图片当中，有的可能具有相同的图例，函数<code>ggarrange（）</code>可以与以下参数一起使用,使两幅图使用相同的图例  </p>
+<ul>
+<li><code>common.legend = TRUE</code>：使用公共图例  </li>
+<li><code>legend</code>:指定图例位置。 允许的值包括c（“top”，“bottom”，“left”，“right”）  </li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ggarrange(bxp, dp, labels = c(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>),</span><br><span class="line">          common.legend = <span class="literal">TRUE</span>, legend = <span class="string">&quot;bottom&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-17-1.png" alt="plot of chunk unnamed-chunk-17"></p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>给散点图添加边界密度图  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Scatter plot colored by groups (&quot;Species&quot;)</span></span><br><span class="line">sp &lt;- ggscatter(iris, x = <span class="string">&quot;Sepal.Length&quot;</span>, y = <span class="string">&quot;Sepal.Width&quot;</span>,</span><br><span class="line">                color = <span class="string">&quot;Species&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>,</span><br><span class="line">                size = <span class="number">3</span>, alpha = <span class="number">0.6</span>)+</span><br><span class="line">  border()                                         </span><br><span class="line"><span class="comment"># Marginal density plot of x (top panel) and y (right panel)</span></span><br><span class="line">xplot &lt;- ggdensity(iris, <span class="string">&quot;Sepal.Length&quot;</span>, fill = <span class="string">&quot;Species&quot;</span>,</span><br><span class="line">                   palette = <span class="string">&quot;jco&quot;</span>)</span><br><span class="line">yplot &lt;- ggdensity(iris, <span class="string">&quot;Sepal.Width&quot;</span>, fill = <span class="string">&quot;Species&quot;</span>, </span><br><span class="line">                   palette = <span class="string">&quot;jco&quot;</span>)+</span><br><span class="line">  rotate()</span><br><span class="line"><span class="comment"># Cleaning the plots</span></span><br><span class="line">yplot &lt;- yplot + clean_theme() </span><br><span class="line">xplot &lt;- xplot + clean_theme()</span><br><span class="line"><span class="comment"># Arranging the plot</span></span><br><span class="line">ggarrange(xplot, <span class="literal">NULL</span>, sp, yplot, </span><br><span class="line">          ncol = <span class="number">2</span>, nrow = <span class="number">2</span>,  align = <span class="string">&quot;hv&quot;</span>, </span><br><span class="line">          widths = c(<span class="number">2</span>, <span class="number">1</span>), heights = c(<span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">          common.legend = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/combine-ggplot2/unnamed-chunk-18-1.png" alt="plot of chunk unnamed-chunk-18"></p>
+<hr>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h3><p><a target="_blank" rel="noopener" href="http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/81-ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page/">ggplot2 - Easy Way to Mix Multiple Graphs on The Same Page</a>  </p>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2018/05/23/git-github/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2018-05-23
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/ggplot2/" title="ggplot2">
+                        <b>#</b> ggplot2
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2018/08/02/library-require/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9B%BE%E7%89%87"><span class="toc-text">创建图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E5%A4%9A%E5%BC%A0%E5%9B%BE%E7%89%87%E5%9C%A8%E4%B8%80%E4%B8%AA%E9%9D%A2%E6%9D%BF%E4%B8%8A"><span class="toc-text">组合多张图片在一个面板上</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%99%E5%9B%BE%E7%89%87%E6%B7%BB%E5%8A%A0%E6%B3%A8%E9%87%8A"><span class="toc-text">给图片添加注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%AF%B9%E9%BD%90"><span class="toc-text">图片对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9%E5%8F%98%E5%9B%BE%E5%BD%A2%E7%9A%84%E8%A1%8C%E5%88%97%E5%B8%83%E5%B1%80%E6%8E%92%E5%B8%83"><span class="toc-text">改变图形的行列布局排布</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ggpubr%E5%8C%85"><span class="toc-text">使用ggpubr包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8cowplot%E5%8C%85"><span class="toc-text">使用cowplot包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8gridExtra%E5%8C%85"><span class="toc-text">使用gridExtra包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8grid%E5%8C%85"><span class="toc-text">使用grid包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%9B%BE%E4%BE%8B%E7%9A%84%E8%AE%BE%E5%AE%9A"><span class="toc-text">通用图例的设定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98"><span class="toc-text">实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference:</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

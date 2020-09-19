@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>ggpubr使用指南(二) | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">ggpubr使用指南(二)</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-05-28
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/plot/" title="plot">
+                    <b>#</b> plot
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="使用ggmaplot函数绘制火山图"><a href="#使用ggmaplot函数绘制火山图" class="headerlink" title="使用ggmaplot函数绘制火山图"></a>使用ggmaplot函数绘制火山图</h2><h3 id="加载所需R包"><a href="#加载所需R包" class="headerlink" title="加载所需R包"></a>加载所需R包</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggpubr)</span><br></pre></td></tr></table></figure>
+
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法:"></a>基本用法:</h3><p><strong>Usage</strong>  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ggmaplot(data, fdr = <span class="number">0.05</span>, fc = <span class="number">1.5</span>, genenames = <span class="literal">NULL</span>, detection_call = <span class="literal">NULL</span>, size = <span class="literal">NULL</span>,</span><br><span class="line">  font.label = c(<span class="number">12</span>, <span class="string">&quot;plain&quot;</span>, <span class="string">&quot;black&quot;</span>), label.rectangle = <span class="literal">FALSE</span>, palette = c(<span class="string">&quot;#B31B21&quot;</span>, <span class="string">&quot;#1465AC&quot;</span>, <span class="string">&quot;darkgray&quot;</span>), top = <span class="number">15</span>, select.top.method = c(<span class="string">&quot;padj&quot;</span>, <span class="string">&quot;fc&quot;</span>), main = <span class="literal">NULL</span>, xlab = <span class="string">&quot;Log2 mean expression&quot;</span>,</span><br><span class="line">  ylab = <span class="string">&quot;Log2 fold change&quot;</span>, ggtheme = theme_classic(), <span class="keyword">...</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用参数："><a href="#常用参数：" class="headerlink" title="常用参数："></a>常用参数：</h3><p><strong>Arguments</strong>  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">data    <span class="comment">#差异基因分析结果 an object of class DESeqResults, get_diff, DE_Results, matrix or data frame containing the columns baseMean, log2FoldChange, and padj. Rows are genes.</span></span><br><span class="line">        <span class="comment">#baseMean: the mean expression of genes in the two groups.</span></span><br><span class="line">        <span class="comment">#log2FoldChange: the log2 fold changes of group 2 compared to group 1</span></span><br><span class="line">        <span class="comment">#padj: the adjusted p-value of the used statiscal test.</span></span><br><span class="line">fdr     <span class="comment">#设定fdr阈值 Accepted false discovery rate for considering genes as differentially expressed.</span></span><br><span class="line">fc      <span class="comment">#设定fc阈值 the fold change threshold. Only genes with a fold change &gt;= fc and padj &lt;= fdr are considered as significantly differentially expressed.</span></span><br><span class="line">genenames    <span class="comment">#基因名 a character vector of length nrow(data) specifying gene names corresponding to each row. Used for point labels.</span></span><br><span class="line">detection_call    <span class="comment">#选出特定表达模式的基因进行展示 a numeric vector with length = nrow(data), specifying if the genes is expressed (value = 1) or not (value = 0). For example detection_call = c(1, 1, 0, 1, 0, 1). Default is NULL. If detection_call column is available in data, it will be used.</span></span><br><span class="line">size    <span class="comment">#points size.</span></span><br><span class="line">font.label    <span class="comment">#a vector of length 3 indicating respectively the size (e.g.: 14), the style (e.g.: &quot;plain&quot;, &quot;bold&quot;, &quot;italic&quot;, &quot;bold.italic&quot;) and the color (e.g.: &quot;red&quot;) of point labels. For example font.label = c(14, &quot;bold&quot;, &quot;red&quot;).</span></span><br><span class="line">label.rectangle    <span class="comment">#logical value. If TRUE, add rectangle underneath the text, making it easier to read.</span></span><br><span class="line">palette    <span class="comment">#the color palette to be used for coloring or filling by groups. Allowed values include &quot;grey&quot; for grey color palettes; brewer palettes e.g. &quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;, &quot;red&quot;); and scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;, &quot;aaas&quot;, &quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and &quot;rickandmorty&quot;.</span></span><br><span class="line">top    <span class="comment">#选定top基因进行展示 the number of top genes to be shown on the plot. Use top = 0 to hide to gene labels.</span></span><br><span class="line">select.top.method    <span class="comment">#methods to be used for selecting top genes. Allowed values include &quot;padj&quot; and &quot;fc&quot; for selecting by adjusted p values or fold changes, respectively.</span></span><br><span class="line">main    <span class="comment">#plot main title.</span></span><br><span class="line">xlab    <span class="comment">#character vector specifying x axis labels. Use xlab = FALSE to hide xlab.</span></span><br><span class="line">ylab    <span class="comment">#character vector specifying y axis labels. Use ylab = FALSE to hide ylab.</span></span><br><span class="line">ggtheme    <span class="comment">#function, ggplot2 theme name. Default value is theme_pubr(). Allowed values include ggplot2 official themes: theme_gray(), theme_bw(), theme_minimal(), theme_classic(), theme_void()</span></span><br><span class="line"><span class="keyword">...</span>     <span class="comment">#other arguments to be passed to ggpar.</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载数据集</span></span><br><span class="line">data(diff_express)</span><br><span class="line">head(diff_express)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##                     name     baseMean log2FoldChange         padj detection_call</span><br><span class="line">## ENSG00000000003   TSPAN6    0.1184475      0.0000000           NA              0</span><br><span class="line">## ENSG00000000419     DPM1 1654.4618144      0.6789538 5.280802e-02              1</span><br><span class="line">## ENSG00000000457    SCYL3  681.0463277      1.5263838 3.915112e-07              1</span><br><span class="line">## ENSG00000000460 C1orf112  389.7226640      3.8933573 1.180333e-14              1</span><br><span class="line">## ENSG00000000938      FGR  364.7810090     -2.3554014 1.559228e-04              1</span><br><span class="line">## ENSG00000000971      CFH    1.1346239      1.2932740 4.491812e-01              0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p1 &lt;- ggmaplot(diff_express, fdr = <span class="number">0.05</span>, fc = <span class="number">2</span>, size = <span class="number">0.4</span>,</span><br><span class="line">               palette = c(<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;gray&quot;</span>))</span><br><span class="line">p1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/ggpubr-ii/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">p2 &lt;- ggmaplot(diff_express, main = expression(<span class="string">&quot;Group 1&quot;</span> %-&gt;% <span class="string">&quot;Group 2&quot;</span>),</span><br><span class="line">               fdr = <span class="number">0.05</span>, fc = <span class="number">2</span>, size = <span class="number">0.4</span>,</span><br><span class="line">               palette = c(<span class="string">&quot;#B31B21&quot;</span>, <span class="string">&quot;#1465AC&quot;</span>, <span class="string">&quot;darkgray&quot;</span>),</span><br><span class="line">               genenames = as.vector(diff_express$name),</span><br><span class="line">               xlab = <span class="string">&quot;M&quot;</span>, ylab = <span class="string">&quot;A&quot;</span>,</span><br><span class="line">               legend = <span class="string">&quot;top&quot;</span>, top = <span class="number">20</span>,</span><br><span class="line">               font.label = c(<span class="number">11</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;red&quot;</span>),</span><br><span class="line">               font.legend = <span class="string">&quot;bold&quot;</span>, font.main = <span class="string">&quot;bold&quot;</span>,</span><br><span class="line">               ggtheme = ggplot2::theme_minimal())</span><br><span class="line">p2</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/ggpubr-ii/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add rectangle around labels</span></span><br><span class="line">p3 &lt;- ggmaplot(diff_express, main = expression(<span class="string">&quot;Group 1&quot;</span> %-&gt;% <span class="string">&quot;Group 2&quot;</span>),</span><br><span class="line">               fdr = <span class="number">0.05</span>, fc = <span class="number">2</span>, size = <span class="number">0.4</span>,</span><br><span class="line">               palette = c(<span class="string">&quot;#B31B21&quot;</span>, <span class="string">&quot;#1465AC&quot;</span>, <span class="string">&quot;darkgray&quot;</span>),</span><br><span class="line">               genenames = as.vector(diff_express$name),</span><br><span class="line">               legend = <span class="string">&quot;top&quot;</span>, top = <span class="number">20</span>, font.label = c(<span class="string">&quot;bold&quot;</span>, <span class="number">11</span>),</span><br><span class="line">               label.rectangle = <span class="literal">TRUE</span>, font.legend = <span class="string">&quot;bold&quot;</span>, </span><br><span class="line">               select.top.method = <span class="string">&quot;padj&quot;</span>, font.main = <span class="string">&quot;bold&quot;</span>,</span><br><span class="line">               ggtheme = ggplot2::theme_minimal())</span><br><span class="line">p3</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/ggpubr-ii/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">p4 &lt;- ggmaplot(diff_express, main = expression(<span class="string">&quot;Group 1&quot;</span> %-&gt;% <span class="string">&quot;Group 2&quot;</span>),</span><br><span class="line">               fdr = <span class="number">0.05</span>, fc = <span class="number">2</span>, size = <span class="number">0.5</span>,</span><br><span class="line">               palette = c(<span class="string">&quot;#B31B21&quot;</span>, <span class="string">&quot;#1465AC&quot;</span>, <span class="string">&quot;darkgray&quot;</span>),</span><br><span class="line">               genenames = as.vector(diff_express$name),</span><br><span class="line">               legend = <span class="string">&quot;top&quot;</span>, top = <span class="number">20</span>, font.label = c(<span class="string">&quot;bold&quot;</span>, <span class="number">11</span>),</span><br><span class="line">               label.rectangle = <span class="literal">TRUE</span>, font.legend = <span class="string">&quot;bold&quot;</span>, </span><br><span class="line">               select.top.method = <span class="string">&quot;fc&quot;</span>, font.main = <span class="string">&quot;bold&quot;</span>,</span><br><span class="line">               ggtheme = ggplot2::theme_minimal())</span><br><span class="line">p4</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/ggpubr-ii/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sessionInfo()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">## R version 4.0.2 (2020-06-22)</span><br><span class="line">## Platform: x86_64-w64-mingw32&#x2F;x64 (64-bit)</span><br><span class="line">## Running under: Windows 10 x64 (build 17763)</span><br><span class="line">## </span><br><span class="line">## Matrix products: default</span><br><span class="line">## </span><br><span class="line">## locale:</span><br><span class="line">## [1] LC_COLLATE&#x3D;Chinese (Simplified)_China.936  LC_CTYPE&#x3D;Chinese (Simplified)_China.936   </span><br><span class="line">## [3] LC_MONETARY&#x3D;Chinese (Simplified)_China.936 LC_NUMERIC&#x3D;C                              </span><br><span class="line">## [5] LC_TIME&#x3D;Chinese (Simplified)_China.936    </span><br><span class="line">## system code page: 65001</span><br><span class="line">## </span><br><span class="line">## attached base packages:</span><br><span class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span><br><span class="line">## </span><br><span class="line">## other attached packages:</span><br><span class="line">##  [1] ggpubr_0.4.0       nycflights13_1.0.1 forcats_0.5.0      stringr_1.4.0     </span><br><span class="line">##  [5] dplyr_1.0.2        purrr_0.3.4        readr_1.3.1        tidyr_1.1.2       </span><br><span class="line">##  [9] tibble_3.0.3       ggplot2_3.3.2      tidyverse_1.3.0   </span><br><span class="line">## </span><br><span class="line">## loaded via a namespace (and not attached):</span><br><span class="line">##  [1] ggrepel_0.8.2     Rcpp_1.0.5        lubridate_1.7.9   assertthat_0.2.1  digest_0.6.25    </span><br><span class="line">##  [6] utf8_1.1.4        R6_2.4.1          cellranger_1.1.0  backports_1.1.9   reprex_0.3.0     </span><br><span class="line">## [11] evaluate_0.14     httr_1.4.2        highr_0.8         pillar_1.4.6      rlang_0.4.7      </span><br><span class="line">## [16] curl_4.3          readxl_1.3.1      rstudioapi_0.11   data.table_1.13.0 car_3.0-9        </span><br><span class="line">## [21] blob_1.2.1        labeling_0.3      foreign_0.8-80    munsell_0.5.0     broom_0.7.0      </span><br><span class="line">## [26] compiler_4.0.2    modelr_0.1.8      xfun_0.17         pkgconfig_2.0.3   tidyselect_1.1.0 </span><br><span class="line">## [31] rio_0.5.16        fansi_0.4.1       crayon_1.3.4      dbplyr_1.4.4      withr_2.2.0      </span><br><span class="line">## [36] grid_4.0.2        jsonlite_1.7.1    gtable_0.3.0      lifecycle_0.2.0   DBI_1.1.0        </span><br><span class="line">## [41] magrittr_1.5      scales_1.1.1      zip_2.1.1         cli_2.0.2         stringi_1.5.3    </span><br><span class="line">## [46] carData_3.0-4     farver_2.0.3      ggsignif_0.6.0    fs_1.5.0          xml2_1.3.2       </span><br><span class="line">## [51] ellipsis_0.3.1    generics_0.0.2    vctrs_0.3.4       openxlsx_4.1.5    ggsci_2.9        </span><br><span class="line">## [56] tools_4.0.2       glue_1.4.2        hms_0.5.3         abind_1.4-5       colorspace_1.4-1 </span><br><span class="line">## [61] rstatix_0.6.0     rvest_0.3.6       knitr_1.29        haven_2.3.1</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/05/27/dplyr-i/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-05-28
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/plot/" title="plot">
+                        <b>#</b> plot
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/05/28/ggpubr-i/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ggmaplot%E5%87%BD%E6%95%B0%E7%BB%98%E5%88%B6%E7%81%AB%E5%B1%B1%E5%9B%BE"><span class="toc-text">使用ggmaplot函数绘制火山图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%89%80%E9%9C%80R%E5%8C%85"><span class="toc-text">加载所需R包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-text">基本用法:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-text">常用参数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">使用示例</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

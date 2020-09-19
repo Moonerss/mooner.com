@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>R 语言统计检验函数汇总 | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">R 语言统计检验函数汇总</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-07-31
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/stats/" title="stats">
+                    <b>#</b> stats
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="连续型数据"><a href="#连续型数据" class="headerlink" title="连续型数据"></a>连续型数据</h2><h3 id="基于分布的检验"><a href="#基于分布的检验" class="headerlink" title="基于分布的检验"></a>基于分布的检验</h3><h4 id="T检验"><a href="#T检验" class="headerlink" title="T检验"></a>T检验</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.test(<span class="number">1</span>:<span class="number">10</span>, <span class="number">10</span>:<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Welch Two Sample t-test</span><br><span class="line">## </span><br><span class="line">## data:  1:10 and 10:20</span><br><span class="line">## t &#x3D; -7, df &#x3D; 19, p-value &#x3D; 2e-06</span><br><span class="line">## alternative hypothesis: true difference in means is not equal to 0</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  -12.4  -6.6</span><br><span class="line">## sample estimates:</span><br><span class="line">## mean of x mean of y </span><br><span class="line">##       5.5      15.0</span><br></pre></td></tr></table></figure>
+
+<p>配对 t 检验：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.test(rnorm(<span class="number">10</span>), rnorm(<span class="number">10</span>, mean = <span class="number">1</span>), paired = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Paired t-test</span><br><span class="line">## </span><br><span class="line">## data:  rnorm(10) and rnorm(10, mean &#x3D; 1)</span><br><span class="line">## t &#x3D; -2, df &#x3D; 9, p-value &#x3D; 0.03</span><br><span class="line">## alternative hypothesis: true difference in means is not equal to 0</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  -1.981 -0.096</span><br><span class="line">## sample estimates:</span><br><span class="line">## mean of the differences </span><br><span class="line">##                   -1.04</span><br></pre></td></tr></table></figure>
+
+<p>使用公式表示：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df &lt;- data.frame(</span><br><span class="line">  value = c(rnorm(<span class="number">10</span>), rnorm(<span class="number">10</span>, mean = <span class="number">1</span>)),</span><br><span class="line">  group = c(rep(<span class="string">&quot;case&quot;</span>, <span class="number">10</span>), rep(<span class="string">&quot;control&quot;</span>, <span class="number">10</span>))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">t.test(value ~ group, data = df)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Welch Two Sample t-test</span><br><span class="line">## </span><br><span class="line">## data:  value by group</span><br><span class="line">## t &#x3D; -0.7, df &#x3D; 18, p-value &#x3D; 0.5</span><br><span class="line">## alternative hypothesis: true difference in means is not equal to 0</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  -0.933  0.447</span><br><span class="line">## sample estimates:</span><br><span class="line">##    mean in group case mean in group control </span><br><span class="line">##                 0.539                 0.782</span><br></pre></td></tr></table></figure>
+
+<p>假设方差同质化：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.test(value ~ group, data = df, var.equal = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Two Sample t-test</span><br><span class="line">## </span><br><span class="line">## data:  value by group</span><br><span class="line">## t &#x3D; -0.7, df &#x3D; 18, p-value &#x3D; 0.5</span><br><span class="line">## alternative hypothesis: true difference in means is not equal to 0</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  -0.933  0.447</span><br><span class="line">## sample estimates:</span><br><span class="line">##    mean in group case mean in group control </span><br><span class="line">##                 0.539                 0.782</span><br></pre></td></tr></table></figure>
+
+<h4 id="总体方差比较"><a href="#总体方差比较" class="headerlink" title="总体方差比较"></a>总体方差比较</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var.test(value ~ group, data = df)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	F test to compare two variances</span><br><span class="line">## </span><br><span class="line">## data:  value by group</span><br><span class="line">## F &#x3D; 0.8, num df &#x3D; 9, denom df &#x3D; 9, p-value &#x3D; 0.8</span><br><span class="line">## alternative hypothesis: true ratio of variances is not equal to 1</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  0.202 3.269</span><br><span class="line">## sample estimates:</span><br><span class="line">## ratio of variances </span><br><span class="line">##              0.812</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bartlett.test(value ~ group, data = df)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Bartlett test of homogeneity of variances</span><br><span class="line">## </span><br><span class="line">## data:  value by group</span><br><span class="line">## Bartlett&#39;s K-squared &#x3D; 0.09, df &#x3D; 1, p-value &#x3D; 0.8</span><br></pre></td></tr></table></figure>
+
+<h4 id="多个组间均值的比较"><a href="#多个组间均值的比较" class="headerlink" title="多个组间均值的比较"></a>多个组间均值的比较</h4><p>两组以上的比较要使用ANOVA  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aov(wt ~ factor(cyl), data = mtcars)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">## Call:</span><br><span class="line">##    aov(formula &#x3D; wt ~ factor(cyl), data &#x3D; mtcars)</span><br><span class="line">## </span><br><span class="line">## Terms:</span><br><span class="line">##                 factor(cyl) Residuals</span><br><span class="line">## Sum of Squares         18.2      11.5</span><br><span class="line">## Deg. of Freedom           2        29</span><br><span class="line">## </span><br><span class="line">## Residual standard error: 0.63</span><br><span class="line">## Estimated effects may be unbalanced</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 查看详细的信息</span></span><br><span class="line">model.tables(aov(wt ~ factor(cyl), data = mtcars))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## Tables of effects</span><br><span class="line">## </span><br><span class="line">##  factor(cyl) </span><br><span class="line">##           4       6      8</span><br><span class="line">##     -0.9315 -0.1001  0.782</span><br><span class="line">## rep 11.0000  7.0000 14.000</span><br></pre></td></tr></table></figure>
+
+<p>ANOVA 分析假设各组样本数据的方差是相等的，如果知道（或怀疑）不相等，可以使用 <code>oneway.test()</code> 函数。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oneway.test(wt ~ cyl, data = mtcars)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	One-way analysis of means (not assuming equal variances)</span><br><span class="line">## </span><br><span class="line">## data:  wt and cyl</span><br><span class="line">## F &#x3D; 20, num df &#x3D; 2, denom df &#x3D; 19, p-value &#x3D; 2e-05</span><br></pre></td></tr></table></figure>
+
+<h4 id="多组样本的配对-t-检验"><a href="#多组样本的配对-t-检验" class="headerlink" title="多组样本的配对 t 检验"></a>多组样本的配对 t 检验</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pairwise.t.test(mtcars$wt, mtcars$cyl)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Pairwise comparisons using t tests with pooled SD </span><br><span class="line">## </span><br><span class="line">## data:  mtcars$wt and mtcars$cyl </span><br><span class="line">## </span><br><span class="line">##   4     6   </span><br><span class="line">## 6 0.01  -   </span><br><span class="line">## 8 6e-07 0.01</span><br><span class="line">## </span><br><span class="line">## P value adjustment method: holm</span><br></pre></td></tr></table></figure>
+
+<h4 id="正态性检验"><a href="#正态性检验" class="headerlink" title="正态性检验"></a>正态性检验</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shapiro.test(rnorm(<span class="number">30</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Shapiro-Wilk normality test</span><br><span class="line">## </span><br><span class="line">## data:  rnorm(30)</span><br><span class="line">## W &#x3D; 1, p-value &#x3D; 0.6</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qqnorm(rnorm(<span class="number">30</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="figure/unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1"></p>
+<h4 id="分布的对称性检验"><a href="#分布的对称性检验" class="headerlink" title="分布的对称性检验"></a>分布的对称性检验</h4><p>用 Kolmogorov-Smirnov 检验查看一个向量是否来自一个对称的分布（不限于正态分布）。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ks.test(rnorm(<span class="number">10</span>), pnorm)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	One-sample Kolmogorov-Smirnov test</span><br><span class="line">## </span><br><span class="line">## data:  rnorm(10)</span><br><span class="line">## D &#x3D; 0.3, p-value &#x3D; 0.2</span><br><span class="line">## alternative hypothesis: two-sided</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>函数第 1 个参数指定待检验的数据，第 2个参数指定对称分布的类型，可以是数值型向量、指定概率分布函数的字符串或一个分布函数。  </p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ks.test(rnorm(<span class="number">10</span>), <span class="string">&quot;pnorm&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	One-sample Kolmogorov-Smirnov test</span><br><span class="line">## </span><br><span class="line">## data:  rnorm(10)</span><br><span class="line">## D &#x3D; 0.3, p-value &#x3D; 0.3</span><br><span class="line">## alternative hypothesis: two-sided</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ks.test(rpois(<span class="number">10</span>, lambda = <span class="number">1</span>), <span class="string">&quot;pnorm&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Warning in ks.test(rpois(10, lambda &#x3D; 1), &quot;pnorm&quot;): ties should not be present for the</span><br><span class="line">## Kolmogorov-Smirnov test</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	One-sample Kolmogorov-Smirnov test</span><br><span class="line">## </span><br><span class="line">## data:  rpois(10, lambda &#x3D; 1)</span><br><span class="line">## D &#x3D; 0.5, p-value &#x3D; 0.006</span><br><span class="line">## alternative hypothesis: two-sided</span><br></pre></td></tr></table></figure>
+
+<h4 id="检验两个向量是否服从同一分布"><a href="#检验两个向量是否服从同一分布" class="headerlink" title="检验两个向量是否服从同一分布"></a>检验两个向量是否服从同一分布</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ks.test(rnorm(<span class="number">20</span>), rnorm(<span class="number">30</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Two-sample Kolmogorov-Smirnov test</span><br><span class="line">## </span><br><span class="line">## data:  rnorm(20) and rnorm(30)</span><br><span class="line">## D &#x3D; 0.2, p-value &#x3D; 0.4</span><br><span class="line">## alternative hypothesis: two-sided</span><br></pre></td></tr></table></figure>
+
+<h4 id="相关性分析"><a href="#相关性分析" class="headerlink" title="相关性分析"></a>相关性分析</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cor.test(mtcars$mpg, mtcars$wt)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Pearson&#39;s product-moment correlation</span><br><span class="line">## </span><br><span class="line">## data:  mtcars$mpg and mtcars$wt</span><br><span class="line">## t &#x3D; -10, df &#x3D; 30, p-value &#x3D; 1e-10</span><br><span class="line">## alternative hypothesis: true correlation is not equal to 0</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  -0.934 -0.744</span><br><span class="line">## sample estimates:</span><br><span class="line">##    cor </span><br><span class="line">## -0.868</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="不依赖分布的检验"><a href="#不依赖分布的检验" class="headerlink" title="不依赖分布的检验"></a>不依赖分布的检验</h3><h4 id="均值检验"><a href="#均值检验" class="headerlink" title="均值检验"></a>均值检验</h4><p>Wilcoxon 检验是 t 检验的非参数版本  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 秩和检验</span></span><br><span class="line">wilcox.test(<span class="number">1</span>:<span class="number">10</span>, <span class="number">10</span>:<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Warning in wilcox.test.default(1:10, 10:20): cannot compute exact p-value with ties</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Wilcoxon rank sum test with continuity correction</span><br><span class="line">## </span><br><span class="line">## data:  1:10 and 10:20</span><br><span class="line">## W &#x3D; 0.5, p-value &#x3D; 1e-04</span><br><span class="line">## alternative hypothesis: true location shift is not equal to 0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 符号秩检验</span></span><br><span class="line">wilcox.test(<span class="number">1</span>:<span class="number">10</span>, <span class="number">10</span>:<span class="number">19</span>, paired = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Warning in wilcox.test.default(1:10, 10:19, paired &#x3D; TRUE): cannot compute exact p-value with</span><br><span class="line">## ties</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Wilcoxon signed rank test with continuity correction</span><br><span class="line">## </span><br><span class="line">## data:  1:10 and 10:19</span><br><span class="line">## V &#x3D; 0, p-value &#x3D; 0.002</span><br><span class="line">## alternative hypothesis: true location shift is not equal to 0</span><br></pre></td></tr></table></figure>
+
+<h4 id="多均值比较"><a href="#多均值比较" class="headerlink" title="多均值比较"></a>多均值比较</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Kruskal-Wallis 秩和检验</span></span><br><span class="line">kruskal.test(wt ~ factor(cyl), data = mtcars)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Kruskal-Wallis rank sum test</span><br><span class="line">## </span><br><span class="line">## data:  wt by factor(cyl)</span><br><span class="line">## Kruskal-Wallis chi-squared &#x3D; 23, df &#x3D; 2, p-value &#x3D; 1e-05</span><br></pre></td></tr></table></figure>
+
+<h4 id="方差检验"><a href="#方差检验" class="headerlink" title="方差检验"></a>方差检验</h4><p>使用Fligner-Killeen（中位数）检验完成不同组别的方差比较  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fligner.test(wt ~ cyl, data = mtcars)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Fligner-Killeen test of homogeneity of variances</span><br><span class="line">## </span><br><span class="line">## data:  wt by cyl</span><br><span class="line">## Fligner-Killeen:med chi-squared &#x3D; 0.5, df &#x3D; 2, p-value &#x3D; 0.8</span><br></pre></td></tr></table></figure>
+
+<h2 id="离散数据"><a href="#离散数据" class="headerlink" title="离散数据"></a>离散数据</h2><h3 id="比例检验"><a href="#比例检验" class="headerlink" title="比例检验"></a>比例检验</h3><p>使用 <code>prop.test()</code> 比较两组观测值发生的概率是否有差异。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">heads &lt;- rbinom(<span class="number">1</span>, size = <span class="number">100</span>, prob = <span class="number">.5</span>)</span><br><span class="line">prop.test(heads, <span class="number">100</span>)  </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	1-sample proportions test with continuity correction</span><br><span class="line">## </span><br><span class="line">## data:  heads out of 100, null probability 0.5</span><br><span class="line">## X-squared &#x3D; 2, df &#x3D; 1, p-value &#x3D; 0.1</span><br><span class="line">## alternative hypothesis: true p is not equal to 0.5</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  0.477 0.677</span><br><span class="line">## sample estimates:</span><br><span class="line">##    p </span><br><span class="line">## 0.58</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prop.test(heads, <span class="number">100</span>, p = <span class="number">0.3</span>, correct = <span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	1-sample proportions test without continuity correction</span><br><span class="line">## </span><br><span class="line">## data:  heads out of 100, null probability 0.3</span><br><span class="line">## X-squared &#x3D; 37, df &#x3D; 1, p-value &#x3D; 1e-09</span><br><span class="line">## alternative hypothesis: true p is not equal to 0.3</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  0.482 0.672</span><br><span class="line">## sample estimates:</span><br><span class="line">##    p </span><br><span class="line">## 0.58</span><br></pre></td></tr></table></figure>
+
+<h3 id="二项式检验"><a href="#二项式检验" class="headerlink" title="二项式检验"></a>二项式检验</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binom.test(c(<span class="number">682</span>, <span class="number">243</span>), p = <span class="number">3</span>/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Exact binomial test</span><br><span class="line">## </span><br><span class="line">## data:  c(682, 243)</span><br><span class="line">## number of successes &#x3D; 682, number of trials &#x3D; 925, p-value &#x3D; 0.4</span><br><span class="line">## alternative hypothesis: true probability of success is not equal to 0.75</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  0.708 0.765</span><br><span class="line">## sample estimates:</span><br><span class="line">## probability of success </span><br><span class="line">##                  0.737</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="列联表"><a href="#列联表" class="headerlink" title="列联表"></a>列联表</h3><p>确定两个分类变量是否相关  </p>
+<h4 id="Fisher精确检验"><a href="#Fisher精确检验" class="headerlink" title="Fisher精确检验"></a>Fisher精确检验</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TeaTasting &lt;-</span><br><span class="line">matrix(c(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>),</span><br><span class="line">       nrow = <span class="number">2</span>,</span><br><span class="line">       dimnames = list(Guess = c(<span class="string">&quot;Milk&quot;</span>, <span class="string">&quot;Tea&quot;</span>),</span><br><span class="line">                       Truth = c(<span class="string">&quot;Milk&quot;</span>, <span class="string">&quot;Tea&quot;</span>)))</span><br><span class="line">fisher.test(TeaTasting, alternative = <span class="string">&quot;greater&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Fisher&#39;s Exact Test for Count Data</span><br><span class="line">## </span><br><span class="line">## data:  TeaTasting</span><br><span class="line">## p-value &#x3D; 0.2</span><br><span class="line">## alternative hypothesis: true odds ratio is greater than 1</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##  0.314   Inf</span><br><span class="line">## sample estimates:</span><br><span class="line">## odds ratio </span><br><span class="line">##       6.41</span><br></pre></td></tr></table></figure>
+
+
+<p>当样本数比较多时，使用卡方检验代替  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chisq.test(TeaTasting)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Warning in chisq.test(TeaTasting): Chi-squared approximation may be incorrect</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Pearson&#39;s Chi-squared test with Yates&#39; continuity correction</span><br><span class="line">## </span><br><span class="line">## data:  TeaTasting</span><br><span class="line">## X-squared &#x3D; 0.5, df &#x3D; 1, p-value &#x3D; 0.5</span><br></pre></td></tr></table></figure>
+
+<p>对于三变量的混合影响，使用 Cochran-Mantel-Haenszel 检验。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Rabbits &lt;-</span><br><span class="line">array(c(<span class="number">0</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">5</span>,</span><br><span class="line">        <span class="number">3</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>,</span><br><span class="line">        <span class="number">6</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">4</span>,</span><br><span class="line">        <span class="number">5</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">0</span>,</span><br><span class="line">        <span class="number">2</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">      dim = c(<span class="number">2</span>, <span class="number">2</span>, <span class="number">5</span>),</span><br><span class="line">      dimnames = list(</span><br><span class="line">          Delay = c(<span class="string">&quot;None&quot;</span>, <span class="string">&quot;1.5h&quot;</span>),</span><br><span class="line">          Response = c(<span class="string">&quot;Cured&quot;</span>, <span class="string">&quot;Died&quot;</span>),</span><br><span class="line">          Penicillin.Level = c(<span class="string">&quot;1/8&quot;</span>, <span class="string">&quot;1/4&quot;</span>, <span class="string">&quot;1/2&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;4&quot;</span>)))</span><br><span class="line">Rabbits</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">## , , Penicillin.Level &#x3D; 1&#x2F;8</span><br><span class="line">## </span><br><span class="line">##       Response</span><br><span class="line">## Delay  Cured Died</span><br><span class="line">##   None     0    6</span><br><span class="line">##   1.5h     0    5</span><br><span class="line">## </span><br><span class="line">## , , Penicillin.Level &#x3D; 1&#x2F;4</span><br><span class="line">## </span><br><span class="line">##       Response</span><br><span class="line">## Delay  Cured Died</span><br><span class="line">##   None     3    3</span><br><span class="line">##   1.5h     0    6</span><br><span class="line">## </span><br><span class="line">## , , Penicillin.Level &#x3D; 1&#x2F;2</span><br><span class="line">## </span><br><span class="line">##       Response</span><br><span class="line">## Delay  Cured Died</span><br><span class="line">##   None     6    0</span><br><span class="line">##   1.5h     2    4</span><br><span class="line">## </span><br><span class="line">## , , Penicillin.Level &#x3D; 1</span><br><span class="line">## </span><br><span class="line">##       Response</span><br><span class="line">## Delay  Cured Died</span><br><span class="line">##   None     5    1</span><br><span class="line">##   1.5h     6    0</span><br><span class="line">## </span><br><span class="line">## , , Penicillin.Level &#x3D; 4</span><br><span class="line">## </span><br><span class="line">##       Response</span><br><span class="line">## Delay  Cured Died</span><br><span class="line">##   None     2    0</span><br><span class="line">##   1.5h     5    0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mantelhaen.test(Rabbits)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Mantel-Haenszel chi-squared test with continuity correction</span><br><span class="line">## </span><br><span class="line">## data:  Rabbits</span><br><span class="line">## Mantel-Haenszel X-squared &#x3D; 4, df &#x3D; 1, p-value &#x3D; 0.05</span><br><span class="line">## alternative hypothesis: true common odds ratio is not equal to 1</span><br><span class="line">## 95 percent confidence interval:</span><br><span class="line">##   1.03 47.73</span><br><span class="line">## sample estimates:</span><br><span class="line">## common odds ratio </span><br><span class="line">##                 7</span><br></pre></td></tr></table></figure>
+
+<h4 id="列联表非参数检验"><a href="#列联表非参数检验" class="headerlink" title="列联表非参数检验"></a>列联表非参数检验</h4><p>Friedman 秩和检验是一个非参数版本的双边 ANOVA 检验。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Hollander &amp; Wolfe (1973), p. 140ff.</span></span><br><span class="line"><span class="comment">## Comparison of three methods (&quot;round out&quot;, &quot;narrow angle&quot;, and</span></span><br><span class="line"><span class="comment">##  &quot;wide angle&quot;) for rounding first base.  For each of 18 players</span></span><br><span class="line"><span class="comment">##  and the three method, the average time of two runs from a point on</span></span><br><span class="line"><span class="comment">##  the first base line 35ft from home plate to a point 15ft short of</span></span><br><span class="line"><span class="comment">##  second base is recorded.</span></span><br><span class="line">RoundingTimes &lt;-</span><br><span class="line">matrix(c(<span class="number">5.40</span>, <span class="number">5.50</span>, <span class="number">5.55</span>,</span><br><span class="line">         <span class="number">5.85</span>, <span class="number">5.70</span>, <span class="number">5.75</span>,</span><br><span class="line">         <span class="number">5.20</span>, <span class="number">5.60</span>, <span class="number">5.50</span>,</span><br><span class="line">         <span class="number">5.55</span>, <span class="number">5.50</span>, <span class="number">5.40</span>,</span><br><span class="line">         <span class="number">5.90</span>, <span class="number">5.85</span>, <span class="number">5.70</span>,</span><br><span class="line">         <span class="number">5.45</span>, <span class="number">5.55</span>, <span class="number">5.60</span>,</span><br><span class="line">         <span class="number">5.40</span>, <span class="number">5.40</span>, <span class="number">5.35</span>,</span><br><span class="line">         <span class="number">5.45</span>, <span class="number">5.50</span>, <span class="number">5.35</span>,</span><br><span class="line">         <span class="number">5.25</span>, <span class="number">5.15</span>, <span class="number">5.00</span>,</span><br><span class="line">         <span class="number">5.85</span>, <span class="number">5.80</span>, <span class="number">5.70</span>,</span><br><span class="line">         <span class="number">5.25</span>, <span class="number">5.20</span>, <span class="number">5.10</span>,</span><br><span class="line">         <span class="number">5.65</span>, <span class="number">5.55</span>, <span class="number">5.45</span>,</span><br><span class="line">         <span class="number">5.60</span>, <span class="number">5.35</span>, <span class="number">5.45</span>,</span><br><span class="line">         <span class="number">5.05</span>, <span class="number">5.00</span>, <span class="number">4.95</span>,</span><br><span class="line">         <span class="number">5.50</span>, <span class="number">5.50</span>, <span class="number">5.40</span>,</span><br><span class="line">         <span class="number">5.45</span>, <span class="number">5.55</span>, <span class="number">5.50</span>,</span><br><span class="line">         <span class="number">5.55</span>, <span class="number">5.55</span>, <span class="number">5.35</span>,</span><br><span class="line">         <span class="number">5.45</span>, <span class="number">5.50</span>, <span class="number">5.55</span>,</span><br><span class="line">         <span class="number">5.50</span>, <span class="number">5.45</span>, <span class="number">5.25</span>,</span><br><span class="line">         <span class="number">5.65</span>, <span class="number">5.60</span>, <span class="number">5.40</span>,</span><br><span class="line">         <span class="number">5.70</span>, <span class="number">5.65</span>, <span class="number">5.55</span>,</span><br><span class="line">         <span class="number">6.30</span>, <span class="number">6.30</span>, <span class="number">6.25</span>),</span><br><span class="line">       nrow = <span class="number">22</span>,</span><br><span class="line">       byrow = <span class="literal">TRUE</span>,</span><br><span class="line">       dimnames = list(<span class="number">1</span> : <span class="number">22</span>,</span><br><span class="line">                       c(<span class="string">&quot;Round Out&quot;</span>, <span class="string">&quot;Narrow Angle&quot;</span>, <span class="string">&quot;Wide Angle&quot;</span>)))</span><br><span class="line">friedman.test(RoundingTimes)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## </span><br><span class="line">## 	Friedman rank sum test</span><br><span class="line">## </span><br><span class="line">## data:  RoundingTimes</span><br><span class="line">## Friedman chi-squared &#x3D; 11, df &#x3D; 2, p-value &#x3D; 0.004</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/07/31/r-docker-tutorial/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-07-31
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/stats/" title="stats">
+                        <b>#</b> stats
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/08/10/single-cell-ii/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="toc-text">连续型数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%88%86%E5%B8%83%E7%9A%84%E6%A3%80%E9%AA%8C"><span class="toc-text">基于分布的检验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#T%E6%A3%80%E9%AA%8C"><span class="toc-text">T检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E6%96%B9%E5%B7%AE%E6%AF%94%E8%BE%83"><span class="toc-text">总体方差比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E7%BB%84%E9%97%B4%E5%9D%87%E5%80%BC%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-text">多个组间均值的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BB%84%E6%A0%B7%E6%9C%AC%E7%9A%84%E9%85%8D%E5%AF%B9-t-%E6%A3%80%E9%AA%8C"><span class="toc-text">多组样本的配对 t 检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E6%80%81%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="toc-text">正态性检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E7%9A%84%E5%AF%B9%E7%A7%B0%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="toc-text">分布的对称性检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E9%AA%8C%E4%B8%A4%E4%B8%AA%E5%90%91%E9%87%8F%E6%98%AF%E5%90%A6%E6%9C%8D%E4%BB%8E%E5%90%8C%E4%B8%80%E5%88%86%E5%B8%83"><span class="toc-text">检验两个向量是否服从同一分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-text">相关性分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E4%BE%9D%E8%B5%96%E5%88%86%E5%B8%83%E7%9A%84%E6%A3%80%E9%AA%8C"><span class="toc-text">不依赖分布的检验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9D%87%E5%80%BC%E6%A3%80%E9%AA%8C"><span class="toc-text">均值检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E5%9D%87%E5%80%BC%E6%AF%94%E8%BE%83"><span class="toc-text">多均值比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%B7%AE%E6%A3%80%E9%AA%8C"><span class="toc-text">方差检验</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%95%B0%E6%8D%AE"><span class="toc-text">离散数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E4%BE%8B%E6%A3%80%E9%AA%8C"><span class="toc-text">比例检验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E9%A1%B9%E5%BC%8F%E6%A3%80%E9%AA%8C"><span class="toc-text">二项式检验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%81%94%E8%A1%A8"><span class="toc-text">列联表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Fisher%E7%B2%BE%E7%A1%AE%E6%A3%80%E9%AA%8C"><span class="toc-text">Fisher精确检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%81%94%E8%A1%A8%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C"><span class="toc-text">列联表非参数检验</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

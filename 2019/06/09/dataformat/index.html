@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>Python基本数据类型 | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Python基本数据类型</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2019-06-09
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/Python/" title="Python">
+                    <b>#</b> Python
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><ul>
+<li>Number（数字）  </li>
+<li>String（字符串）  </li>
+<li>List（列表）  </li>
+<li>Tuple（元组）  </li>
+<li>Set（集合）  </li>
+<li>Dictionary（字典）  </li>
+</ul>
+<blockquote>
+<p>不可变数据（3 个）：Number（数字）、String（字符串）、Tuple（元组）<br>可变数据（3 个）：List（列表）、Dictionary（字典）、Set（集合）  </p>
+</blockquote>
+<h4 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h4><p>Python3 支持 int、float、bool、complex（复数）。  </p>
+<p>内置的 <code>type()</code> 函数可以用来查询变量所指的对象类型。 <code>isinstance()</code> 用来判断数据类型  </p>
+<blockquote>
+<p>isinstance 和 type 的区别在于:  </p>
+<ul>
+<li><code>type()</code> 不会认为子类是一种父类类型  </li>
+<li><code>isinstance()</code> 会认为子类是一种父类类型  </li>
+</ul>
+</blockquote>
+<h4 id="String（字符串）"><a href="#String（字符串）" class="headerlink" title="String（字符串）"></a>String（字符串）</h4><p>Python中的字符串用单引号 <code>&#39;</code> 或双引号 <code>&quot;</code> 括起来，同时使用反斜杠 <code>\</code> 转义特殊字符。  </p>
+<p>Python 使用反斜杠(<code>\</code>)转义特殊字符，如果你不想让反斜杠发生转义，可以在字符串前面添加一个 <code>r</code> ，表示原始字符串   </p>
+<p>另外，反斜杠(<code>\</code>)可以作为续行符，表示下一行是上一行的延续。也可以使用 <code>&quot;&quot;&quot;...&quot;&quot;&quot;</code> 或者 <code>&#39;&#39;&#39;...&#39;&#39;&#39;</code> 跨越多行。  </p>
+<p><strong>注意</strong>，Python 没有单独的字符类型，一个字符就是长度为1的字符串。  </p>
+<blockquote>
+<ol>
+<li>反斜杠可以用来转义，使用r可以让反斜杠不发生转义。  </li>
+<li>字符串可以用+运算符连接在一起，用*运算符重复。  </li>
+<li>Python中的字符串有两种索引方式，从左往右以0开始，从右往左以-1开始。  </li>
+<li>Python中的字符串不能改变。  </li>
+</ol>
+</blockquote>
+<h4 id="List（列表）"><a href="#List（列表）" class="headerlink" title="List（列表）"></a>List（列表）</h4><p>列表可以完成大多数集合类的数据结构实现。列表中元素的类型可以不相同，它支持数字，字符串甚至可以包含列表（所谓嵌套）。  </p>
+<p>列表是写在方括号 [] 之间、用逗号分隔开的元素列表。  </p>
+<p>列表索引：<br><img src="/images/dataformat/list_slicing1.png" alt="list_slicing1"></p>
+<p>与Python字符串不一样的是，列表中的元素是可以改变的。  </p>
+<blockquote>
+<ol>
+<li>List写在方括号之间，元素用逗号隔开。  </li>
+<li>和字符串一样，list可以被索引和切片。  </li>
+<li>List可以使用+操作符进行拼接。  </li>
+<li>List中的元素是可以改变的。  </li>
+</ol>
+</blockquote>
+<h4 id="Tuple（元组）"><a href="#Tuple（元组）" class="headerlink" title="Tuple（元组）"></a>Tuple（元组）</h4><p>元组（tuple）与列表类似，不同之处在于元组的元素不能修改。元组写在小括号 <code>()</code> 里，元素之间用逗号隔开。元组中的元素类型也可以不相同。  </p>
+<p>虽然tuple的元素不可改变，但它可以包含可变的对象，比如list列表。  </p>
+<p>string、list 和 tuple 都属于 sequence（序列）。</p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>与字符串一样，元组的元素不能修改。  </li>
+<li>元组也可以被索引和切片，方法一样。  </li>
+<li>注意构造包含 0 或 1 个元素的元组的特殊语法规则。  </li>
+<li>元组也可以使用+操作符进行拼接。  </li>
+</ol>
+<h4 id="Set（集合）"><a href="#Set（集合）" class="headerlink" title="Set（集合）"></a>Set（集合）</h4><p>集合（set）是由一个或数个形态各异的大小整体组成的，构成集合的事物或对象称作元素或是成员，是一个无序的不重复元素序列。  </p>
+<p>基本功能是进行成员关系测试和删除重复元素。  </p>
+<p>可以使用大括号 <code>&#123; &#125;</code> 或者 <code>set()</code> 函数创建集合，注意：创建一个空集合必须用 <code>set()</code> 而不是 <code>&#123; &#125;</code>，因为 <code>&#123; &#125;</code> 是用来创建一个空字典。  </p>
+<h4 id="Dictionary（字典）"><a href="#Dictionary（字典）" class="headerlink" title="Dictionary（字典）"></a>Dictionary（字典）</h4><p>字典（dictionary）是Python中另一个非常有用的内置数据类型。  </p>
+<p>列表是有序的对象集合，字典是无序的对象集合。两者之间的区别在于：字典当中的元素是通过键来存取的，而不是通过偏移存取。  </p>
+<p>字典是一种映射类型，字典用 { } 标识，它是一个无序的 键(key) : 值(value) 的集合。  </p>
+<p>键(key)必须使用不可变类型。  </p>
+<p>在同一个字典中，键(key)必须是唯一的。  </p>
+<blockquote>
+<ol>
+<li>字典是一种映射类型，它的元素是键值对。  </li>
+<li>字典的关键字必须为不可变类型，且不能重复。  </li>
+<li>创建空字典使用 <code>&#123; &#125;</code>。  </li>
+</ol>
+</blockquote>
+<h3 id="Python数据类型转换"><a href="#Python数据类型转换" class="headerlink" title="Python数据类型转换"></a>Python数据类型转换</h3><p>有时候，我们需要对数据内置的类型进行转换，数据类型的转换，你只需要将数据类型作为函数名即可。  </p>
+<p>以下几个内置的函数可以执行数据类型之间的转换。这些函数返回一个新的对象，表示转换的值。  </p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>int(x [,base])</code></td>
+<td align="center">将x转换为一个整数</td>
+</tr>
+<tr>
+<td align="center"><code>float(x)</code></td>
+<td align="center">将x转换到一个浮点数</td>
+</tr>
+<tr>
+<td align="center"><code>complex(real [,imag])</code></td>
+<td align="center">创建一个复数</td>
+</tr>
+<tr>
+<td align="center"><code>str(x)</code></td>
+<td align="center">将对象 x 转换为字符串</td>
+</tr>
+<tr>
+<td align="center"><code>repr(x)</code></td>
+<td align="center">将对象 x 转换为表达式字符串</td>
+</tr>
+<tr>
+<td align="center"><code>eval(str)</code></td>
+<td align="center">用来计算在字符串中的有效Python表达式,并返回一个对象</td>
+</tr>
+<tr>
+<td align="center"><code>tuple(s)</code></td>
+<td align="center">将序列 s 转换为一个元组</td>
+</tr>
+<tr>
+<td align="center"><code>list(s)</code></td>
+<td align="center">将序列 s 转换为一个列表</td>
+</tr>
+<tr>
+<td align="center"><code>set(s)</code></td>
+<td align="center">转换为可变集合</td>
+</tr>
+<tr>
+<td align="center"><code>dict(d)</code></td>
+<td align="center">创建一个字典。d 必须是一个序列 (key,value)元组。</td>
+</tr>
+<tr>
+<td align="center"><code>frozenset(s)</code></td>
+<td align="center">转换为不可变集合</td>
+</tr>
+<tr>
+<td align="center"><code>chr(x)</code></td>
+<td align="center">将一个整数转换为一个字符</td>
+</tr>
+<tr>
+<td align="center"><code>ord(x)</code></td>
+<td align="center">将一个字符转换为它的整数值</td>
+</tr>
+<tr>
+<td align="center"><code>hex(x)</code></td>
+<td align="center">将一个整数转换为一个十六进制字符串</td>
+</tr>
+<tr>
+<td align="center"><code>oct(x)</code></td>
+<td align="center">将一个整数转换为一个八进制字符串</td>
+</tr>
+</tbody></table>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><h4 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h4><p>加（<code>+</code>）、减（<code>-</code>）、乘（<code>*</code>）、除（<code>/</code>）、取余（<code>%</code>）、乘幂（<code>**</code>）、向下整除（<code>//</code>）  </p>
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><p>等于（<code>==</code>）、不等于（<code>!=</code>）、大于（<code>&gt;</code>）、小于（<code>&lt;</code>）、大于等于（<code>&gt;=</code>）、小于等于（<code>&lt;=</code>）  </p>
+<blockquote>
+<p>返回布尔值：<strong>TRUE</strong>或<strong>FALSE</strong>  </p>
+</blockquote>
+<h4 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">=</td>
+<td align="center">简单的赋值运算符</td>
+<td align="center">c = a + b 将 a + b 的运算结果赋值为 c</td>
+</tr>
+<tr>
+<td align="center">+=</td>
+<td align="center">加法赋值运算符</td>
+<td align="center">c += a 等效于 c = c + a</td>
+</tr>
+<tr>
+<td align="center">-=</td>
+<td align="center">减法赋值运算符</td>
+<td align="center">c -= a 等效于 c = c - a</td>
+</tr>
+<tr>
+<td align="center">*=</td>
+<td align="center">乘法赋值运算符</td>
+<td align="center">c *= a 等效于 c = c * a</td>
+</tr>
+<tr>
+<td align="center">/=</td>
+<td align="center">除法赋值运算符</td>
+<td align="center">c /= a 等效于 c = c / a</td>
+</tr>
+<tr>
+<td align="center">%=</td>
+<td align="center">取模赋值运算符</td>
+<td align="center">c %= a 等效于 c = c % a</td>
+</tr>
+<tr>
+<td align="center">**=</td>
+<td align="center">幂赋值运算符</td>
+<td align="center">c **= a 等效于 c = c ** a</td>
+</tr>
+<tr>
+<td align="center">//=</td>
+<td align="center">取整除赋值运算符</td>
+<td align="center">c //= a 等效于 c = c // a</td>
+</tr>
+</tbody></table>
+<h4 id="按位运算符"><a href="#按位运算符" class="headerlink" title="按位运算符"></a>按位运算符</h4><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;</td>
+<td align="center">按位与运算符：参与运算的两个值,如果两个相应位都为1,则该位的结果为1,否则为0</td>
+<td align="center">(a &amp; b) 输出结果 12 ，二进制解释： 0000 1100</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">按位或运算符：只要对应的二个二进位有一个为1时，结果位就为1。</td>
+<td align="center">(a</td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td align="center">按位异或运算符：当两对应的二进位相异时，结果为1</td>
+<td align="center">(a ^ b) 输出结果 49 ，二进制解释： 0011 0001</td>
+</tr>
+<tr>
+<td align="center">~</td>
+<td align="center">按位取反运算符：对数据的每个二进制位取反,即把1变为0,把0变为1。<code>~x</code> 类似于 <code>-x-1</code></td>
+<td align="center">(~a ) 输出结果 -61 ，二进制解释： 1100 0011， 在一个有符号二进制数的补码形式。</td>
+</tr>
+<tr>
+<td align="center">&lt;&lt;</td>
+<td align="center">左移动运算符：运算数的各二进位全部左移若干位，由”&lt;&lt;”右边的数指定移动的位数，高位丢弃，低位补0。</td>
+<td align="center">a &lt;&lt; 2 输出结果 240 ，二进制解释： 1111 0000</td>
+</tr>
+<tr>
+<td align="center">&gt;&gt;</td>
+<td align="center">右移动运算符：把”&gt;&gt;”左边的运算数的各二进位全部右移若干位，”&gt;&gt;”右边的数指定移动的位数</td>
+<td align="center">a &gt;&gt; 2  输出结果 15 ，二进制解释： 0000 1111</td>
+</tr>
+</tbody></table>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">逻辑表达式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">and</td>
+<td align="center">x and y</td>
+<td align="center">布尔”与” - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。</td>
+</tr>
+<tr>
+<td align="center">or</td>
+<td align="center">x or y</td>
+<td align="center">布尔”或” - 如果 x 是 True，它返回 x 的值，否则它返回 y 的计算值。</td>
+</tr>
+<tr>
+<td align="center">not</td>
+<td align="center">not x</td>
+<td align="center">布尔”非” - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。</td>
+</tr>
+</tbody></table>
+<h4 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h4><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">in</td>
+<td align="center">如果在指定的序列中找到值返回 True，否则返回 False。</td>
+<td align="center">x 在 y 序列中 , 如果 x 在 y 序列中返回 True。</td>
+</tr>
+<tr>
+<td align="center">not in</td>
+<td align="center">如果在指定的序列中没有找到值返回 True，否则返回 False。</td>
+<td align="center">x 不在 y 序列中 , 如果 x 不在 y 序列中返回 True。</td>
+</tr>
+</tbody></table>
+<h4 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a>身份运算符</h4><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">is</td>
+<td align="center">is 是判断两个标识符是不是引用自一个对象</td>
+<td align="center">x is y, 类似 id(x) == id(y) , 如果引用的是同一个对象则返回 True，否则返回 False</td>
+</tr>
+<tr>
+<td align="center">is not</td>
+<td align="center">is not 是判断两个标识符是不是引用自不同对象</td>
+<td align="center">x is not y ， 类似 id(a) != id(b)。如果引用的不是同一个对象则返回结果 True，否则返回 False。</td>
+</tr>
+</tbody></table>
+<h3 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h3><p>运算符由高到低优先级为：  </p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">**</td>
+<td align="center">指数 (最高优先级)</td>
+</tr>
+<tr>
+<td align="center">~ + -</td>
+<td align="center">按位翻转, 一元加号和减号 (最后两个的方法名为 +@ 和 -@)</td>
+</tr>
+<tr>
+<td align="center">* / % //</td>
+<td align="center">乘，除，取模和取整除</td>
+</tr>
+<tr>
+<td align="center">+ -</td>
+<td align="center">加法减法</td>
+</tr>
+<tr>
+<td align="center">&gt;&gt; &lt;&lt;</td>
+<td align="center">右移，左移运算符</td>
+</tr>
+<tr>
+<td align="center">&amp;</td>
+<td align="center">位 ‘AND’</td>
+</tr>
+<tr>
+<td align="center">^ `</td>
+<td align="center">`</td>
+</tr>
+<tr>
+<td align="center">&lt;= &lt; &gt; &gt;=</td>
+<td align="center">比较运算符</td>
+</tr>
+<tr>
+<td align="center">&lt;&gt; == !=</td>
+<td align="center">等于运算符</td>
+</tr>
+<tr>
+<td align="center">= %= /= //= -= += *= **=</td>
+<td align="center">赋值运算符</td>
+</tr>
+<tr>
+<td align="center">is is not</td>
+<td align="center">身份运算符</td>
+</tr>
+<tr>
+<td align="center">in not in</td>
+<td align="center">成员运算符</td>
+</tr>
+<tr>
+<td align="center">and or not</td>
+<td align="center">逻辑运算符</td>
+</tr>
+</tbody></table>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2019/05/31/typeof/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2019-06-09
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/Python/" title="Python">
+                        <b>#</b> Python
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2019/06/09/chara-py/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8B"><span class="toc-text">数字类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#String%EF%BC%88%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%89"><span class="toc-text">String（字符串）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#List%EF%BC%88%E5%88%97%E8%A1%A8%EF%BC%89"><span class="toc-text">List（列表）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tuple%EF%BC%88%E5%85%83%E7%BB%84%EF%BC%89"><span class="toc-text">Tuple（元组）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Set%EF%BC%88%E9%9B%86%E5%90%88%EF%BC%89"><span class="toc-text">Set（集合）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dictionary%EF%BC%88%E5%AD%97%E5%85%B8%EF%BC%89"><span class="toc-text">Dictionary（字典）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">Python数据类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">算术运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">比较运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">赋值运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">按位运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%91%98%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">成员运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">身份运算符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">运算符优先级</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>
