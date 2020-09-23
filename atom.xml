@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-09-18T11:57:44.889Z</updated>
+  <updated>2020-09-23T01:13:54.943Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ggplot2小部件参考</title>
+    <link href="http://example.com/2020/09/22/ggplot2/"/>
+    <id>http://example.com/2020/09/22/ggplot2/</id>
+    <published>2020-09-22T08:44:55.000Z</published>
+    <updated>2020-09-23T01:13:54.943Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;添加原件&quot;&gt;&lt;a href=&quot;#添加原件&quot; class=&quot;headerlink&quot; title=&quot;添加原件&quot;&gt;&lt;/a&gt;添加原件&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;添加竖线或者横线  &lt;/p&gt;
+&lt;figure class=&quot;highlight</summary>
+        
+      
+    
+    
+    
+    
+    <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
+    
+  </entry>
   
   <entry>
     <title>WGCNA教程</title>
@@ -337,25 +362,6 @@
   </entry>
   
   <entry>
-    <title>ggpubr使用指南(一)</title>
-    <link href="http://example.com/2020/05/28/ggpubr-i/"/>
-    <id>http://example.com/2020/05/28/ggpubr-i/</id>
-    <published>2020-05-27T16:00:00.000Z</published>
-    <updated>2020-09-18T13:54:22.965Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;code&gt;ggpubr&lt;/code&gt; 是由 &lt;strong&gt;Alboukadel Kassambara&lt;/strong&gt; 开发的一款非常优秀的基于&lt;code&gt;ggplot2&lt;/code&gt;作图的可视化R包，一行命令即可简单方便的绘制出符合出版物要求的图形。</summary>
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="plot" scheme="http://example.com/tags/plot/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ggpubr使用指南(二)</title>
     <link href="http://example.com/2020/05/28/ggpubr-ii/"/>
     <id>http://example.com/2020/05/28/ggpubr-ii/</id>
@@ -385,31 +391,21 @@
   </entry>
   
   <entry>
-    <title>dplyr学习笔记(一)</title>
-    <link href="http://example.com/2020/05/27/dplyr-i/"/>
-    <id>http://example.com/2020/05/27/dplyr-i/</id>
-    <published>2020-05-26T16:00:00.000Z</published>
-    <updated>2020-09-18T13:31:02.284Z</updated>
+    <title>ggpubr使用指南(一)</title>
+    <link href="http://example.com/2020/05/28/ggpubr-i/"/>
+    <id>http://example.com/2020/05/28/ggpubr-i/</id>
+    <published>2020-05-27T16:00:00.000Z</published>
+    <updated>2020-09-18T13:54:22.965Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h1 id=&quot;dplyr&quot;&gt;&lt;a href=&quot;#dplyr&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">&lt;p&gt;&lt;code&gt;ggpubr&lt;/code&gt; 是由 &lt;strong&gt;Alboukadel Kassambara&lt;/strong&gt; 开发的一款非常优秀的基于&lt;code&gt;ggplot2&lt;/code&gt;作图的可视化R包，一行命令即可简单方便的绘制出符合出版物要求的图形。</summary>
     
     
     
     <category term="R" scheme="http://example.com/categories/R/"/>
     
     
-    <category term="tidyverse" scheme="http://example.com/tags/tidyverse/"/>
-    
-    <category term="dplyr" scheme="http://example.com/tags/dplyr/"/>
+    <category term="plot" scheme="http://example.com/tags/plot/"/>
     
   </entry>
   
@@ -431,6 +427,35 @@
 
 &lt;p&gt;在&lt;code&gt;dplyr&lt;/code&gt;中提供的动词语法与其他操作进行连接，可以实现更加复杂的数据操作  &lt;/p&gt;
 &lt;h2 id=&quot;group操作&quot;&gt;&lt;a href=&quot;#group操作&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    
+    <category term="tidyverse" scheme="http://example.com/tags/tidyverse/"/>
+    
+    <category term="dplyr" scheme="http://example.com/tags/dplyr/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dplyr学习笔记(一)</title>
+    <link href="http://example.com/2020/05/27/dplyr-i/"/>
+    <id>http://example.com/2020/05/27/dplyr-i/</id>
+    <published>2020-05-26T16:00:00.000Z</published>
+    <updated>2020-09-18T13:31:02.284Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;dplyr&quot;&gt;&lt;a href=&quot;#dplyr&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -486,33 +511,6 @@
         
     <summary type="html">&lt;p&gt;复合图形可以给出更多的信息，并且更能够观察数据之间的联系。一般所说的复合饼图包括以下两种：  &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;散点复合饼图&lt;/strong&gt;（compound scatter and pie chart）可以展示三个数据变量的信息：(x, y,</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="R" scheme="http://example.com/tags/R/"/>
-    
-    <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R graphics cookbook</title>
-    <link href="http://example.com/2019/12/28/cookbook/"/>
-    <id>http://example.com/2019/12/28/cookbook/</id>
-    <published>2019-12-28T06:41:18.000Z</published>
-    <updated>2020-09-19T01:00:40.382Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;R语言绘制基础图形&quot;&gt;&lt;a href=&quot;#R语言绘制基础图形&quot; class=&quot;headerlink&quot;</summary>
         
       
     
