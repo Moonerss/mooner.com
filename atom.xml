@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-09-23T07:45:09.178Z</updated>
+  <updated>2020-09-23T13:09:59.802Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,102 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>测序质控软件trim_galore安装</title>
+    <link href="http://example.com/2020/09/23/trim-galore/"/>
+    <id>http://example.com/2020/09/23/trim-galore/</id>
+    <published>2020-09-23T12:58:22.000Z</published>
+    <updated>2020-09-23T13:09:59.802Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;code&gt;trim_galore&lt;/code&gt;可以用来对原始的测序数据进行质控  &lt;/p&gt;
+&lt;p&gt;安装&lt;code&gt;trim_galore&lt;/code&gt;需要提前安装两个依赖软件：&lt;code&gt;Fastqc&lt;/code&gt;和&lt;code&gt;cutadapt&lt;/code&gt; </summary>
+        
+      
+    
+    
+    
+    <category term="software" scheme="http://example.com/categories/software/"/>
+    
+    
+    <category term="software" scheme="http://example.com/tags/software/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastQC安装与使用</title>
+    <link href="http://example.com/2020/09/23/fastqc/"/>
+    <id>http://example.com/2020/09/23/fastqc/</id>
+    <published>2020-09-23T11:58:13.000Z</published>
+    <updated>2020-09-23T12:09:25.015Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;FastQC是一款用于对RNA-seq数据进行质量检测和控制的软件（对单细胞和bulk的测序数据都适用）  &lt;/p&gt;
+&lt;p&gt;首先需要从官网下载FastQC的安装文件&lt;br&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="software" scheme="http://example.com/categories/software/"/>
+    
+    
+    <category term="software" scheme="http://example.com/tags/software/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ggplot2常用theme参数参考</title>
+    <link href="http://example.com/2020/09/23/ggplottheme/"/>
+    <id>http://example.com/2020/09/23/ggplottheme/</id>
+    <published>2020-09-23T08:48:36.000Z</published>
+    <updated>2020-09-23T08:52:09.018Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;大佬总结的ggplot2常用调节参数&lt;br&gt;&lt;img src=&quot;/images/ggplottheme/20200627183728.png&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/ggplottheme/20200627183936.png&quot;&gt;   </summary>
+        
+      
+    
+    
+    
+    <category term="R" scheme="http://example.com/categories/R/"/>
+    
+    <category term="ggplot2" scheme="http://example.com/categories/R/ggplot2/"/>
+    
+    
+    <category term="R" scheme="http://example.com/tags/R/"/>
+    
+    <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hemberg-lab单细胞转录组数据分析（一）</title>
+    <link href="http://example.com/2020/09/23/hemberg-lab2/"/>
+    <id>http://example.com/2020/09/23/hemberg-lab2/</id>
+    <published>2020-09-23T08:04:50.000Z</published>
+    <updated>2020-09-23T10:35:43.402Z</updated>
+    
+    
+    
+    
+    
+    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
+    
+  </entry>
   
   <entry>
     <title>GO富集圈圈图</title>
@@ -405,123 +501,6 @@
     
     
     <category term="plot" scheme="http://example.com/tags/plot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ggpubr使用指南(二)</title>
-    <link href="http://example.com/2020/05/28/ggpubr-ii/"/>
-    <id>http://example.com/2020/05/28/ggpubr-ii/</id>
-    <published>2020-05-27T16:00:00.000Z</published>
-    <updated>2020-09-18T23:56:51.365Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-
-
-&lt;h2 id=&quot;使用ggmaplot函数绘制火山图&quot;&gt;&lt;a href=&quot;#使用ggmaplot函数绘制火山图&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="plot" scheme="http://example.com/tags/plot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dplyr学习笔记(一)</title>
-    <link href="http://example.com/2020/05/27/dplyr-i/"/>
-    <id>http://example.com/2020/05/27/dplyr-i/</id>
-    <published>2020-05-26T16:00:00.000Z</published>
-    <updated>2020-09-18T13:31:02.284Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h1 id=&quot;dplyr&quot;&gt;&lt;a href=&quot;#dplyr&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="tidyverse" scheme="http://example.com/tags/tidyverse/"/>
-    
-    <category term="dplyr" scheme="http://example.com/tags/dplyr/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dplyr学习笔记(二)</title>
-    <link href="http://example.com/2020/05/27/dplyr-ii/"/>
-    <id>http://example.com/2020/05/27/dplyr-ii/</id>
-    <published>2020-05-26T16:00:00.000Z</published>
-    <updated>2020-09-18T13:35:19.147Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-
-
-&lt;p&gt;在&lt;code&gt;dplyr&lt;/code&gt;中提供的动词语法与其他操作进行连接，可以实现更加复杂的数据操作  &lt;/p&gt;
-&lt;h2 id=&quot;group操作&quot;&gt;&lt;a href=&quot;#group操作&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="tidyverse" scheme="http://example.com/tags/tidyverse/"/>
-    
-    <category term="dplyr" scheme="http://example.com/tags/dplyr/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>inferCNV 推断拷贝数</title>
-    <link href="http://example.com/2020/01/09/inferCNV/"/>
-    <id>http://example.com/2020/01/09/inferCNV/</id>
-    <published>2020-01-09T01:33:04.000Z</published>
-    <updated>2020-09-19T00:54:50.080Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;inferCNV使用流程&quot;&gt;&lt;a href=&quot;#inferCNV使用流程&quot; class=&quot;headerlink&quot; title=&quot;inferCNV使用流程&quot;&gt;&lt;/a&gt;inferCNV使用流程&lt;/h2&gt;&lt;h3 id=&quot;inferCNV简介&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
-    
-    
-    <category term="R" scheme="http://example.com/tags/R/"/>
-    
-    <category term="inferCNV" scheme="http://example.com/tags/inferCNV/"/>
     
   </entry>
   
