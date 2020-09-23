@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>GO富集圈圈图 | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">GO富集圈圈图</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-09-23
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/R/" title="R">
+                    <b>#</b> R
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/enrichment/" title="enrichment">
+                    <b>#</b> enrichment
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="绘制GO富集的圈圈图实例"><a href="#绘制GO富集的圈圈图实例" class="headerlink" title="绘制GO富集的圈圈图实例"></a>绘制GO富集的圈圈图实例</h2><p>载入R包  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(clusterProfiler)</span><br><span class="line"><span class="keyword">library</span>(org.Hs.eg.db)</span><br><span class="line"><span class="keyword">library</span>(GOplot)</span><br><span class="line"><span class="keyword">library</span>(stringr)</span><br></pre></td></tr></table></figure>
+
+<p>载入差异表达数据  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Warning in readChar(con, 5L, useBytes &#x3D; TRUE): cannot open compressed file &#39;F:&#x2F;</span><br><span class="line">## diff_expr.Rdata&#39;, probable reason &#39;No such file or directory&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Error in readChar(con, 5L, useBytes &#x3D; TRUE): cannot open the connection</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">##       logFC   AveExpr         t      P.Value    adj.P.Val        B probe_id symbol change</span><br><span class="line">## 1 -5.780170  7.370282 -82.94833 3.495205e-12 1.163798e-07 16.32898  8133876   CD36   down</span><br><span class="line">## 2  4.212683  9.106625  68.40113 1.437468e-11 2.393169e-07 15.71739  7965335  DUSP6     up</span><br><span class="line">## 3 -5.633027  8.763220 -57.61985 5.053466e-11 4.431880e-07 15.04752  7972259    DCT   down</span><br><span class="line">## 4  3.801663  9.726468  57.21112 5.324059e-11 4.431880e-07 15.01709  7972217  SPRY2     up</span><br><span class="line">## 5 -3.263063 10.171635 -50.51733 1.324638e-10 8.821294e-07 14.45166  8129573  MOXD1   down</span><br><span class="line">## 6  3.843247  9.667077  45.87910 2.681063e-10 1.487856e-06 13.97123  8015806   ETV4     up</span><br><span class="line">##   ENTREZID</span><br><span class="line">## 1      948</span><br><span class="line">## 2     1848</span><br><span class="line">## 3     1638</span><br><span class="line">## 4    10253</span><br><span class="line">## 5    26002</span><br><span class="line">## 6     2118</span><br></pre></td></tr></table></figure>
+
+<p>保留差异表达基因  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">diff_expr = diff_expr[diff_expr$change!=<span class="string">&quot;stable&quot;</span>,]</span><br><span class="line">diff_expr = diff_expr[<span class="number">1</span>:<span class="number">100</span>,]</span><br><span class="line">gene_diff = diff_expr$symbol</span><br></pre></td></tr></table></figure>
+
+<p>富集分析  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enrich_BP &lt;- enrichGO(gene = gene_diff, keyType = <span class="string">&quot;SYMBOL&quot;</span>, OrgDb= org.Hs.eg.db,</span><br><span class="line">                      ont = <span class="string">&quot;BP&quot;</span>, pAdjustMethod = <span class="string">&quot;BH&quot;</span>, minGSSize = <span class="number">1</span>,</span><br><span class="line">                      pvalueCutoff = <span class="number">0.05</span>, qvalueCutoff = <span class="number">0.05</span>)</span><br><span class="line">class(enrich_BP)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## [1] &quot;enrichResult&quot;</span><br><span class="line">## attr(,&quot;package&quot;)</span><br><span class="line">## [1] &quot;DOSE&quot;</span><br></pre></td></tr></table></figure>
+
+<p>提取图像绘制需要的输入数据  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enrich &lt;- data.frame(enrich_BP) </span><br><span class="line">colnames(enrich)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## [1] &quot;ID&quot;          &quot;Description&quot; &quot;GeneRatio&quot;   &quot;BgRatio&quot;     &quot;pvalue&quot;      &quot;p.adjust&quot;   </span><br><span class="line">## [7] &quot;qvalue&quot;      &quot;geneID&quot;      &quot;Count&quot;</span><br></pre></td></tr></table></figure>
+
+<p>数据整理  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">enrich &lt;- enrich[<span class="number">1</span>:<span class="number">10</span>,c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">6</span>)] </span><br><span class="line"></span><br><span class="line">enrich$geneID &lt;- str_replace_all(enrich$geneID,<span class="string">&quot;/&quot;</span>,<span class="string">&quot;,&quot;</span>) </span><br><span class="line">names(enrich)=c(<span class="string">&quot;ID&quot;</span>,<span class="string">&quot;Term&quot;</span>,<span class="string">&quot;Genes&quot;</span>,<span class="string">&quot;adj_pval&quot;</span>)</span><br><span class="line">enrich$Category = <span class="string">&quot;BP&quot;</span></span><br><span class="line">head(enrich)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">##                    ID                                                       Term</span><br><span class="line">## GO:0050730 GO:0050730            regulation of peptidyl-tyrosine phosphorylation</span><br><span class="line">## GO:0048732 GO:0048732                                          gland development</span><br><span class="line">## GO:0018108 GO:0018108                          peptidyl-tyrosine phosphorylation</span><br><span class="line">## GO:0018212 GO:0018212                             peptidyl-tyrosine modification</span><br><span class="line">## GO:1901992 GO:1901992 positive regulation of mitotic cell cycle phase transition</span><br><span class="line">## GO:0042326 GO:0042326                     negative regulation of phosphorylation</span><br><span class="line">##                                                                                   Genes</span><br><span class="line">## GO:0050730                CD36,AREG,TGFA,CD24,SFRP1,ITGB3,MIR221,SH2B3,CNTN1,INPP5F,MVP</span><br><span class="line">## GO:0048732   ETV5,CCND1,AREG,SERPINF1,SFRP1,IGFBP5,JUN,SEMA3C,SOX2,SNAI2,PBX1,E2F7,RARB</span><br><span class="line">## GO:0018108          CD36,AREG,TGFA,CD24,SFRP1,ITGB3,MIR221,EPHA5,SH2B3,CNTN1,INPP5F,MVP</span><br><span class="line">## GO:0018212          CD36,AREG,TGFA,CD24,SFRP1,ITGB3,MIR221,EPHA5,SH2B3,CNTN1,INPP5F,MVP</span><br><span class="line">## GO:1901992                                     DTL,CCND1,CDCA5,CDC25A,MIR221,PBX1,CDC45</span><br><span class="line">## GO:0042326 DUSP6,SPRY2,NUPR1,SPRY4,UBASH3B,SFRP1,JUN,TLR4,TIMP3,MIR221,SH2B3,INPP5F,MVP</span><br><span class="line">##                adj_pval Category</span><br><span class="line">## GO:0050730 0.0001172193       BP</span><br><span class="line">## GO:0048732 0.0001314734       BP</span><br><span class="line">## GO:0018108 0.0001314734       BP</span><br><span class="line">## GO:0018212 0.0001314734       BP</span><br><span class="line">## GO:1901992 0.0001567831       BP</span><br><span class="line">## GO:0042326 0.0001741554       BP</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">genes &lt;- data.frame(ID = diff_expr$symbol, logFC = diff_expr$logFC)</span><br><span class="line">head(genes)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##      ID     logFC</span><br><span class="line">## 1  CD36 -5.780170</span><br><span class="line">## 2 DUSP6  4.212683</span><br><span class="line">## 3   DCT -5.633027</span><br><span class="line">## 4 SPRY2  3.801663</span><br><span class="line">## 5 MOXD1 -3.263063</span><br><span class="line">## 6  ETV4  3.843247</span><br></pre></td></tr></table></figure>
+
+
+<p>转化成输入数据  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">circ &lt;- circle_dat(enrich,genes)</span><br><span class="line">head(circ)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">##   category         ID                                            term count genes     logFC</span><br><span class="line">## 1       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11  CD36 -5.780170</span><br><span class="line">## 2       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11  AREG  3.095910</span><br><span class="line">## 3       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11  TGFA  2.518930</span><br><span class="line">## 4       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11  CD24 -3.322533</span><br><span class="line">## 5       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11 SFRP1  2.103767</span><br><span class="line">## 6       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11 ITGB3  3.162000</span><br><span class="line">##       adj_pval   zscore</span><br><span class="line">## 1 0.0001172193 0.904534</span><br><span class="line">## 2 0.0001172193 0.904534</span><br><span class="line">## 3 0.0001172193 0.904534</span><br><span class="line">## 4 0.0001172193 0.904534</span><br><span class="line">## 5 0.0001172193 0.904534</span><br><span class="line">## 6 0.0001172193 0.904534</span><br></pre></td></tr></table></figure>
+
+<p>绘制图像  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GOCircle(circ)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/goplot/unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16"></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/09/22/ggplot2/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-09-23
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/R/" title="R">
+                        <b>#</b> R
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/enrichment/" title="enrichment">
+                        <b>#</b> enrichment
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%98%E5%88%B6GO%E5%AF%8C%E9%9B%86%E7%9A%84%E5%9C%88%E5%9C%88%E5%9B%BE%E5%AE%9E%E4%BE%8B"><span class="toc-text">绘制GO富集的圈圈图实例</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>
