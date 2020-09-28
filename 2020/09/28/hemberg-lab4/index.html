@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>Hemberg-lab单细胞转录组数据分析（四） | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Hemberg-lab单细胞转录组数据分析（四）</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-09-28
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/SingleCell/" title="SingleCell">
+                    <b>#</b> SingleCell
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="UMI表达定量-UMI"><a href="#UMI表达定量-UMI" class="headerlink" title="UMI表达定量 (UMI)"></a>UMI表达定量 (UMI)</h1><h2 id="UMI表达定量-UMI-1"><a href="#UMI表达定量-UMI-1" class="headerlink" title="UMI表达定量 (UMI)"></a>UMI表达定量 (UMI)</h2><h3 id="UMI表达定量简介"><a href="#UMI表达定量简介" class="headerlink" title="UMI表达定量简介"></a>UMI表达定量简介</h3><p>基因定量后会整理成一个行为基因（或转录本）列为细胞的<strong>表达矩阵</strong>。虽然前面做了原始数据质控和测序数据质控移除了一部分从reads数层面就不合格的细胞，还需要进一步根据表达矩阵移除其它类型低质量细胞。如果未能识别并移除低质量细胞会混淆下游分析中的有意义的生物信息。  </p>
+<p>鉴于scRNASeq还没有标准方法，后续用到的质控质量值的标准会因为实验方法不同而有很大变化。因此，执行质控时，我们是通过数据集内部比较找到异常细胞，而不是依赖于其它独立的质量标准。因此比较不同的建库方法获得的不同数据集时需要格外注意。  </p>
+<h3 id="Tung数据集"><a href="#Tung数据集" class="headerlink" title="Tung数据集"></a>Tung数据集</h3><p>我们使用芝加哥大学<code>Yoav Gilad</code>实验室的3个不同来源的诱导多能性干细胞 (iPSC)的数据集。细胞分选采用<code>Fluidigm C1</code>微流控台，同时使用<code>UMIs</code>和<code>ERCC spike in</code>进行质控为了保证可重复性，数据是2016年3月15生成的原始数据的拷贝，存储于tung文件夹下。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(SingleCellExperiment)</span><br><span class="line"><span class="keyword">library</span>(scater)</span><br><span class="line">options(stringsAsFactors = <span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+
+<p>读入数据和注释：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">molecules &lt;- read.table(<span class="string">&quot;tung/molecules.txt&quot;</span>, sep = <span class="string">&quot;\t&quot;</span>)</span><br><span class="line">anno &lt;- read.table(<span class="string">&quot;tung/annotation.txt&quot;</span>, sep = <span class="string">&quot;\t&quot;</span>, header = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+
+<p>查看读入的数据：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(molecules[ , <span class="number">1</span>:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##                 NA19098.r1.A01 NA19098.r1.A02 NA19098.r1.A03</span></span><br><span class="line"><span class="comment">## ENSG00000237683              0              0              0</span></span><br><span class="line"><span class="comment">## ENSG00000187634              0              0              0</span></span><br><span class="line"><span class="comment">## ENSG00000188976              3              6              1</span></span><br><span class="line"><span class="comment">## ENSG00000187961              0              0              0</span></span><br><span class="line"><span class="comment">## ENSG00000187583              0              0              0</span></span><br><span class="line"><span class="comment">## ENSG00000187642              0              0              0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(anno)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##   individual replicate well      batch      sample_id</span></span><br><span class="line"><span class="comment">## 1    NA19098        r1  A01 NA19098.r1 NA19098.r1.A01</span></span><br><span class="line"><span class="comment">## 2    NA19098        r1  A02 NA19098.r1 NA19098.r1.A02</span></span><br><span class="line"><span class="comment">## 3    NA19098        r1  A03 NA19098.r1 NA19098.r1.A03</span></span><br><span class="line"><span class="comment">## 4    NA19098        r1  A04 NA19098.r1 NA19098.r1.A04</span></span><br><span class="line"><span class="comment">## 5    NA19098        r1  A05 NA19098.r1 NA19098.r1.A05</span></span><br><span class="line"><span class="comment">## 6    NA19098        r1  A06 NA19098.r1 NA19098.r1.A06</span></span><br></pre></td></tr></table></figure>
+
+<p>数据包含 3个个体，3次重复和9个批次。</p>
+<p>通过使用<code>SingleCellExperiment</code> (SCE) 和<code>scater</code>包标准化分析过程。首先构建<code>SCE</code>对象:  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">umi &lt;- SingleCellExperiment(</span><br><span class="line">    assays = list(counts = as.matrix(molecules)), </span><br><span class="line">    colData = anno</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>移除不在任何细胞表达的基因:  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keep_feature &lt;- rowSums(counts(umi) &gt; <span class="number">0</span>) &gt; <span class="number">0</span></span><br><span class="line">umi &lt;- umi[keep_feature, ]</span><br></pre></td></tr></table></figure>
+
+<p>定义对照特征基因集：<code>ERCC spike-ins</code>和线粒体基因  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">isSpike(umi, <span class="string">&quot;ERCC&quot;</span>) &lt;- grepl(<span class="string">&quot;^ERCC-&quot;</span>, rownames(umi))</span><br><span class="line">isSpike(umi, <span class="string">&quot;MT&quot;</span>) &lt;- rownames(umi) %<span class="keyword">in</span>% </span><br><span class="line">    c(<span class="string">&quot;ENSG00000198899&quot;</span>, <span class="string">&quot;ENSG00000198727&quot;</span>, <span class="string">&quot;ENSG00000198888&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ENSG00000198886&quot;</span>, <span class="string">&quot;ENSG00000212907&quot;</span>, <span class="string">&quot;ENSG00000198786&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ENSG00000198695&quot;</span>, <span class="string">&quot;ENSG00000198712&quot;</span>, <span class="string">&quot;ENSG00000198804&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ENSG00000198763&quot;</span>, <span class="string">&quot;ENSG00000228253&quot;</span>, <span class="string">&quot;ENSG00000198938&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ENSG00000198840&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>计算质量矩阵:  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">umi &lt;- calculateQCMetrics(</span><br><span class="line">    umi,</span><br><span class="line">    feature_controls = list(</span><br><span class="line">        ERCC = isSpike(umi, <span class="string">&quot;ERCC&quot;</span>), </span><br><span class="line">        MT = isSpike(umi, <span class="string">&quot;MT&quot;</span>)</span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><code>SingleCellExperiment</code>对象结构。<code>str</code> (structure)是一个很好的工具，可以用来查看数据的结构组成。  </p>
+<p>如下面的展示<code>SingleCellExperiment</code>有10个数据槽 (<code>slots</code>)，使用<code>@</code>索引。比如想获得降维后的结果，使用<code>umi@reduceDims</code>，使用<code>umi@colData</code>可以获取质控信息，都有哪些质控变量，进一步的使用<code>umi@colData@listData$total_features_by_counts</code>可以获得每个细胞的基因数。<code>umi@rowRanges@elementMetadata@listData</code>基因的属性信息。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(umi@assays$data@listData$counts)[,<span class="number">1</span>:<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##                 NA19098.r1.A01 NA19098.r1.A02 NA19098.r1.A03</span></span><br><span class="line"><span class="comment">## ENSG00000237683              0              0              0</span></span><br><span class="line"><span class="comment">## ENSG00000187634              0              0              0</span></span><br><span class="line"><span class="comment">## ENSG00000188976              3              6              1</span></span><br><span class="line"><span class="comment">## ENSG00000187961              0              0              0</span></span><br><span class="line"><span class="comment">## ENSG00000187583              0              0              0</span></span><br><span class="line"><span class="comment">## ENSG00000187642              0              0              0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str(umi)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Formal class &#x27;SingleCellExperiment&#x27; [package &quot;SingleCellExperiment&quot;] with 10 slots##   ..@ int_elementMetadata:Formal class &#x27;DataFrame&#x27; [package &quot;S4Vectors&quot;] with 6 slots</span></span><br><span class="line"><span class="comment">##   .. .. ..@ rownames       : NULL</span></span><br><span class="line"><span class="comment">##   .. .. ..@ nrows          : int 18726</span></span><br><span class="line"><span class="comment">##   .. .. ..@ listData       :List of 3</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ is_spike_ERCC: logi [1:18726] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ is_spike     : logi [1:18726] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ is_spike_MT  : logi [1:18726] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   ..@ int_colData        :Formal class &#x27;DataFrame&#x27; [package &quot;S4Vectors&quot;] with 6 slots</span></span><br><span class="line"><span class="comment">##   .. .. ..@ rownames       : NULL</span></span><br><span class="line"><span class="comment">##   .. .. ..@ nrows          : int 864</span></span><br><span class="line"><span class="comment">##   .. .. ..@ listData       : Named list()</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   ..@ int_metadata       :List of 3</span></span><br><span class="line"><span class="comment">##   .. ..$ version          :Classes &#x27;package_version&#x27;, &#x27;numeric_version&#x27;  hidden list of 1</span></span><br><span class="line"><span class="comment">##   .. .. ..$ : int [1:3] 1 4 1</span></span><br><span class="line"><span class="comment">##   .. ..$ spike_names      : chr [1:2] &quot;ERCC&quot; &quot;MT&quot;</span></span><br><span class="line"><span class="comment">##   .. ..$ size_factor_names: chr(0) </span></span><br><span class="line"><span class="comment">##   ..@ reducedDims        :Formal class &#x27;SimpleList&#x27; [package &quot;S4Vectors&quot;] with 4 slots</span></span><br><span class="line"><span class="comment">##   .. .. ..@ listData       : Named list()</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   ..@ rowRanges          :Formal class &#x27;CompressedGRangesList&#x27; [package &quot;GenomicRanges&quot;] with 5 slots</span></span><br><span class="line"><span class="comment">##   .. .. ..@ unlistData     :Formal class &#x27;GRanges&#x27; [package &quot;GenomicRanges&quot;] with 7 slots</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ seqnames       :Formal class &#x27;Rle&#x27; [package &quot;S4Vectors&quot;] with 4 slots</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ values         : Factor w/ 0 levels: </span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ lengths        : int(0) </span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ ranges         :Formal class &#x27;IRanges&#x27; [package &quot;IRanges&quot;] with 6 slots</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ start          : int(0) </span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ width          : int(0) </span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ NAMES          : NULL</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ strand         :Formal class &#x27;Rle&#x27; [package &quot;S4Vectors&quot;] with 4 slots</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ values         : Factor w/ 3 levels &quot;+&quot;,&quot;-&quot;,&quot;*&quot;: </span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ lengths        : int(0) </span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ seqinfo        :Formal class &#x27;Seqinfo&#x27; [package &quot;GenomeInfoDb&quot;] with 4 slots</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ seqnames   : chr(0) </span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ seqlengths : int(0) </span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ is_circular: logi(0) </span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ genome     : chr(0) </span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ elementMetadata:Formal class &#x27;DataFrame&#x27; [package &quot;S4Vectors&quot;] with 6 slots</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ rownames       : NULL</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ nrows          : int 0</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ listData       : Named list()</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementMetadata:Formal class &#x27;DataFrame&#x27; [package &quot;S4Vectors&quot;] with 6 slots</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ rownames       : NULL</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ nrows          : int 18726</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ listData       :List of 9</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. ..$ is_feature_control     : logi [1:18726] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. ..$ is_feature_control_ERCC: logi [1:18726] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. ..$ is_feature_control_MT  : logi [1:18726] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. ..$ mean_counts            : num [1:18726] 0.2824 0.0301 2.6389 0.2384 0.0116 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. ..$ log10_mean_counts      : num [1:18726] 0.108 0.0129 0.561 0.0929 0.005 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. ..$ n_cells_by_counts      : int [1:18726] 201 24 728 178 10 11 20 632 798 19 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. ..$ pct_dropout_by_counts  : num [1:18726] 76.7 97.2 15.7 79.4 98.8 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. ..$ total_counts           : int [1:18726] 244 26 2280 206 10 11 21 1638 2873 19 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. .. ..$ log10_total_counts     : num [1:18726] 2.39 1.43 3.36 2.32 1.04 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementType    : chr &quot;GRanges&quot;</span></span><br><span class="line"><span class="comment">##   .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   .. .. ..@ partitioning   :Formal class &#x27;PartitioningByEnd&#x27; [package &quot;IRanges&quot;] with 5 slots</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ end            : int [1:18726] 0 0 0 0 0 0 0 0 0 0 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ NAMES          : chr [1:18726] &quot;ENSG00000237683&quot; &quot;ENSG00000187634&quot; &quot;ENSG00000188976&quot; &quot;ENSG00000187961&quot; ...</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   ..@ colData            :Formal class &#x27;DataFrame&#x27; [package &quot;S4Vectors&quot;] with 6 slots</span></span><br><span class="line"><span class="comment">##   .. .. ..@ rownames       : chr [1:864] &quot;NA19098.r1.A01&quot; &quot;NA19098.r1.A02&quot; &quot;NA19098.r1.A03&quot; &quot;NA19098.r1.A04&quot; ...</span></span><br><span class="line"><span class="comment">##   .. .. ..@ nrows          : int 864</span></span><br><span class="line"><span class="comment">##   .. .. ..@ listData       :List of 50</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ individual                                    : chr [1:864] &quot;NA19098&quot; &quot;NA19098&quot; &quot;NA19098&quot; &quot;NA19098&quot; ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ replicate                                     : chr [1:864] &quot;r1&quot; &quot;r1&quot; &quot;r1&quot; &quot;r1&quot; ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ well                                          : chr [1:864] &quot;A01&quot; &quot;A02&quot; &quot;A03&quot; &quot;A04&quot; ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ batch                                         : chr [1:864] &quot;NA19098.r1&quot; &quot;NA19098.r1&quot; &quot;NA19098.r1&quot; &quot;NA19098.r1&quot; ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ sample_id                                     : chr [1:864] &quot;NA19098.r1.A01&quot; &quot;NA19098.r1.A02&quot; &quot;NA19098.r1.A03&quot; &quot;NA19098.r1.A04&quot; ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ is_cell_control                               : logi [1:864] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_features_by_counts                      : int [1:864] 8368 8234 7289 7985 8619 8659 8054 9429 8243 9407 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_features_by_counts                : num [1:864] 3.92 3.92 3.86 3.9 3.94 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_counts                                  : int [1:864] 63322 63976 43630 53922 70887 68051 58069 89082 60053 87489 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_counts                            : num [1:864] 4.8 4.81 4.64 4.73 4.85 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_50_features                 : num [1:864] 17.6 16.5 18.2 16.8 16.2 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_100_features                : num [1:864] 25.2 24.4 26.1 24.4 24.1 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_200_features                : num [1:864] 34.9 34.5 36 34.1 34 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_500_features                : num [1:864] 50.2 50.5 51.5 49.8 50 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_features_by_counts_endogenous           : int [1:864] 8324 8190 7248 7942 8573 8616 8009 9384 8201 9361 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_features_by_counts_endogenous     : num [1:864] 3.92 3.91 3.86 3.9 3.93 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_counts_endogenous                       : int [1:864] 57252 58967 39420 49076 65244 63508 53456 83920 56280 82287 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_counts_endogenous                 : num [1:864] 4.76 4.77 4.6 4.69 4.81 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_endogenous                         : num [1:864] 90.4 92.2 90.4 91 92 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_50_features_endogenous      : num [1:864] 12.5 13 13.1 12.3 12.5 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_100_features_endogenous     : num [1:864] 20 20.7 21 19.8 20.2 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_200_features_endogenous     : num [1:864] 29.8 30.8 31.1 29.5 30.1 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_500_features_endogenous     : num [1:864] 45.9 47.3 47.4 45.9 46.7 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_features_by_counts_feature_control      : int [1:864] 44 44 41 43 46 43 45 45 42 46 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_features_by_counts_feature_control: num [1:864] 1.65 1.65 1.62 1.64 1.67 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_counts_feature_control                  : int [1:864] 6070 5009 4210 4846 5643 4543 4613 5162 3773 5202 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_counts_feature_control            : num [1:864] 3.78 3.7 3.62 3.69 3.75 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_feature_control                    : num [1:864] 9.59 7.83 9.65 8.99 7.96 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_50_features_feature_control : num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_100_features_feature_control: num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_200_features_feature_control: num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_500_features_feature_control: num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_features_by_counts_ERCC                 : int [1:864] 31 31 28 30 33 30 32 32 29 33 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_features_by_counts_ERCC           : num [1:864] 1.51 1.51 1.46 1.49 1.53 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_counts_ERCC                             : int [1:864] 1187 1277 1121 1240 1262 1308 1203 1217 1217 1339 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_counts_ERCC                       : num [1:864] 3.07 3.11 3.05 3.09 3.1 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_ERCC                               : num [1:864] 1.87 2 2.57 2.3 1.78 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_50_features_ERCC            : num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_100_features_ERCC           : num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_200_features_ERCC           : num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_500_features_ERCC           : num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_features_by_counts_MT                   : int [1:864] 13 13 13 13 13 13 13 13 13 13 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_features_by_counts_MT             : num [1:864] 1.15 1.15 1.15 1.15 1.15 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ total_counts_MT                               : int [1:864] 4883 3732 3089 3606 4381 3235 3410 3945 2556 3863 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ log10_total_counts_MT                         : num [1:864] 3.69 3.57 3.49 3.56 3.64 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_MT                                 : num [1:864] 7.71 5.83 7.08 6.69 6.18 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_50_features_MT              : num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_100_features_MT             : num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_200_features_MT             : num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. .. ..$ pct_counts_in_top_500_features_MT             : num [1:864] 100 100 100 100 100 100 100 100 100 100 ...</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   ..@ assays             :Reference class &#x27;ShallowSimpleListAssays&#x27; [package &quot;SummarizedExperiment&quot;] with 1 field</span></span><br><span class="line"><span class="comment">##   .. ..$ data: NULL</span></span><br><span class="line"><span class="comment">##   .. ..and 14 methods.</span></span><br><span class="line"><span class="comment">##   ..@ NAMES              : NULL</span></span><br><span class="line"><span class="comment">##   ..@ elementMetadata    :Formal class &#x27;DataFrame&#x27; [package &quot;S4Vectors&quot;] with 6 slots</span></span><br><span class="line"><span class="comment">##   .. .. ..@ rownames       : NULL</span></span><br><span class="line"><span class="comment">##   .. .. ..@ nrows          : int 18726</span></span><br><span class="line"><span class="comment">##   .. .. ..@ listData       : Named list()</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementType    : chr &quot;ANY&quot;</span></span><br><span class="line"><span class="comment">##   .. .. ..@ elementMetadata: NULL</span></span><br><span class="line"><span class="comment">##   .. .. ..@ metadata       : list()</span></span><br><span class="line"><span class="comment">##   ..@ metadata           : list()</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="细胞质控"><a href="#细胞质控" class="headerlink" title="细胞质控"></a>细胞质控</h3><h4 id="文库大小"><a href="#文库大小" class="headerlink" title="文库大小"></a>文库大小</h4><p>查看每个样品(细胞）检测到的总分子数 (<code>UMI count</code>)或总reads数 (<code>reads count</code>)，拥有很少的reads或分子数的样品可能是细胞破损或捕获失败，应该移除。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hist(umi$total_counts, breaks = <span class="number">100</span>)</span><br><span class="line">abline(v = <span class="number">25000</span>, col = <span class="string">&quot;red&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab4/total-counts-hist-1.png">   </p>
+<h4 id="检测到的基因数"><a href="#检测到的基因数" class="headerlink" title="检测到的基因数"></a>检测到的基因数</h4><p>除了确保每个样品的测序深度，也需要保证测序reads在转录本中分布均衡，而不是集中在少数高表达的基因上。每个样品检测到的基因数也是衡量样品质量好坏的一个标准。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hist(umi$total_features_by_counts, breaks = <span class="number">100</span>)</span><br><span class="line">abline(v = <span class="number">7000</span>, col = <span class="string">&quot;red&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab4/total-features-hist-1.png"></p>
+<p>从图中可以看出，大部分细胞能检测到<code>7,000-10,000</code>基因，这对高深度<code>scRNA-seq</code>是正常的。当然这个受测序深度和实验方法的影响。比如居于<code>droplet</code>的方法或样品测序深度低时每个细胞检测到的基因数要少一些，表现在图上是，左侧拖尾严重。如果细胞之间的基因检出率相当，应该符合正态分布。因此选择移除分布尾部的细胞 (本例中是检测出的基因数少于7000的细胞)。  </p>
+<h4 id="ERCCs和MTs"><a href="#ERCCs和MTs" class="headerlink" title="ERCCs和MTs"></a>ERCCs和MTs</h4><p>另外一个测量细胞质量的方式是比较<code>ERCC spike-in</code>测到的reads数与内源转录本测到的reads数的比例，可以衡量捕获到的内源性RNA的总量。如果<code>spike in</code>的reads数很高，则表示起始内源性RNA总量低，可能是由于细胞死亡或胁迫诱导的RNA降解导致的，也有可能是细胞体积小。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plotColData(umi, x = <span class="string">&quot;total_features_by_counts&quot;</span>, y = <span class="string">&quot;pct_counts_MT&quot;</span>, colour = <span class="string">&quot;batch&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab4/mt-vs-counts-1.png">  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plotColData(</span><br><span class="line">    umi,</span><br><span class="line">    x = <span class="string">&quot;total_features_by_counts&quot;</span>,</span><br><span class="line">    y = <span class="string">&quot;pct_counts_ERCC&quot;</span>,</span><br><span class="line">    colour = <span class="string">&quot;batch&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab4/ercc-vs-counts-1.png">   </p>
+<p>上图显示来源于<code>NA19098.r2</code>批次的细胞有较高的<code>ERCC/内源RNA</code>比例。作者在文章中证实这一点，说这个批次的细胞体积小。  </p>
+<h3 id="细胞过滤"><a href="#细胞过滤" class="headerlink" title="细胞过滤"></a>细胞过滤</h3><h4 id="手动过滤"><a href="#手动过滤" class="headerlink" title="手动过滤"></a>手动过滤</h4><p>基于前面的分析定义一个过滤器，不满足任何一个条件的细胞都过滤掉:  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">umi$use &lt;- (</span><br><span class="line">    <span class="comment"># sufficient features (genes)</span></span><br><span class="line">    filter_by_expr_features &amp;</span><br><span class="line">    <span class="comment"># sufficient molecules counted</span></span><br><span class="line">    filter_by_total_counts &amp;</span><br><span class="line">    <span class="comment"># sufficient endogenous RNA</span></span><br><span class="line">    filter_by_ERCC &amp;</span><br><span class="line">    <span class="comment"># remove cells with unusual number of reads in MT genes</span></span><br><span class="line">    filter_by_MT</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">table(umi$use)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## FALSE  TRUE </span></span><br><span class="line"><span class="comment">##   207   657</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="自动过滤"><a href="#自动过滤" class="headerlink" title="自动过滤"></a>自动过滤</h4><p><code>scater</code>提供了一个根据质控数据进行PCA分析进而自动挑出异常细胞的方法。默认，下面这些统计量将用于PCA异常细胞检测的分析：  </p>
+<ul>
+<li><strong>pct_counts_top_100_features</strong></li>
+<li><strong>total_features_by_counts</strong></li>
+<li><strong>pct_counts_feature_controls</strong></li>
+<li><strong>n_detected_feature_controls</strong></li>
+<li><strong>log10_counts_endogenous_features</strong></li>
+<li><strong>log10_counts_feature_controls</strong>  </li>
+</ul>
+<p><code>scater</code>首先生成一个行是细胞，列是细胞中对应的上述质控数据的值，然后使用<code>mvoutlier</code>包筛选质控数据与大部分细胞不同的样品定义为低质量细胞。 package on the QC metrics for all cells. This will identify cells that have substantially different QC metrics from the others, possibly corresponding to low-quality cells. We can visualize any outliers using a principal components plot as shown below:  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">umi &lt;- runPCA(umi, use_coldata = <span class="literal">TRUE</span>, </span><br><span class="line">              detect_outliers = <span class="literal">TRUE</span>)</span><br><span class="line">reducedDimNames(umi)</span><br><span class="line"><span class="comment">## [1] &quot;PCA_coldata&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>鉴定结果存储于<code>umi</code>变量的<code>$outlier</code>部分，指示细胞是否被判断未异常细胞。自动异常细胞检测是很有意义的，可以作为工厂化大批量模式使用，但特异性的手动检测数据集和根据结果、实验调整过滤是推荐的方式。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">table(umi$outlier)</span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## FALSE  TRUE </span></span><br><span class="line"><span class="comment">##   791    73</span></span><br></pre></td></tr></table></figure>
+
+<p>绘制PCA结果展示异常细胞分布：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plotReducedDim(umi, use_dimred = <span class="string">&quot;PCA_coldata&quot;</span>,</span><br><span class="line">               size_by = <span class="string">&quot;total_features_by_counts&quot;</span>, shape_by = <span class="string">&quot;use&quot;</span>, </span><br><span class="line">               colour_by=<span class="string">&quot;outlier&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab4/unnamed-chunk-15-1.png">  </p>
+<h4 id="手动过滤和自动过滤比较"><a href="#手动过滤和自动过滤比较" class="headerlink" title="手动过滤和自动过滤比较"></a>手动过滤和自动过滤比较</h4><p><img src="/images/lab4/cell-filt-comp-1.png">  </p>
+<h3 id="基因分析"><a href="#基因分析" class="headerlink" title="基因分析"></a>基因分析</h3><h4 id="基因表达"><a href="#基因表达" class="headerlink" title="基因表达"></a>基因表达</h4><p>除了移除低质量的细胞，也会排除受技术操作影响较大的一部分基因。而且查看基因表达结果，可以帮助改进实验操作。  </p>
+<p>通常会看<code>top 50</code>表达的基因占据了多少reads。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plotHighestExprs(umi, exprs_values = <span class="string">&quot;counts&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab4/top50-gene-expr-1.png">  </p>
+<p>表达最高的50个基因的reads分布相对平缓，且比例不大，在一定程度上反应了测序对整个转录组覆盖较好。但是最高表达的15个基因里面有4个<code>ERCC spikein</code>，表明下次重复时可以稀释下<code>spike in</code>的浓度，把测序的机会更多留给内源性基因。  </p>
+<h4 id="基因过滤"><a href="#基因过滤" class="headerlink" title="基因过滤"></a>基因过滤</h4><p>通常建议移除那些表达水平极低以至于可以视为”未检测出”的基因。这里针对UMI数据，“检出”定义为至少有2个细胞检测到某个基因存在多于一个转录本。如果是reads counts数据, “检出”可以定义为至少有2个细胞检测到某个基因有至少5个reads count支持。请注意，对两种表达量计算方式，阈值的选择都与测序深度有关。自己的数据可以做相应的修改。另外一个需要注意的点是基因的过滤必须在细胞过滤后面，因为部分基因可能只在低质量细胞中能检测的到 (注意下面的<code>colData(umi)$use</code>过滤).  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">keep_feature &lt;- nexprs(umi[,colData(umi)$use], byrow=<span class="literal">TRUE</span>, </span><br><span class="line">                       detection_limit=<span class="number">1</span>) &gt;= <span class="number">2</span></span><br><span class="line">rowData(umi)$use &lt;- keep_feature</span><br><span class="line">table(keep_feature)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## keep_feature</span></span><br><span class="line"><span class="comment">## FALSE  TRUE </span></span><br><span class="line"><span class="comment">##  4660 14066</span></span><br></pre></td></tr></table></figure>
+
+<p>细胞类型，建库方案，测序深度都会影响阈值选择，勿硬套。  </p>
+<h3 id="存储过滤后的数据"><a href="#存储过滤后的数据" class="headerlink" title="存储过滤后的数据"></a>存储过滤后的数据</h3><p>查看过滤后的数据集中保留的基因数和细胞数:   </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dim(umi[rowData(umi)$use, colData(umi)$use])</span><br><span class="line"><span class="comment">## [1] 14066   657</span></span><br></pre></td></tr></table></figure>
+
+<p>获取对数转换的原始count值，供下一章节使用，并且移除PCA的结果：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">assay(umi, <span class="string">&quot;logcounts_raw&quot;</span>) &lt;- log2(counts(umi) + <span class="number">1</span>)</span><br><span class="line">reducedDim(umi) &lt;- <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">saveRDS(umi, file = <span class="string">&quot;data/tung/umi.rds&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/09/28/hemberg-lab3/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-09-28
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/SingleCell/" title="SingleCell">
+                        <b>#</b> SingleCell
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/09/28/hemberg-lab5/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UMI%E8%A1%A8%E8%BE%BE%E5%AE%9A%E9%87%8F-UMI"><span class="toc-text">UMI表达定量 (UMI)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UMI%E8%A1%A8%E8%BE%BE%E5%AE%9A%E9%87%8F-UMI-1"><span class="toc-text">UMI表达定量 (UMI)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UMI%E8%A1%A8%E8%BE%BE%E5%AE%9A%E9%87%8F%E7%AE%80%E4%BB%8B"><span class="toc-text">UMI表达定量简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tung%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">Tung数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%86%E8%83%9E%E8%B4%A8%E6%8E%A7"><span class="toc-text">细胞质控</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E5%BA%93%E5%A4%A7%E5%B0%8F"><span class="toc-text">文库大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E5%88%B0%E7%9A%84%E5%9F%BA%E5%9B%A0%E6%95%B0"><span class="toc-text">检测到的基因数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ERCCs%E5%92%8CMTs"><span class="toc-text">ERCCs和MTs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%86%E8%83%9E%E8%BF%87%E6%BB%A4"><span class="toc-text">细胞过滤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E8%BF%87%E6%BB%A4"><span class="toc-text">手动过滤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%BF%87%E6%BB%A4"><span class="toc-text">自动过滤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E8%BF%87%E6%BB%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E8%BF%87%E6%BB%A4%E6%AF%94%E8%BE%83"><span class="toc-text">手动过滤和自动过滤比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%9B%A0%E5%88%86%E6%9E%90"><span class="toc-text">基因分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE"><span class="toc-text">基因表达</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E5%9B%A0%E8%BF%87%E6%BB%A4"><span class="toc-text">基因过滤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E6%BB%A4%E5%90%8E%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-text">存储过滤后的数据</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

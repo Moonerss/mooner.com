@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>Hemberg-lab单细胞转录组数据分析（五） | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Hemberg-lab单细胞转录组数据分析（五）</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-09-28
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/SingleCell/" title="SingleCell">
+                    <b>#</b> SingleCell
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h2><p>我们继续使用上一步生成的<code>Tung</code>数据集。我们将探索不同的数据可视化方式来让你意识到质控后发生了什么。<code>scater</code>包提供了几个有用的简化可视化的函数。  </p>
+<p>scRNA-seq分析的一个重要方面是控制<code>批次效应</code>。批次效应是实验过程中引入的技术偏差。例如两个不同实验室准备的样品或同一实验室不同时间准备的样品，同时或同地准备的样品相似度更高。最差的情况，批次效应引入的差异可能大于生物本身的偏差，进而获得错误结果。因为样品处理过程记录详细，所以<code>Tung</code>数据集将允许我们探索这一现象。理想上，如果同一个体来源的细胞聚在一起，分组的数目与个体是对应的，就说明存在批次效应。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(SingleCellExperiment)</span><br><span class="line"><span class="keyword">library</span>(scater)</span><br><span class="line">options(stringsAsFactors = <span class="literal">FALSE</span>)</span><br><span class="line">umi &lt;- readRDS(<span class="string">&quot;data/tung/umi.rds&quot;</span>)</span><br><span class="line">umi.qc &lt;- umi[rowData(umi)$use, colData(umi)$use]</span><br><span class="line">endog_genes &lt;- !rowData(umi.qc)$is_feature_control</span><br></pre></td></tr></table></figure>
+
+<h3 id="PCA分析"><a href="#PCA分析" class="headerlink" title="PCA分析"></a>PCA分析</h3><p>查看数据整体分布的最简单方式是<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5MTcwNjA4NQ==&mid=2247484036&idx=1&sn=22ee356d0c9680d56dada1b777985ed2&scene=21#wechat_redirect">PCA主成分分析</a>,在其前两个主成分轴查看数据的分布。  </p>
+<p>主成分分析 (PCA)是一种数学降维方法, 利用正交变换 (orthogonal transformation)把一系列可能线性相关的变量转换为一组线性不相关的新变量，也称为主成分，从而利用新变量在更小的维度下展示数据的特征。  </p>
+<p>PCA分析不是简单地选取2个或3个变化最大的基因，而是先把原始的变量做一个评估，计算各个变量各自的变异度(方差)和两两变量的相关度（协方差），得到一个协方差矩阵。在这个协方差矩阵中，对角线的值为每一个变量的方差，其它值为每两个变量的协方差。随后对原变量的协方差矩阵对角化处理，即求解其特征值和特征向量。原变量与特征向量的乘积（对原始变量的线性组合）即为新变量（回顾下线性代数中的矩阵乘法）；新变量的协方差矩阵为对角协方差矩阵且对角线上的方差由大到小排列；然后从新变量中选择信息最丰富也就是方差最大的的前2个或前3个新变量也就是主成分用以可视化。  </p>
+<p><img src="/images/lab5/pca.png">  </p>
+<h4 id="QC前"><a href="#QC前" class="headerlink" title="QC前"></a>QC前</h4><p>不进行log转换:  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">umi_endog &lt;- runPCA(umi_endog, exprs_values = <span class="string">&quot;counts&quot;</span>)</span><br><span class="line">scater::plotPCA(</span><br><span class="line">    umi_endog,</span><br><span class="line">    by_exprs_values = <span class="string">&quot;counts&quot;</span>,</span><br><span class="line">    colour_by = <span class="string">&quot;batch&quot;</span>,</span><br><span class="line">    size_by = <span class="string">&quot;total_features_by_counts&quot;</span>,</span><br><span class="line">    shape_by = <span class="string">&quot;individual&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab5/expr-overview-pca-before-qc1-1.png">  </p>
+<p>log转化后  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">tmp &lt;- runPCA(</span><br><span class="line">  umi[endog_genes, ],</span><br><span class="line">  exprs_values = <span class="string">&quot;logcounts_raw&quot;</span></span><br><span class="line">)</span><br><span class="line">plotPCA(</span><br><span class="line">    tmp,</span><br><span class="line">    colour_by = <span class="string">&quot;batch&quot;</span>,</span><br><span class="line">    size_by = <span class="string">&quot;total_features_by_counts&quot;</span>,</span><br><span class="line">    shape_by = <span class="string">&quot;individual&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab5/expr-overview-pca-before-qc2-1.png">  </p>
+<p>从图中可以看出，<code>log</code>转换更适合我们的数据，降低了第一主成分的变化，数据点的分布散开了些。对数转换可以使表达值更符合正态分布，在后续的分析中，我们都是使用对数转换后的数据。  </p>
+<p><strong>请注意,只是对数转换不足以屏蔽掉细胞之间不同的技术因子如测序深度带来的差异。因此实际分析时不要使用<code>logcounts_raw</code>,至少使用<code>SingleCellExperiment</code>对象中<code>logcounts</code>通道的值，这是CPM标准化后的log转换的值。</strong>  </p>
+<h4 id="QC后"><a href="#QC后" class="headerlink" title="QC后"></a>QC后</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">tmp &lt;- runPCA(</span><br><span class="line">  umi.qc[endog_genes, ],</span><br><span class="line">  exprs_values = <span class="string">&quot;logcounts_raw&quot;</span></span><br><span class="line">)</span><br><span class="line">plotPCA(</span><br><span class="line">    tmp,</span><br><span class="line">    colour_by = <span class="string">&quot;batch&quot;</span>,</span><br><span class="line">    size_by = <span class="string">&quot;total_features_by_counts&quot;</span>,</span><br><span class="line">    shape_by = <span class="string">&quot;individual&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab5/expr-overview-pca-after-qc-1.png">   </p>
+<p>比较发现质控后<code>NA19098.r2</code>细胞不再成为离群组.  </p>
+<p>默认，<code>runPCA</code>函数只用了前500个在细胞之间表达变化最大的基因做PCA分析。可以通过参数<code>ntop</code>进行修改。  </p>
+<h3 id="tSNE聚类"><a href="#tSNE聚类" class="headerlink" title="tSNE聚类"></a>tSNE聚类</h3><p>scRNA-seq中另一个常用的可视化方法是<code>tSNE</code>。tSNE (t-Distributed Stochastic Neighbor Embedding) 通过组合降维（如PCA）和最近邻网络随机行走算法在保留细胞的局部距离的基础上实现高维数据（14000维基因表达）到二维空间的映射。与PCA不同，<code>tSNE</code>算法有随机性，每次运行结果都会不同。因为它的非线性和随机性特征，<code>tSNE</code>结果难以直观解释。为了保证重复性，我们固定一个随机数种子使得每次结果都一致。  </p>
+<p>PCA线性降维算法在集中将不相似的数据点放置在较低维度区域时，尽可能多的保留原始数据的差异，因此导致小部分数据点相距甚远，大部分数据重叠放置。tSNE把点的高维空间的<code>距离</code>转换成点的<code>相似度的概率</code>，维持高维空间和低维空间中一对点之间的<code>条件概率差值总和最小</code>。同时使用<code>t-分布的长尾性解决高维数据映射到低维时的重叠问题</code>。t-SNE算法定义了数据的局部和全局结构之间的软边界，既可以使点在局部分散，又在全局聚集，同时照顾近距离和远距离的点。其性能优于任何非线性降维算法。  </p>
+<h4 id="QC前TSNE"><a href="#QC前TSNE" class="headerlink" title="QC前TSNE"></a>QC前TSNE</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">123456</span>)</span><br><span class="line">tmp &lt;- runTSNE(</span><br><span class="line">    umi[endog_genes, ],</span><br><span class="line">    exprs_values = <span class="string">&quot;logcounts_raw&quot;</span>,</span><br><span class="line">    perplexity = <span class="number">130</span></span><br><span class="line">)</span><br><span class="line">plotTSNE(</span><br><span class="line">    tmp,</span><br><span class="line">    colour_by = <span class="string">&quot;batch&quot;</span>,</span><br><span class="line">    size_by = <span class="string">&quot;total_features_by_counts&quot;</span>,</span><br><span class="line">    shape_by = <span class="string">&quot;individual&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab5/expr-overview-tsne-before-qc-1.png">   </p>
+<h4 id="QC后TSNE"><a href="#QC后TSNE" class="headerlink" title="QC后TSNE"></a>QC后TSNE</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">123456</span>)</span><br><span class="line">tmp &lt;- runTSNE(</span><br><span class="line">    umi.qc[endog_genes, ],</span><br><span class="line">    exprs_values = <span class="string">&quot;logcounts_raw&quot;</span>,</span><br><span class="line">    perplexity = <span class="number">130</span></span><br><span class="line">)</span><br><span class="line">plotTSNE(</span><br><span class="line">    tmp,</span><br><span class="line">    colour_by = <span class="string">&quot;batch&quot;</span>,</span><br><span class="line">    size_by = <span class="string">&quot;total_features_by_counts&quot;</span>,</span><br><span class="line">    shape_by = <span class="string">&quot;individual&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/lab5/expr-overview-tsne-after-qc-1.png">  </p>
+<p>比较两张图可以发现质控过滤后<code>NA19098.r2</code>来源的细胞不再是异常值。</p>
+<p><code>tSNE</code>要求提供一个<code>perplexity</code>参数用于指定构建最近邻网络的邻居数，这个值越高网络越致密细胞越成团围抱；这个值越小网络会越稀疏使得细胞不同的相似度分组相对分散。<code>scater</code>默认的<code>perplexity</code>值是细胞总数除以5（不能整除的部分舍去）。  </p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/09/28/hemberg-lab4/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-09-28
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/SingleCell/" title="SingleCell">
+                        <b>#</b> SingleCell
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-text">数据可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PCA%E5%88%86%E6%9E%90"><span class="toc-text">PCA分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#QC%E5%89%8D"><span class="toc-text">QC前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QC%E5%90%8E"><span class="toc-text">QC后</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tSNE%E8%81%9A%E7%B1%BB"><span class="toc-text">tSNE聚类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#QC%E5%89%8DTSNE"><span class="toc-text">QC前TSNE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QC%E5%90%8ETSNE"><span class="toc-text">QC后TSNE</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

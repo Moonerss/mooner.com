@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-09-23T13:09:59.802Z</updated>
+  <updated>2020-09-28T12:48:34.630Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,81 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hemberg-lab单细胞转录组数据分析（五）</title>
+    <link href="http://example.com/2020/09/28/hemberg-lab5/"/>
+    <id>http://example.com/2020/09/28/hemberg-lab5/</id>
+    <published>2020-09-28T12:35:14.000Z</published>
+    <updated>2020-09-28T12:48:34.630Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;数据可视化&quot;&gt;&lt;a href=&quot;#数据可视化&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
+    
+    
+    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hemberg-lab单细胞转录组数据分析（四）</title>
+    <link href="http://example.com/2020/09/28/hemberg-lab4/"/>
+    <id>http://example.com/2020/09/28/hemberg-lab4/</id>
+    <published>2020-09-28T11:40:47.000Z</published>
+    <updated>2020-09-28T12:34:53.605Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;UMI表达定量-UMI&quot;&gt;&lt;a href=&quot;#UMI表达定量-UMI&quot; class=&quot;headerlink&quot; title=&quot;UMI表达定量 (UMI)&quot;&gt;&lt;/a&gt;UMI表达定量 (UMI)&lt;/h1&gt;&lt;h2 id=&quot;UMI表达定量-UMI-1&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
+    
+    
+    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hemberg-lab单细胞转录组数据分析（三）</title>
+    <link href="http://example.com/2020/09/28/hemberg-lab3/"/>
+    <id>http://example.com/2020/09/28/hemberg-lab3/</id>
+    <published>2020-09-28T07:47:07.000Z</published>
+    <updated>2020-09-28T11:50:21.595Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;我们使用 Tabula Muris最开始释放的数据做为测试数据来完成完整的单细胞数据分析。&lt;code&gt;The Tabula</summary>
+        
+      
+    
+    
+    
+    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
+    
+    
+    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
+    
+  </entry>
   
   <entry>
     <title>测序质控软件trim_galore安装</title>
@@ -435,92 +510,6 @@
     
     
     <category term="Markdown" scheme="http://example.com/tags/Markdown/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基因ID转换相关知识</title>
-    <link href="http://example.com/2020/05/29/id-convert/"/>
-    <id>http://example.com/2020/05/29/id-convert/</id>
-    <published>2020-05-28T16:00:00.000Z</published>
-    <updated>2020-09-19T00:00:46.404Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-
-
-&lt;h2 id=&quot;Ensembl-ID-辨识&quot;&gt;&lt;a href=&quot;#Ensembl-ID-辨识&quot; class=&quot;headerlink&quot; title=&quot;Ensembl ID 辨识&quot;&gt;&lt;/a&gt;Ensembl ID</summary>
-        
-      
-    
-    
-    
-    <category term="IDconvert" scheme="http://example.com/categories/IDconvert/"/>
-    
-    
-    <category term="gene" scheme="http://example.com/tags/gene/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dplyr学习笔记(三)</title>
-    <link href="http://example.com/2020/05/28/dplyr-iii/"/>
-    <id>http://example.com/2020/05/28/dplyr-iii/</id>
-    <published>2020-05-27T16:00:00.000Z</published>
-    <updated>2020-09-18T13:38:27.455Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;对于数据进行操作时，往往不限于单个数据的操作，多数情况需要对数据进行整合，过滤，标准化。在&lt;code&gt;dplyr&lt;/code&gt;包中，提供了一系列的快捷操作，用于两个数据之间的操作处理  &lt;/p&gt;
-&lt;h2 id=&quot;合并-join-操作&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="tidyverse" scheme="http://example.com/tags/tidyverse/"/>
-    
-    <category term="dplyr" scheme="http://example.com/tags/dplyr/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ggpubr使用指南(二)</title>
-    <link href="http://example.com/2020/05/28/ggpubr-ii/"/>
-    <id>http://example.com/2020/05/28/ggpubr-ii/</id>
-    <published>2020-05-27T16:00:00.000Z</published>
-    <updated>2020-09-18T23:56:51.365Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-
-
-&lt;h2 id=&quot;使用ggmaplot函数绘制火山图&quot;&gt;&lt;a href=&quot;#使用ggmaplot函数绘制火山图&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="plot" scheme="http://example.com/tags/plot/"/>
     
   </entry>
   
