@@ -155,7 +155,7 @@
     <link href="http://example.com/2020/09/22/ggplot2/"/>
     <id>http://example.com/2020/09/22/ggplot2/</id>
     <published>2020-09-22T08:44:55.000Z</published>
-    <updated>2020-09-23T01:13:54.943Z</updated>
+    <updated>2020-09-27T23:54:06.348Z</updated>
     
     
       
@@ -496,14 +496,24 @@
   </entry>
   
   <entry>
-    <title>ggpubr使用指南(一)</title>
-    <link href="http://example.com/2020/05/28/ggpubr-i/"/>
-    <id>http://example.com/2020/05/28/ggpubr-i/</id>
+    <title>ggpubr使用指南(二)</title>
+    <link href="http://example.com/2020/05/28/ggpubr-ii/"/>
+    <id>http://example.com/2020/05/28/ggpubr-ii/</id>
     <published>2020-05-27T16:00:00.000Z</published>
-    <updated>2020-09-18T13:54:22.965Z</updated>
+    <updated>2020-09-18T23:56:51.365Z</updated>
     
     
-    <summary type="html">&lt;p&gt;&lt;code&gt;ggpubr&lt;/code&gt; 是由 &lt;strong&gt;Alboukadel Kassambara&lt;/strong&gt; 开发的一款非常优秀的基于&lt;code&gt;ggplot2&lt;/code&gt;作图的可视化R包，一行命令即可简单方便的绘制出符合出版物要求的图形。</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+
+
+
+&lt;h2 id=&quot;使用ggmaplot函数绘制火山图&quot;&gt;&lt;a href=&quot;#使用ggmaplot函数绘制火山图&quot; class=&quot;headerlink&quot;</summary>
+        
+      
     
     
     

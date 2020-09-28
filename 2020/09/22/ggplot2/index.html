@@ -128,7 +128,12 @@
 <p>三个函数的作用分别是，geom_abline添加斜线， geom_hline添加水平线，geom_vline添加垂直线  </p>
 <p>参数slope 表示斜率  intercept表示截距  </p>
 <p>参数yintercept  表示y轴截距或直线所在位置  </p>
-<p>参数xintercept  表示x轴截距或直线所在位置</p>
+<p>参数xintercept  表示x轴截距或直线所在位置  </p>
+</li>
+<li><p>添加线段  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2)</span><br></pre></td></tr></table></figure>
+
+<p>x, y控制线段起始位置，xend，yend控制线段终止位置  </p>
 </li>
 </ul>
 <h3 id="背景布局"><a href="#背景布局" class="headerlink" title="背景布局"></a>背景布局</h3><ul>
@@ -140,8 +145,9 @@
 </li>
 <li><p>x，y轴转换  </p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">coord_flip()</span><br></pre></td></tr></table></figure>
-
-
+</li>
+<li><p>去掉图形和坐标轴间隙  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scale_y_continuous(expand = c(<span class="number">0</span>,<span class="number">0</span>))//这个可以去掉与X轴间隙</span><br><span class="line">scale_x_continuous(expand = c(<span class="number">0</span>,<span class="number">0</span>))//这个可以去掉与Y轴间隙</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
