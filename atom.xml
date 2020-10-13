@@ -40,15 +40,26 @@
   </entry>
   
   <entry>
-    <title>aspera</title>
+    <title>Aspera的安装与使用</title>
     <link href="http://example.com/2020/10/09/aspera/"/>
     <id>http://example.com/2020/10/09/aspera/</id>
     <published>2020-10-09T00:08:28.000Z</published>
-    <updated>2020-10-09T00:08:28.871Z</updated>
+    <updated>2020-10-13T12:04:41.408Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;当我们需要一些NGS数据时，一般会想到去NCBI或者EBI的数据库中下载。但是当我们使用wget进行下载时，真的是慢到令人发指。这时我们可以使用Aspera来下载NGS数据，来加速数据的下载。  &lt;/p&gt;
+&lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot;</summary>
+        
+      
     
     
     
     
+    <category term="software" scheme="http://example.com/tags/software/"/>
     
   </entry>
   
