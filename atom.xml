@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-09-28T12:48:34.630Z</updated>
+  <updated>2020-10-13T02:21:40.061Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,67 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>多组比较的box图</title>
+    <link href="http://example.com/2020/10/13/multicompare/"/>
+    <id>http://example.com/2020/10/13/multicompare/</id>
+    <published>2020-10-13T01:26:23.000Z</published>
+    <updated>2020-10-13T02:21:40.061Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>aspera</title>
+    <link href="http://example.com/2020/10/09/aspera/"/>
+    <id>http://example.com/2020/10/09/aspera/</id>
+    <published>2020-10-09T00:08:28.000Z</published>
+    <updated>2020-10-09T00:08:28.871Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>测序数据常见文件类型</title>
+    <link href="http://example.com/2020/10/02/filetype/"/>
+    <id>http://example.com/2020/10/02/filetype/</id>
+    <published>2020-10-02T11:51:29.000Z</published>
+    <updated>2020-10-02T12:13:34.797Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;各行各业都有在自己的标准体系，生物信息学数据分析也不例外，各个厂商出品的芯片系列，还有各种NGS组学分析，都会涉及到不同的分析步骤，有着丰富多样的中间文件。其中一些常用的文件就被规定成文件格式。</summary>
+        
+      
+    
+    
+    
+    <category term="NGS" scheme="http://example.com/categories/NGS/"/>
+    
+    
+    <category term="NGS" scheme="http://example.com/tags/NGS/"/>
+    
+  </entry>
   
   <entry>
     <title>Hemberg-lab单细胞转录组数据分析（五）</title>
@@ -96,7 +157,7 @@
     <link href="http://example.com/2020/09/23/trim-galore/"/>
     <id>http://example.com/2020/09/23/trim-galore/</id>
     <published>2020-09-23T12:58:22.000Z</published>
-    <updated>2020-09-23T13:09:59.802Z</updated>
+    <updated>2020-10-03T10:49:11.531Z</updated>
     
     
       
@@ -122,7 +183,7 @@
     <link href="http://example.com/2020/09/23/fastqc/"/>
     <id>http://example.com/2020/09/23/fastqc/</id>
     <published>2020-09-23T11:58:13.000Z</published>
-    <updated>2020-09-23T12:09:25.015Z</updated>
+    <updated>2020-10-03T08:10:54.469Z</updated>
     
     
       
@@ -130,7 +191,7 @@
         
         
     <summary type="html">&lt;p&gt;FastQC是一款用于对RNA-seq数据进行质量检测和控制的软件（对单细胞和bulk的测序数据都适用）  &lt;/p&gt;
-&lt;p&gt;首先需要从官网下载FastQC的安装文件&lt;br&gt;&lt;a</summary>
+&lt;h2 id=&quot;fastqc安装&quot;&gt;&lt;a href=&quot;#fastqc安装&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -424,92 +485,6 @@
     
     
     <category term="docker" scheme="http://example.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分类变量和连续变量的相关性计算</title>
-    <link href="http://example.com/2020/06/01/classificated-continonus/"/>
-    <id>http://example.com/2020/06/01/classificated-continonus/</id>
-    <published>2020-05-31T16:00:00.000Z</published>
-    <updated>2020-09-19T00:45:10.490Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-
-
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="statistics" scheme="http://example.com/categories/statistics/"/>
-    
-    
-    <category term="correlation" scheme="http://example.com/tags/correlation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R语言基础设置</title>
-    <link href="http://example.com/2020/06/01/r-base-set/"/>
-    <id>http://example.com/2020/06/01/r-base-set/</id>
-    <published>2020-05-31T16:00:00.000Z</published>
-    <updated>2020-09-19T00:02:24.571Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-
-
-&lt;p&gt;在R语言中，为了方便使用，可以对其进行个性化设置，优化使用体验。    &lt;/p&gt;
-&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Markdown语法说明</title>
-    <link href="http://example.com/2020/05/30/markdown-synathx/"/>
-    <id>http://example.com/2020/05/30/markdown-synathx/</id>
-    <published>2020-05-29T16:00:00.000Z</published>
-    <updated>2020-09-18T23:57:56.445Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-
-
-
-&lt;h1 id=&quot;Markdown-文件&quot;&gt;&lt;a href=&quot;#Markdown-文件&quot; class=&quot;headerlink&quot; title=&quot;Markdown 文件&quot;&gt;&lt;/a&gt;Markdown 文件&lt;/h1&gt;&lt;p&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="Markdown" scheme="http://example.com/categories/Markdown/"/>
-    
-    
-    <category term="Markdown" scheme="http://example.com/tags/Markdown/"/>
     
   </entry>
   
