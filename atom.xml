@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-10-13T02:21:40.061Z</updated>
+  <updated>2020-10-26T02:33:44.705Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django 之 requirement.txt 依赖文件生成</title>
+    <link href="http://example.com/2020/10/26/django/"/>
+    <id>http://example.com/2020/10/26/django/</id>
+    <published>2020-10-26T02:24:30.000Z</published>
+    <updated>2020-10-26T02:33:44.705Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Django" scheme="http://example.com/tags/Django/"/>
+    
+  </entry>
   
   <entry>
     <title>多组比较的box图</title>
@@ -466,33 +489,6 @@
     <category term="docker" scheme="http://example.com/categories/docker/"/>
     
     <category term="R" scheme="http://example.com/categories/docker/R/"/>
-    
-    
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker 学习笔记(一)</title>
-    <link href="http://example.com/2020/06/08/docker-i/"/>
-    <id>http://example.com/2020/06/08/docker-i/</id>
-    <published>2020-06-07T16:00:00.000Z</published>
-    <updated>2020-09-18T11:52:16.361Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; 
-
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Docker&lt;/strong&gt; 是一个开源的应用容器引擎，基于</summary>
-        
-      
-    
-    
-    
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
     
     
     <category term="docker" scheme="http://example.com/tags/docker/"/>

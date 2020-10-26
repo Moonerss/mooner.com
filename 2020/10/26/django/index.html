@@ -6,10 +6,8 @@
   <meta name="author" content="zchengsite, 1451426471@qq.com" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
-    <meta name="robots" content="noindex" />
   
-  
-  <title>Hexo</title>
+  <title>Django 之 requirement.txt 依赖文件生成 | Hexo</title>
 
   
     <link rel="apple-touch-icon" href="/images/favicon.png">
@@ -88,151 +86,134 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="Hemberg-lab单细胞转录组数据分析（二）">
-        <div class="time-m-d">2020-09-23</div>
-        <div class="title">
-          <a href="/2020/09/23/hemberg-lab2/">
-            
-              
-                <span>Hemberg-lab单细胞转录组数据分析（二）</span>
-              
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Django 之 requirement.txt 依赖文件生成</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-10-26
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/Django/" title="Django">
+                    <b>#</b> Django
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="GO富集圈圈图">
-        <div class="time-m-d">2020-09-23</div>
-        <div class="title">
-          <a href="/2020/09/23/goplot/">
-            
-              
-                <span>GO富集圈圈图</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在对Django项目进行移植时，由于生成项目的时候是将依赖和解释信息以绝对路径的方式写入配置文件的，<br>所以从一台电脑移植到另一台电脑，直接通过拷贝的方式是行不通的，正确的做法是将依赖模块写入requirements.txt文件中，<br>这样在别人使用我们的项目时，不需要再一个个去安装所需模块，只需安装依赖文件即可。  </p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="使用-pip-freeze"><a href="#使用-pip-freeze" class="headerlink" title="使用 pip freeze"></a>使用 <code>pip freeze</code></h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在项目根目录中，打开终端执行以下命令</span></span><br><span class="line"><span class="comment"># 生成 requirements.txt 文件</span></span><br><span class="line">pip freeze &gt; requirements.txt</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>该方法最好是在虚拟环境下进行的，否则会将整个环境中的包都列出来。  </p>
+</blockquote>
+<h3 id="使用-pipreqs"><a href="#使用-pipreqs" class="headerlink" title="使用 pipreqs"></a>使用 <code>pipreqs</code></h3><p>有时候并不需要将整个虚拟环境所有依赖都导出，有可能有几十上百个模块，而本项目只依赖其中几个，那么这时仅导出本项目所依赖文件即可。  </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install pipreqs</span><br><span class="line">pipreqs /var/www/project  --encoding=utf8 <span class="comment">#项目目录</span></span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+
+
       </div>
-    
-      <div class="post-item" title="ggplot2小部件参考">
-        <div class="time-m-d">2020-09-22</div>
-        <div class="title">
-          <a href="/2020/09/22/ggplot2/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>ggplot2小部件参考</span>
-              
+              <a href="/2020/10/13/multicompare/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-10-26
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/Django/" title="Django">
+                        <b>#</b> Django
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="WGCNA教程">
-        <div class="time-m-d">2020-08-15</div>
-        <div class="title">
-          <a href="/2020/08/15/wgcna/">
-            
-              
-                <span>WGCNA教程</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pip-freeze"><span class="toc-text">使用 pip freeze</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pipreqs"><span class="toc-text">使用 pipreqs</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="Orchestrating Single-Cell Analysis (二)">
-        <div class="time-m-d">2020-08-12</div>
-        <div class="title">
-          <a href="/2020/08/12/single-cell-i/">
-            
-              
-                <span>Orchestrating Single-Cell Analysis (二)</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="scRNA的细胞质控">
-        <div class="time-m-d">2020-08-12</div>
-        <div class="title">
-          <a href="/2020/08/12/quality-control/">
-            
-              
-                <span>scRNA的细胞质控</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="单尾还是双尾检验">
-        <div class="time-m-d">2020-08-10</div>
-        <div class="title">
-          <a href="/2020/08/10/one-tail/">
-            
-              
-                <span>单尾还是双尾检验</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Orchestrating Single-Cell Analysis (一)">
-        <div class="time-m-d">2020-08-10</div>
-        <div class="title">
-          <a href="/2020/08/10/single-cell-ii/">
-            
-              
-                <span>Orchestrating Single-Cell Analysis (一)</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="R 语言统计检验函数汇总">
-        <div class="time-m-d">2020-07-31</div>
-        <div class="title">
-          <a href="/2020/07/31/r-stats/">
-            
-              
-                <span>R 语言统计检验函数汇总</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="R Docker tutorial">
-        <div class="time-m-d">2020-07-31</div>
-        <div class="title">
-          <a href="/2020/07/31/r-docker-tutorial/">
-            
-              
-                <span>R Docker tutorial</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-      <a href="/"><i class="iconfont icon-angleleft"></i></a>
-    
-    <span class="page-num">2 / 9</span>
-    
-      <a href="/page/3/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         <div class="footer">
   <div class="social">
