@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-10-26T02:33:44.705Z</updated>
+  <updated>2020-11-02T06:13:55.030Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>shell脚本构建的基本函数</title>
+    <link href="http://example.com/2020/11/02/shell1/"/>
+    <id>http://example.com/2020/11/02/shell1/</id>
+    <published>2020-11-02T02:41:30.000Z</published>
+    <updated>2020-11-02T06:13:55.030Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;shell脚本的构建&quot;&gt;&lt;a href=&quot;#shell脚本的构建&quot; class=&quot;headerlink&quot; title=&quot;shell脚本的构建&quot;&gt;&lt;/a&gt;shell脚本的构建&lt;/h2&gt;&lt;p&gt;在创建脚本文件时，必须在文件的第一行指定要使用的shell，格式为： </summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="http://example.com/tags/linux/"/>
+    
+    <category term="shell" scheme="http://example.com/tags/shell/"/>
+    
+  </entry>
   
   <entry>
     <title>Django 之 requirement.txt 依赖文件生成</title>
@@ -325,7 +350,7 @@
     <link href="http://example.com/2020/09/22/ggplot2/"/>
     <id>http://example.com/2020/09/22/ggplot2/</id>
     <published>2020-09-22T08:44:55.000Z</published>
-    <updated>2020-09-27T23:54:06.348Z</updated>
+    <updated>2020-10-29T10:31:47.180Z</updated>
     
     
       
@@ -464,34 +489,6 @@
     
     
     <category term="stats" scheme="http://example.com/tags/stats/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R Docker tutorial</title>
-    <link href="http://example.com/2020/07/31/r-docker-tutorial/"/>
-    <id>http://example.com/2020/07/31/r-docker-tutorial/</id>
-    <published>2020-07-30T16:00:00.000Z</published>
-    <updated>2020-09-18T11:55:04.585Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;这是专门为具有 R 和 RStudio 知识的朋友设计的 Docker 教程。该介绍旨在帮助需要 Docker 进行项目的人们。我们首先解释 Docker 是什么以及为什么有用。然后，我们将详细介绍如何将其用于可复制的分析项目。 </summary>
-        
-      
-    
-    
-    
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
-    
-    <category term="R" scheme="http://example.com/categories/docker/R/"/>
-    
-    
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
     
   </entry>
   
