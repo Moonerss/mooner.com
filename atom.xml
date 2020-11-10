@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-02T06:13:55.030Z</updated>
+  <updated>2020-11-10T02:59:42.411Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Conda使用指南（安装部署篇）</title>
+    <link href="http://example.com/2020/11/10/conda/"/>
+    <id>http://example.com/2020/11/10/conda/</id>
+    <published>2020-11-10T02:04:06.000Z</published>
+    <updated>2020-11-10T02:59:42.411Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;关于-Conda&quot;&gt;&lt;a href=&quot;#关于-Conda&quot; class=&quot;headerlink&quot; title=&quot;关于 Conda&quot;&gt;&lt;/a&gt;关于 Conda&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Conda is an open source package</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Python" scheme="http://example.com/tags/Python/"/>
+    
+    <category term="conda" scheme="http://example.com/tags/conda/"/>
+    
+  </entry>
   
   <entry>
     <title>shell脚本构建的基本函数</title>
@@ -462,33 +488,6 @@
     
     
     <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R 语言统计检验函数汇总</title>
-    <link href="http://example.com/2020/07/31/r-stats/"/>
-    <id>http://example.com/2020/07/31/r-stats/</id>
-    <published>2020-07-30T16:00:00.000Z</published>
-    <updated>2020-09-19T00:12:01.201Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h2 id=&quot;连续型数据&quot;&gt;&lt;a href=&quot;#连续型数据&quot; class=&quot;headerlink&quot; title=&quot;连续型数据&quot;&gt;&lt;/a&gt;连续型数据&lt;/h2&gt;&lt;h3 id=&quot;基于分布的检验&quot;&gt;&lt;a href=&quot;#基于分布的检验&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="stats" scheme="http://example.com/tags/stats/"/>
     
   </entry>
   

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>Conda使用指南（安装部署篇） | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Conda使用指南（安装部署篇）</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-11-10
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/Python/" title="Python">
+                    <b>#</b> Python
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/conda/" title="conda">
+                    <b>#</b> conda
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="关于-Conda"><a href="#关于-Conda" class="headerlink" title="关于 Conda"></a>关于 Conda</h2><blockquote>
+<p>Conda is an open source package management system and environment management system that runs on Windows, macOS and Linux. Conda quickly installs, runs and updates packages and their dependencies. Conda easily creates, saves, loads and switches between environments on your local computer. It was created for Python programs, but it can package and distribute software for any language.  </p>
+</blockquote>
+<p>简单来说，Conda 就是专门用于管理 Python 包环境以及部署的工具。  </p>
+<h2 id="Anaconda、Conda-、Miniconda"><a href="#Anaconda、Conda-、Miniconda" class="headerlink" title="Anaconda、Conda 、Miniconda"></a>Anaconda、Conda 、Miniconda</h2><ul>
+<li>Anaconda是一个包含180+的科学包及其依赖项的发行版本。其包含的科学包包括：conda, numpy, scipy, ipython notebook等。  </li>
+<li>conda是包及其依赖项和环境的管理工具。适用多种语言（Python, R, Ruby, Lua等）</li>
+<li>Miniconda是一个最小安装版本的conda，只包含了少量的依赖和软件包</li>
+</ul>
+<blockquote>
+<p>一般来说，三者并没有那么明显，只是在于依赖等信息的囊括问题  </p>
+</blockquote>
+<h2 id="安装-Conda"><a href="#安装-Conda" class="headerlink" title="安装 Conda"></a>安装 Conda</h2><p>都可以下载安装包进行安装  </p>
+<h2 id="Conda使用"><a href="#Conda使用" class="headerlink" title="Conda使用"></a>Conda使用</h2><h3 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda -V</span><br></pre></td></tr></table></figure>
+
+<p>conda在安装时默认创建Base虚拟环境，并且自带了一系列包可以使用，可以使用<code>conda list</code> 查看当前环境中安装的包</p>
+<blockquote>
+<p>Base 虚拟环境:实际开发中，每个 Python 项目依赖的包都不同，Python 解释器版本也可能不同；每个Python 项目可能是你一人开发，也可能是多人开发；为了保证每个 Python 项目的环境（Python 解释器和项目依赖包）独立，互不干预，以及同一个Python 项目的所有人开发环境一致，Anaconda 可以为每一个项目单独配置Python 的开发和运行环境，也就是 Anaconda 中的虚拟环境（可以类比为仓库）  </p>
+</blockquote>
+<h3 id="创建-conda-虚拟环境"><a href="#创建-conda-虚拟环境" class="headerlink" title="创建 conda 虚拟环境"></a>创建 conda 虚拟环境</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n test python=<span class="number">3.6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="切换环境"><a href="#切换环境" class="headerlink" title="切换环境"></a>切换环境</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate test</span><br></pre></td></tr></table></figure>
+
+<h3 id="退出和删除环境"><a href="#退出和删除环境" class="headerlink" title="退出和删除环境"></a>退出和删除环境</h3><p>退出当前环境回到默认的 Base</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate test</span><br></pre></td></tr></table></figure>
+
+<p>删除环境  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n env_name –-all </span><br></pre></td></tr></table></figure>
+
+<h3 id="查看系统中的所有环境"><a href="#查看系统中的所有环境" class="headerlink" title="查看系统中的所有环境"></a>查看系统中的所有环境</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda info -e</span><br></pre></td></tr></table></figure>
+
+<h2 id="环境安装包管理"><a href="#环境安装包管理" class="headerlink" title="环境安装包管理"></a>环境安装包管理</h2><h3 id="安装指定环境的包"><a href="#安装指定环境的包" class="headerlink" title="安装指定环境的包"></a>安装指定环境的包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -n &lt;env_name&gt; &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="当前环境安装包"><a href="#当前环境安装包" class="headerlink" title="当前环境安装包"></a>当前环境安装包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除指定环境的包"><a href="#删除指定环境的包" class="headerlink" title="删除指定环境的包"></a>删除指定环境的包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n &lt;env_name&gt; &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除指定环境的包-1"><a href="#删除指定环境的包-1" class="headerlink" title="删除指定环境的包"></a>删除指定环境的包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新当前环境的包"><a href="#更新当前环境的包" class="headerlink" title="更新当前环境的包"></a>更新当前环境的包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新当前环境所有包"><a href="#更新当前环境所有包" class="headerlink" title="更新当前环境所有包"></a>更新当前环境所有包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update --all</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新conda"><a href="#更新conda" class="headerlink" title="更新conda"></a>更新conda</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update conda</span><br></pre></td></tr></table></figure>
+
+<h2 id="环境复制和导出"><a href="#环境复制和导出" class="headerlink" title="环境复制和导出"></a>环境复制和导出</h2><h3 id="环境复制"><a href="#环境复制" class="headerlink" title="环境复制"></a>环境复制</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name new_env_name --clone copied_env_name</span><br></pre></td></tr></table></figure>
+
+<h3 id="导出环境"><a href="#导出环境" class="headerlink" title="导出环境"></a>导出环境</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env export &gt; environment.yaml</span><br></pre></td></tr></table></figure>
+
+<p>该命令会生成一个<code>environment.yaml</code>文件，包含了当前环境中的配置</p>
+<h3 id="导入环境"><a href="#导入环境" class="headerlink" title="导入环境"></a>导入环境</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env create -f environment.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改镜像源"><a href="#修改镜像源" class="headerlink" title="修改镜像源"></a>修改镜像源</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ </span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ </span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/11/02/shell1/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-11-10
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/Python/" title="Python">
+                        <b>#</b> Python
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/conda/" title="conda">
+                        <b>#</b> conda
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-Conda"><span class="toc-text">关于 Conda</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Anaconda%E3%80%81Conda-%E3%80%81Miniconda"><span class="toc-text">Anaconda、Conda 、Miniconda</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Conda"><span class="toc-text">安装 Conda</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conda%E4%BD%BF%E7%94%A8"><span class="toc-text">Conda使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC"><span class="toc-text">查看版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-conda-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="toc-text">创建 conda 虚拟环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%8E%AF%E5%A2%83"><span class="toc-text">切换环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%80%E5%87%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%8E%AF%E5%A2%83"><span class="toc-text">退出和删除环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%8E%AF%E5%A2%83"><span class="toc-text">查看系统中的所有环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%8C%85%E7%AE%A1%E7%90%86"><span class="toc-text">环境安装包管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%8E%AF%E5%A2%83%E7%9A%84%E5%8C%85"><span class="toc-text">安装指定环境的包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-text">当前环境安装包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%8E%AF%E5%A2%83%E7%9A%84%E5%8C%85"><span class="toc-text">删除指定环境的包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%8E%AF%E5%A2%83%E7%9A%84%E5%8C%85-1"><span class="toc-text">删除指定环境的包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E5%BD%93%E5%89%8D%E7%8E%AF%E5%A2%83%E7%9A%84%E5%8C%85"><span class="toc-text">更新当前环境的包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E5%BD%93%E5%89%8D%E7%8E%AF%E5%A2%83%E6%89%80%E6%9C%89%E5%8C%85"><span class="toc-text">更新当前环境所有包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0conda"><span class="toc-text">更新conda</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%A4%8D%E5%88%B6%E5%92%8C%E5%AF%BC%E5%87%BA"><span class="toc-text">环境复制和导出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%A4%8D%E5%88%B6"><span class="toc-text">环境复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E7%8E%AF%E5%A2%83"><span class="toc-text">导出环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E7%8E%AF%E5%A2%83"><span class="toc-text">导入环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-text">修改镜像源</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>
