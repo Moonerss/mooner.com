@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,11 +234,12 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在进行Cox模型的预后能力评估比较时，C-index作为一个重要的评价指标被广泛的使用。目前有多个R包<br>可以实现C-index的计算，如：Hmisc，survcomp等。但是，当进行计算时，发现一个问题，使用不同的<br>R包计算出的C-index值可能不同，虽然这一结果可能是由于对于<a target="_blank" rel="noopener" href="http://zeegroom.com/">tied risk</a>事件的处理手段不同所造成的；<br>但是为了尽量获得可靠的C-index，决定采用Harrell本人开发的Hmisc包进行计算  </p>
-<h2 id="计算过程"><a href="#计算过程" class="headerlink" title="计算过程"></a>计算过程</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">library</span>(survival)</span><br><span class="line">&gt; <span class="keyword">library</span>(Hmisc)</span><br><span class="line">&gt; data(colon)</span><br><span class="line">&gt; d &lt;- colon</span><br><span class="line">&gt; surv &lt;- y &lt;- Surv(d $time, <span class="number">1</span>-(d$ status))</span><br><span class="line">&gt; m1 &lt;- coxph(surv ~ rx+sex, data=d)</span><br><span class="line">&gt; m2 &lt;- coxph(surv ~ rx+sex+age, data=d)</span><br><span class="line">&gt; m1.cindex &lt;- rcorr.cens(-predict(m1), surv)</span><br><span class="line"><span class="comment">#m1的C-index和置信区间</span></span><br><span class="line">&gt; m1.cindex</span><br><span class="line">       C Index            Dxy           S.D.              n        missing     uncensored </span><br><span class="line">  <span class="number">5.266315e-01</span>   <span class="number">5.326294e-02</span>   <span class="number">2.170980e-02</span>   <span class="number">1.858000e+03</span>   <span class="number">0.000000e+00</span>   <span class="number">9.380000e+02</span> </span><br><span class="line">Relevant Pairs     Concordant      Uncertain </span><br><span class="line">  <span class="number">9.379880e+05</span>   <span class="number">4.939740e+05</span>   <span class="number">2.510688e+06</span></span><br><span class="line"></span><br><span class="line">&gt; CIndex &lt;- round(m1.cindex[<span class="string">&#x27;C Index&#x27;</span>], digits = <span class="number">4</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.5266</span> </span><br><span class="line">&gt; Lower &lt;- round(CIndex - <span class="number">1.96</span>*m1.cindex[<span class="string">&#x27;S.D.&#x27;</span>]/<span class="number">2</span>, digits = <span class="number">4</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.5053</span></span><br><span class="line">&gt; Upper &lt;- round(CIndex + <span class="number">1.96</span>*m1.cindex[<span class="string">&#x27;S.D.&#x27;</span>]/<span class="number">2</span>, digits = <span class="number">4</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.5479</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># C-index比较的p值</span></span><br><span class="line">&gt; (r &lt;- rcorrp.cens(predict(m1), predict(m2), surv))</span><br><span class="line">         Dxy        S.D. x1 more concordant x2 more concordant         n </span><br><span class="line">     <span class="number">6.069800e-02</span>    <span class="number">2.345218e-02</span>    <span class="number">5.282221e-01</span>    <span class="number">4.675241e-01</span>    <span class="number">1.858000e+03</span> </span><br><span class="line">       missing     uncensored   Relevant Pairs     Uncertain        C X1 </span><br><span class="line">     <span class="number">0.000000e+00</span>    <span class="number">9.380000e+02</span>    <span class="number">9.379880e+05</span>    <span class="number">2.510688e+06</span>    <span class="number">4.733685e-01</span> </span><br><span class="line">         C X2       Dxy X1       Dxy X2 </span><br><span class="line">     <span class="number">4.614846e-01</span>   -<span class="number">5.326294e-02</span>   -<span class="number">7.703084e-02</span> </span><br><span class="line">&gt; (p.value &lt;- round(<span class="number">2</span>*(<span class="number">1</span> - pnorm(r[[<span class="string">&#x27;Dxy&#x27;</span>]] / r[[<span class="string">&#x27;S.D.&#x27;</span>]])), digits=<span class="number">4</span>))</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.0096</span> </span><br></pre></td></tr></table></figure>
-
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://stats.stackovernet.com/cn/q/30724">https://stats.stackovernet.com/cn/q/30724</a></p>
+        <h2 id="背景">背景</h2>
+<p>在进行Cox模型的预后能力评估比较时，C-index作为一个重要的评价指标被广泛的使用。目前有多个R包 可以实现C-index的计算，如：Hmisc，survcomp等。但是，当进行计算时，发现一个问题，使用不同的 R包计算出的C-index值可能不同，虽然这一结果可能是由于对于<a target="_blank" rel="noopener" href="http://zeegroom.com/">tied risk</a>事件的处理手段不同所造成的； 但是为了尽量获得可靠的C-index，决定采用Harrell本人开发的Hmisc包进行计算</p>
+<h2 id="计算过程">计算过程</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">library</span>(survival)</span><br><span class="line">&gt; <span class="keyword">library</span>(Hmisc)</span><br><span class="line">&gt; data(colon)</span><br><span class="line">&gt; d &lt;- colon</span><br><span class="line">&gt; surv &lt;- y &lt;- Surv(d $time, <span class="number">1</span>-(d$ status))</span><br><span class="line">&gt; m1 &lt;- coxph(surv ~ rx+sex, data=d)</span><br><span class="line">&gt; m2 &lt;- coxph(surv ~ rx+sex+age, data=d)</span><br><span class="line">&gt; m1.cindex &lt;- rcorr.cens(-predict(m1), surv)</span><br><span class="line"><span class="comment">#m1的C-index和置信区间</span></span><br><span class="line">&gt; m1.cindex</span><br><span class="line">       C Index            Dxy           S.D.              n        missing     uncensored </span><br><span class="line">  <span class="number">5.266315e-01</span>   <span class="number">5.326294e-02</span>   <span class="number">2.170980e-02</span>   <span class="number">1.858000e+03</span>   <span class="number">0.000000e+00</span>   <span class="number">9.380000e+02</span> </span><br><span class="line">Relevant Pairs     Concordant      Uncertain </span><br><span class="line">  <span class="number">9.379880e+05</span>   <span class="number">4.939740e+05</span>   <span class="number">2.510688e+06</span></span><br><span class="line"></span><br><span class="line">&gt; CIndex &lt;- round(m1.cindex[<span class="string">&#x27;C Index&#x27;</span>], digits = <span class="number">4</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.5266</span> </span><br><span class="line">&gt; Lower &lt;- round(CIndex - <span class="number">1.96</span>*m1.cindex[<span class="string">&#x27;S.D.&#x27;</span>]/<span class="number">2</span>, digits = <span class="number">4</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.5053</span></span><br><span class="line">&gt; Upper &lt;- round(CIndex + <span class="number">1.96</span>*m1.cindex[<span class="string">&#x27;S.D.&#x27;</span>]/<span class="number">2</span>, digits = <span class="number">4</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.5479</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># C-index比较的p值</span></span><br><span class="line">&gt; (r &lt;- rcorrp.cens(predict(m1), predict(m2), surv))</span><br><span class="line">         Dxy        S.D. x1 more concordant x2 more concordant         n </span><br><span class="line">     <span class="number">6.069800e-02</span>    <span class="number">2.345218e-02</span>    <span class="number">5.282221e-01</span>    <span class="number">4.675241e-01</span>    <span class="number">1.858000e+03</span> </span><br><span class="line">       missing     uncensored   Relevant Pairs     Uncertain        C X1 </span><br><span class="line">     <span class="number">0.000000e+00</span>    <span class="number">9.380000e+02</span>    <span class="number">9.379880e+05</span>    <span class="number">2.510688e+06</span>    <span class="number">4.733685e-01</span> </span><br><span class="line">         C X2       Dxy X1       Dxy X2 </span><br><span class="line">     <span class="number">4.614846e-01</span>   -<span class="number">5.326294e-02</span>   -<span class="number">7.703084e-02</span> </span><br><span class="line">&gt; (p.value &lt;- round(<span class="number">2</span>*(<span class="number">1</span> - pnorm(r[[<span class="string">&#x27;Dxy&#x27;</span>]] / r[[<span class="string">&#x27;S.D.&#x27;</span>]])), digits=<span class="number">4</span>))</span><br><span class="line">[<span class="number">1</span>] <span class="number">0.0096</span> </span><br></pre></td></tr></table></figure>
+<h2 id="参考">参考</h2>
+<p>https://stats.stackovernet.com/cn/q/30724</p>
 
       </div>
       

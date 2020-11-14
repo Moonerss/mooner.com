@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -127,18 +240,17 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="下载编译过的安装包"><a href="#下载编译过的安装包" class="headerlink" title="下载编译过的安装包"></a>下载编译过的安装包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/yomun/youdaodict_5.5/raw/master/youdao-dict_1.1.1-0~ubuntu_amd64.deb</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询并卸载QT5"><a href="#查询并卸载QT5" class="headerlink" title="查询并卸载QT5"></a>查询并卸载QT5</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如有显示 PyQt5 (5.10.1), 卸载</span></span><br><span class="line">pip3 list | grep PyQt5</span><br><span class="line">pip3 uninstall pyqt5</span><br><span class="line"></span><br><span class="line"><span class="comment"># root 用户</span></span><br><span class="line">sudo sudo pip3 list | grep PyQt5</span><br><span class="line">sudo sudo pip3 uninstall pyqt5</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python3</span><br><span class="line"></span><br><span class="line">sudo apt install python3-dbus python3-lxml python3-pil python3-requests python3-xdg python3-xlib</span><br><span class="line">sudo apt install python3-pyqt5 python3-pyqt5.qtmultimedia python3-pyqt5.qtquick python3-pyqt5.qtwebkit</span><br><span class="line"></span><br><span class="line">sudo apt install gir1.2-appindicator3-0.1 qml-module-qtgraphicaleffects qml-module-qtquick-controls</span><br><span class="line">sudo apt install libqt5multimedia5-plugins ttf-wqy-microhei</span><br><span class="line">sudo apt install tesseract-ocr tesseract-ocr-eng tesseract-ocr-chi-sim tesseract-ocr-chi-tra</span><br><span class="line"></span><br><span class="line">sudo apt install ubuntu-restricted-extras</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu 18.04 用 fonts-wqy-microhei 取代了 ttf-wqy-microhei</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="安装有道词典"><a href="#安装有道词典" class="headerlink" title="安装有道词典"></a>安装有道词典</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line"></span><br><span class="line">如果是 dpkg 安装的话 (基于 Ubuntu / Debian / Linux Mint / Zorin OS)</span><br><span class="line">dpkg -i youdao-dict_1.1.1-0?ubuntu_amd64.deb</span><br><span class="line">apt install -f  (如果上面的 dpkg 命令运行显示缺依赖软件包)</span><br><span class="line"></span><br><span class="line">如果是 tar 安装的话 (其实就是将 deb 解压, 把文件放到系统各处)</span><br><span class="line">ar vx youdao-dict_1.1.1-0?ubuntu_amd64.deb</span><br><span class="line">tar -Jxvf data.tar.xz -C /</span><br><span class="line">rm -rf control.tar.gz &amp;&amp; rm -rf data.tar.xz &amp;&amp; rm -rf debian-binary</span><br></pre></td></tr></table></figure>
-
-<p>安装之后可以直接运行有道词典  </p>
-<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/.config/youdao-dict</span><br><span class="line">rm -rf ~/.cache/youdao-dict</span><br><span class="line"></span><br><span class="line">su</span><br><span class="line"></span><br><span class="line">如果是 dpkg 安装的话</span><br><span class="line">dpkg -r youdao-dict</span><br><span class="line"></span><br><span class="line">如果是 tar 安装的话</span><br><span class="line">wget https://raw.githubusercontent.com/yomun/youdaodict_5.5/master/youdaodict-uninstall.sh</span><br><span class="line">bash youdaodict-uninstall.sh</span><br></pre></td></tr></table></figure>
-
-
+        <h2 id="下载编译过的安装包">下载编译过的安装包</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/yomun/youdaodict_5.5/raw/master/youdao-dict_1.1.1-0~ubuntu_amd64.deb</span><br></pre></td></tr></table></figure>
+<h2 id="查询并卸载qt5">查询并卸载QT5</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如有显示 PyQt5 (5.10.1), 卸载</span></span><br><span class="line">pip3 list | grep PyQt5</span><br><span class="line">pip3 uninstall pyqt5</span><br><span class="line"></span><br><span class="line"><span class="comment"># root 用户</span></span><br><span class="line">sudo sudo pip3 list | grep PyQt5</span><br><span class="line">sudo sudo pip3 uninstall pyqt5</span><br></pre></td></tr></table></figure>
+<h2 id="安装依赖包">安装依赖包</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python3</span><br><span class="line"></span><br><span class="line">sudo apt install python3-dbus python3-lxml python3-pil python3-requests python3-xdg python3-xlib</span><br><span class="line">sudo apt install python3-pyqt5 python3-pyqt5.qtmultimedia python3-pyqt5.qtquick python3-pyqt5.qtwebkit</span><br><span class="line"></span><br><span class="line">sudo apt install gir1.2-appindicator3-0.1 qml-module-qtgraphicaleffects qml-module-qtquick-controls</span><br><span class="line">sudo apt install libqt5multimedia5-plugins ttf-wqy-microhei</span><br><span class="line">sudo apt install tesseract-ocr tesseract-ocr-eng tesseract-ocr-chi-sim tesseract-ocr-chi-tra</span><br><span class="line"></span><br><span class="line">sudo apt install ubuntu-restricted-extras</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu 18.04 用 fonts-wqy-microhei 取代了 ttf-wqy-microhei</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装有道词典">安装有道词典</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line"></span><br><span class="line">如果是 dpkg 安装的话 (基于 Ubuntu / Debian / Linux Mint / Zorin OS)</span><br><span class="line">dpkg -i youdao-dict_1.1.1-0?ubuntu_amd64.deb</span><br><span class="line">apt install -f  (如果上面的 dpkg 命令运行显示缺依赖软件包)</span><br><span class="line"></span><br><span class="line">如果是 tar 安装的话 (其实就是将 deb 解压, 把文件放到系统各处)</span><br><span class="line">ar vx youdao-dict_1.1.1-0?ubuntu_amd64.deb</span><br><span class="line">tar -Jxvf data.tar.xz -C /</span><br><span class="line">rm -rf control.tar.gz &amp;&amp; rm -rf data.tar.xz &amp;&amp; rm -rf debian-binary</span><br></pre></td></tr></table></figure>
+<p>安装之后可以直接运行有道词典</p>
+<h2 id="卸载">卸载</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/.config/youdao-dict</span><br><span class="line">rm -rf ~/.cache/youdao-dict</span><br><span class="line"></span><br><span class="line">su</span><br><span class="line"></span><br><span class="line">如果是 dpkg 安装的话</span><br><span class="line">dpkg -r youdao-dict</span><br><span class="line"></span><br><span class="line">如果是 tar 安装的话</span><br><span class="line">wget https://raw.githubusercontent.com/yomun/youdaodict_5.5/master/youdaodict-uninstall.sh</span><br><span class="line">bash youdaodict-uninstall.sh</span><br></pre></td></tr></table></figure>
 
       </div>
       
@@ -190,7 +302,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91%E8%BF%87%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-text">下载编译过的安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%B9%B6%E5%8D%B8%E8%BD%BDQT5"><span class="toc-text">查询并卸载QT5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="toc-text">安装依赖包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%9C%89%E9%81%93%E8%AF%8D%E5%85%B8"><span class="toc-text">安装有道词典</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BD"><span class="toc-text">卸载</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91%E8%BF%87%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-text">下载编译过的安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%B9%B6%E5%8D%B8%E8%BD%BDqt5"><span class="toc-text">查询并卸载QT5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="toc-text">安装依赖包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%9C%89%E9%81%93%E8%AF%8D%E5%85%B8"><span class="toc-text">安装有道词典</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BD"><span class="toc-text">卸载</span></a></li></ol>
     </div>
   </div>
 

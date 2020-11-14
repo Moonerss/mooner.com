@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,49 +234,50 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="R-package信息查看"><a href="#R-package信息查看" class="headerlink" title="R package信息查看"></a>R package信息查看</h2><table>
+        <h2 id="r-package信息查看">R package信息查看</h2>
+<table>
 <thead>
-<tr>
+<tr class="header">
 <th><strong>命令</strong></th>
 <th><strong>描述</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td><code>installed.packages()</code></td>
 <td>返回一个矩阵，包含所有已安装的包信息</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>available.packages()</code></td>
 <td>返回一个矩阵，包含远端库上所有可用的R包</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>old.packages()</code></td>
 <td>返回一个矩阵，显示所有已安装的包中具有新版本的包</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>new.packages()</code></td>
 <td>返回一个矩阵，包含所有已安装的包信息</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>download.packages()</code></td>
 <td>下载一系列R包到本地目录</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>install.packages()</code></td>
 <td>从远端库下载安装一系列R包</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>remove.packages()</code></td>
 <td>移除一系列已安装的R包</td>
 </tr>
-</tbody></table>
-<h2 id="公式的创建与使用"><a href="#公式的创建与使用" class="headerlink" title="公式的创建与使用"></a>公式的创建与使用</h2><p>最基础实用的方法就是调用函数 <code>as.formula()</code> :  </p>
+</tbody>
+</table>
+<h2 id="公式的创建与使用">公式的创建与使用</h2>
+<p>最基础实用的方法就是调用函数 <code>as.formula()</code> :</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">as.formula(<span class="string">&quot;y ~ x1 + x2&quot;</span>)</span><br><span class="line"><span class="comment">#&gt; y ~ x1 + x2</span></span><br></pre></td></tr></table></figure>
-
-<p>从公式中提取部分字符串  </p>
+<p>从公式中提取部分字符串</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">f &lt;- y ~ x1 + x2</span><br><span class="line">f[[<span class="number">1</span>]]</span><br><span class="line"><span class="comment">#&gt; `~`</span></span><br><span class="line">as.list(f)</span><br><span class="line"><span class="comment">#&gt; [[1]]</span></span><br><span class="line"><span class="comment">#&gt; `~`</span></span><br><span class="line"><span class="comment">#&gt; </span></span><br><span class="line"><span class="comment">#&gt; [[2]]</span></span><br><span class="line"><span class="comment">#&gt; y</span></span><br><span class="line"><span class="comment">#&gt; </span></span><br><span class="line"><span class="comment">#&gt; [[3]]</span></span><br><span class="line"><span class="comment">#&gt; x1 + x2</span></span><br></pre></td></tr></table></figure>
-
-
 
       </div>
       
@@ -209,7 +323,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#R-package%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B"><span class="toc-text">R package信息查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-text">公式的创建与使用</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#r-package%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B"><span class="toc-text">R package信息查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-text">公式的创建与使用</span></a></li></ol>
     </div>
   </div>
 

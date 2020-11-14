@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -127,49 +240,32 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="绘制GO富集的圈圈图实例"><a href="#绘制GO富集的圈圈图实例" class="headerlink" title="绘制GO富集的圈圈图实例"></a>绘制GO富集的圈圈图实例</h2><p>载入R包  </p>
+        <h2 id="绘制go富集的圈圈图实例">绘制GO富集的圈圈图实例</h2>
+<p>载入R包</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(clusterProfiler)</span><br><span class="line"><span class="keyword">library</span>(org.Hs.eg.db)</span><br><span class="line"><span class="keyword">library</span>(GOplot)</span><br><span class="line"><span class="keyword">library</span>(stringr)</span><br></pre></td></tr></table></figure>
-
-<p>载入差异表达数据  </p>
+<p>载入差异表达数据</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Warning in readChar(con, 5L, useBytes &#x3D; TRUE): cannot open compressed file &#39;F:&#x2F;</span><br><span class="line">## diff_expr.Rdata&#39;, probable reason &#39;No such file or directory&#39;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Error in readChar(con, 5L, useBytes &#x3D; TRUE): cannot open the connection</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">##       logFC   AveExpr         t      P.Value    adj.P.Val        B probe_id symbol change</span><br><span class="line">## 1 -5.780170  7.370282 -82.94833 3.495205e-12 1.163798e-07 16.32898  8133876   CD36   down</span><br><span class="line">## 2  4.212683  9.106625  68.40113 1.437468e-11 2.393169e-07 15.71739  7965335  DUSP6     up</span><br><span class="line">## 3 -5.633027  8.763220 -57.61985 5.053466e-11 4.431880e-07 15.04752  7972259    DCT   down</span><br><span class="line">## 4  3.801663  9.726468  57.21112 5.324059e-11 4.431880e-07 15.01709  7972217  SPRY2     up</span><br><span class="line">## 5 -3.263063 10.171635 -50.51733 1.324638e-10 8.821294e-07 14.45166  8129573  MOXD1   down</span><br><span class="line">## 6  3.843247  9.667077  45.87910 2.681063e-10 1.487856e-06 13.97123  8015806   ETV4     up</span><br><span class="line">##   ENTREZID</span><br><span class="line">## 1      948</span><br><span class="line">## 2     1848</span><br><span class="line">## 3     1638</span><br><span class="line">## 4    10253</span><br><span class="line">## 5    26002</span><br><span class="line">## 6     2118</span><br></pre></td></tr></table></figure>
-
-<p>保留差异表达基因  </p>
+<p>保留差异表达基因</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">diff_expr = diff_expr[diff_expr$change!=<span class="string">&quot;stable&quot;</span>,]</span><br><span class="line">diff_expr = diff_expr[<span class="number">1</span>:<span class="number">100</span>,]</span><br><span class="line">gene_diff = diff_expr$symbol</span><br></pre></td></tr></table></figure>
-
-<p>富集分析  </p>
+<p>富集分析</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enrich_BP &lt;- enrichGO(gene = gene_diff, keyType = <span class="string">&quot;SYMBOL&quot;</span>, OrgDb= org.Hs.eg.db,</span><br><span class="line">                      ont = <span class="string">&quot;BP&quot;</span>, pAdjustMethod = <span class="string">&quot;BH&quot;</span>, minGSSize = <span class="number">1</span>,</span><br><span class="line">                      pvalueCutoff = <span class="number">0.05</span>, qvalueCutoff = <span class="number">0.05</span>)</span><br><span class="line">class(enrich_BP)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## [1] &quot;enrichResult&quot;</span><br><span class="line">## attr(,&quot;package&quot;)</span><br><span class="line">## [1] &quot;DOSE&quot;</span><br></pre></td></tr></table></figure>
-
-<p>提取图像绘制需要的输入数据  </p>
+<p>提取图像绘制需要的输入数据</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enrich &lt;- data.frame(enrich_BP) </span><br><span class="line">colnames(enrich)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## [1] &quot;ID&quot;          &quot;Description&quot; &quot;GeneRatio&quot;   &quot;BgRatio&quot;     &quot;pvalue&quot;      &quot;p.adjust&quot;   </span><br><span class="line">## [7] &quot;qvalue&quot;      &quot;geneID&quot;      &quot;Count&quot;</span><br></pre></td></tr></table></figure>
-
-<p>数据整理  </p>
+<p>数据整理</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">enrich &lt;- enrich[<span class="number">1</span>:<span class="number">10</span>,c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">6</span>)] </span><br><span class="line"></span><br><span class="line">enrich$geneID &lt;- str_replace_all(enrich$geneID,<span class="string">&quot;/&quot;</span>,<span class="string">&quot;,&quot;</span>) </span><br><span class="line">names(enrich)=c(<span class="string">&quot;ID&quot;</span>,<span class="string">&quot;Term&quot;</span>,<span class="string">&quot;Genes&quot;</span>,<span class="string">&quot;adj_pval&quot;</span>)</span><br><span class="line">enrich$Category = <span class="string">&quot;BP&quot;</span></span><br><span class="line">head(enrich)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">##                    ID                                                       Term</span><br><span class="line">## GO:0050730 GO:0050730            regulation of peptidyl-tyrosine phosphorylation</span><br><span class="line">## GO:0048732 GO:0048732                                          gland development</span><br><span class="line">## GO:0018108 GO:0018108                          peptidyl-tyrosine phosphorylation</span><br><span class="line">## GO:0018212 GO:0018212                             peptidyl-tyrosine modification</span><br><span class="line">## GO:1901992 GO:1901992 positive regulation of mitotic cell cycle phase transition</span><br><span class="line">## GO:0042326 GO:0042326                     negative regulation of phosphorylation</span><br><span class="line">##                                                                                   Genes</span><br><span class="line">## GO:0050730                CD36,AREG,TGFA,CD24,SFRP1,ITGB3,MIR221,SH2B3,CNTN1,INPP5F,MVP</span><br><span class="line">## GO:0048732   ETV5,CCND1,AREG,SERPINF1,SFRP1,IGFBP5,JUN,SEMA3C,SOX2,SNAI2,PBX1,E2F7,RARB</span><br><span class="line">## GO:0018108          CD36,AREG,TGFA,CD24,SFRP1,ITGB3,MIR221,EPHA5,SH2B3,CNTN1,INPP5F,MVP</span><br><span class="line">## GO:0018212          CD36,AREG,TGFA,CD24,SFRP1,ITGB3,MIR221,EPHA5,SH2B3,CNTN1,INPP5F,MVP</span><br><span class="line">## GO:1901992                                     DTL,CCND1,CDCA5,CDC25A,MIR221,PBX1,CDC45</span><br><span class="line">## GO:0042326 DUSP6,SPRY2,NUPR1,SPRY4,UBASH3B,SFRP1,JUN,TLR4,TIMP3,MIR221,SH2B3,INPP5F,MVP</span><br><span class="line">##                adj_pval Category</span><br><span class="line">## GO:0050730 0.0001172193       BP</span><br><span class="line">## GO:0048732 0.0001314734       BP</span><br><span class="line">## GO:0018108 0.0001314734       BP</span><br><span class="line">## GO:0018212 0.0001314734       BP</span><br><span class="line">## GO:1901992 0.0001567831       BP</span><br><span class="line">## GO:0042326 0.0001741554       BP</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">genes &lt;- data.frame(ID = diff_expr$symbol, logFC = diff_expr$logFC)</span><br><span class="line">head(genes)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##      ID     logFC</span><br><span class="line">## 1  CD36 -5.780170</span><br><span class="line">## 2 DUSP6  4.212683</span><br><span class="line">## 3   DCT -5.633027</span><br><span class="line">## 4 SPRY2  3.801663</span><br><span class="line">## 5 MOXD1 -3.263063</span><br><span class="line">## 6  ETV4  3.843247</span><br></pre></td></tr></table></figure>
-
-
-<p>转化成输入数据  </p>
+<p>转化成输入数据</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">circ &lt;- circle_dat(enrich,genes)</span><br><span class="line">head(circ)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">##   category         ID                                            term count genes     logFC</span><br><span class="line">## 1       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11  CD36 -5.780170</span><br><span class="line">## 2       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11  AREG  3.095910</span><br><span class="line">## 3       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11  TGFA  2.518930</span><br><span class="line">## 4       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11  CD24 -3.322533</span><br><span class="line">## 5       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11 SFRP1  2.103767</span><br><span class="line">## 6       BP GO:0050730 regulation of peptidyl-tyrosine phosphorylation    11 ITGB3  3.162000</span><br><span class="line">##       adj_pval   zscore</span><br><span class="line">## 1 0.0001172193 0.904534</span><br><span class="line">## 2 0.0001172193 0.904534</span><br><span class="line">## 3 0.0001172193 0.904534</span><br><span class="line">## 4 0.0001172193 0.904534</span><br><span class="line">## 5 0.0001172193 0.904534</span><br><span class="line">## 6 0.0001172193 0.904534</span><br></pre></td></tr></table></figure>
-
-<p>绘制图像  </p>
+<p>绘制图像</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GOCircle(circ)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/goplot/unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16"></p>
+<p><img src="/images/goplot/unnamed-chunk-16-1.png" /></p>
 
       </div>
       
@@ -221,7 +317,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%98%E5%88%B6GO%E5%AF%8C%E9%9B%86%E7%9A%84%E5%9C%88%E5%9C%88%E5%9B%BE%E5%AE%9E%E4%BE%8B"><span class="toc-text">绘制GO富集的圈圈图实例</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%98%E5%88%B6go%E5%AF%8C%E9%9B%86%E7%9A%84%E5%9C%88%E5%9C%88%E5%9B%BE%E5%AE%9E%E4%BE%8B"><span class="toc-text">绘制GO富集的圈圈图实例</span></a></li></ol>
     </div>
   </div>
 

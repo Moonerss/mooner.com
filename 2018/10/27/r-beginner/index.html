@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,34 +234,47 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="R-for-beginners"><a href="#R-for-beginners" class="headerlink" title="R for beginners"></a><strong>R for beginners</strong></h2><h3 id="一、基本原理和概念"><a href="#一、基本原理和概念" class="headerlink" title="一、基本原理和概念"></a><strong>一、基本原理和概念</strong></h3><ol>
-<li>R是一种<strong>解释型语言</strong>， 而不是<strong>编译语言</strong>， 也就意味着输入的命令能够直接被执行， 而不需要像一些语言要首先构成一个完整的程序形式(如C， Fortan, Pascal, . . . )。  </li>
-<li>当R运行时， 所有变量， 数据， 函数及结果都以对象(<em>objects</em>)的形式存在计算机的活动内存中， 并冠有相应的名字代号。  </li>
-<li><strong>命名规范：</strong>对象的名字必须是以一个字母开头(A{Z 或a{z), 中间可以包含字母， 数字(0{9)， 点(.)及下划线( ). 因为R对对象的名字区分大小写， 所以x 和X就可以代表两个完全不同的对象。  </li>
-<li>函数ls的功能是显示所有在内存中的对象，如果只要显示出在名称中带有某个指定字符的对象， 则通过设定选项pattern 来实现。如：<code>ls(pat = &quot;m&quot;)</code>,会显示在名称中以<code>m</code>开头的对象  </li>
-<li>运行函数ls.str()将会展示内存中所有对象的详细信息  </li>
-<li>要在内存中删除某个对象， 可利用函数<code>rm</code>: 运行<code>rm(x)</code>将会删除对象<code>x</code>,运行<code>rm(x,y)</code> 将会删除对象<code>x</code>和<code>y</code>， 而运行<code>rm(list=ls())</code>则会删除内存中的所有对象. 在<code>ls() </code>函数中的一些选项同样也可以运用到<code>rm</code>中来， 以选择的删除一些对象， 如: <code>rm(list=ls(pat=”^m”))</code>。  </li>
+        <h2 id="r-for-beginners"><strong>R for beginners</strong></h2>
+<h3 id="一基本原理和概念"><strong>一、基本原理和概念</strong></h3>
+<ol type="1">
+<li>R是一种<strong>解释型语言</strong>， 而不是<strong>编译语言</strong>， 也就意味着输入的命令能够直接被执行， 而不需要像一些语言要首先构成一个完整的程序形式(如C， Fortan, Pascal, . . . )。<br />
+</li>
+<li>当R运行时， 所有变量， 数据， 函数及结果都以对象(<em>objects</em>)的形式存在计算机的活动内存中， 并冠有相应的名字代号。<br />
+</li>
+<li><strong>命名规范：</strong>对象的名字必须是以一个字母开头(A{Z 或a{z), 中间可以包含字母， 数字(0{9)， 点(.)及下划线( ). 因为R对对象的名字区分大小写， 所以x 和X就可以代表两个完全不同的对象。<br />
+</li>
+<li>函数ls的功能是显示所有在内存中的对象，如果只要显示出在名称中带有某个指定字符的对象， 则通过设定选项pattern 来实现。如：<code>ls(pat = "m")</code>,会显示在名称中以<code>m</code>开头的对象<br />
+</li>
+<li>运行函数ls.str()将会展示内存中所有对象的详细信息<br />
+</li>
+<li>要在内存中删除某个对象， 可利用函数<code>rm</code>: 运行<code>rm(x)</code>将会删除对象<code>x</code>,运行<code>rm(x,y)</code> 将会删除对象<code>x</code>和<code>y</code>， 而运行<code>rm(list=ls())</code>则会删除内存中的所有对象. 在<code>ls()</code>函数中的一些选项同样也可以运用到<code>rm</code>中来， 以选择的删除一些对象， 如: <code>rm(list=ls(pat=”^m”))</code>。</li>
 </ol>
-<h3 id="二、R的数据操作"><a href="#二、R的数据操作" class="headerlink" title="二、R的数据操作"></a><strong>二、R的数据操作</strong></h3><h4 id="1-对象"><a href="#1-对象" class="headerlink" title="1. 对象"></a><strong>1. 对象</strong></h4><ol>
-<li>在R中，操作的内容称作对象(<em>objects</em>)，对象的刻画主要通过：1）名称和内容；2）<strong>属性</strong>  </li>
-<li>所有的对象都有两个内在属性： <strong>类型</strong>和<strong>长度</strong>。 类型是对象元素的基本种类，共有四种： <code>数值型</code>， <code>字符型</code>， <code>复数型</code>和<code>逻辑型</code> ；长度是对象中元素的数目。对象的类型和长度可以分别通过函数mode和length得到。  </li>
-<li>对象的类型是可以通过<code>as.something</code>这种形式的函数可以完成转换的。  </li>
-<li>比较两个对象时，需要使用<code>identical</code>和<code>all.equal</code>函数，他们两者之间存在差别：<code>identical</code>比较数据的内在关系， 如果对象是严格相同的返回<code>TRUE</code>， 否则返回<code>FALSE</code>。 <code>all.equal</code>用来判断两个对象是否“ 近似相等” ， 返回结果为<code>TRUE</code>或者对二者差异的描述。 后一个函数在比较数值型变量时考虑到了计算过程中的近似。具体示例如下：  </li>
+<h3 id="二r的数据操作"><strong>二、R的数据操作</strong></h3>
+<h4 id="对象"><strong>1. 对象</strong></h4>
+<ol type="1">
+<li>在R中，操作的内容称作对象(<em>objects</em>)，对象的刻画主要通过：1）名称和内容；2）<strong>属性</strong><br />
+</li>
+<li>所有的对象都有两个内在属性： <strong>类型</strong>和<strong>长度</strong>。 类型是对象元素的基本种类，共有四种： <code>数值型</code>， <code>字符型</code>， <code>复数型</code>和<code>逻辑型</code> ；长度是对象中元素的数目。对象的类型和长度可以分别通过函数mode和length得到。<br />
+</li>
+<li>对象的类型是可以通过<code>as.something</code>这种形式的函数可以完成转换的。<br />
+</li>
+<li>比较两个对象时，需要使用<code>identical</code>和<code>all.equal</code>函数，他们两者之间存在差别：<code>identical</code>比较数据的内在关系， 如果对象是严格相同的返回<code>TRUE</code>， 否则返回<code>FALSE</code>。 <code>all.equal</code>用来判断两个对象是否“ 近似相等” ， 返回结果为<code>TRUE</code>或者对二者差异的描述。 后一个函数在比较数值型变量时考虑到了计算过程中的近似。具体示例如下：</li>
 </ol>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.9</span> == (<span class="number">1</span> - <span class="number">0.1</span>)</span><br><span class="line">identical(<span class="number">0.9</span>, <span class="number">1</span> - <span class="number">0.1</span>)</span><br><span class="line">all.equal(<span class="number">0.9</span>, <span class="number">1</span> - <span class="number">0.1</span>)</span><br><span class="line"><span class="number">0.9</span> == (<span class="number">1.1</span> - <span class="number">0.2</span>)</span><br><span class="line">identical(<span class="number">0.9</span>, <span class="number">1.1</span> - <span class="number">0.2</span>)</span><br><span class="line">all.equal(<span class="number">0.9</span>, <span class="number">1.1</span> - <span class="number">0.2</span>)</span><br><span class="line">all.equal(<span class="number">0.9</span>, <span class="number">1.1</span> - <span class="number">0.2</span>, tolerance = <span class="number">1e-16</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="三、R绘图"><a href="#三、R绘图" class="headerlink" title="三、R绘图"></a><strong>三、R绘图</strong></h3><ol>
-<li>有两种绘图函数： 高级绘图函数（<em>high-level plotting functions</em>） 创建一个新的图形， 低级绘图函数（<em>low-level plotting functions</em>） 在现存的图形上添加元素。 绘图参数（<em>graphical parameters</em>） 控制绘图选项， 可以使用缺省值或者用函数par修改。  </li>
-<li>绘图设备的切换选择：  </li>
+<h3 id="三r绘图"><strong>三、R绘图</strong></h3>
+<ol type="1">
+<li>有两种绘图函数： 高级绘图函数（<em>high-level plotting functions</em>） 创建一个新的图形， 低级绘图函数（<em>low-level plotting functions</em>） 在现存的图形上添加元素。 绘图参数（<em>graphical parameters</em>） 控制绘图选项， 可以使用缺省值或者用函数par修改。<br />
+</li>
+<li>绘图设备的切换选择：</li>
 </ol>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dev.list() <span class="comment">#显示当前绘图设备列表</span></span><br><span class="line">dev.cur()  <span class="comment">#显示当前所在绘图设备</span></span><br><span class="line">dev.set()  <span class="comment">#切换绘图设备</span></span><br><span class="line">dev.off()  <span class="comment">#关闭某个绘图设备</span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>图形设备面板的分割  <ul>
-<li>函数<code>split.screen</code>分割当前的绘图设备；<code>erase.screen()</code>删除最后绘制的图形。  </li>
-<li>函数<code>layout</code>把当前的图形窗口分割为多个部份， 图形将一次显示在各部分中。 它主要的自变量是一个元素都是整数值的矩阵， 元素指示子窗口（\sub-windows”） 的编号。如：<code>layout(matrix(1:4, 2, 2))</code>,把设备划分为4个相等的部分。<code>layout.show</code>查看创建的分割。  </li>
-</ul>
+<ol start="3" type="1">
+<li>图形设备面板的分割
+<ul>
+<li>函数<code>split.screen</code>分割当前的绘图设备；<code>erase.screen()</code>删除最后绘制的图形。<br />
 </li>
+<li>函数<code>layout</code>把当前的图形窗口分割为多个部份， 图形将一次显示在各部分中。 它主要的自变量是一个元素都是整数值的矩阵， 元素指示子窗口（-windows”） 的编号。如：<code>layout(matrix(1:4, 2, 2))</code>,把设备划分为4个相等的部分。<code>layout.show</code>查看创建的分割。</li>
+</ul></li>
 </ol>
       </div>
       
@@ -194,7 +320,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#R-for-beginners"><span class="toc-text">R for beginners</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%92%8C%E6%A6%82%E5%BF%B5"><span class="toc-text">一、基本原理和概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81R%E7%9A%84%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="toc-text">二、R的数据操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AF%B9%E8%B1%A1"><span class="toc-text">1. 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81R%E7%BB%98%E5%9B%BE"><span class="toc-text">三、R绘图</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#r-for-beginners"><span class="toc-text">R for beginners</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%92%8C%E6%A6%82%E5%BF%B5"><span class="toc-text">一、基本原理和概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8Cr%E7%9A%84%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="toc-text">二、R的数据操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-text">1. 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89r%E7%BB%98%E5%9B%BE"><span class="toc-text">三、R绘图</span></a></li></ol></li></ol>
     </div>
   </div>
 

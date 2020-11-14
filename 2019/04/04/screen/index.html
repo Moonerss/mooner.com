@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,30 +234,30 @@
           
       </div>
       <div class="markdown-body">
-        <h3 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h3><p><code>screen</code> 是一个非常有用的命令，提供从单个 SSH 会话中使用多个 shell 窗口（会话）的能力。当会话被分离或网络中断时，screen 会话中启动的进程仍将运行，你可以随时重新连接到 screen 会话。如果你想运行一个持久的进程或者从多个位置连接到 shell 会话，这也很方便。  </p>
-<h4 id="安装screen"><a href="#安装screen" class="headerlink" title="安装screen"></a>安装screen</h4><p><code>screen</code> 在一些流行的发行版上已经预安装了。你可以使用下面的命令检查是否已经在你的服务器上安装了。  </p>
+        <h3 id="screen">screen</h3>
+<p><code>screen</code> 是一个非常有用的命令，提供从单个 SSH 会话中使用多个 shell 窗口（会话）的能力。当会话被分离或网络中断时，screen 会话中启动的进程仍将运行，你可以随时重新连接到 screen 会话。如果你想运行一个持久的进程或者从多个位置连接到 shell 会话，这也很方便。</p>
+<h4 id="安装screen">安装screen</h4>
+<p><code>screen</code> 在一些流行的发行版上已经预安装了。你可以使用下面的命令检查是否已经在你的服务器上安装了。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -v</span><br><span class="line">Screen version 4.04.00 (GNU) 19-Jun-16</span><br></pre></td></tr></table></figure>
-
-<p>如果没有，可以直接使用包管理器进行安装  </p>
-<h4 id="启动-screen-会话"><a href="#启动-screen-会话" class="headerlink" title="启动 screen 会话"></a>启动 screen 会话</h4><p>你可以在命令行中输入 <code>screen</code> 来启动它，接着会有一个看上去和命令行提示符一样的 <code>screen</code> 会话启动  </p>
+<p>如果没有，可以直接使用包管理器进行安装</p>
+<h4 id="启动-screen-会话">启动 screen 会话</h4>
+<p>你可以在命令行中输入 <code>screen</code> 来启动它，接着会有一个看上去和命令行提示符一样的 <code>screen</code> 会话启动</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen</span><br></pre></td></tr></table></figure>
-
-<p>使用描述性名称启动屏幕会话是一个很好的做法，这样你可以轻松地记住会话中正在运行的进程。要使用会话名称创建新会话，请运行以下命令：  </p>
+<p>使用描述性名称启动屏幕会话是一个很好的做法，这样你可以轻松地记住会话中正在运行的进程。要使用会话名称创建新会话，请运行以下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -S yourname</span><br></pre></td></tr></table></figure>
-
-<h4 id="screen-会话分离"><a href="#screen-会话分离" class="headerlink" title="screen 会话分离"></a>screen 会话分离</h4><p>要从当前的 screen 会话中分离，你可以按下 <code>Ctrl-A</code> 和 <code>d</code>。所有的 screen 会话仍将是活跃的，你之后可以随时重新连接。  </p>
-<h4 id="重新连接到-screen-会话"><a href="#重新连接到-screen-会话" class="headerlink" title="重新连接到 screen 会话"></a>重新连接到 screen 会话</h4><p>如果你从一个会话分离，或者由于某些原因你的连接被中断了，你可以使用下面的命令重新连接：  </p>
+<h4 id="screen-会话分离">screen 会话分离</h4>
+<p>要从当前的 screen 会话中分离，你可以按下 <code>Ctrl-A</code> 和 <code>d</code>。所有的 screen 会话仍将是活跃的，你之后可以随时重新连接。</p>
+<h4 id="重新连接到-screen-会话">重新连接到 screen 会话</h4>
+<p>如果你从一个会话分离，或者由于某些原因你的连接被中断了，你可以使用下面的命令重新连接：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -r</span><br></pre></td></tr></table></figure>
-
-<p>如果你有多个 screen 会话，你可以用 <code>ls</code> 参数列出它们。  </p>
+<p>如果你有多个 screen 会话，你可以用 <code>ls</code> 参数列出它们。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen -ls</span><br><span class="line">There are screens on:</span><br><span class="line">7880.session    (Detached)</span><br><span class="line">7934.session2   (Detached)</span><br><span class="line">2 Sockets in /var/run/screen/S-root.</span><br></pre></td></tr></table></figure>
-
-<p>如果你想要还原 “session2” 会话，你可以执行：  </p>
+<p>如果你想要还原 “session2” 会话，你可以执行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">screen -r 7934</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">或者：  </span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">screen -r -S session2</span><br></pre></td></tr></table></figure>
-
-<h4 id="中止-screen"><a href="#中止-screen" class="headerlink" title="中止 screen"></a>中止 screen</h4><p>你可以按下 <code>Ctrl+d</code>，或者在命令行中使用 <code>exit</code> 命令。  </p>
-<h4 id="更多语法"><a href="#更多语法" class="headerlink" title="更多语法"></a>更多语法</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">man screen</span><br><span class="line">NAME</span><br><span class="line">screen - screen manager with VT100/ANSI terminal emulation</span><br><span class="line">SYNOPSIS</span><br><span class="line">screen [ -options ] [ cmd [ args ] ]</span><br><span class="line">screen -r [[pid.]tty[.host]]</span><br><span class="line">screen -r sessionowner/[[pid.]tty[.host]]</span><br></pre></td></tr></table></figure>
-
+<h4 id="中止-screen">中止 screen</h4>
+<p>你可以按下 <code>Ctrl+d</code>，或者在命令行中使用 <code>exit</code> 命令。</p>
+<h4 id="更多语法">更多语法</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">man screen</span><br><span class="line">NAME</span><br><span class="line">screen - screen manager with VT100/ANSI terminal emulation</span><br><span class="line">SYNOPSIS</span><br><span class="line">screen [ -options ] [ cmd [ args ] ]</span><br><span class="line">screen -r [[pid.]tty[.host]]</span><br><span class="line">screen -r sessionowner/[[pid.]tty[.host]]</span><br></pre></td></tr></table></figure>
 
       </div>
       

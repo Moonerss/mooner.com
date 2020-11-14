@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,91 +234,67 @@
           
       </div>
       <div class="markdown-body">
-        <p>我们使用 Tabula Muris最开始释放的数据做为测试数据来完成完整的单细胞数据分析。<code>The Tabula Muris</code>是一个国际合作组织，目的是采用标准方法生成小鼠每个细胞的图谱。建库测序方法包括通量高覆盖率低的<code>10X</code>数据和通量低覆盖率高的<code>FACS</code>筛选+<code>Smartseq2</code>建库技术。  </p>
-<p>原始数据于2017年12月20日释放，包含<code>20</code>个组织/器官的<code>100,000</code>细胞的转录组图谱。  </p>
-<h2 id="下载数据"><a href="#下载数据" class="headerlink" title="下载数据"></a>下载数据</h2><p>下载FACS数据:  </p>
+        <p>我们使用 Tabula Muris最开始释放的数据做为测试数据来完成完整的单细胞数据分析。<code>The Tabula Muris</code>是一个国际合作组织，目的是采用标准方法生成小鼠每个细胞的图谱。建库测序方法包括通量高覆盖率低的<code>10X</code>数据和通量低覆盖率高的<code>FACS</code>筛选+<code>Smartseq2</code>建库技术。</p>
+<p>原始数据于2017年12月20日释放，包含<code>20</code>个组织/器官的<code>100,000</code>细胞的转录组图谱。</p>
+<h2 id="下载数据">下载数据</h2>
+<p>下载FACS数据:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://ndownloader.figshare.com/files/10038307</span><br><span class="line">unzip 10038307</span><br><span class="line">wget https://ndownloader.figshare.com/files/10038310</span><br><span class="line">mv 10038310 FACS_metadata.csv</span><br><span class="line">wget https://ndownloader.figshare.com/files/10039267</span><br><span class="line">mv 10039267 FACS_annotations.csv</span><br></pre></td></tr></table></figure>
-
-<p>下载10X数据:  </p>
+<p>下载10X数据:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://ndownloader.figshare.com/files/10038325</span><br><span class="line">unzip 10038325</span><br><span class="line">wget https://ndownloader.figshare.com/files/10038328</span><br><span class="line">mv 10038328 droplet_metadata.csv</span><br><span class="line">wget https://ndownloader.figshare.com/files/10039264</span><br><span class="line">mv 10039264 droplet_annotation.csv</span><br></pre></td></tr></table></figure>
-
-<p>现在应该有两个文件夹: <code>FACS</code>和<code>droplet</code>，每个对应一个<code>annotation</code>和<code>metadata</code>文件。使用<code>head</code>命令查看前10行：  </p>
+<p>现在应该有两个文件夹: <code>FACS</code>和<code>droplet</code>，每个对应一个<code>annotation</code>和<code>metadata</code>文件。使用<code>head</code>命令查看前10行：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head -n 10 droplet_metadata.csv</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>wc -l</code>查看文件的行数:  </p>
+<p>使用<code>wc -l</code>查看文件的行数:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l droplet_annotation.csv</span><br></pre></td></tr></table></figure>
-
-<h2 id="读入数据-Smartseq2"><a href="#读入数据-Smartseq2" class="headerlink" title="读入数据 (Smartseq2)"></a>读入数据 (Smartseq2)</h2><p>读入逗号分隔的<code>count matrix</code>，存储为数据框:  </p>
+<h2 id="读入数据-smartseq2">读入数据 (Smartseq2)</h2>
+<p>读入逗号分隔的<code>count matrix</code>，存储为数据框:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dat = read.delim(<span class="string">&quot;FACS/Kidney-counts.csv&quot;</span>, sep=<span class="string">&quot;,&quot;</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">dat[<span class="number">1</span>:<span class="number">5</span>,<span class="number">1</span>:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
-
-<p>数据库第一列是基因名字，把它移除作为列名字：  </p>
+<p>数据库第一列是基因名字，把它移除作为列名字：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dim(dat)</span><br><span class="line">rownames(dat) &lt;- dat[,<span class="number">1</span>]</span><br><span class="line">dat &lt;- dat[,-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<p>这是<code>Smartseq2</code>数据集，可能含有<code>spike-ins</code>:  </p>
+<p>这是<code>Smartseq2</code>数据集，可能含有<code>spike-ins</code>:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rownames(dat)[grep(<span class="string">&quot;^ERCC-&quot;</span>, rownames(dat))]</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[1] &quot;ERCC-00002&quot; &quot;ERCC-00003&quot; &quot;ERCC-00004&quot; &quot;ERCC-00009&quot; &quot;ERCC-00012&quot;</span><br><span class="line"> [6] &quot;ERCC-00013&quot; &quot;ERCC-00014&quot; &quot;ERCC-00016&quot; &quot;ERCC-00017&quot; &quot;ERCC-00019&quot;</span><br><span class="line">[11] &quot;ERCC-00022&quot; &quot;ERCC-00024&quot; &quot;ERCC-00025&quot; &quot;ERCC-00028&quot; &quot;ERCC-00031&quot;</span><br><span class="line">[16] &quot;ERCC-00033&quot; &quot;ERCC-00034&quot; &quot;ERCC-00035&quot; &quot;ERCC-00039&quot; &quot;ERCC-00040&quot;</span><br><span class="line">[21] &quot;ERCC-00041&quot; &quot;ERCC-00042&quot; &quot;ERCC-00043&quot; &quot;ERCC-00044&quot; &quot;ERCC-00046&quot;</span><br><span class="line">[26] &quot;ERCC-00048&quot; &quot;ERCC-00051&quot; &quot;ERCC-00053&quot; &quot;ERCC-00054&quot; &quot;ERCC-00057&quot;</span><br><span class="line">[31] &quot;ERCC-00058&quot; &quot;ERCC-00059&quot; &quot;ERCC-00060&quot; &quot;ERCC-00061&quot; &quot;ERCC-00062&quot;</span><br><span class="line">[36] &quot;ERCC-00067&quot; &quot;ERCC-00069&quot; &quot;ERCC-00071&quot; &quot;ERCC-00073&quot; &quot;ERCC-00074&quot;</span><br><span class="line">[41] &quot;ERCC-00075&quot; &quot;ERCC-00076&quot; &quot;ERCC-00077&quot; &quot;ERCC-00078&quot; &quot;ERCC-00079&quot;</span><br><span class="line">[46] &quot;ERCC-00081&quot; &quot;ERCC-00083&quot; &quot;ERCC-00084&quot; &quot;ERCC-00085&quot; &quot;ERCC-00086&quot;</span><br><span class="line">[51] &quot;ERCC-00092&quot; &quot;ERCC-00095&quot; &quot;ERCC-00096&quot; &quot;ERCC-00097&quot; &quot;ERCC-00098&quot;</span><br><span class="line">[56] &quot;ERCC-00099&quot; &quot;ERCC-00104&quot; &quot;ERCC-00108&quot; &quot;ERCC-00109&quot; &quot;ERCC-00111&quot;</span><br><span class="line">[61] &quot;ERCC-00112&quot; &quot;ERCC-00113&quot; &quot;ERCC-00116&quot; &quot;ERCC-00117&quot; &quot;ERCC-00120&quot;</span><br><span class="line">[66] &quot;ERCC-00123&quot; &quot;ERCC-00126&quot; &quot;ERCC-00130&quot; &quot;ERCC-00131&quot; &quot;ERCC-00134&quot;</span><br><span class="line">[71] &quot;ERCC-00136&quot; &quot;ERCC-00137&quot; &quot;ERCC-00138&quot; &quot;ERCC-00142&quot; &quot;ERCC-00143&quot;</span><br><span class="line">[76] &quot;ERCC-00144&quot; &quot;ERCC-00145&quot; &quot;ERCC-00147&quot; &quot;ERCC-00148&quot; &quot;ERCC-00150&quot;</span><br><span class="line">[81] &quot;ERCC-00154&quot; &quot;ERCC-00156&quot; &quot;ERCC-00157&quot; &quot;ERCC-00158&quot; &quot;ERCC-00160&quot;</span><br><span class="line">[86] &quot;ERCC-00162&quot; &quot;ERCC-00163&quot; &quot;ERCC-00164&quot; &quot;ERCC-00165&quot; &quot;ERCC-00168&quot;</span><br><span class="line">[91] &quot;ERCC-00170&quot; &quot;ERCC-00171&quot;</span><br></pre></td></tr></table></figure>
-
-<p>从列名字中提取<code>metadata</code>信息:  </p>
+<p>从列名字中提取<code>metadata</code>信息:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cellIDs &lt;- colnames(dat)</span><br><span class="line">cell_info &lt;- strsplit(cellIDs, <span class="string">&quot;\\.&quot;</span>)</span><br><span class="line">Well &lt;- unlist(lapply(cell_info, <span class="keyword">function</span>(x)&#123;x[<span class="number">1</span>]&#125;))</span><br><span class="line">Plate &lt;- unlist(lapply(cell_info, <span class="keyword">function</span>(x)&#123;x[<span class="number">2</span>]&#125;))</span><br><span class="line">Mouse &lt;- unlist(lapply(cell_info, <span class="keyword">function</span>(x)&#123;x[<span class="number">3</span>]&#125;))</span><br></pre></td></tr></table></figure>
-
-<p>检测每种<code>metadata</code>类型的数据分布：  </p>
+<p>检测每种<code>metadata</code>类型的数据分布：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary(factor(Mouse))</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3_10_M 3_11_M 3_38_F 3_39_F  3_8_M  3_9_M</span><br><span class="line">   104    196    237    169     82     77</span><br></pre></td></tr></table></figure>
-
-<p>查看有没有技术因子是<code>cofounded</code>，实验批次与供体小鼠批次一致:  </p>
+<p>查看有没有技术因子是<code>cofounded</code>，实验批次与供体小鼠批次一致:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">table(Mouse, Plate)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">        Plate</span><br><span class="line">Mouse    B001717 B002775 MAA000545 MAA000752 MAA000801 MAA000922</span><br><span class="line">  3_10_M       0       0         0       104         0         0</span><br><span class="line">  3_11_M       0       0         0         0       196         0</span><br><span class="line">  3_38_F     237       0         0         0         0         0</span><br><span class="line">  3_39_F       0     169         0         0         0         0</span><br><span class="line">  3_8_M        0       0        82         0         0         0</span><br><span class="line">  3_9_M        0       0         0         0         0        77</span><br></pre></td></tr></table></figure>
-
-<p>最后读入计算预测的细胞类型注释，并与表达矩阵中的细胞注释做比较:  </p>
+<p>最后读入计算预测的细胞类型注释，并与表达矩阵中的细胞注释做比较:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ann &lt;- read.table(<span class="string">&quot;FACS_annotations.csv&quot;</span>, sep=<span class="string">&quot;,&quot;</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">ann &lt;- ann[match(cellIDs, ann[,<span class="number">1</span>]),]</span><br><span class="line">celltype &lt;- ann[,<span class="number">3</span>]</span><br><span class="line">table(celltype)</span><br></pre></td></tr></table></figure>
-
-<h2 id="构建scater对象"><a href="#构建scater对象" class="headerlink" title="构建scater对象"></a>构建scater对象</h2><p>为了构建<code>SingleCellExperiment</code>对象，先把所有的细胞注释放到一个数据框中。因为实验批次(<code>pcr plate</code>)和供体小鼠完全重合，所以只保留一个信息。  </p>
+<h2 id="构建scater对象">构建scater对象</h2>
+<p>为了构建<code>SingleCellExperiment</code>对象，先把所有的细胞注释放到一个数据框中。因为实验批次(<code>pcr plate</code>)和供体小鼠完全重合，所以只保留一个信息。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">suppressMessages(<span class="keyword">require</span>(<span class="string">&quot;SingleCellExperiment&quot;</span>))</span><br><span class="line">suppressMessages(<span class="keyword">require</span>(<span class="string">&quot;scater&quot;</span>))</span><br><span class="line">cell_anns &lt;- data.frame(mouse = Mouse, well=Well, type=celltype)</span><br><span class="line">rownames(cell_anns) &lt;- colnames(dat)</span><br><span class="line">sceset &lt;- SingleCellExperiment(assays = list(counts = as.matrix(dat)), colData=cell_anns)</span><br><span class="line">str(sceset)</span><br></pre></td></tr></table></figure>
-
-<p>如果数据集包含<code>spike-ins</code>，我们在<code>SingleCellExperiment</code>对象中定义一个变量记录它们。  </p>
+<p>如果数据集包含<code>spike-ins</code>，我们在<code>SingleCellExperiment</code>对象中定义一个变量记录它们。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">isSpike(sceset, <span class="string">&quot;ERCC&quot;</span>) &lt;- grepl(<span class="string">&quot;ERCC-&quot;</span>, rownames(sceset))</span><br><span class="line">str(sceset)</span><br></pre></td></tr></table></figure>
-
-<h2 id="读入10X的数据"><a href="#读入10X的数据" class="headerlink" title="读入10X的数据"></a>读入10X的数据</h2><p>因为<code>10X</code>技术细胞通量高但测序覆盖度低，所以其count matrix是一个大的稀疏矩阵(矩阵中高达90%的数据的数值为0)。CellRanger默认的输出格式是<code>.mtx</code>文件用于存储这个稀疏矩阵，第一列是基因的坐标（0-based），第二列是细胞的坐标（0-based），第三列是大于0的表达值 (<em>长表格形式</em>)。 打开<code>.mtx</code>文件会看到两行标题行后面是包含总行数 (<em>基因数</em>)、列数 (<em>样本数</em>)和稀疏矩阵总行数 (<em>所有细胞中表达不为0的基因的总和</em>)的一行数据。  </p>
-<p>鉴于<code>.mtx</code>文件中只存储了基因和样品名字的坐标，而实际的基因和样品的名字必须单独存储到文件<code>genes.tsv</code>和<code>barcodes.tsv</code>。  </p>
-<p>下面使用<code>Matrix</code>包读入稀疏矩阵：  </p>
+<h2 id="读入10x的数据">读入10X的数据</h2>
+<p>因为<code>10X</code>技术细胞通量高但测序覆盖度低，所以其count matrix是一个大的稀疏矩阵(矩阵中高达90%的数据的数值为0)。CellRanger默认的输出格式是<code>.mtx</code>文件用于存储这个稀疏矩阵，第一列是基因的坐标（0-based），第二列是细胞的坐标（0-based），第三列是大于0的表达值 (<em>长表格形式</em>)。 打开<code>.mtx</code>文件会看到两行标题行后面是包含总行数 (<em>基因数</em>)、列数 (<em>样本数</em>)和稀疏矩阵总行数 (<em>所有细胞中表达不为0的基因的总和</em>)的一行数据。</p>
+<p>鉴于<code>.mtx</code>文件中只存储了基因和样品名字的坐标，而实际的基因和样品的名字必须单独存储到文件<code>genes.tsv</code>和<code>barcodes.tsv</code>。</p>
+<p>下面使用<code>Matrix</code>包读入稀疏矩阵：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">suppressMessages(<span class="keyword">require</span>(<span class="string">&quot;Matrix&quot;</span>))</span><br><span class="line">cellbarcodes &lt;- read.table(<span class="string">&quot;droplet/Kidney-10X_P4_5/barcodes.tsv&quot;</span>)</span><br><span class="line">genenames &lt;- read.table(<span class="string">&quot;droplet/Kidney-10X_P4_5/genes.tsv&quot;</span>)</span><br><span class="line">molecules &lt;- Matrix::readMM(<span class="string">&quot;droplet/Kidney-10X_P4_5/matrix.mtx&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>下一步增加合适的行或列的名字。首先查看read的<code>cellbarcode</code>信息会发现这个文件只有<code>barcode</code>序列。考虑到<code>10X</code>数据每一批的<code>cellbarcode</code>是有重叠的，所以在合并数据前，需要把批次信息与barcode信息合并一起。  </p>
+<p>下一步增加合适的行或列的名字。首先查看read的<code>cellbarcode</code>信息会发现这个文件只有<code>barcode</code>序列。考虑到<code>10X</code>数据每一批的<code>cellbarcode</code>是有重叠的，所以在合并数据前，需要把批次信息与barcode信息合并一起。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head(cellbarcodes)</span><br><span class="line">rownames(molecules) &lt;- genenames[,<span class="number">1</span>]</span><br><span class="line">colnames(molecules) &lt;- paste(<span class="string">&quot;10X_P4_5&quot;</span>, cellbarcodes[,<span class="number">1</span>], sep=<span class="string">&quot;_&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>读入计算注释的细胞类型信息:  </p>
+<p>读入计算注释的细胞类型信息:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">meta &lt;- read.delim(<span class="string">&quot;droplet_metadata.csv&quot;</span>, sep=<span class="string">&quot;,&quot;</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">head(meta)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   channel mouse.id  tissue   subtissue mouse.sex</span><br><span class="line">1 10X_P4_0    3-M-8  Tongue        &lt;NA&gt;         M</span><br><span class="line">2 10X_P4_1    3-M-9  Tongue        &lt;NA&gt;         M</span><br><span class="line">3 10X_P4_2  3-M-8&#x2F;9   Liver hepatocytes         M</span><br><span class="line">4 10X_P4_3    3-M-8 Bladder        &lt;NA&gt;         M</span><br><span class="line">5 10X_P4_4    3-M-9 Bladder        &lt;NA&gt;         M</span><br><span class="line">6 10X_P4_5    3-M-8  Kidney        &lt;NA&gt;         M</span><br></pre></td></tr></table></figure>
-
-<p>我们需要用<code>10X_P4_5</code>获得这批数据对应的<code>metadata</code>信息。这时需要注意<code>metadata</code>表格中<code>mouse ID</code>与前面<code>plate-based (FACS SmartSeq2)</code>数据集的<code>mouse ID</code>不同，这里用<code>-</code>而非<code>_</code>作为分隔符，并且性别在中间。通过查阅文献中的描述得知<code>droplet (10X)</code>和<code>plate-based (FACS SmartSeq2)</code>的技术用了同样的8只老鼠。所以对数据做下修正，使得<code>10X</code>与<code>FACS</code>的数据一致。  </p>
+<p>我们需要用<code>10X_P4_5</code>获得这批数据对应的<code>metadata</code>信息。这时需要注意<code>metadata</code>表格中<code>mouse ID</code>与前面<code>plate-based (FACS SmartSeq2)</code>数据集的<code>mouse ID</code>不同，这里用<code>-</code>而非<code>_</code>作为分隔符，并且性别在中间。通过查阅文献中的描述得知<code>droplet (10X)</code>和<code>plate-based (FACS SmartSeq2)</code>的技术用了同样的8只老鼠。所以对数据做下修正，使得<code>10X</code>与<code>FACS</code>的数据一致。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">meta[meta$channel == <span class="string">&quot;10X_P4_5&quot;</span>,]</span><br><span class="line">mouseID &lt;- <span class="string">&quot;3_8_M&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong><em>注意</em></strong>：有些组织的<code>10X</code>数据可能来源于多个小鼠的样品，如<code>mouse id = 3-M-5/6</code>。也需要格式化这些信息，但可能这些与<code>FACS</code>数据的<code>mouse id</code>会不一致，进而影响下游分析。如果小鼠不是纯系，可能需要通过<code>exonic-SNP</code>把细胞和对应的小鼠联系起来。  </p>
+<p><strong><em>注意</em></strong>：有些组织的<code>10X</code>数据可能来源于多个小鼠的样品，如<code>mouse id = 3-M-5/6</code>。也需要格式化这些信息，但可能这些与<code>FACS</code>数据的<code>mouse id</code>会不一致，进而影响下游分析。如果小鼠不是纯系，可能需要通过<code>exonic-SNP</code>把细胞和对应的小鼠联系起来。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ann &lt;- read.delim(<span class="string">&quot;droplet_annotation.csv&quot;</span>, sep=<span class="string">&quot;,&quot;</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">head(ann)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">                       cell  tissue cell_ontology_class                    cell_ontology_term_iri cell_ontology_id</span><br><span class="line"><span class="number">1</span> 10X_P4_3_AAAGTAGAGATGCCAG Bladder    mesenchymal cell http://purl.obolibrary.org/obo/CL_0008019       CL:<span class="number">0008019</span></span><br><span class="line"><span class="number">2</span> 10X_P4_3_AACCGCGTCCAACCAA Bladder    mesenchymal cell http://purl.obolibrary.org/obo/CL_0008019       CL:<span class="number">0008019</span></span><br><span class="line"><span class="number">3</span> 10X_P4_3_AACTCCCGTCGGGTCT Bladder    mesenchymal cell http://purl.obolibrary.org/obo/CL_0008019       CL:<span class="number">0008019</span></span><br><span class="line"><span class="number">4</span> 10X_P4_3_AACTCTTAGTTGCAGG Bladder        bladder cell http://purl.obolibrary.org/obo/CL_1001319       CL:<span class="number">1001319</span></span><br><span class="line"><span class="number">5</span> 10X_P4_3_AACTCTTTCATAACCG Bladder    mesenchymal cell http://purl.obolibrary.org/obo/CL_0008019       CL:<span class="number">0008019</span></span><br><span class="line"><span class="number">6</span> 10X_P4_3_AAGACCTAGATCCGAG Bladder    endothelial cell http://purl.obolibrary.org/obo/CL_0000115       CL:<span class="number">0000115</span></span><br></pre></td></tr></table></figure>
-
-<p>注释中的<code>cellID</code>和<code>cellbarcodes</code>也存在细微差别，少了最后的<code>-1</code>，在匹配前需要做下校正。  </p>
+<p>注释中的<code>cellID</code>和<code>cellbarcodes</code>也存在细微差别，少了最后的<code>-1</code>，在匹配前需要做下校正。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ann[,<span class="number">1</span>] &lt;- paste(ann[,<span class="number">1</span>], <span class="string">&quot;-1&quot;</span>, sep=<span class="string">&quot;&quot;</span>)</span><br><span class="line">ann_subset &lt;- ann[match(colnames(molecules), ann[,<span class="number">1</span>]),]</span><br><span class="line">celltype &lt;- ann_subset[,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-<p>构建<code>cell-metadata</code>数据框:  </p>
+<p>构建<code>cell-metadata</code>数据框:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cell_anns &lt;- data.frame(mouse = rep(mouseID, times=ncol(molecules)), type=celltype)</span><br><span class="line">rownames(cell_anns) &lt;- colnames(molecules)</span><br><span class="line">head(cell_anns)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">                            mouse                        type</span><br><span class="line">10X_P4_5_AAACCTGAGATGCCAG-<span class="number">1</span> 3_8_M                   leukocyte</span><br><span class="line">10X_P4_5_AAACCTGAGTGTCCAT-<span class="number">1</span> 3_8_M            fenestrated cell</span><br><span class="line">10X_P4_5_AAACCTGCAAGGCTCC-<span class="number">1</span> 3_8_M          smooth muscle cell</span><br><span class="line">10X_P4_5_AAACCTGTCCTTGCCA-<span class="number">1</span> 3_8_M          kidney tubule cell</span><br><span class="line">10X_P4_5_AAACGGGAGCTGAACG-<span class="number">1</span> 3_8_M kidney collecting duct cell</span><br><span class="line">10X_P4_5_AAACGGGCAGGACCCT-<span class="number">1</span> 3_8_M          kidney tubule cell</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建scater对象"><a href="#创建scater对象" class="headerlink" title="创建scater对象"></a>创建<code>scater</code>对象</h2><p>现在读入了多个批次的<code>10X</code>数据，把它们组合成一个<code>SingleCellExperiment object</code>对象。首先检查不同批次数据的基因名字是否一致:  </p>
+<h2 id="创建scater对象">创建<code>scater</code>对象</h2>
+<p>现在读入了多个批次的<code>10X</code>数据，把它们组合成一个<code>SingleCellExperiment object</code>对象。首先检查不同批次数据的基因名字是否一致:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">identical(rownames(molecules1), rownames(molecules2))</span><br><span class="line">identical(rownames(molecules1), rownames(molecules3))</span><br></pre></td></tr></table></figure>
-
-<p>确认没有重复的细胞ID:  </p>
+<p>确认没有重复的细胞ID:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sum(colnames(molecules1) %<span class="keyword">in</span>% colnames(molecules2))</span><br><span class="line">sum(colnames(molecules1) %<span class="keyword">in</span>% colnames(molecules3))</span><br><span class="line">sum(colnames(molecules2) %<span class="keyword">in</span>% colnames(molecules3))</span><br></pre></td></tr></table></figure>
-
-<p>检查无误，把它们组合起来:  </p>
+<p>检查无误，把它们组合起来:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获得大的表达矩阵</span></span><br><span class="line">all_molecules &lt;- cbind(molecules1, molecules2, molecules3)</span><br><span class="line"><span class="comment"># 获得大的数据矩阵</span></span><br><span class="line">all_cell_anns &lt;- as.data.frame(rbind(cell_anns1, cell_anns2, cell_anns3))</span><br><span class="line"><span class="comment"># 增加批次信息</span></span><br><span class="line">all_cell_anns$batch &lt;- rep(c(<span class="string">&quot;10X_P4_5&quot;</span>, <span class="string">&quot;10X_P4_6&quot;</span>,<span class="string">&quot;10X_P7_5&quot;</span>), times = c(nrow(cell_anns1), nrow(cell_anns2), nrow(cell_anns3)))</span><br></pre></td></tr></table></figure>
-
 
       </div>
       
@@ -251,7 +340,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="toc-text">下载数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%85%A5%E6%95%B0%E6%8D%AE-Smartseq2"><span class="toc-text">读入数据 (Smartseq2)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BAscater%E5%AF%B9%E8%B1%A1"><span class="toc-text">构建scater对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%85%A510X%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-text">读入10X的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAscater%E5%AF%B9%E8%B1%A1"><span class="toc-text">创建scater对象</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="toc-text">下载数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%85%A5%E6%95%B0%E6%8D%AE-smartseq2"><span class="toc-text">读入数据 (Smartseq2)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BAscater%E5%AF%B9%E8%B1%A1"><span class="toc-text">构建scater对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%85%A510x%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-text">读入10X的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAscater%E5%AF%B9%E8%B1%A1"><span class="toc-text">创建scater对象</span></a></li></ol>
     </div>
   </div>
 

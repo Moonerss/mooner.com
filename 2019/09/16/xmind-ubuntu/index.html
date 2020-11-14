@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -127,26 +240,26 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="相关下载"><a href="#相关下载" class="headerlink" title="相关下载"></a>相关下载</h2><p>XMind 官网下载程序：<a target="_blank" rel="noopener" href="https://www.xmind.cn/download/xmind8/">https://www.xmind.cn/download/xmind8/</a><br>XMind 破解补丁：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1pijGyVHFfO1BlDx-ZhtI5g">网盘地址</a> 提取码：tnkb  </p>
-<h2 id="程序安装"><a href="#程序安装" class="headerlink" title="程序安装"></a>程序安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建安装目录</span></span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/xmind-8</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压XMind下载文件</span></span><br><span class="line">sudo unzip -d /usr/<span class="built_in">local</span>/xmind-8 xmind-8-update8-linux.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝破解补丁文件到XMind_amd64目录</span></span><br><span class="line">sudo mv XMind_amd64.tar.gz /usr/<span class="built_in">local</span>/xmind-8/XMind_amd64</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压破解补丁文件</span></span><br><span class="line"><span class="built_in">cd</span> /usr/develop/xmind-8/XMind_amd64</span><br><span class="line">tar -xvf XMind_amd64.tar.gz</span><br><span class="line">rm -f XMind_amd64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果系统环境是Centos，则需要修改依赖库安装脚本，将安装依赖的命令注释掉，默认的脚本只适合Debian/Ubuntu系统</span></span><br><span class="line">sudo vim /usr/develop/xmind-8/setup.sh</span><br><span class="line"><span class="comment"># 注释掉： apt-get install openjdk-8-jre libgtk2.0-0 libwebkitgtk-1.0-0 lame libc6 libglib2.0-0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行依赖库安装脚本</span></span><br><span class="line"><span class="built_in">cd</span> /usr/develop/xmind-8</span><br><span class="line">sudo ./setup.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改Hosts</span></span><br><span class="line">sudo vim /etc/hosts</span><br><span class="line"><span class="comment"># 另起一行，添加　127.0.0.1 www.xmind.net</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="激活ximd"><a href="#激活ximd" class="headerlink" title="激活ximd"></a>激活ximd</h2><p>进入XMind_amd64目录，执行命令 “./XMind” 运行软件，然后在XMind主界面导航到: Help -&gt; License，复制以下License Key即可, 邮箱可以随便填。  </p>
+        <h2 id="相关下载">相关下载</h2>
+<p>XMind 官网下载程序：https://www.xmind.cn/download/xmind8/<br />
+XMind 破解补丁：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1pijGyVHFfO1BlDx-ZhtI5g">网盘地址</a> 提取码：tnkb</p>
+<h2 id="程序安装">程序安装</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建安装目录</span></span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/xmind-8</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压XMind下载文件</span></span><br><span class="line">sudo unzip -d /usr/<span class="built_in">local</span>/xmind-8 xmind-8-update8-linux.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝破解补丁文件到XMind_amd64目录</span></span><br><span class="line">sudo mv XMind_amd64.tar.gz /usr/<span class="built_in">local</span>/xmind-8/XMind_amd64</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压破解补丁文件</span></span><br><span class="line"><span class="built_in">cd</span> /usr/develop/xmind-8/XMind_amd64</span><br><span class="line">tar -xvf XMind_amd64.tar.gz</span><br><span class="line">rm -f XMind_amd64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果系统环境是Centos，则需要修改依赖库安装脚本，将安装依赖的命令注释掉，默认的脚本只适合Debian/Ubuntu系统</span></span><br><span class="line">sudo vim /usr/develop/xmind-8/setup.sh</span><br><span class="line"><span class="comment"># 注释掉： apt-get install openjdk-8-jre libgtk2.0-0 libwebkitgtk-1.0-0 lame libc6 libglib2.0-0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行依赖库安装脚本</span></span><br><span class="line"><span class="built_in">cd</span> /usr/develop/xmind-8</span><br><span class="line">sudo ./setup.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改Hosts</span></span><br><span class="line">sudo vim /etc/hosts</span><br><span class="line"><span class="comment"># 另起一行，添加　127.0.0.1 www.xmind.net</span></span><br></pre></td></tr></table></figure>
+<h2 id="激活ximd">激活ximd</h2>
+<p>进入XMind_amd64目录，执行命令 “./XMind” 运行软件，然后在XMind主界面导航到: Help -&gt; License，复制以下License Key即可, 邮箱可以随便填。</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XAka34A2rVRYJ4XBIU35UZMUEEF64CMMIYZCK2FZZUQNODEKUHGJLFMSLIQMQUCUBXRENLK6NZL37JXP4PZXQFILMQ2RG5R7G4QNDO3PSOEUBOCDRYSSXZGRARV6MGA33TN2AMUBHEL4FXMWYTTJDEINJXUAV4BAYKBDCZQWVF3LWYXSDCXY546U3NBGOI3ZPAP2SO3CSQFNB7VVIY123456789012345</span><br></pre></td></tr></table></figure>
-
-<h2 id="报错解决办法"><a href="#报错解决办法" class="headerlink" title="报错解决办法"></a>报错解决办法</h2><p><strong>警告1</strong>：  </p>
+<h2 id="报错解决办法">报错解决办法</h2>
+<p><strong>警告1</strong>：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Gtk-Message: Failed to load module <span class="string">&quot;canberra-gtk-module&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>解决办法：安装libcanberra-gtk-module  </p>
+<p>解决办法：安装libcanberra-gtk-module</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libcanberra-gtk-module</span><br></pre></td></tr></table></figure>
-
-<p><strong>警告2</strong>：  </p>
+<p><strong>警告2</strong>：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Gtk-WARNING **: 20:23:58.735: Theme directory status/scalable of theme macOS11 has no size field</span><br></pre></td></tr></table></figure>
-
-<p>解决办法：安装jdk8，切换优先级  </p>
+<p>解决办法：安装jdk8，切换优先级</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 jdk</span></span><br><span class="line">sudo apt-get install openjdk-8-jdk</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换优先级，选jdk8</span></span><br><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>参考：<br><a target="_blank" rel="noopener" href="https://www.techgrow.cn/posts/d32cbc24.html">Linux破解安装XMind</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36049506/article/details/88092444">ubuntu18.04安装XMind8</a>  </p>
+<hr />
+<p>参考： <a target="_blank" rel="noopener" href="https://www.techgrow.cn/posts/d32cbc24.html">Linux破解安装XMind</a><br />
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36049506/article/details/88092444">ubuntu18.04安装XMind8</a></p>
 
       </div>
       

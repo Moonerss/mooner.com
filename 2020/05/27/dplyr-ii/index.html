@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -127,96 +240,59 @@
           
       </div>
       <div class="markdown-body">
-        <p>在<code>dplyr</code>中提供的动词语法与其他操作进行连接，可以实现更加复杂的数据操作  </p>
-<h2 id="group操作"><a href="#group操作" class="headerlink" title="group操作"></a>group操作</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># group操作</span></span><br><span class="line">by_tailnum &lt;- group_by(flights, tailnum)</span><br><span class="line"></span><br><span class="line"><span class="comment"># group操作</span></span><br><span class="line">delay &lt;- summarise(by_tailnum,</span><br><span class="line">  count = n(),</span><br><span class="line">  dist = mean(distance, na.rm = <span class="literal">TRUE</span>),</span><br><span class="line">  delay = mean(arr_delay, na.rm = <span class="literal">TRUE</span>))</span><br></pre></td></tr></table></figure>
-
+        <p>在<code>dplyr</code>中提供的动词语法与其他操作进行连接，可以实现更加复杂的数据操作</p>
+<h2 id="group操作">group操作</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># group操作</span></span><br><span class="line">by_tailnum &lt;- group_by(flights, tailnum)</span><br><span class="line"></span><br><span class="line"><span class="comment"># group操作</span></span><br><span class="line">delay &lt;- summarise(by_tailnum,</span><br><span class="line">  count = n(),</span><br><span class="line">  dist = mean(distance, na.rm = <span class="literal">TRUE</span>),</span><br><span class="line">  delay = mean(arr_delay, na.rm = <span class="literal">TRUE</span>))</span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delay</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 4,044 x 4</span><br><span class="line">##    tailnum count  dist  delay</span><br><span class="line">##    &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;</span><br><span class="line">##  1 D942DN      4  854. 31.5  </span><br><span class="line">##  2 N0EGMQ    371  676.  9.98 </span><br><span class="line">##  3 N10156    153  758. 12.7  </span><br><span class="line">##  4 N102UW     48  536.  2.94 </span><br><span class="line">##  5 N103US     46  535. -6.93 </span><br><span class="line">##  6 N104UW     47  535.  1.80 </span><br><span class="line">##  7 N10575    289  520. 20.7  </span><br><span class="line">##  8 N105UW     45  525. -0.267</span><br><span class="line">##  9 N107US     41  529. -5.73 </span><br><span class="line">## 10 N108UW     60  534. -1.25 </span><br><span class="line">## # ... with 4,034 more rows</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>在<code>summarise()</code>函数中可以与基础的R函数(如：<code>min()</code>)进行联合操作，同时<code>dplyr</code>同样提供了一系列的快捷操作：  </p>
-<ul>
-<li><code>n()</code>: 观测值的个数  </li>
-<li><code>n_distinct(x)</code>: unique的观测值数目  </li>
-<li><code>first(x)</code>,<code>last(x)</code>, <code>nth(x, n)</code>: 第一个、最后一个、第n个观测值  </li>
-</ul>
+<p>在<code>summarise()</code>函数中可以与基础的R函数(如：<code>min()</code>)进行联合操作，同时<code>dplyr</code>同样提供了一系列的快捷操作：<br />
++ <code>n()</code>: 观测值的个数<br />
++ <code>n_distinct(x)</code>: unique的观测值数目<br />
++ <code>first(x)</code>,<code>last(x)</code>, <code>nth(x, n)</code>: 第一个、最后一个、第n个观测值</p>
 </blockquote>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">destinations &lt;- group_by(flights, dest)</span><br><span class="line">summarise(destinations,</span><br><span class="line">  planes = n_distinct(tailnum),</span><br><span class="line">  flights = n()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 105 x 3</span><br><span class="line">##    dest  planes flights</span><br><span class="line">##    &lt;chr&gt;  &lt;int&gt;   &lt;int&gt;</span><br><span class="line">##  1 ABQ      108     254</span><br><span class="line">##  2 ACK       58     265</span><br><span class="line">##  3 ALB      172     439</span><br><span class="line">##  4 ANC        6       8</span><br><span class="line">##  5 ATL     1180   17215</span><br><span class="line">##  6 AUS      993    2439</span><br><span class="line">##  7 AVL      159     275</span><br><span class="line">##  8 BDL      186     443</span><br><span class="line">##  9 BGR       46     375</span><br><span class="line">## 10 BHM       45     297</span><br><span class="line">## # ... with 95 more rows</span><br></pre></td></tr></table></figure>
-
-<p>当依据多个变量进行分组时，可以根据<code>summarise()</code>层层递进，得出结果  </p>
+<p>当依据多个变量进行分组时，可以根据<code>summarise()</code>层层递进，得出结果</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">daily &lt;- group_by(flights, year, month, day)</span><br><span class="line"></span><br><span class="line">per_day   &lt;- summarise(daily, flights = n())</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">per_month &lt;- summarise(per_day, flights = sum(flights))</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">per_year  &lt;- summarise(per_month, flights = sum(flights))</span><br></pre></td></tr></table></figure>
-
-<h2 id="select-操作"><a href="#select-操作" class="headerlink" title="select 操作"></a>select 操作</h2><p><code>select</code>函数可以接受数字和具体的列名，但需要注意的是，当有与列名相同的其他赋值时，不能进行操作  </p>
+<h2 id="select-操作">select 操作</h2>
+<p><code>select</code>函数可以接受数字和具体的列名，但需要注意的是，当有与列名相同的其他赋值时，不能进行操作</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select(flights, year)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 1</span><br><span class="line">##     year</span><br><span class="line">##    &lt;int&gt;</span><br><span class="line">##  1  2013</span><br><span class="line">##  2  2013</span><br><span class="line">##  3  2013</span><br><span class="line">##  4  2013</span><br><span class="line">##  5  2013</span><br><span class="line">##  6  2013</span><br><span class="line">##  7  2013</span><br><span class="line">##  8  2013</span><br><span class="line">##  9  2013</span><br><span class="line">## 10  2013</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select(flights, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 1</span><br><span class="line">##     year</span><br><span class="line">##    &lt;int&gt;</span><br><span class="line">##  1  2013</span><br><span class="line">##  2  2013</span><br><span class="line">##  3  2013</span><br><span class="line">##  4  2013</span><br><span class="line">##  5  2013</span><br><span class="line">##  6  2013</span><br><span class="line">##  7  2013</span><br><span class="line">##  8  2013</span><br><span class="line">##  9  2013</span><br><span class="line">## 10  2013</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">year &lt;- <span class="number">5</span></span><br><span class="line">select(flights, year)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 1</span><br><span class="line">##     year</span><br><span class="line">##    &lt;int&gt;</span><br><span class="line">##  1  2013</span><br><span class="line">##  2  2013</span><br><span class="line">##  3  2013</span><br><span class="line">##  4  2013</span><br><span class="line">##  5  2013</span><br><span class="line">##  6  2013</span><br><span class="line">##  7  2013</span><br><span class="line">##  8  2013</span><br><span class="line">##  9  2013</span><br><span class="line">## 10  2013</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
-<h2 id="Mutating-操作"><a href="#Mutating-操作" class="headerlink" title="Mutating 操作"></a>Mutating 操作</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df &lt;- select(flights, year:dep_time)</span><br><span class="line"></span><br><span class="line">mutate(df, <span class="string">&quot;year&quot;</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
+<h2 id="mutating-操作">Mutating 操作</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df &lt;- select(flights, year:dep_time)</span><br><span class="line"></span><br><span class="line">mutate(df, <span class="string">&quot;year&quot;</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 6</span><br><span class="line">##     year month   day dep_time &#96;&quot;year&quot;&#96;   &#96;2&#96;</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;</span><br><span class="line">##  1  2013     1     1      517 year         2</span><br><span class="line">##  2  2013     1     1      533 year         2</span><br><span class="line">##  3  2013     1     1      542 year         2</span><br><span class="line">##  4  2013     1     1      544 year         2</span><br><span class="line">##  5  2013     1     1      554 year         2</span><br><span class="line">##  6  2013     1     1      554 year         2</span><br><span class="line">##  7  2013     1     1      555 year         2</span><br><span class="line">##  8  2013     1     1      557 year         2</span><br><span class="line">##  9  2013     1     1      557 year         2</span><br><span class="line">## 10  2013     1     1      558 year         2</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mutate(df, year + <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 5</span><br><span class="line">##     year month   day dep_time &#96;year + 10&#96;</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;       &lt;dbl&gt;</span><br><span class="line">##  1  2013     1     1      517        2023</span><br><span class="line">##  2  2013     1     1      533        2023</span><br><span class="line">##  3  2013     1     1      542        2023</span><br><span class="line">##  4  2013     1     1      544        2023</span><br><span class="line">##  5  2013     1     1      554        2023</span><br><span class="line">##  6  2013     1     1      554        2023</span><br><span class="line">##  7  2013     1     1      555        2023</span><br><span class="line">##  8  2013     1     1      557        2023</span><br><span class="line">##  9  2013     1     1      557        2023</span><br><span class="line">## 10  2013     1     1      558        2023</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var &lt;- seq(<span class="number">1</span>, nrow(df))</span><br><span class="line">mutate(df, new = var)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 5</span><br><span class="line">##     year month   day dep_time   new</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;int&gt;</span><br><span class="line">##  1  2013     1     1      517     1</span><br><span class="line">##  2  2013     1     1      533     2</span><br><span class="line">##  3  2013     1     1      542     3</span><br><span class="line">##  4  2013     1     1      544     4</span><br><span class="line">##  5  2013     1     1      554     5</span><br><span class="line">##  6  2013     1     1      554     6</span><br><span class="line">##  7  2013     1     1      555     7</span><br><span class="line">##  8  2013     1     1      557     8</span><br><span class="line">##  9  2013     1     1      557     9</span><br><span class="line">## 10  2013     1     1      558    10</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
-<p><code>group_by()</code>的操作同样可以修改和创建变量，不同的时该变量是group之后的  </p>
+<p><code>group_by()</code>的操作同样可以修改和创建变量，不同的时该变量是group之后的</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_by(df, month)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 4</span><br><span class="line">## # Groups:   month [12]</span><br><span class="line">##     year month   day dep_time</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;</span><br><span class="line">##  1  2013     1     1      517</span><br><span class="line">##  2  2013     1     1      533</span><br><span class="line">##  3  2013     1     1      542</span><br><span class="line">##  4  2013     1     1      544</span><br><span class="line">##  5  2013     1     1      554</span><br><span class="line">##  6  2013     1     1      554</span><br><span class="line">##  7  2013     1     1      555</span><br><span class="line">##  8  2013     1     1      557</span><br><span class="line">##  9  2013     1     1      557</span><br><span class="line">## 10  2013     1     1      558</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_by(df, month = as.factor(month))</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 4</span><br><span class="line">## # Groups:   month [12]</span><br><span class="line">##     year month   day dep_time</span><br><span class="line">##    &lt;int&gt; &lt;fct&gt; &lt;int&gt;    &lt;int&gt;</span><br><span class="line">##  1  2013 1         1      517</span><br><span class="line">##  2  2013 1         1      533</span><br><span class="line">##  3  2013 1         1      542</span><br><span class="line">##  4  2013 1         1      544</span><br><span class="line">##  5  2013 1         1      554</span><br><span class="line">##  6  2013 1         1      554</span><br><span class="line">##  7  2013 1         1      555</span><br><span class="line">##  8  2013 1         1      557</span><br><span class="line">##  9  2013 1         1      557</span><br><span class="line">## 10  2013 1         1      558</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_by(df, day_binned = cut(day, <span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 5</span><br><span class="line">## # Groups:   day_binned [3]</span><br><span class="line">##     year month   day dep_time day_binned</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;fct&gt;     </span><br><span class="line">##  1  2013     1     1      517 (0.97,11] </span><br><span class="line">##  2  2013     1     1      533 (0.97,11] </span><br><span class="line">##  3  2013     1     1      542 (0.97,11] </span><br><span class="line">##  4  2013     1     1      544 (0.97,11] </span><br><span class="line">##  5  2013     1     1      554 (0.97,11] </span><br><span class="line">##  6  2013     1     1      554 (0.97,11] </span><br><span class="line">##  7  2013     1     1      555 (0.97,11] </span><br><span class="line">##  8  2013     1     1      557 (0.97,11] </span><br><span class="line">##  9  2013     1     1      557 (0.97,11] </span><br><span class="line">## 10  2013     1     1      558 (0.97,11] </span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
-<h2 id="pipe-操作"><a href="#pipe-操作" class="headerlink" title="pipe 操作"></a>pipe 操作</h2><p>当进行多重的动词语法操作时，可以把一系列的操作进行融合，不过因此会损害代码的可读性  </p>
+<h2 id="pipe-操作">pipe 操作</h2>
+<p>当进行多重的动词语法操作时，可以把一系列的操作进行融合，不过因此会损害代码的可读性</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 鎸笺父鏄笺工鎴笺父鏄笺付鎸笺功鏀笺赴同鎴笺傅牟鎼笺腹鎼笺阜鏄笺阜 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># method 1</span></span><br><span class="line">a1 &lt;- group_by(flights, year, month, day)</span><br><span class="line">a2 &lt;- select(a1, arr_delay, dep_delay)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Adding missing grouping variables: &#96;year&#96;, &#96;month&#96;, &#96;day&#96;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a3 &lt;- summarise(a2,</span><br><span class="line">  arr = mean(arr_delay, na.rm = <span class="literal">TRUE</span>),</span><br><span class="line">  dep = mean(dep_delay, na.rm = <span class="literal">TRUE</span>))</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## &#96;summarise()&#96; regrouping output by &#39;year&#39;, &#39;month&#39; (override with &#96;.groups&#96; argument)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a4 &lt;- filter(a3, arr &gt; <span class="number">30</span> | dep &gt; <span class="number">30</span>)</span><br><span class="line">a4</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 49 x 5</span><br><span class="line">## # Groups:   year, month [11]</span><br><span class="line">##     year month   day   arr   dep</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span><br><span class="line">##  1  2013     1    16  34.2  24.6</span><br><span class="line">##  2  2013     1    31  32.6  28.7</span><br><span class="line">##  3  2013     2    11  36.3  39.1</span><br><span class="line">##  4  2013     2    27  31.3  37.8</span><br><span class="line">##  5  2013     3     8  85.9  83.5</span><br><span class="line">##  6  2013     3    18  41.3  30.1</span><br><span class="line">##  7  2013     4    10  38.4  33.0</span><br><span class="line">##  8  2013     4    12  36.0  34.8</span><br><span class="line">##  9  2013     4    18  36.0  34.9</span><br><span class="line">## 10  2013     4    19  47.9  46.1</span><br><span class="line">## # ... with 39 more rows</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># method 2</span></span><br><span class="line">filter(</span><br><span class="line">  summarise(</span><br><span class="line">    select(</span><br><span class="line">      group_by(flights, year, month, day),</span><br><span class="line">      arr_delay, dep_delay</span><br><span class="line">    ),</span><br><span class="line">    arr = mean(arr_delay, na.rm = <span class="literal">TRUE</span>),</span><br><span class="line">    dep = mean(dep_delay, na.rm = <span class="literal">TRUE</span>)</span><br><span class="line">  ),</span><br><span class="line">  arr &gt; <span class="number">30</span> | dep &gt; <span class="number">30</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Adding missing grouping variables: &#96;year&#96;, &#96;month&#96;, &#96;day&#96;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## &#96;summarise()&#96; regrouping output by &#39;year&#39;, &#39;month&#39; (override with &#96;.groups&#96; argument)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 49 x 5</span><br><span class="line">## # Groups:   year, month [11]</span><br><span class="line">##     year month   day   arr   dep</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span><br><span class="line">##  1  2013     1    16  34.2  24.6</span><br><span class="line">##  2  2013     1    31  32.6  28.7</span><br><span class="line">##  3  2013     2    11  36.3  39.1</span><br><span class="line">##  4  2013     2    27  31.3  37.8</span><br><span class="line">##  5  2013     3     8  85.9  83.5</span><br><span class="line">##  6  2013     3    18  41.3  30.1</span><br><span class="line">##  7  2013     4    10  38.4  33.0</span><br><span class="line">##  8  2013     4    12  36.0  34.8</span><br><span class="line">##  9  2013     4    18  36.0  34.9</span><br><span class="line">## 10  2013     4    19  47.9  46.1</span><br><span class="line">## # ... with 39 more rows</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># method 3</span></span><br><span class="line"></span><br><span class="line">flights %&gt;%</span><br><span class="line">  group_by(year, month, day) %&gt;%</span><br><span class="line">  select(arr_delay, dep_delay) %&gt;%</span><br><span class="line">  summarise(</span><br><span class="line">    arr = mean(arr_delay, na.rm = <span class="literal">TRUE</span>),</span><br><span class="line">    dep = mean(dep_delay, na.rm = <span class="literal">TRUE</span>)</span><br><span class="line">  ) %&gt;%</span><br><span class="line">  filter(arr &gt; <span class="number">30</span> | dep &gt; <span class="number">30</span>)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Adding missing grouping variables: &#96;year&#96;, &#96;month&#96;, &#96;day&#96;</span><br><span class="line">## &#96;summarise()&#96; regrouping output by &#39;year&#39;, &#39;month&#39; (override with &#96;.groups&#96; argument)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 49 x 5</span><br><span class="line">## # Groups:   year, month [11]</span><br><span class="line">##     year month   day   arr   dep</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span><br><span class="line">##  1  2013     1    16  34.2  24.6</span><br><span class="line">##  2  2013     1    31  32.6  28.7</span><br><span class="line">##  3  2013     2    11  36.3  39.1</span><br><span class="line">##  4  2013     2    27  31.3  37.8</span><br><span class="line">##  5  2013     3     8  85.9  83.5</span><br><span class="line">##  6  2013     3    18  41.3  30.1</span><br><span class="line">##  7  2013     4    10  38.4  33.0</span><br><span class="line">##  8  2013     4    12  36.0  34.8</span><br><span class="line">##  9  2013     4    18  36.0  34.9</span><br><span class="line">## 10  2013     4    19  47.9  46.1</span><br><span class="line">## # ... with 39 more rows</span><br></pre></td></tr></table></figure>
       </div>
       
@@ -268,7 +344,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#group%E6%93%8D%E4%BD%9C"><span class="toc-text">group操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#select-%E6%93%8D%E4%BD%9C"><span class="toc-text">select 操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mutating-%E6%93%8D%E4%BD%9C"><span class="toc-text">Mutating 操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pipe-%E6%93%8D%E4%BD%9C"><span class="toc-text">pipe 操作</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#group%E6%93%8D%E4%BD%9C"><span class="toc-text">group操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#select-%E6%93%8D%E4%BD%9C"><span class="toc-text">select 操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mutating-%E6%93%8D%E4%BD%9C"><span class="toc-text">Mutating 操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pipe-%E6%93%8D%E4%BD%9C"><span class="toc-text">pipe 操作</span></a></li></ol>
     </div>
   </div>
 

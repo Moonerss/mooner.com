@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -127,41 +240,57 @@
           
       </div>
       <div class="markdown-body">
-        <p><code>tibble</code>是升级版的<code>data.frame</code>，它保留了<code>data.famre</code>的优势，并且以更友好的方式展示出来  </p>
-<h3 id="构建tibble"><a href="#构建tibble" class="headerlink" title="构建tibble"></a>构建tibble</h3><ul>
-<li><code>readr</code>已知读入数据形成tibble  </li>
-<li><code>tibble()</code>直接构建  </li>
-<li><code>tribble()</code>直观构建  </li>
-<li><code>as_tibble()</code>转换格式  </li>
+        <p><code>tibble</code>是升级版的<code>data.frame</code>，它保留了<code>data.famre</code>的优势，并且以更友好的方式展示出来</p>
+<h3 id="构建tibble">构建tibble</h3>
+<ul>
+<li><code>readr</code>已知读入数据形成tibble<br />
+</li>
+<li><code>tibble()</code>直接构建<br />
+</li>
+<li><code>tribble()</code>直观构建<br />
+</li>
+<li><code>as_tibble()</code>转换格式</li>
 </ul>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">df2 &lt;- read_csv(readr_example(<span class="string">&quot;challenge.csv&quot;</span>), guess_max = <span class="number">1001</span>)</span><br><span class="line"><span class="comment">#&gt;  Parsed with column specification:</span></span><br><span class="line"><span class="comment">#&gt;  cols(</span></span><br><span class="line"><span class="comment">#&gt;    x = col_double(),</span></span><br><span class="line"><span class="comment">#&gt;    y = col_date(format = &quot;&quot;)</span></span><br><span class="line"><span class="comment">#&gt;  )</span></span><br><span class="line">tibble(x = <span class="number">1</span>:<span class="number">3</span>, y = list(<span class="number">1</span>:<span class="number">5</span>, <span class="number">1</span>:<span class="number">10</span>, <span class="number">1</span>:<span class="number">20</span>))</span><br><span class="line"><span class="comment">#&gt;  # A tibble: 3 x 2</span></span><br><span class="line"><span class="comment">#&gt;        x y         </span></span><br><span class="line"><span class="comment">#&gt;    &lt;int&gt; &lt;list&gt;    </span></span><br><span class="line"><span class="comment">#&gt;  1     1 &lt;int [5]&gt; </span></span><br><span class="line"><span class="comment">#&gt;  2     2 &lt;int [10]&gt;</span></span><br><span class="line"><span class="comment">#&gt;  3     3 &lt;int [20]&gt;</span></span><br><span class="line">tribble(</span><br><span class="line">~x, ~y,</span><br><span class="line"><span class="string">&quot;a&quot;</span>, <span class="number">1</span>:<span class="number">3</span>,</span><br><span class="line"><span class="string">&quot;b&quot;</span>, <span class="number">4</span>:<span class="number">6</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">#&gt; A tibble: 2 x 2</span></span><br><span class="line"><span class="comment">#&gt;   x     y        </span></span><br><span class="line"><span class="comment">#&gt;   &lt;chr&gt; &lt;list&gt;   </span></span><br><span class="line"><span class="comment">#&gt; 1 a     &lt;int [3]&gt;</span></span><br><span class="line"><span class="comment">#&gt; 2 b     &lt;int [3]&gt;</span></span><br><span class="line">l &lt;- list(x = <span class="number">1</span>:<span class="number">500</span>, y = runif(<span class="number">500</span>), z = <span class="number">500</span>:<span class="number">1</span>)</span><br><span class="line">df &lt;- as_tibble(l)</span><br><span class="line"><span class="comment">#&gt;  A tibble: 500 x 3</span></span><br><span class="line"><span class="comment">#&gt;        x     y     z</span></span><br><span class="line"><span class="comment">#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;int&gt;</span></span><br><span class="line"><span class="comment">#&gt;  1     1 0.311   500</span></span><br><span class="line"><span class="comment">#&gt;  2     2 0.512   499</span></span><br><span class="line"><span class="comment">#&gt;  3     3 0.440   498</span></span><br><span class="line"><span class="comment">#&gt;  4     4 0.501   497</span></span><br><span class="line"><span class="comment">#&gt;  5     5 0.131   496</span></span><br><span class="line"><span class="comment">#&gt;  6     6 0.566   495</span></span><br><span class="line"><span class="comment">#&gt;  7     7 0.647   494</span></span><br><span class="line"><span class="comment">#&gt;  8     8 0.200   493</span></span><br><span class="line"><span class="comment">#&gt;  9     9 0.121   492</span></span><br><span class="line"><span class="comment">#&gt; 10    10 0.315   491</span></span><br><span class="line"><span class="comment">#&gt; # ... with 490 more rows</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="tibble和data-frame的区别"><a href="#tibble和data-frame的区别" class="headerlink" title="tibble和data.frame的区别"></a>tibble和data.frame的区别</h3><h4 id="print结果"><a href="#print结果" class="headerlink" title="print结果"></a>print结果</h4><p><code>tibble</code>默认只展示前10行的信息  </p>
+<h3 id="tibble和data.frame的区别">tibble和data.frame的区别</h3>
+<h4 id="print结果">print结果</h4>
+<p><code>tibble</code>默认只展示前10行的信息</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">tibble(x = -<span class="number">5</span>:<span class="number">1000</span>)</span><br><span class="line"><span class="comment">#&gt; # A tibble: 1,006 x 1</span></span><br><span class="line"><span class="comment">#&gt;        x</span></span><br><span class="line"><span class="comment">#&gt;    &lt;int&gt;</span></span><br><span class="line"><span class="comment">#&gt;  1    -5</span></span><br><span class="line"><span class="comment">#&gt;  2    -4</span></span><br><span class="line"><span class="comment">#&gt;  3    -3</span></span><br><span class="line"><span class="comment">#&gt;  4    -2</span></span><br><span class="line"><span class="comment">#&gt;  5    -1</span></span><br><span class="line"><span class="comment">#&gt;  6     0</span></span><br><span class="line"><span class="comment">#&gt;  7     1</span></span><br><span class="line"><span class="comment">#&gt;  8     2</span></span><br><span class="line"><span class="comment">#&gt;  9     3</span></span><br><span class="line"><span class="comment">#&gt; 10     4</span></span><br><span class="line"><span class="comment">#&gt; # … with 996 more rows</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>可以使用<code>options(tibble.print_max = n, tibble.print_min = m)</code>参数设置展示的信息  </p>
+<p>可以使用<code>options(tibble.print_max = n, tibble.print_min = m)</code>参数设置展示的信息</p>
 </blockquote>
-<h4 id="子集提取"><a href="#子集提取" class="headerlink" title="子集提取"></a>子集提取</h4><p><code>tibble</code>通过<code>[</code>提取子集返回的是一个<code>tibble</code>，如果提取某一列需要使用<code>[[</code>或者<code>$</code>  </p>
+<h4 id="子集提取">子集提取</h4>
+<p><code>tibble</code>通过<code>[</code>提取子集返回的是一个<code>tibble</code>，如果提取某一列需要使用<code>[[</code>或者<code>$</code></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">df2 &lt;- tibble(x = <span class="number">1</span>:<span class="number">3</span>, y = <span class="number">3</span>:<span class="number">1</span>)</span><br><span class="line">class(df2)</span><br><span class="line"><span class="comment">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span><br><span class="line">class(df2[, <span class="number">1</span>])</span><br><span class="line"><span class="comment">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span><br><span class="line">class(df2[[<span class="number">1</span>]])</span><br><span class="line"><span class="comment">#&gt; [1] &quot;integer&quot;</span></span><br><span class="line">class(df2$x)</span><br><span class="line"><span class="comment">#&gt; [1] &quot;integer&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="自动填充"><a href="#自动填充" class="headerlink" title="自动填充"></a>自动填充</h4><p>在构建<code>tibble</code>时，只有长度为1的值才会被循环填充  </p>
+<h4 id="自动填充">自动填充</h4>
+<p>在构建<code>tibble</code>时，只有长度为1的值才会被循环填充</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tibble(a = <span class="number">1</span>:<span class="number">3</span>, b = <span class="number">1</span>)</span><br><span class="line"><span class="comment">#&gt; # A tibble: 3 x 2</span></span><br><span class="line"><span class="comment">#&gt;       a     b</span></span><br><span class="line"><span class="comment">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span><br><span class="line"><span class="comment">#&gt; 1     1     1</span></span><br><span class="line"><span class="comment">#&gt; 2     2     1</span></span><br><span class="line"><span class="comment">#&gt; 3     3     1</span></span><br><span class="line">tibble(a = <span class="number">1</span>:<span class="number">3</span>, c = <span class="number">1</span>:<span class="number">2</span>)</span><br><span class="line"><span class="comment">#&gt; Error: Tibble columns must have consistent lengths, only values of length one are recycled:</span></span><br><span class="line"><span class="comment">#&gt; * Length 2: Column `c`</span></span><br><span class="line"><span class="comment">#&gt; * Length 3: Column `a`</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="没有行名"><a href="#没有行名" class="headerlink" title="没有行名"></a>没有行名</h4><p><code>tibble</code>对象中是没有行名的，因此需要一些函数进行辅助操作  </p>
+<h4 id="没有行名">没有行名</h4>
+<p><code>tibble</code>对象中是没有行名的，因此需要一些函数进行辅助操作</p>
 <ul>
-<li><code>has_rownames(.data)</code>：判断数据是否有行名  </li>
-<li><code>remove_rownames(.data)</code>：去掉数据行名  </li>
-<li><code>rownames_to_column(.data, var = &quot;rowname&quot;)</code>：行名转为数据的第一列，<code>var</code>是行名所在列的名字  </li>
-<li><code>rowid_to_column(.data, var = &quot;rowid&quot;)</code>：行ID号转为数据的第一列，<code>var</code>是行名所在列的名字  </li>
-<li><code>column_to_rownames(.data, var = &quot;rowname&quot;)</code>：列转行名  </li>
-</ul>
-<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><ul>
-<li><code>add_column</code>和<code>add_row</code><br>添加行和列  <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">add_column(df, z = -<span class="number">1</span>:<span class="number">1</span>, w = <span class="number">0</span>)</span><br><span class="line"><span class="comment">#&gt;      # A tibble: 3 x 4</span></span><br><span class="line"><span class="comment">#&gt;        x     y     z     w</span></span><br><span class="line"><span class="comment">#&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span></span><br><span class="line"><span class="comment">#&gt; 1     1     3    -1     0</span></span><br><span class="line"><span class="comment">#&gt; 2     2     2     0     0</span></span><br><span class="line"><span class="comment">#&gt; 3     3     1     1     0</span></span><br></pre></td></tr></table></figure></li>
-<li><code>enframe</code>和<code>deframe</code><br>把向量变成<code>tibble</code>和把<code>tibble</code>变成向量  <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">enframe(c(a = <span class="number">5</span>, b = <span class="number">7</span>), name = <span class="string">&quot;name&quot;</span>, value = <span class="string">&quot;value&quot;</span>)</span><br><span class="line"><span class="comment">#&gt;   # A tibble: 2 x 2</span></span><br><span class="line"><span class="comment">#&gt;     name  value</span></span><br><span class="line"><span class="comment">#&gt;     &lt;chr&gt; &lt;dbl&gt;</span></span><br><span class="line"><span class="comment">#&gt;  1  a         5</span></span><br><span class="line"><span class="comment">#&gt;  2  b         7</span></span><br><span class="line">deframe(tibble(a = <span class="number">1</span>:<span class="number">3</span>))</span><br><span class="line"><span class="comment">#&gt; [1] 1 2 3</span></span><br></pre></td></tr></table></figure></li>
-<li><code>glimpse()</code><br>相当于<code>tibble</code>的<code>str()</code>  <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">glimpse(df)</span><br><span class="line"><span class="comment">#&gt;  Observations: 3</span></span><br><span class="line"><span class="comment">#&gt;  Variables: 2</span></span><br><span class="line"><span class="comment">#&gt;  $ x &lt;int&gt; 1, 2, 3</span></span><br><span class="line"><span class="comment">#&gt;  $ y &lt;int&gt; 3, 2, 1</span></span><br></pre></td></tr></table></figure></li>
-<li><code>tbl_sum</code><br>提供简要数据信息<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tbl_sum(df)</span><br><span class="line"><span class="comment">#&gt; A tibble </span></span><br><span class="line"><span class="comment">#&gt; &quot;3 x 2&quot; </span></span><br></pre></td></tr></table></figure>
+<li><code>has_rownames(.data)</code>：判断数据是否有行名<br />
 </li>
+<li><code>remove_rownames(.data)</code>：去掉数据行名<br />
+</li>
+<li><code>rownames_to_column(.data, var = "rowname")</code>：行名转为数据的第一列，<code>var</code>是行名所在列的名字<br />
+</li>
+<li><code>rowid_to_column(.data, var = "rowid")</code>：行ID号转为数据的第一列，<code>var</code>是行名所在列的名字<br />
+</li>
+<li><code>column_to_rownames(.data, var = "rowname")</code>：列转行名</li>
+</ul>
+<h3 id="常用操作">常用操作</h3>
+<ul>
+<li><code>add_column</code>和<code>add_row</code><br />
+添加行和列<br />
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">add_column(df, z = -<span class="number">1</span>:<span class="number">1</span>, w = <span class="number">0</span>)</span><br><span class="line"><span class="comment">#&gt;      # A tibble: 3 x 4</span></span><br><span class="line"><span class="comment">#&gt;        x     y     z     w</span></span><br><span class="line"><span class="comment">#&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span></span><br><span class="line"><span class="comment">#&gt; 1     1     3    -1     0</span></span><br><span class="line"><span class="comment">#&gt; 2     2     2     0     0</span></span><br><span class="line"><span class="comment">#&gt; 3     3     1     1     0</span></span><br></pre></td></tr></table></figure></li>
+<li><code>enframe</code>和<code>deframe</code><br />
+把向量变成<code>tibble</code>和把<code>tibble</code>变成向量<br />
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">enframe(c(a = <span class="number">5</span>, b = <span class="number">7</span>), name = <span class="string">&quot;name&quot;</span>, value = <span class="string">&quot;value&quot;</span>)</span><br><span class="line"><span class="comment">#&gt;   # A tibble: 2 x 2</span></span><br><span class="line"><span class="comment">#&gt;     name  value</span></span><br><span class="line"><span class="comment">#&gt;     &lt;chr&gt; &lt;dbl&gt;</span></span><br><span class="line"><span class="comment">#&gt;  1  a         5</span></span><br><span class="line"><span class="comment">#&gt;  2  b         7</span></span><br><span class="line">deframe(tibble(a = <span class="number">1</span>:<span class="number">3</span>))</span><br><span class="line"><span class="comment">#&gt; [1] 1 2 3</span></span><br></pre></td></tr></table></figure></li>
+<li><code>glimpse()</code><br />
+相当于<code>tibble</code>的<code>str()</code><br />
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">glimpse(df)</span><br><span class="line"><span class="comment">#&gt;  Observations: 3</span></span><br><span class="line"><span class="comment">#&gt;  Variables: 2</span></span><br><span class="line"><span class="comment">#&gt;  $ x &lt;int&gt; 1, 2, 3</span></span><br><span class="line"><span class="comment">#&gt;  $ y &lt;int&gt; 3, 2, 1</span></span><br></pre></td></tr></table></figure></li>
+<li><code>tbl_sum</code><br />
+提供简要数据信息 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tbl_sum(df)</span><br><span class="line"><span class="comment">#&gt; A tibble </span></span><br><span class="line"><span class="comment">#&gt; &quot;3 x 2&quot; </span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
       </div>
@@ -214,7 +343,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BAtibble"><span class="toc-text">构建tibble</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tibble%E5%92%8Cdata-frame%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">tibble和data.frame的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#print%E7%BB%93%E6%9E%9C"><span class="toc-text">print结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E9%9B%86%E6%8F%90%E5%8F%96"><span class="toc-text">子集提取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85"><span class="toc-text">自动填充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B2%A1%E6%9C%89%E8%A1%8C%E5%90%8D"><span class="toc-text">没有行名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">常用操作</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BAtibble"><span class="toc-text">构建tibble</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tibble%E5%92%8Cdata.frame%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">tibble和data.frame的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#print%E7%BB%93%E6%9E%9C"><span class="toc-text">print结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E9%9B%86%E6%8F%90%E5%8F%96"><span class="toc-text">子集提取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85"><span class="toc-text">自动填充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B2%A1%E6%9C%89%E8%A1%8C%E5%90%8D"><span class="toc-text">没有行名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">常用操作</span></a></li></ol>
     </div>
   </div>
 

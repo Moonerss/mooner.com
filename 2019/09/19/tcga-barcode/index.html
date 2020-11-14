@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,73 +234,80 @@
           
       </div>
       <div class="markdown-body">
-        <p>接触和分析过TCGA数据的朋友肯定会经常处理TCGA barcode的7个编码信息，每个编码信息用横杠-隔开，如下所示：  </p>
-<p><img src="/images/tcga-barcode/barcode.jpg" alt="TCGA barcode">  </p>
+        <p>接触和分析过TCGA数据的朋友肯定会经常处理TCGA barcode的7个编码信息，每个编码信息用横杠-隔开，如下所示：</p>
+<p><img src="/images/tcga-barcode/barcode.jpg" /></p>
 <p>接触和分析过TCGA数据的朋友肯定会经常处理TCGA barcode的前15位（有时12位），实际从上图可以看出TCGA的barcode设计总共有28位之多。</p>
-<p>每一个短横杠衔接的都是含不同意义的序列，如下图  </p>
-<p><img src="/images/tcga-barcode/flow.jpg" alt="Data flow">    </p>
+<p>每一个短横杠衔接的都是含不同意义的序列，如下图</p>
+<p><img src="/images/tcga-barcode/flow.jpg" /></p>
 <p>图中总结了TCGA中从样品到数据处理流程：</p>
-<p>BCR从TSS收到参与者的样本和他们相关的元数据。然后BCRs分配人可读的IDs（barcode），也就是TCGA barcode给参与者的元数据和样本。TCGA barcode用来把扩展到整个TCGA网络中的数据联系在一起，因为IDs可以唯一识别一个特定样本的一组结果。  </p>
-<p>具体的解释如下表：  </p>
+<p>BCR从TSS收到参与者的样本和他们相关的元数据。然后BCRs分配人可读的IDs（barcode），也就是TCGA barcode给参与者的元数据和样本。TCGA barcode用来把扩展到整个TCGA网络中的数据联系在一起，因为IDs可以唯一识别一个特定样本的一组结果。</p>
+<p>具体的解释如下表：</p>
 <table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 45%" />
+<col style="width: 45%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>Label</th>
 <th>Identifier for</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>Project</td>
 <td>Project name</td>
 <td>来自哪个项目: 如TCGA、TARGET等等</td>
 </tr>
-<tr>
+<tr class="even">
 <td>TSS</td>
 <td>Tissue source site</td>
 <td>样品来自哪个组织机构：01 代表International Genomics Consortium, 更多见：<a target="_blank" rel="noopener" href="https://www.omicsclass.com/article/1079">TSS</a></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Participant</td>
 <td>Study participant</td>
 <td>样品唯一编号(可以理解为一个病人唯一编号）</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Sample</td>
 <td>Sample type</td>
 <td>样品来自人体组织类型，01-09表示肿瘤样本，10-19表示normal type，20-29表示control samples,如：01代表Primary Solid Tumor， 更多见：<a target="_blank" rel="noopener" href="https://www.omicsclass.com/article/1080">SampleType</a></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Vial</td>
 <td>Order of sample in a sequence of samples</td>
 <td>一份样品被分割成好几份，表示第几份，通常是A-Z编号</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Portion</td>
 <td>Order of portion in a sequence of 100-120 mg sample portions</td>
 <td>每份样品再分割成不同的小样品：01-99等等编号，代表第几份</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Analyte</td>
 <td>Molecular type of analyte for analysis</td>
 <td>实验数据来源分子类型，如R代表 RNA，D代表DNA等等，更多见：<a target="_blank" rel="noopener" href="https://gdc.cancer.gov/resources-tcga-users/tcga-code-tables/portion-analyte-codes">Portion / Analyte Codes</a></td>
 </tr>
-<tr>
+<tr class="even">
 <td>Plate</td>
 <td>Order of plate in a sequence of 96-well plates</td>
 <td>96孔序列中板的顺序，4个数字组成</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Center</td>
 <td>Sequencing or characterization center that will receive the aliquot for analysis</td>
 <td>数据由哪个机构分析：如 01代表The Broad Institute GCC,更多见：<a target="_blank" rel="noopener" href="https://www.omicsclass.com/article/1081">Center</a></td>
 </tr>
-</tbody></table>
-<p>其中比较重要的，用于区分样本类型的是 sample。  </p>
-<p>此外除了上述的barcode还有表示其他信息的barcode，整体的组织形式如下：  </p>
-<p><img src="/images/tcga-barcode/barcode1.jpg">   </p>
-<p>下表显示了不同barcode，所代表的不同意义：层次结构级别：  </p>
-<p><img src="/images/tcga-barcode/table.jpg">     </p>
+</tbody>
+</table>
+<p>其中比较重要的，用于区分样本类型的是 sample。</p>
+<p>此外除了上述的barcode还有表示其他信息的barcode，整体的组织形式如下：</p>
+<p><img src="/images/tcga-barcode/barcode1.jpg" /></p>
+<p>下表显示了不同barcode，所代表的不同意义：层次结构级别：</p>
+<p><img src="/images/tcga-barcode/table.jpg" /></p>
 
       </div>
       

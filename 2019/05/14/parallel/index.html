@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,16 +234,20 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="R的并行运算"><a href="#R的并行运算" class="headerlink" title="R的并行运算"></a>R的并行运算</h2><p>R作为主要流行的统计分析软件之一，其处理数据一般都是单线程的。随着数据量的增大，R运行的时间会大大增加；为了充分发挥计算机的性能和进一步提升R运行速度，使用并行运算不失为一种有效的手段。  </p>
-<p>简单的说R的并行化计算其实没有改变其整个并行环境，而是先启动N个附属进程，然后将数据分割成N块在N个核上进行运行，等待附属进程结束返回结果。与单线程运算相比，会大大节省运算时间  </p>
-<h3 id="parallel"><a href="#parallel" class="headerlink" title="parallel"></a>parallel</h3><p>R内置了parallel包（R version &gt; 2.14），强化了R的并行计算能力。parallel包的思路和lapply函数很相似，都是将输入数据分割、计算、整合结果。只不过并行计算是用到了不同的cpu内核来运算。两个核心的函数为<code>mclapply</code>和<code>parlapply</code>。  </p>
+        <h2 id="r的并行运算">R的并行运算</h2>
+<p>R作为主要流行的统计分析软件之一，其处理数据一般都是单线程的。随着数据量的增大，R运行的时间会大大增加；为了充分发挥计算机的性能和进一步提升R运行速度，使用并行运算不失为一种有效的手段。</p>
+<p>简单的说R的并行化计算其实没有改变其整个并行环境，而是先启动N个附属进程，然后将数据分割成N块在N个核上进行运行，等待附属进程结束返回结果。与单线程运算相比，会大大节省运算时间</p>
+<h3 id="parallel">parallel</h3>
+<p>R内置了parallel包（R version &gt; 2.14），强化了R的并行计算能力。parallel包的思路和lapply函数很相似，都是将输入数据分割、计算、整合结果。只不过并行计算是用到了不同的cpu内核来运算。两个核心的函数为<code>mclapply</code>和<code>parlapply</code>。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## lapply</span></span><br><span class="line">system.time(&#123;</span><br><span class="line">res &lt;- lapply(<span class="number">1</span>:<span class="number">5000000</span>, <span class="keyword">function</span>(x) x+<span class="number">1</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">user  system elapsed</span><br><span class="line"><span class="number">21.42</span>    <span class="number">1.74</span>   <span class="number">25.70</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## parlapply</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># load parallel</span></span><br><span class="line"><span class="keyword">library</span>(parallel)</span><br><span class="line"></span><br><span class="line"><span class="comment"># check numrber of cores</span></span><br><span class="line">clnum&lt;-detectCores() </span><br><span class="line"></span><br><span class="line"><span class="comment">#设置参与并行的CPU核数目</span></span><br><span class="line">cl &lt;- makeCluster(getOption(<span class="string">&quot;cl.cores&quot;</span>, clnum));</span><br><span class="line"></span><br><span class="line"><span class="comment">#运行</span></span><br><span class="line">system.time(&#123;</span><br><span class="line">res &lt;- parLapply(cl, <span class="number">1</span>:<span class="number">5000000</span>,  <span class="keyword">function</span>(x) x + <span class="number">1</span>)</span><br><span class="line">&#125;);</span><br><span class="line">user system elapsed</span><br><span class="line"><span class="number">6.54</span> <span class="number">0.34</span> <span class="number">19.95</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭并行计算</span></span><br><span class="line">stopCluster(cl);</span><br><span class="line"></span><br><span class="line"><span class="comment">## mclapply ==&gt; mclapply适用于类Unix系统的操作</span></span><br><span class="line">mc &lt;- getOption(<span class="string">&quot;mc.cores&quot;</span>, <span class="number">3</span>)</span><br><span class="line">system.time(&#123;</span><br><span class="line">res &lt;- mclapply(<span class="number">1</span>:<span class="number">5000000</span>, <span class="keyword">function</span>(x)&#123;x+<span class="number">1</span>&#125;, mc.cores = mc);</span><br><span class="line">&#125;);</span><br><span class="line">user system elapsed</span><br><span class="line"><span class="number">6.657</span> <span class="number">0.500</span> <span class="number">7.181</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="furrr"><a href="#furrr" class="headerlink" title="furrr"></a>furrr</h3><p><code>furrr</code>是<code>future</code>和<code>purrr</code>包的结合，提供了一系列的并行操作适用于<code>*map</code>家族函数  </p>
+<h3 id="furrr">furrr</h3>
+<p><code>furrr</code>是<code>future</code>和<code>purrr</code>包的结合，提供了一系列的并行操作适用于<code>*map</code>家族函数</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(furrr)</span><br><span class="line"><span class="keyword">library</span>(tictoc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># This should take 6 seconds in total running sequentially</span></span><br><span class="line">plan(sequential)</span><br><span class="line">tic()</span><br><span class="line">nothingness &lt;- future_map(c(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), ~Sys.sleep(.x))</span><br><span class="line">toc()</span><br><span class="line"><span class="comment">#&gt; 6.08 sec elapsed</span></span><br><span class="line"><span class="comment"># This should take ~2 seconds running in parallel, with a little overhead</span></span><br><span class="line">plan(multiprocess)</span><br><span class="line">tic()</span><br><span class="line">nothingness &lt;- future_map(c(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), ~Sys.sleep(.x))</span><br><span class="line">toc()</span><br><span class="line"><span class="comment">#&gt; 2.212 sec elapsed</span></span><br></pre></td></tr></table></figure>
-
-<p>与<code>parallel</code>相比更喜欢<code>furrr</code>的傻瓜式操作，且其与其他R包的交互使用更为方便。   </p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>其他一些并行相关的R包：<br><a target="_blank" rel="noopener" href="https://github.com/HenrikBengtsson/future">future</a> : 强大的分布式处理并行包<br><a target="_blank" rel="noopener" href="https://github.com/HenrikBengtsson/future.apply">future.apply</a> : 基于<code>future</code>包开发的<code>*apply</code>家族函数并行包  </p>
+<p>与<code>parallel</code>相比更喜欢<code>furrr</code>的傻瓜式操作，且其与其他R包的交互使用更为方便。</p>
+<h3 id="其他">其他</h3>
+<p>其他一些并行相关的R包：<br />
+<a target="_blank" rel="noopener" href="https://github.com/HenrikBengtsson/future">future</a> : 强大的分布式处理并行包<br />
+<a target="_blank" rel="noopener" href="https://github.com/HenrikBengtsson/future.apply">future.apply</a> : 基于<code>future</code>包开发的<code>*apply</code>家族函数并行包</p>
 
       </div>
       
@@ -176,7 +293,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#R%E7%9A%84%E5%B9%B6%E8%A1%8C%E8%BF%90%E7%AE%97"><span class="toc-text">R的并行运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel"><span class="toc-text">parallel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#furrr"><span class="toc-text">furrr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#r%E7%9A%84%E5%B9%B6%E8%A1%8C%E8%BF%90%E7%AE%97"><span class="toc-text">R的并行运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel"><span class="toc-text">parallel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#furrr"><span class="toc-text">furrr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li></ol>
     </div>
   </div>
 

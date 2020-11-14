@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,57 +234,55 @@
           
       </div>
       <div class="markdown-body">
-        <p>当我们需要一些NGS数据时，一般会想到去NCBI或者EBI的数据库中下载。但是当我们使用wget进行下载时，真的是慢到令人发指。这时我们可以使用Aspera来下载NGS数据，来加速数据的下载。  </p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
-<li><p>根据电脑版本下载对应aspera connect server，下载地址：<a target="_blank" rel="noopener" href="https://www.ibm.com/products/aspera/downloads">https://www.ibm.com/products/aspera/downloads</a>  </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ./download</span><br><span class="line">wget http://download.asperasoft.com/download/sw/connect/3.7.4/aspera-connect-3.7.4.147727-linux-64.tar.gz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下载获得的是shell脚本，解压安装  </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxf aspera-connect-3.7.4.147727-linux-64.tar.gz</span><br><span class="line">bash aspera-connect-3.7.4.147727-linux-64.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装后找到home目录下的会有一个.aspera目录，里边包含密钥等信息，可以将其添加入环境变量中   </p>
+        <p>当我们需要一些NGS数据时，一般会想到去NCBI或者EBI的数据库中下载。但是当我们使用wget进行下载时，真的是慢到令人发指。这时我们可以使用Aspera来下载NGS数据，来加速数据的下载。</p>
+<h2 id="安装">安装</h2>
+<ol type="1">
+<li><p>根据电脑版本下载对应aspera connect server，下载地址：https://www.ibm.com/products/aspera/downloads</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ./download</span><br><span class="line">wget http://download.asperasoft.com/download/sw/connect/3.7.4/aspera-connect-3.7.4.147727-linux-64.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>下载获得的是shell脚本，解压安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxf aspera-connect-3.7.4.147727-linux-64.tar.gz</span><br><span class="line">bash aspera-connect-3.7.4.147727-linux-64.sh</span><br></pre></td></tr></table></figure></li>
+<li><p>安装后找到home目录下的会有一个.aspera目录，里边包含密钥等信息，可以将其添加入环境变量中</p>
 <blockquote>
 <p>在.aspera的目录，有两个文件比较重要: 一个是ascp的可执行文件<code>~/.aspera/connect/bin/ascp</code>，另一个ascp的密钥文件<code>~/.aspera/connect/etc/asperaweb_id_dsa.putty</code>,可以把密钥备份到home目录当中</p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;PATH=$PATH:/home/jeason/.aspera/connect/bin/&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line">cp ~/.aspera/connect/etc/asperaweb_id_dsa.putty ~/</span><br><span class="line"><span class="built_in">source</span> .bashrc</span><br></pre></td></tr></table></figure>
-
-<p>重新source配置文件生效  </p>
-</li>
-<li><p>使用<code>ascp --help</code>参看命令参数    </p>
+<p>重新source配置文件生效</p></li>
+<li><p>使用<code>ascp --help</code>参看命令参数</p>
 <p>常见参数：</p>
 <ul>
-<li><code>-v</code> verbose mode 唠叨模式，能让你实时知道程序在干啥，方便查错。  </li>
-<li><code>-T</code> 取消加密，否则有时候数据下载不了 。  </li>
-<li><code>-i</code> 提供私钥文件的地址，我也不知道干嘛的，反正不能少，地址一般是~/.aspera/connect/etc中的asperaweb_id_dsa.openssh文件  </li>
-<li><code>-l</code> 设置最大传输速度，一般200m到500m，如果不设置，反而速度会比较低，可能有个较低的默认值  </li>
-<li><code>-k</code> 断点续传，一般设置为值1  </li>
-</ul>
+<li><code>-v</code> verbose mode 唠叨模式，能让你实时知道程序在干啥，方便查错。<br />
 </li>
+<li><code>-T</code> 取消加密，否则有时候数据下载不了 。<br />
+</li>
+<li><code>-i</code> 提供私钥文件的地址，我也不知道干嘛的，反正不能少，地址一般是~/.aspera/connect/etc中的asperaweb_id_dsa.openssh文件<br />
+</li>
+<li><code>-l</code> 设置最大传输速度，一般200m到500m，如果不设置，反而速度会比较低，可能有个较低的默认值<br />
+</li>
+<li><code>-k</code> 断点续传，一般设置为值1</li>
+</ul></li>
 </ol>
-<h2 id="下载sra数据"><a href="#下载sra数据" class="headerlink" title="下载sra数据"></a>下载sra数据</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ascp -T -i ~/.aspera/connect/etc/asperaweb_id_dsa.openssh  -k 1 -l 200m anonftp@ftp-private.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR620/SRR6208854/SRR6208854.sra ./</span><br></pre></td></tr></table></figure>
-
+<h2 id="下载sra数据">下载sra数据</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ascp -T -i ~/.aspera/connect/etc/asperaweb_id_dsa.openssh  -k 1 -l 200m anonftp@ftp-private.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR620/SRR6208854/SRR6208854.sra ./</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>SRA数据库下载：首先记住，数据的存放地址是<code>ftp-private.ncbi.nlm.nih.gov</code>，SRA在Aspera的用户名是<code>anonftp</code>  </p>
+<p>SRA数据库下载：首先记住，数据的存放地址是<code>ftp-private.ncbi.nlm.nih.gov</code>，SRA在Aspera的用户名是<code>anonftp</code></p>
 </blockquote>
-<h2 id="Aspera批量下载SRA文件"><a href="#Aspera批量下载SRA文件" class="headerlink" title="Aspera批量下载SRA文件"></a>Aspera批量下载SRA文件</h2><p>很多时候需要同时下载多个SRA文件，ascp命令提供参数<code>--file-list</code>，用于批量下载SRA文件。  </p>
-<p>可以将下载列表写入sra.txt文件中，然后进行批量下载  </p>
+<h2 id="aspera批量下载sra文件">Aspera批量下载SRA文件</h2>
+<p>很多时候需要同时下载多个SRA文件，ascp命令提供参数<code>--file-list</code>，用于批量下载SRA文件。</p>
+<p>可以将下载列表写入sra.txt文件中，然后进行批量下载</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;sra&#x2F;sra-instant&#x2F;reads&#x2F;ByRun&#x2F;sra&#x2F;SRR&#x2F;SRR623&#x2F;SRR6232298&#x2F;SRR6232298.sra</span><br><span class="line">&#x2F;sra&#x2F;sra-instant&#x2F;reads&#x2F;ByRun&#x2F;sra&#x2F;SRR&#x2F;SRR623&#x2F;SRR6232299&#x2F;SRR6232299.sra</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ascp -T -i ~/.aspera/connect/etc/asperaweb_id_dsa.openssh  -k 1 -l 200m --mode recv --host ftp-private.ncbi.nlm.nih.gov --user anonftp --file-list ~/sra.txt ./</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>asprea同样可以下载ENA的数据，ENA在Aspera的用户名是<code>era-fasp</code>，数据的存放地址是<code>fasp.sra.ebi.ac.uk</code>  </p>
+<p>asprea同样可以下载ENA的数据，ENA在Aspera的用户名是<code>era-fasp</code>，数据的存放地址是<code>fasp.sra.ebi.ac.uk</code></p>
 </blockquote>
-<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><p>有时会遇到以下报错：  </p>
+<h2 id="报错">报错</h2>
+<p>有时会遇到以下报错：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ascp: Failed to open TCP connection <span class="keyword">for</span> SSH, exiting.</span><br><span class="line"></span><br><span class="line">Session Stop (Error: Failed to open TCP connection <span class="keyword">for</span> SSH)</span><br></pre></td></tr></table></figure>
-
-<p>官方回答：  </p>
+<p>官方回答：</p>
 <blockquote>
-<p>On many Linux systems the default firewall can be configured with iptables. You will have to allow all incoming and outgoing traffic on UDP port 33001 (or whatever your Aspera UDP port is), which you can do with the following commands:  </p>
+<p>On many Linux systems the default firewall can be configured with iptables. You will have to allow all incoming and outgoing traffic on UDP port 33001 (or whatever your Aspera UDP port is), which you can do with the following commands:</p>
 </blockquote>
-<p>使用如下命令进行操作：  </p>
+<p>使用如下命令进行操作：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 33001 -j ACCEPT</span><br><span class="line">iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT</span><br></pre></td></tr></table></figure>
-
 
       </div>
       
@@ -217,7 +328,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE"><span class="toc-text">下载sra数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Aspera%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BDSRA%E6%96%87%E4%BB%B6"><span class="toc-text">Aspera批量下载SRA文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E9%94%99"><span class="toc-text">报错</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE"><span class="toc-text">下载sra数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#aspera%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BDsra%E6%96%87%E4%BB%B6"><span class="toc-text">Aspera批量下载SRA文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E9%94%99"><span class="toc-text">报错</span></a></li></ol>
     </div>
   </div>
 

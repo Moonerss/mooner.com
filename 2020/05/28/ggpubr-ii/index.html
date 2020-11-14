@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,39 +234,42 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="使用ggmaplot函数绘制火山图"><a href="#使用ggmaplot函数绘制火山图" class="headerlink" title="使用ggmaplot函数绘制火山图"></a>使用ggmaplot函数绘制火山图</h2><h3 id="加载所需R包"><a href="#加载所需R包" class="headerlink" title="加载所需R包"></a>加载所需R包</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggpubr)</span><br></pre></td></tr></table></figure>
-
-<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法:"></a>基本用法:</h3><p><strong>Usage</strong>  </p>
+        <h2 id="使用ggmaplot函数绘制火山图">使用ggmaplot函数绘制火山图</h2>
+<h3 id="加载所需r包">加载所需R包</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggpubr)</span><br></pre></td></tr></table></figure>
+<h3 id="基本用法">基本用法:</h3>
+<p><strong>Usage</strong></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ggmaplot(data, fdr = <span class="number">0.05</span>, fc = <span class="number">1.5</span>, genenames = <span class="literal">NULL</span>, detection_call = <span class="literal">NULL</span>, size = <span class="literal">NULL</span>,</span><br><span class="line">  font.label = c(<span class="number">12</span>, <span class="string">&quot;plain&quot;</span>, <span class="string">&quot;black&quot;</span>), label.rectangle = <span class="literal">FALSE</span>, palette = c(<span class="string">&quot;#B31B21&quot;</span>, <span class="string">&quot;#1465AC&quot;</span>, <span class="string">&quot;darkgray&quot;</span>), top = <span class="number">15</span>, select.top.method = c(<span class="string">&quot;padj&quot;</span>, <span class="string">&quot;fc&quot;</span>), main = <span class="literal">NULL</span>, xlab = <span class="string">&quot;Log2 mean expression&quot;</span>,</span><br><span class="line">  ylab = <span class="string">&quot;Log2 fold change&quot;</span>, ggtheme = theme_classic(), <span class="keyword">...</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="常用参数："><a href="#常用参数：" class="headerlink" title="常用参数："></a>常用参数：</h3><p><strong>Arguments</strong>  </p>
+<h3 id="常用参数">常用参数：</h3>
+<p><strong>Arguments</strong></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">data    <span class="comment">#差异基因分析结果 an object of class DESeqResults, get_diff, DE_Results, matrix or data frame containing the columns baseMean, log2FoldChange, and padj. Rows are genes.</span></span><br><span class="line">        <span class="comment">#baseMean: the mean expression of genes in the two groups.</span></span><br><span class="line">        <span class="comment">#log2FoldChange: the log2 fold changes of group 2 compared to group 1</span></span><br><span class="line">        <span class="comment">#padj: the adjusted p-value of the used statiscal test.</span></span><br><span class="line">fdr     <span class="comment">#设定fdr阈值 Accepted false discovery rate for considering genes as differentially expressed.</span></span><br><span class="line">fc      <span class="comment">#设定fc阈值 the fold change threshold. Only genes with a fold change &gt;= fc and padj &lt;= fdr are considered as significantly differentially expressed.</span></span><br><span class="line">genenames    <span class="comment">#基因名 a character vector of length nrow(data) specifying gene names corresponding to each row. Used for point labels.</span></span><br><span class="line">detection_call    <span class="comment">#选出特定表达模式的基因进行展示 a numeric vector with length = nrow(data), specifying if the genes is expressed (value = 1) or not (value = 0). For example detection_call = c(1, 1, 0, 1, 0, 1). Default is NULL. If detection_call column is available in data, it will be used.</span></span><br><span class="line">size    <span class="comment">#points size.</span></span><br><span class="line">font.label    <span class="comment">#a vector of length 3 indicating respectively the size (e.g.: 14), the style (e.g.: &quot;plain&quot;, &quot;bold&quot;, &quot;italic&quot;, &quot;bold.italic&quot;) and the color (e.g.: &quot;red&quot;) of point labels. For example font.label = c(14, &quot;bold&quot;, &quot;red&quot;).</span></span><br><span class="line">label.rectangle    <span class="comment">#logical value. If TRUE, add rectangle underneath the text, making it easier to read.</span></span><br><span class="line">palette    <span class="comment">#the color palette to be used for coloring or filling by groups. Allowed values include &quot;grey&quot; for grey color palettes; brewer palettes e.g. &quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;, &quot;red&quot;); and scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;, &quot;aaas&quot;, &quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and &quot;rickandmorty&quot;.</span></span><br><span class="line">top    <span class="comment">#选定top基因进行展示 the number of top genes to be shown on the plot. Use top = 0 to hide to gene labels.</span></span><br><span class="line">select.top.method    <span class="comment">#methods to be used for selecting top genes. Allowed values include &quot;padj&quot; and &quot;fc&quot; for selecting by adjusted p values or fold changes, respectively.</span></span><br><span class="line">main    <span class="comment">#plot main title.</span></span><br><span class="line">xlab    <span class="comment">#character vector specifying x axis labels. Use xlab = FALSE to hide xlab.</span></span><br><span class="line">ylab    <span class="comment">#character vector specifying y axis labels. Use ylab = FALSE to hide ylab.</span></span><br><span class="line">ggtheme    <span class="comment">#function, ggplot2 theme name. Default value is theme_pubr(). Allowed values include ggplot2 official themes: theme_gray(), theme_bw(), theme_minimal(), theme_classic(), theme_void()</span></span><br><span class="line"><span class="keyword">...</span>     <span class="comment">#other arguments to be passed to ggpar.</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载数据集</span></span><br><span class="line">data(diff_express)</span><br><span class="line">head(diff_express)</span><br></pre></td></tr></table></figure>
-
+<h3 id="使用示例">使用示例</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载数据集</span></span><br><span class="line">data(diff_express)</span><br><span class="line">head(diff_express)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##                     name     baseMean log2FoldChange         padj detection_call</span><br><span class="line">## ENSG00000000003   TSPAN6    0.1184475      0.0000000           NA              0</span><br><span class="line">## ENSG00000000419     DPM1 1654.4618144      0.6789538 5.280802e-02              1</span><br><span class="line">## ENSG00000000457    SCYL3  681.0463277      1.5263838 3.915112e-07              1</span><br><span class="line">## ENSG00000000460 C1orf112  389.7226640      3.8933573 1.180333e-14              1</span><br><span class="line">## ENSG00000000938      FGR  364.7810090     -2.3554014 1.559228e-04              1</span><br><span class="line">## ENSG00000000971      CFH    1.1346239      1.2932740 4.491812e-01              0</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p1 &lt;- ggmaplot(diff_express, fdr = <span class="number">0.05</span>, fc = <span class="number">2</span>, size = <span class="number">0.4</span>,</span><br><span class="line">               palette = c(<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;gray&quot;</span>))</span><br><span class="line">p1</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/ggpubr-ii/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"></p>
+<figure>
+<img src="/images/ggpubr-ii/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" /><figcaption aria-hidden="true">plot of chunk unnamed-chunk-4</figcaption>
+</figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">p2 &lt;- ggmaplot(diff_express, main = expression(<span class="string">&quot;Group 1&quot;</span> %-&gt;% <span class="string">&quot;Group 2&quot;</span>),</span><br><span class="line">               fdr = <span class="number">0.05</span>, fc = <span class="number">2</span>, size = <span class="number">0.4</span>,</span><br><span class="line">               palette = c(<span class="string">&quot;#B31B21&quot;</span>, <span class="string">&quot;#1465AC&quot;</span>, <span class="string">&quot;darkgray&quot;</span>),</span><br><span class="line">               genenames = as.vector(diff_express$name),</span><br><span class="line">               xlab = <span class="string">&quot;M&quot;</span>, ylab = <span class="string">&quot;A&quot;</span>,</span><br><span class="line">               legend = <span class="string">&quot;top&quot;</span>, top = <span class="number">20</span>,</span><br><span class="line">               font.label = c(<span class="number">11</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;red&quot;</span>),</span><br><span class="line">               font.legend = <span class="string">&quot;bold&quot;</span>, font.main = <span class="string">&quot;bold&quot;</span>,</span><br><span class="line">               ggtheme = ggplot2::theme_minimal())</span><br><span class="line">p2</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/ggpubr-ii/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5"></p>
+<figure>
+<img src="/images/ggpubr-ii/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5" /><figcaption aria-hidden="true">plot of chunk unnamed-chunk-5</figcaption>
+</figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add rectangle around labels</span></span><br><span class="line">p3 &lt;- ggmaplot(diff_express, main = expression(<span class="string">&quot;Group 1&quot;</span> %-&gt;% <span class="string">&quot;Group 2&quot;</span>),</span><br><span class="line">               fdr = <span class="number">0.05</span>, fc = <span class="number">2</span>, size = <span class="number">0.4</span>,</span><br><span class="line">               palette = c(<span class="string">&quot;#B31B21&quot;</span>, <span class="string">&quot;#1465AC&quot;</span>, <span class="string">&quot;darkgray&quot;</span>),</span><br><span class="line">               genenames = as.vector(diff_express$name),</span><br><span class="line">               legend = <span class="string">&quot;top&quot;</span>, top = <span class="number">20</span>, font.label = c(<span class="string">&quot;bold&quot;</span>, <span class="number">11</span>),</span><br><span class="line">               label.rectangle = <span class="literal">TRUE</span>, font.legend = <span class="string">&quot;bold&quot;</span>, </span><br><span class="line">               select.top.method = <span class="string">&quot;padj&quot;</span>, font.main = <span class="string">&quot;bold&quot;</span>,</span><br><span class="line">               ggtheme = ggplot2::theme_minimal())</span><br><span class="line">p3</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/ggpubr-ii/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6"></p>
+<figure>
+<img src="/images/ggpubr-ii/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" /><figcaption aria-hidden="true">plot of chunk unnamed-chunk-6</figcaption>
+</figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">p4 &lt;- ggmaplot(diff_express, main = expression(<span class="string">&quot;Group 1&quot;</span> %-&gt;% <span class="string">&quot;Group 2&quot;</span>),</span><br><span class="line">               fdr = <span class="number">0.05</span>, fc = <span class="number">2</span>, size = <span class="number">0.5</span>,</span><br><span class="line">               palette = c(<span class="string">&quot;#B31B21&quot;</span>, <span class="string">&quot;#1465AC&quot;</span>, <span class="string">&quot;darkgray&quot;</span>),</span><br><span class="line">               genenames = as.vector(diff_express$name),</span><br><span class="line">               legend = <span class="string">&quot;top&quot;</span>, top = <span class="number">20</span>, font.label = c(<span class="string">&quot;bold&quot;</span>, <span class="number">11</span>),</span><br><span class="line">               label.rectangle = <span class="literal">TRUE</span>, font.legend = <span class="string">&quot;bold&quot;</span>, </span><br><span class="line">               select.top.method = <span class="string">&quot;fc&quot;</span>, font.main = <span class="string">&quot;bold&quot;</span>,</span><br><span class="line">               ggtheme = ggplot2::theme_minimal())</span><br><span class="line">p4</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/ggpubr-ii/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7"></p>
+<figure>
+<img src="/images/ggpubr-ii/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" /><figcaption aria-hidden="true">plot of chunk unnamed-chunk-7</figcaption>
+</figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sessionInfo()</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">## R version 4.0.2 (2020-06-22)</span><br><span class="line">## Platform: x86_64-w64-mingw32&#x2F;x64 (64-bit)</span><br><span class="line">## Running under: Windows 10 x64 (build 17763)</span><br><span class="line">## </span><br><span class="line">## Matrix products: default</span><br><span class="line">## </span><br><span class="line">## locale:</span><br><span class="line">## [1] LC_COLLATE&#x3D;Chinese (Simplified)_China.936  LC_CTYPE&#x3D;Chinese (Simplified)_China.936   </span><br><span class="line">## [3] LC_MONETARY&#x3D;Chinese (Simplified)_China.936 LC_NUMERIC&#x3D;C                              </span><br><span class="line">## [5] LC_TIME&#x3D;Chinese (Simplified)_China.936    </span><br><span class="line">## system code page: 65001</span><br><span class="line">## </span><br><span class="line">## attached base packages:</span><br><span class="line">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span><br><span class="line">## </span><br><span class="line">## other attached packages:</span><br><span class="line">##  [1] ggpubr_0.4.0       nycflights13_1.0.1 forcats_0.5.0      stringr_1.4.0     </span><br><span class="line">##  [5] dplyr_1.0.2        purrr_0.3.4        readr_1.3.1        tidyr_1.1.2       </span><br><span class="line">##  [9] tibble_3.0.3       ggplot2_3.3.2      tidyverse_1.3.0   </span><br><span class="line">## </span><br><span class="line">## loaded via a namespace (and not attached):</span><br><span class="line">##  [1] ggrepel_0.8.2     Rcpp_1.0.5        lubridate_1.7.9   assertthat_0.2.1  digest_0.6.25    </span><br><span class="line">##  [6] utf8_1.1.4        R6_2.4.1          cellranger_1.1.0  backports_1.1.9   reprex_0.3.0     </span><br><span class="line">## [11] evaluate_0.14     httr_1.4.2        highr_0.8         pillar_1.4.6      rlang_0.4.7      </span><br><span class="line">## [16] curl_4.3          readxl_1.3.1      rstudioapi_0.11   data.table_1.13.0 car_3.0-9        </span><br><span class="line">## [21] blob_1.2.1        labeling_0.3      foreign_0.8-80    munsell_0.5.0     broom_0.7.0      </span><br><span class="line">## [26] compiler_4.0.2    modelr_0.1.8      xfun_0.17         pkgconfig_2.0.3   tidyselect_1.1.0 </span><br><span class="line">## [31] rio_0.5.16        fansi_0.4.1       crayon_1.3.4      dbplyr_1.4.4      withr_2.2.0      </span><br><span class="line">## [36] grid_4.0.2        jsonlite_1.7.1    gtable_0.3.0      lifecycle_0.2.0   DBI_1.1.0        </span><br><span class="line">## [41] magrittr_1.5      scales_1.1.1      zip_2.1.1         cli_2.0.2         stringi_1.5.3    </span><br><span class="line">## [46] carData_3.0-4     farver_2.0.3      ggsignif_0.6.0    fs_1.5.0          xml2_1.3.2       </span><br><span class="line">## [51] ellipsis_0.3.1    generics_0.0.2    vctrs_0.3.4       openxlsx_4.1.5    ggsci_2.9        </span><br><span class="line">## [56] tools_4.0.2       glue_1.4.2        hms_0.5.3         abind_1.4-5       colorspace_1.4-1 </span><br><span class="line">## [61] rstatix_0.6.0     rvest_0.3.6       knitr_1.29        haven_2.3.1</span><br></pre></td></tr></table></figure>
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2020/05/28/ggpubr-i/" target="_self">
+              <a href="/2020/05/27/dplyr-i/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>上一页</span>
               </a>
@@ -179,7 +295,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2020/05/28/dplyr-iii/" target="_self">
+              <a href="/2020/05/28/ggpubr-i/" target="_self">
                 <span>下一页</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -192,7 +308,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ggmaplot%E5%87%BD%E6%95%B0%E7%BB%98%E5%88%B6%E7%81%AB%E5%B1%B1%E5%9B%BE"><span class="toc-text">使用ggmaplot函数绘制火山图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%89%80%E9%9C%80R%E5%8C%85"><span class="toc-text">加载所需R包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-text">基本用法:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-text">常用参数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">使用示例</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ggmaplot%E5%87%BD%E6%95%B0%E7%BB%98%E5%88%B6%E7%81%AB%E5%B1%B1%E5%9B%BE"><span class="toc-text">使用ggmaplot函数绘制火山图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%89%80%E9%9C%80r%E5%8C%85"><span class="toc-text">加载所需R包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-text">基本用法:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-text">常用参数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">使用示例</span></a></li></ol></li></ol>
     </div>
   </div>
 

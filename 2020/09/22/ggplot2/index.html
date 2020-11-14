@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,50 +234,45 @@
           
       </div>
       <div class="markdown-body">
-        <h3 id="添加原件"><a href="#添加原件" class="headerlink" title="添加原件"></a>添加原件</h3><ul>
-<li><p>添加竖线或者横线  </p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">geom_abline(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, <span class="keyword">...</span>, slope, intercept, na.rm = <span class="literal">FALSE</span>, show.legend = <span class="literal">NA</span>)</span><br><span class="line">geom_hline(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, <span class="keyword">...</span>, yintercept, na.rm = <span class="literal">FALSE</span>, show.legend = <span class="literal">NA</span>)</span><br><span class="line">geom_vline(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, <span class="keyword">...</span>, xintercept, na.rm = <span class="literal">FALSE</span>, show.legend = <span class="literal">NA</span>)</span><br></pre></td></tr></table></figure>
-
-<p>三个函数的作用分别是，geom_abline添加斜线， geom_hline添加水平线，geom_vline添加垂直线  </p>
-<p>参数slope 表示斜率  intercept表示截距  </p>
-<p>参数yintercept  表示y轴截距或直线所在位置  </p>
-<p>参数xintercept  表示x轴截距或直线所在位置  </p>
-</li>
-<li><p>添加线段  </p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2)</span><br></pre></td></tr></table></figure>
-
-<p>x, y控制线段起始位置，xend，yend控制线段终止位置  </p>
-</li>
-</ul>
-<h3 id="背景布局"><a href="#背景布局" class="headerlink" title="背景布局"></a>背景布局</h3><ul>
-<li><p>去掉网格  </p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme(panel.grid = element_blank())</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用与plot相似的背景  </p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme_classic()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>x，y轴转换  </p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">coord_flip()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>去掉图形和坐标轴间隙  </p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scale_y_continuous(expand = c(<span class="number">0</span>,<span class="number">0</span>))//这个可以去掉与X轴间隙</span><br><span class="line">scale_x_continuous(expand = c(<span class="number">0</span>,<span class="number">0</span>))//这个可以去掉与Y轴间隙</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="添加阴影"><a href="#添加阴影" class="headerlink" title="添加阴影"></a>添加阴影</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">geom_ribbon(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, stat = <span class="string">&quot;identity&quot;</span>, position = <span class="string">&quot;identity&quot;</span>, <span class="keyword">...</span>, na.rm = <span class="literal">FALSE</span>, orientation = <span class="literal">NA</span>,</span><br><span class="line">show.legend = <span class="literal">NA</span>, inherit.aes = <span class="literal">TRUE</span>,outline.type = <span class="string">&quot;both&quot;</span>)</span><br><span class="line"></span><br><span class="line">geom_area(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, stat = <span class="string">&quot;identity&quot;</span>, position = <span class="string">&quot;stack&quot;</span>, na.rm = <span class="literal">FALSE</span>, orientation = <span class="literal">NA</span>, show.legend = <span class="literal">NA</span>, inherit.aes = <span class="literal">TRUE</span>, <span class="keyword">...</span>, outline.type = <span class="string">&quot;upper&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加箭头和线段"><a href="#添加箭头和线段" class="headerlink" title="添加箭头和线段"></a>添加箭头和线段</h3><p>添加箭头或线段需要使用<code>annotate(&#39;segment&#39;)</code>  </p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">annotate(<span class="string">&#x27;segment&#x27;</span>, x=<span class="comment">#, xend=#, y=#, yend=#, arrow=arrow())</span></span><br></pre></td></tr></table></figure>
-
+        <h3 id="添加原件">添加原件</h3>
 <ul>
-<li>没有添加<code>arrow</code>参数时是绘制线段  </li>
-<li>如果添加了<code>arrow</code>参数，需要提前加载<code>library(grid)</code>包才能调用<code>arrow()</code>函数  </li>
+<li><p>添加竖线或者横线</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">geom_abline(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, <span class="keyword">...</span>, slope, intercept, na.rm = <span class="literal">FALSE</span>, show.legend = <span class="literal">NA</span>)</span><br><span class="line">geom_hline(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, <span class="keyword">...</span>, yintercept, na.rm = <span class="literal">FALSE</span>, show.legend = <span class="literal">NA</span>)</span><br><span class="line">geom_vline(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, <span class="keyword">...</span>, xintercept, na.rm = <span class="literal">FALSE</span>, show.legend = <span class="literal">NA</span>)</span><br></pre></td></tr></table></figure>
+<p>三个函数的作用分别是，geom_abline添加斜线， geom_hline添加水平线，geom_vline添加垂直线</p>
+<p>参数slope 表示斜率 intercept表示截距</p>
+<p>参数yintercept 表示y轴截距或直线所在位置</p>
+<p>参数xintercept 表示x轴截距或直线所在位置</p></li>
+<li><p>添加线段</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2)</span><br></pre></td></tr></table></figure>
+<p>x, y控制线段起始位置，xend，yend控制线段终止位置</p></li>
 </ul>
-<h3 id="画图理解"><a href="#画图理解" class="headerlink" title="画图理解"></a>画图理解</h3><ul>
-<li>使用ggplot绘图，图层是最重要的，要弄清参数是否写进了图层里。只有在图层中的对象才能进行后续的修改和操作。  </li>
+<h3 id="背景布局">背景布局</h3>
+<ul>
+<li><p>去掉网格</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme(panel.grid = element_blank())</span><br></pre></td></tr></table></figure></li>
+<li><p>使用与plot相似的背景</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme_classic()</span><br></pre></td></tr></table></figure></li>
+<li><p>x，y轴转换</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">coord_flip()</span><br></pre></td></tr></table></figure></li>
+<li><p>去掉图形和坐标轴间隙</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scale_y_continuous(expand = c(<span class="number">0</span>,<span class="number">0</span>))//这个可以去掉与X轴间隙</span><br><span class="line">scale_x_continuous(expand = c(<span class="number">0</span>,<span class="number">0</span>))//这个可以去掉与Y轴间隙</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="标题居中"><a href="#标题居中" class="headerlink" title="标题居中"></a>标题居中</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme(plot.title = element_text(hjust = <span class="number">0.5</span>))</span><br></pre></td></tr></table></figure>
-
+<h3 id="添加阴影">添加阴影</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">geom_ribbon(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, stat = <span class="string">&quot;identity&quot;</span>, position = <span class="string">&quot;identity&quot;</span>, <span class="keyword">...</span>, na.rm = <span class="literal">FALSE</span>, orientation = <span class="literal">NA</span>,</span><br><span class="line">show.legend = <span class="literal">NA</span>, inherit.aes = <span class="literal">TRUE</span>,outline.type = <span class="string">&quot;both&quot;</span>)</span><br><span class="line"></span><br><span class="line">geom_area(mapping = <span class="literal">NULL</span>, data = <span class="literal">NULL</span>, stat = <span class="string">&quot;identity&quot;</span>, position = <span class="string">&quot;stack&quot;</span>, na.rm = <span class="literal">FALSE</span>, orientation = <span class="literal">NA</span>, show.legend = <span class="literal">NA</span>, inherit.aes = <span class="literal">TRUE</span>, <span class="keyword">...</span>, outline.type = <span class="string">&quot;upper&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="添加箭头和线段">添加箭头和线段</h3>
+<p>添加箭头或线段需要使用<code>annotate('segment')</code></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">annotate(<span class="string">&#x27;segment&#x27;</span>, x=<span class="comment">#, xend=#, y=#, yend=#, arrow=arrow())</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>没有添加<code>arrow</code>参数时是绘制线段<br />
+</li>
+<li>如果添加了<code>arrow</code>参数，需要提前加载<code>library(grid)</code>包才能调用<code>arrow()</code>函数</li>
+</ul>
+<h3 id="画图理解">画图理解</h3>
+<ul>
+<li>使用ggplot绘图，图层是最重要的，要弄清参数是否写进了图层里。只有在图层中的对象才能进行后续的修改和操作。</li>
+</ul>
+<h3 id="标题居中">标题居中</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme(plot.title = element_text(hjust = <span class="number">0.5</span>))</span><br></pre></td></tr></table></figure>
 
       </div>
       

@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -127,22 +240,17 @@
           
       </div>
       <div class="markdown-body">
-        <p>根据R官方提供的安装方法，感觉在Ubuntu18.04上毫无作用，因此尝试从源码手动编译安装R  </p>
+        <p>根据R官方提供的安装方法，感觉在Ubuntu18.04上毫无作用，因此尝试从源码手动编译安装R</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装依赖</span></span><br><span class="line">sudo apt-get install xorg-dev libreadline-dev</span><br><span class="line">sudo apt-get install libcurl4-openssl-dev</span><br><span class="line">sudo apt-get install libbz2-dev</span><br><span class="line">sudo apt-get install libcairo2-dev libgtk2.0-dev</span><br><span class="line">sudo apt-get install texinfo texlive</span><br><span class="line">wget http://mirrors.ctan.org/fonts/inconsolata.zip</span><br><span class="line">sudo cp -Rfp inconsolata/* /usr/share/texmf/</span><br><span class="line"><span class="comment"># 或者 sudo cp -r inconsolata/ /usr/share/texlive/texmf-dist/tex/latex/</span></span><br><span class="line">sudo mktexlsr <span class="comment"># 刷新一下</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果没有java解释器，安装下</span></span><br><span class="line">sudo apt-get install default-jdk</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载与安装R</span></span><br><span class="line">curl -O https://cran.r-project.org/src/base/R-3/R-3.6.1.tar.gz</span><br><span class="line">tar -zxvf R-3.6.1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> R-3.6.1/</span><br><span class="line">./configure --prefix=<span class="variable">$HOME</span>/<span class="built_in">local</span>/R --enable-R-shlib --with-cairo=yes</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="comment"># ./configure --with-cairo --with-libpng --with-libtiff --with-jpeglib --enable-R-shlib --prefix=$HOME/local/R</span></span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建符号链接</span></span><br><span class="line"><span class="built_in">cd</span> /usr/bin/</span><br><span class="line">sudo ln -s <span class="variable">$HOME</span>/<span class="built_in">local</span>/R/bin/Rscript Rscript</span><br><span class="line">sudo ln -s <span class="variable">$HOME</span>/<span class="built_in">local</span>/R/bin/R R</span><br></pre></td></tr></table></figure>
-
-<p>在编译过程中需要使用<code>./configure</code>命令检测环境及其依赖包，检测过程中可能遇到的报错：  </p>
-<p>报错一：  </p>
+<p>在编译过程中需要使用<code>./configure</code>命令检测环境及其依赖包，检测过程中可能遇到的报错：</p>
+<p>报错一：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure: error: No F77 compiler found</span><br></pre></td></tr></table></figure>
-
-<p>解决办法：  </p>
+<p>解决办法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gfortran build-essential</span><br></pre></td></tr></table></figure>
-
 <p>报错二：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configure: error: <span class="string">&quot;liblzma library and headers are required&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>解决办法：安装xz  </p>
+<p>解决办法：安装xz</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo wget http://tukaani.org/xz/xz-5.2.4.tar.gz</span><br><span class="line">sudo tar xzvf xz-5.2.4.tar.gz</span><br><span class="line">sudo <span class="built_in">cd</span> xz-5.2.4</span><br><span class="line">sudo ./configure</span><br><span class="line">sudo make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
 
       </div>
       

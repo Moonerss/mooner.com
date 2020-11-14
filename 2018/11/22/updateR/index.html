@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,18 +234,18 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在windows中R和Rstudio的更新是非常头疼的问题，每次更新都需要把之前的版本删掉重新安装，甚是麻烦。所以一直在想是否有R包可以实现R的自动更新和配置。  </p>
-<h3 id="R的更新"><a href="#R的更新" class="headerlink" title="R的更新"></a>R的更新</h3><p>目前R已经提供了<code>installr</code>包用于更新R版本及其相关的软件，目前这种方法只适合于Windows平台。  </p>
-<h4 id="installr安装"><a href="#installr安装" class="headerlink" title="installr安装"></a><code>installr</code>安装</h4><p>目前支持镜像安装，或者从<code>github</code>安装：  </p>
+        <h2 id="背景">背景</h2>
+<p>在windows中R和Rstudio的更新是非常头疼的问题，每次更新都需要把之前的版本删掉重新安装，甚是麻烦。所以一直在想是否有R包可以实现R的自动更新和配置。</p>
+<h3 id="r的更新">R的更新</h3>
+<p>目前R已经提供了<code>installr</code>包用于更新R版本及其相关的软件，目前这种方法只适合于Windows平台。</p>
+<h4 id="installr安装"><code>installr</code>安装</h4>
+<p>目前支持镜像安装，或者从<code>github</code>安装：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 镜像安装</span></span><br><span class="line">install.packages(<span class="string">&#x27;installr&#x27;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># github安装</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">require</span>(<span class="string">&#x27;devtools&#x27;</span>)) install.packages(<span class="string">&#x27;devtools&#x27;</span>); <span class="comment"># make sure you have Rtools installed first! if not, then run:</span></span><br><span class="line"><span class="comment">#install.packages(&#x27;installr&#x27;)</span></span><br><span class="line"><span class="comment">#install.Rtools()</span></span><br><span class="line">devtools::install_github(<span class="string">&#x27;talgalili/installr&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装更新"><a href="#安装更新" class="headerlink" title="安装更新"></a>安装更新</h4><p>直接运行<code>installr()</code>，就会出现下面的选项框，选择需要更新的内容即可  </p>
-<div align = center> 
-    <img src = "/images/updateR/updateR.png">
-</div>
-
-<p>目前使用这种方法更新的下载速度比较慢，可能是由于镜像的原因，建议切换到清华的镜像  </p>
-<p><strong>注意</strong>：使用此方法更新Rstudio时，需要在R下运行，如果在Rstudio下将不能完成安装。  </p>
+<h4 id="安装更新">安装更新</h4>
+<p>直接运行<code>installr()</code>，就会出现下面的选项框，选择需要更新的内容即可</p>
+<p><img src = "/images/updateR/updateR.png" align = "middle"></p>
+<p>目前使用这种方法更新的下载速度比较慢，可能是由于镜像的原因，建议切换到清华的镜像</p>
+<p><strong>注意</strong>：使用此方法更新Rstudio时，需要在R下运行，如果在Rstudio下将不能完成安装。</p>
       </div>
       
         <div class="prev-or-next">
@@ -177,7 +290,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#R%E7%9A%84%E6%9B%B4%E6%96%B0"><span class="toc-text">R的更新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#installr%E5%AE%89%E8%A3%85"><span class="toc-text">installr安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%9B%B4%E6%96%B0"><span class="toc-text">安装更新</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#r%E7%9A%84%E6%9B%B4%E6%96%B0"><span class="toc-text">R的更新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#installr%E5%AE%89%E8%A3%85"><span class="toc-text">installr安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%9B%B4%E6%96%B0"><span class="toc-text">安装更新</span></a></li></ol></li></ol></li></ol>
     </div>
   </div>
 

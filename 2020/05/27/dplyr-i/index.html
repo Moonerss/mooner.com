@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -127,91 +240,77 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="dplyr"><a href="#dplyr" class="headerlink" title="dplyr"></a>dplyr</h1><p><code>dplyr</code>是<code>tidyverse</code>数据科学包中的重要成员，提供了许多数据操控(data manipulation)的语法，用于快速处理数据。  </p>
-<h2 id="Verbs-语法"><a href="#Verbs-语法" class="headerlink" title="Verbs 语法"></a>Verbs 语法</h2><p>在<code>dplyr</code>包中，提供了一致的动词语法，帮助解决最常见的数据操作:  </p>
+        <h1 id="dplyr">dplyr</h1>
+<p><code>dplyr</code>是<code>tidyverse</code>数据科学包中的重要成员，提供了许多数据操控(data manipulation)的语法，用于快速处理数据。</p>
+<h2 id="verbs-语法">Verbs 语法</h2>
+<p>在<code>dplyr</code>包中，提供了一致的动词语法，帮助解决最常见的数据操作:</p>
 <ul>
-<li><code>filter()</code>: 根据值筛选数据  </li>
-<li><code>arrange()</code>: 数据排序  </li>
-<li><code>select()</code> 和 <code>rename()</code>: 根据名字选择变量  </li>
-<li><code>mutate()</code> 和 <code>transmute()</code>: 修改数据  </li>
-<li><code>summarise()</code>: 数据摘要  </li>
-<li><code>sample_n()</code>和<code>sample_frac()</code>: 随机选择样本  </li>
+<li><code>filter()</code>: 根据值筛选数据<br />
+</li>
+<li><code>arrange()</code>: 数据排序<br />
+</li>
+<li><code>select()</code> 和 <code>rename()</code>: 根据名字选择变量<br />
+</li>
+<li><code>mutate()</code> 和 <code>transmute()</code>: 修改数据<br />
+</li>
+<li><code>summarise()</code>: 数据摘要<br />
+</li>
+<li><code>sample_n()</code>和<code>sample_frac()</code>: 随机选择样本</li>
 </ul>
-<h3 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(nycflights13)</span><br><span class="line">dim(flights)</span><br></pre></td></tr></table></figure>
-
+<h3 id="filter">filter()</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(nycflights13)</span><br><span class="line">dim(flights)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 336776     19</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flights</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 19</span><br><span class="line">##     year month   day dep_time sched_dep_time dep_delay</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;</span><br><span class="line">##  1  2013     1     1      517            515         2</span><br><span class="line">##  2  2013     1     1      533            529         4</span><br><span class="line">##  3  2013     1     1      542            540         2</span><br><span class="line">##  4  2013     1     1      544            545        -1</span><br><span class="line">##  5  2013     1     1      554            600        -6</span><br><span class="line">##  6  2013     1     1      554            558        -4</span><br><span class="line">##  7  2013     1     1      555            600        -5</span><br><span class="line">##  8  2013     1     1      557            600        -3</span><br><span class="line">##  9  2013     1     1      557            600        -3</span><br><span class="line">## 10  2013     1     1      558            600        -2</span><br><span class="line">## # ... with 336,766 more rows, and 13 more variables:</span><br><span class="line">## #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,</span><br><span class="line">## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,</span><br><span class="line">## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,</span><br><span class="line">## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,</span><br><span class="line">## #   time_hour &lt;dttm&gt;</span><br></pre></td></tr></table></figure>
-
-<p>根据条件筛选行：  </p>
+<p>根据条件筛选行：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filter(flights, month == <span class="number">1</span>, day == <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 842 x 19</span><br><span class="line">##     year month   day dep_time sched_dep_time dep_delay</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;</span><br><span class="line">##  1  2013     1     1      517            515         2</span><br><span class="line">##  2  2013     1     1      533            529         4</span><br><span class="line">##  3  2013     1     1      542            540         2</span><br><span class="line">##  4  2013     1     1      544            545        -1</span><br><span class="line">##  5  2013     1     1      554            600        -6</span><br><span class="line">##  6  2013     1     1      554            558        -4</span><br><span class="line">##  7  2013     1     1      555            600        -5</span><br><span class="line">##  8  2013     1     1      557            600        -3</span><br><span class="line">##  9  2013     1     1      557            600        -3</span><br><span class="line">## 10  2013     1     1      558            600        -2</span><br><span class="line">## # ... with 832 more rows, and 13 more variables:</span><br><span class="line">## #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,</span><br><span class="line">## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,</span><br><span class="line">## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,</span><br><span class="line">## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,</span><br><span class="line">## #   time_hour &lt;dttm&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这等价于<code>flights[flights$month == 1 &amp; flights$day == 1, ]</code>  </p>
-<h3 id="arrange"><a href="#arrange" class="headerlink" title="arrange()"></a>arrange()</h3><p>数据排序  </p>
+<p>这等价于<code>flights[flights$month == 1 &amp; flights$day == 1, ]</code></p>
+<h3 id="arrange">arrange()</h3>
+<p>数据排序</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrange(flights, year, month, day)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 19</span><br><span class="line">##     year month   day dep_time sched_dep_time dep_delay</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;</span><br><span class="line">##  1  2013     1     1      517            515         2</span><br><span class="line">##  2  2013     1     1      533            529         4</span><br><span class="line">##  3  2013     1     1      542            540         2</span><br><span class="line">##  4  2013     1     1      544            545        -1</span><br><span class="line">##  5  2013     1     1      554            600        -6</span><br><span class="line">##  6  2013     1     1      554            558        -4</span><br><span class="line">##  7  2013     1     1      555            600        -5</span><br><span class="line">##  8  2013     1     1      557            600        -3</span><br><span class="line">##  9  2013     1     1      557            600        -3</span><br><span class="line">## 10  2013     1     1      558            600        -2</span><br><span class="line">## # ... with 336,766 more rows, and 13 more variables:</span><br><span class="line">## #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,</span><br><span class="line">## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,</span><br><span class="line">## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,</span><br><span class="line">## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,</span><br><span class="line">## #   time_hour &lt;dttm&gt;</span><br></pre></td></tr></table></figure>
-
-<p>降序排列  </p>
+<p>降序排列</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrange(flights, desc(arr_delay))</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 19</span><br><span class="line">##     year month   day dep_time sched_dep_time dep_delay</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;</span><br><span class="line">##  1  2013     1     9      641            900      1301</span><br><span class="line">##  2  2013     6    15     1432           1935      1137</span><br><span class="line">##  3  2013     1    10     1121           1635      1126</span><br><span class="line">##  4  2013     9    20     1139           1845      1014</span><br><span class="line">##  5  2013     7    22      845           1600      1005</span><br><span class="line">##  6  2013     4    10     1100           1900       960</span><br><span class="line">##  7  2013     3    17     2321            810       911</span><br><span class="line">##  8  2013     7    22     2257            759       898</span><br><span class="line">##  9  2013    12     5      756           1700       896</span><br><span class="line">## 10  2013     5     3     1133           2055       878</span><br><span class="line">## # ... with 336,766 more rows, and 13 more variables:</span><br><span class="line">## #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,</span><br><span class="line">## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,</span><br><span class="line">## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,</span><br><span class="line">## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,</span><br><span class="line">## #   time_hour &lt;dttm&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="select"><a href="#select" class="headerlink" title="select()"></a>select()</h4><p>变量筛选  </p>
+<h4 id="select">select()</h4>
+<p>变量筛选</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Select columns by name</span></span><br><span class="line">select(flights, year, month, day)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 3</span><br><span class="line">##     year month   day</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;</span><br><span class="line">##  1  2013     1     1</span><br><span class="line">##  2  2013     1     1</span><br><span class="line">##  3  2013     1     1</span><br><span class="line">##  4  2013     1     1</span><br><span class="line">##  5  2013     1     1</span><br><span class="line">##  6  2013     1     1</span><br><span class="line">##  7  2013     1     1</span><br><span class="line">##  8  2013     1     1</span><br><span class="line">##  9  2013     1     1</span><br><span class="line">## 10  2013     1     1</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Select all columns between year and day (inclusive)</span></span><br><span class="line">select(flights, year:day)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 3</span><br><span class="line">##     year month   day</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;</span><br><span class="line">##  1  2013     1     1</span><br><span class="line">##  2  2013     1     1</span><br><span class="line">##  3  2013     1     1</span><br><span class="line">##  4  2013     1     1</span><br><span class="line">##  5  2013     1     1</span><br><span class="line">##  6  2013     1     1</span><br><span class="line">##  7  2013     1     1</span><br><span class="line">##  8  2013     1     1</span><br><span class="line">##  9  2013     1     1</span><br><span class="line">## 10  2013     1     1</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Select all columns except those from year to day (inclusive)</span></span><br><span class="line">select(flights, -(year:day))</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 16</span><br><span class="line">##    dep_time sched_dep_time dep_delay arr_time sched_arr_time</span><br><span class="line">##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;</span><br><span class="line">##  1      517            515         2      830            819</span><br><span class="line">##  2      533            529         4      850            830</span><br><span class="line">##  3      542            540         2      923            850</span><br><span class="line">##  4      544            545        -1     1004           1022</span><br><span class="line">##  5      554            600        -6      812            837</span><br><span class="line">##  6      554            558        -4      740            728</span><br><span class="line">##  7      555            600        -5      913            854</span><br><span class="line">##  8      557            600        -3      709            723</span><br><span class="line">##  9      557            600        -3      838            846</span><br><span class="line">## 10      558            600        -2      753            745</span><br><span class="line">## # ... with 336,766 more rows, and 11 more variables:</span><br><span class="line">## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,</span><br><span class="line">## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,</span><br><span class="line">## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,</span><br><span class="line">## #   time_hour &lt;dttm&gt;</span><br></pre></td></tr></table></figure>
-
-<p>利用<code>select</code>和其他辅助函数进行组合，进行更多类型的操作  </p>
+<p>利用<code>select</code>和其他辅助函数进行组合，进行更多类型的操作</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提取变量并重命名</span></span><br><span class="line">select(flights, tail_num = tailnum)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 1</span><br><span class="line">##    tail_num</span><br><span class="line">##    &lt;chr&gt;   </span><br><span class="line">##  1 N14228  </span><br><span class="line">##  2 N24211  </span><br><span class="line">##  3 N619AA  </span><br><span class="line">##  4 N804JB  </span><br><span class="line">##  5 N668DN  </span><br><span class="line">##  6 N39463  </span><br><span class="line">##  7 N516JB  </span><br><span class="line">##  8 N829AS  </span><br><span class="line">##  9 N593JB  </span><br><span class="line">## 10 N3ALAA  </span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
-<h3 id="mutate"><a href="#mutate" class="headerlink" title="mutate()"></a>mutate()</h3><p>基于已有变量，添加新变量  </p>
+<h3 id="mutate">mutate()</h3>
+<p>基于已有变量，添加新变量</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mutate(flights,</span><br><span class="line">  gain = arr_delay - dep_delay,</span><br><span class="line">  speed = distance / air_time * <span class="number">60</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 21</span><br><span class="line">##     year month   day dep_time sched_dep_time dep_delay</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;</span><br><span class="line">##  1  2013     1     1      517            515         2</span><br><span class="line">##  2  2013     1     1      533            529         4</span><br><span class="line">##  3  2013     1     1      542            540         2</span><br><span class="line">##  4  2013     1     1      544            545        -1</span><br><span class="line">##  5  2013     1     1      554            600        -6</span><br><span class="line">##  6  2013     1     1      554            558        -4</span><br><span class="line">##  7  2013     1     1      555            600        -5</span><br><span class="line">##  8  2013     1     1      557            600        -3</span><br><span class="line">##  9  2013     1     1      557            600        -3</span><br><span class="line">## 10  2013     1     1      558            600        -2</span><br><span class="line">## # ... with 336,766 more rows, and 15 more variables:</span><br><span class="line">## #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,</span><br><span class="line">## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,</span><br><span class="line">## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,</span><br><span class="line">## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,</span><br><span class="line">## #   time_hour &lt;dttm&gt;, gain &lt;dbl&gt;, speed &lt;dbl&gt;</span><br></pre></td></tr></table></figure>
-
-<p>并且，可以依据刚建立的新列进行操作  </p>
+<p>并且，可以依据刚建立的新列进行操作</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mutate(flights,</span><br><span class="line">  gain = arr_delay - dep_delay,</span><br><span class="line">  gain_per_hour = gain / (air_time / <span class="number">60</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 21</span><br><span class="line">##     year month   day dep_time sched_dep_time dep_delay</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;</span><br><span class="line">##  1  2013     1     1      517            515         2</span><br><span class="line">##  2  2013     1     1      533            529         4</span><br><span class="line">##  3  2013     1     1      542            540         2</span><br><span class="line">##  4  2013     1     1      544            545        -1</span><br><span class="line">##  5  2013     1     1      554            600        -6</span><br><span class="line">##  6  2013     1     1      554            558        -4</span><br><span class="line">##  7  2013     1     1      555            600        -5</span><br><span class="line">##  8  2013     1     1      557            600        -3</span><br><span class="line">##  9  2013     1     1      557            600        -3</span><br><span class="line">## 10  2013     1     1      558            600        -2</span><br><span class="line">## # ... with 336,766 more rows, and 15 more variables:</span><br><span class="line">## #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,</span><br><span class="line">## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,</span><br><span class="line">## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,</span><br><span class="line">## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,</span><br><span class="line">## #   time_hour &lt;dttm&gt;, gain &lt;dbl&gt;, gain_per_hour &lt;dbl&gt;</span><br></pre></td></tr></table></figure>
-
-<p>若只想保留新列，可以使用<code>transmute()</code>  </p>
+<p>若只想保留新列，可以使用<code>transmute()</code></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">transmute(flights,</span><br><span class="line">  gain = arr_delay - dep_delay,</span><br><span class="line">  gain_per_hour = gain / (air_time / <span class="number">60</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 336,776 x 2</span><br><span class="line">##     gain gain_per_hour</span><br><span class="line">##    &lt;dbl&gt;         &lt;dbl&gt;</span><br><span class="line">##  1     9          2.38</span><br><span class="line">##  2    16          4.23</span><br><span class="line">##  3    31         11.6 </span><br><span class="line">##  4   -17         -5.57</span><br><span class="line">##  5   -19         -9.83</span><br><span class="line">##  6    16          6.4 </span><br><span class="line">##  7    24          9.11</span><br><span class="line">##  8   -11        -12.5 </span><br><span class="line">##  9    -5         -2.14</span><br><span class="line">## 10    10          4.35</span><br><span class="line">## # ... with 336,766 more rows</span><br></pre></td></tr></table></figure>
-
-<h3 id="summarise"><a href="#summarise" class="headerlink" title="summarise()"></a>summarise()</h3><p>根据要求提供数据概要  </p>
+<h3 id="summarise">summarise()</h3>
+<p>根据要求提供数据概要</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">summarise(flights,</span><br><span class="line">  delay = mean(dep_delay, na.rm = <span class="literal">TRUE</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 1 x 1</span><br><span class="line">##   delay</span><br><span class="line">##   &lt;dbl&gt;</span><br><span class="line">## 1  12.6</span><br></pre></td></tr></table></figure>
-
-<h2 id="sample-n-和-sample-frac"><a href="#sample-n-和-sample-frac" class="headerlink" title="sample_n() 和 sample_frac()"></a>sample_n() 和 sample_frac()</h2><p>随机选择变量  </p>
+<h2 id="sample_n-和-sample_frac">sample_n() 和 sample_frac()</h2>
+<p>随机选择变量</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提取变量并重命名</span></span><br><span class="line">sample_n(flights, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 10 x 19</span><br><span class="line">##     year month   day dep_time sched_dep_time dep_delay</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;</span><br><span class="line">##  1  2013     4    19     1948           1930        18</span><br><span class="line">##  2  2013     5    17     1328           1329        -1</span><br><span class="line">##  3  2013     6    27      732            600        92</span><br><span class="line">##  4  2013     7    17     1010           1014        -4</span><br><span class="line">##  5  2013     8    17     1241           1229        12</span><br><span class="line">##  6  2013     7    14      700            700         0</span><br><span class="line">##  7  2013     9    24     1015           1020        -5</span><br><span class="line">##  8  2013    11    14     1451           1455        -4</span><br><span class="line">##  9  2013     3    17      847            850        -3</span><br><span class="line">## 10  2013    11     9     1629           1630        -1</span><br><span class="line">## # ... with 13 more variables: arr_time &lt;int&gt;,</span><br><span class="line">## #   sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,</span><br><span class="line">## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,</span><br><span class="line">## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,</span><br><span class="line">## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按比例选择</span></span><br><span class="line">sample_frac(flights, <span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## # A tibble: 3,368 x 19</span><br><span class="line">##     year month   day dep_time sched_dep_time dep_delay</span><br><span class="line">##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;</span><br><span class="line">##  1  2013     4     2      812            815        -3</span><br><span class="line">##  2  2013     8     6      542            545        -3</span><br><span class="line">##  3  2013     2     6      608            610        -2</span><br><span class="line">##  4  2013    10     5     1138           1145        -7</span><br><span class="line">##  5  2013     6    14     1515           1455        20</span><br><span class="line">##  6  2013     7    17      608            609        -1</span><br><span class="line">##  7  2013    10     2     1214           1223        -9</span><br><span class="line">##  8  2013     6     9     1739           1629        70</span><br><span class="line">##  9  2013     6    13      651            700        -9</span><br><span class="line">## 10  2013    10     1     2026           2029        -3</span><br><span class="line">## # ... with 3,358 more rows, and 13 more variables:</span><br><span class="line">## #   arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;,</span><br><span class="line">## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,</span><br><span class="line">## #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,</span><br><span class="line">## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;,</span><br><span class="line">## #   time_hour &lt;dttm&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>dplyr</code>动词语法的操作规律：  </p>
-<ol>
-<li>第一个参数是data.frame  </li>
-<li>第二个参数是要进行的操作  </li>
+<h2 id="总结">总结</h2>
+<p><code>dplyr</code>动词语法的操作规律：</p>
+<ol type="1">
+<li>第一个参数是data.frame<br />
+</li>
+<li>第二个参数是要进行的操作<br />
+</li>
 <li>最后返回一个data.frame</li>
 </ol>
       </div>
@@ -251,7 +350,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2020/05/28/ggpubr-i/" target="_self">
+              <a href="/2020/05/28/ggpubr-ii/" target="_self">
                 <span>下一页</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -264,7 +363,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dplyr"><span class="toc-text">dplyr</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Verbs-%E8%AF%AD%E6%B3%95"><span class="toc-text">Verbs 语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#filter"><span class="toc-text">filter()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arrange"><span class="toc-text">arrange()</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#select"><span class="toc-text">select()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mutate"><span class="toc-text">mutate()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#summarise"><span class="toc-text">summarise()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample-n-%E5%92%8C-sample-frac"><span class="toc-text">sample_n() 和 sample_frac()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dplyr"><span class="toc-text">dplyr</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#verbs-%E8%AF%AD%E6%B3%95"><span class="toc-text">Verbs 语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#filter"><span class="toc-text">filter()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arrange"><span class="toc-text">arrange()</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#select"><span class="toc-text">select()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mutate"><span class="toc-text">mutate()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#summarise"><span class="toc-text">summarise()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sample_n-%E5%92%8C-sample_frac"><span class="toc-text">sample_n() 和 sample_frac()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
     </div>
   </div>
 

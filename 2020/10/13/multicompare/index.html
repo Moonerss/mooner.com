@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,10 +234,11 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>我们经常会碰到连续变量的多组比较，比如比较基因在不同分组(如分期、分级和亚型等)的表达差异。两个分组之间的比较可以使用T检验或Wilcox秩和检验，三个及三个以上分组的比较可以使用方差检验和kruskal检验。同样的，我们可以将不同分组的差异结果进行可视化展示。  </p>
-<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成数据</span></span><br><span class="line">set.seed(<span class="number">40</span>)</span><br><span class="line">data &lt;- data.frame(exp=c(rnorm(<span class="number">30</span>,<span class="number">0</span>,<span class="number">1.3</span>),rnorm(<span class="number">30</span>,<span class="number">0.5</span>,<span class="number">1.6</span>),</span><br><span class="line">                          rnorm(<span class="number">30</span>,<span class="number">1</span>,<span class="number">1.9</span>),rnorm(<span class="number">30</span>,<span class="number">1.5</span>,<span class="number">1.9</span>)),</span><br><span class="line">                   Stage=c(rep(paste0(<span class="string">&#x27;Stage-&#x27;</span>,<span class="number">1</span>:<span class="number">4</span>),each=<span class="number">30</span>)))</span><br><span class="line">data$Stage &lt;- factor(data$Stage, levels = c(<span class="string">&quot;Stage-1&quot;</span>, <span class="string">&quot;Stage-2&quot;</span>, <span class="string">&quot;Stage-3&quot;</span>, <span class="string">&quot;Stage-4&quot;</span>))</span><br><span class="line"><span class="comment"># 绘制图片</span></span><br><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(ggsci)</span><br><span class="line"><span class="keyword">library</span>(ggpubr)</span><br><span class="line">ggplot(data,aes(Stage,exp,fill=Stage))+</span><br><span class="line">  geom_boxplot(outlier.colour = <span class="literal">NA</span>,notch = <span class="literal">T</span>,size = <span class="number">0.4</span>)+ <span class="comment"># 箱式图</span></span><br><span class="line">  geom_jitter(shape = <span class="number">21</span>,size=<span class="number">2</span>,width = <span class="number">0.2</span>)+             <span class="comment"># 散点</span></span><br><span class="line">  geom_violin(position = position_dodge(width = <span class="number">.75</span>),</span><br><span class="line">              size = <span class="number">0.4</span>,alpha = <span class="number">0.4</span>,trim = <span class="literal">T</span>)+           <span class="comment"># 小提琴图</span></span><br><span class="line">  theme_classic()+</span><br><span class="line">  theme(legend.position = <span class="string">&#x27;none&#x27;</span>,</span><br><span class="line">        axis.title.y = element_text(size=<span class="number">12</span>),</span><br><span class="line">        axis.text = element_text(size=<span class="number">12</span>),</span><br><span class="line">        axis.title.x = element_blank())+</span><br><span class="line">  scale_fill_npg()+</span><br><span class="line">  stat_compare_means(comparisons = split(t(combn(levels(data$Stage),<span class="number">2</span>)),<span class="number">1</span>:nrow(t(combn(levels(data$Stage),<span class="number">2</span>)))),</span><br><span class="line">                     label = <span class="string">&#x27;p.signif&#x27;</span>) +</span><br><span class="line">  stat_compare_means(label.y = max(data$exp)+<span class="number">5.7</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/multicompare/pic.jpg"></p>
+        <h2 id="背景">背景</h2>
+<p>我们经常会碰到连续变量的多组比较，比如比较基因在不同分组(如分期、分级和亚型等)的表达差异。两个分组之间的比较可以使用T检验或Wilcox秩和检验，三个及三个以上分组的比较可以使用方差检验和kruskal检验。同样的，我们可以将不同分组的差异结果进行可视化展示。</p>
+<h2 id="绘图">绘图</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成数据</span></span><br><span class="line">set.seed(<span class="number">40</span>)</span><br><span class="line">data &lt;- data.frame(exp=c(rnorm(<span class="number">30</span>,<span class="number">0</span>,<span class="number">1.3</span>),rnorm(<span class="number">30</span>,<span class="number">0.5</span>,<span class="number">1.6</span>),</span><br><span class="line">                          rnorm(<span class="number">30</span>,<span class="number">1</span>,<span class="number">1.9</span>),rnorm(<span class="number">30</span>,<span class="number">1.5</span>,<span class="number">1.9</span>)),</span><br><span class="line">                   Stage=c(rep(paste0(<span class="string">&#x27;Stage-&#x27;</span>,<span class="number">1</span>:<span class="number">4</span>),each=<span class="number">30</span>)))</span><br><span class="line">data$Stage &lt;- factor(data$Stage, levels = c(<span class="string">&quot;Stage-1&quot;</span>, <span class="string">&quot;Stage-2&quot;</span>, <span class="string">&quot;Stage-3&quot;</span>, <span class="string">&quot;Stage-4&quot;</span>))</span><br><span class="line"><span class="comment"># 绘制图片</span></span><br><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(ggsci)</span><br><span class="line"><span class="keyword">library</span>(ggpubr)</span><br><span class="line">ggplot(data,aes(Stage,exp,fill=Stage))+</span><br><span class="line">  geom_boxplot(outlier.colour = <span class="literal">NA</span>,notch = <span class="literal">T</span>,size = <span class="number">0.4</span>)+ <span class="comment"># 箱式图</span></span><br><span class="line">  geom_jitter(shape = <span class="number">21</span>,size=<span class="number">2</span>,width = <span class="number">0.2</span>)+             <span class="comment"># 散点</span></span><br><span class="line">  geom_violin(position = position_dodge(width = <span class="number">.75</span>),</span><br><span class="line">              size = <span class="number">0.4</span>,alpha = <span class="number">0.4</span>,trim = <span class="literal">T</span>)+           <span class="comment"># 小提琴图</span></span><br><span class="line">  theme_classic()+</span><br><span class="line">  theme(legend.position = <span class="string">&#x27;none&#x27;</span>,</span><br><span class="line">        axis.title.y = element_text(size=<span class="number">12</span>),</span><br><span class="line">        axis.text = element_text(size=<span class="number">12</span>),</span><br><span class="line">        axis.title.x = element_blank())+</span><br><span class="line">  scale_fill_npg()+</span><br><span class="line">  stat_compare_means(comparisons = split(t(combn(levels(data$Stage),<span class="number">2</span>)),<span class="number">1</span>:nrow(t(combn(levels(data$Stage),<span class="number">2</span>)))),</span><br><span class="line">                     label = <span class="string">&#x27;p.signif&#x27;</span>) +</span><br><span class="line">  stat_compare_means(label.y = max(data$exp)+<span class="number">5.7</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/multicompare/pic.jpg" /></p>
 <p>如图分析：四组整体是存在显著的差异的,并且第一组和其他三组两两之间都有显著的差异；但是后三组两两之间的差异不明显。为了获得一个较优的选择，通过观察他们的中位值可以发现第四组的中位值是最高的，因此可能选择第四组作为最终的选择。</p>
 
       </div>

@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,69 +234,67 @@
           
       </div>
       <div class="markdown-body">
-        <p>&ensp;&ensp; 字符串格式化用于解决字符串和变量同时输出时的格式安排。Python中有str.format()，format()和%三种格式控制的方法，但主要采用str.format()方法进行字符串的格式化。  </p>
-<h2 id="str-format-方法"><a href="#str-format-方法" class="headerlink" title="str.format()方法"></a><code>str.format()</code>方法</h2><p><code>str.format()</code>方法的基本使用格式：  </p>
+        <p>   字符串格式化用于解决字符串和变量同时输出时的格式安排。Python中有str.format()，format()和%三种格式控制的方法，但主要采用str.format()方法进行字符串的格式化。</p>
+<h2 id="str.format方法"><code>str.format()</code>方法</h2>
+<p><code>str.format()</code>方法的基本使用格式：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;模板字符串&gt;.format(&lt;由逗号分隔的参数&gt;)</span><br></pre></td></tr></table></figure>
-
-<p>其中模板字符串是由一系列的槽({})组成，用来控制修改字符串中嵌入值出现的位置，基本思路：将<code>str.format()</code>方法中逗号分隔的参数按照序号关系替换到模板字符串的槽中，槽用大括号({})来表示，如果大括号中没有序号，则按照出现顺序替换。  </p>
+<p>其中模板字符串是由一系列的槽({})组成，用来控制修改字符串中嵌入值出现的位置，基本思路：将<code>str.format()</code>方法中逗号分隔的参数按照序号关系替换到模板字符串的槽中，槽用大括号({})来表示，如果大括号中没有序号，则按照出现顺序替换。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#123;1&#125; &#123;0&#125;&#x27;</span>.format(<span class="string">&#x27;abc&#x27;</span>, <span class="number">123</span>)  <span class="comment"># 可以不按顺序进行位置映射，输出&#x27;123 abc&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#123;&#125; &#123;&#125;&#x27;</span>.format(<span class="string">&#x27;abc&#x27;</span>, <span class="number">123</span>)  <span class="comment"># 可以不指定参数名称，输出&#x27;abc 123&#x27;</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p><strong>注意</strong>：序号是从0开始，而不是1。  </p>
+<p><strong>注意</strong>：序号是从0开始，而不是1。</p>
 </blockquote>
-<p>槽的内部格式为：  </p>
+<p>槽的内部格式为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&lt;参数序号&gt;：&lt;格式控制标记&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在复杂格式控制方面，format函数也提供了强大的控制方式，它的格式为：  </p>
+<p>在复杂格式控制方面，format函数也提供了强大的控制方式，它的格式为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; : [[填充字符]对齐方式][符号标志][#][宽度][,][.精度][类型] &#125;</span><br></pre></td></tr></table></figure>
-
 <table>
 <thead>
-<tr>
-<th align="center">类型</th>
-<th align="center">说明</th>
+<tr class="header">
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">:</td>
-<td align="center">引导符号，分割参数序号和格式控制标记</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">:</td>
+<td style="text-align: center;">引导符号，分割参数序号和格式控制标记</td>
 </tr>
-<tr>
-<td align="center">填充字符</td>
-<td align="center">用于填充的单个字符，不填时默认为空格</td>
+<tr class="even">
+<td style="text-align: center;">填充字符</td>
+<td style="text-align: center;">用于填充的单个字符，不填时默认为空格</td>
 </tr>
-<tr>
-<td align="center">对齐方式</td>
-<td align="center"><code>&lt;</code>左对齐，<code>&gt;</code>右对齐，<code>^</code>居中，不足部分会用填充字符填充</td>
+<tr class="odd">
+<td style="text-align: center;">对齐方式</td>
+<td style="text-align: center;"><code>&lt;</code>左对齐，<code>&gt;</code>右对齐，<code>^</code>居中，不足部分会用填充字符填充</td>
 </tr>
-<tr>
-<td align="center">符号标志</td>
-<td align="center"><code>+</code>表示有符号（正数前显示+，负数前显示-），空格表示正数前加空格来和负数对齐</td>
+<tr class="even">
+<td style="text-align: center;">符号标志</td>
+<td style="text-align: center;"><code>+</code>表示有符号（正数前显示+，负数前显示-），空格表示正数前加空格来和负数对齐</td>
 </tr>
-<tr>
-<td align="center">#</td>
-<td align="center">表示是否在二、八、十六进制前显示0b、0o、0x等符号</td>
+<tr class="odd">
+<td style="text-align: center;">#</td>
+<td style="text-align: center;">表示是否在二、八、十六进制前显示0b、0o、0x等符号</td>
 </tr>
-<tr>
-<td align="center">宽度</td>
-<td align="center">输出字符串的宽度，不足部分自动用填充字符补齐</td>
+<tr class="even">
+<td style="text-align: center;">宽度</td>
+<td style="text-align: center;">输出字符串的宽度，不足部分自动用填充字符补齐</td>
 </tr>
-<tr>
-<td align="center">,</td>
-<td align="center">英文状态下的逗号，数字的千分位分隔符，适用于整数和浮点数</td>
+<tr class="odd">
+<td style="text-align: center;">,</td>
+<td style="text-align: center;">英文状态下的逗号，数字的千分位分隔符，适用于整数和浮点数</td>
 </tr>
-<tr>
-<td align="center">精度</td>
-<td align="center">浮点数小数部分的精度</td>
+<tr class="even">
+<td style="text-align: center;">精度</td>
+<td style="text-align: center;">浮点数小数部分的精度</td>
 </tr>
-<tr>
-<td align="center">类型</td>
-<td align="center">整数类型b，c，d，o，x，X，浮点数类型e，E，f，%</td>
+<tr class="odd">
+<td style="text-align: center;">类型</td>
+<td style="text-align: center;">整数类型b，c，d，o，x，X，浮点数类型e，E，f，%</td>
 </tr>
-</tbody></table>
-<p>举例如下：  </p>
+</tbody>
+</table>
+<p>举例如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#123;:S^+#016,.2f&#125;&#x27;</span>.format(<span class="number">1234</span>)  <span class="comment"># 输出&#x27;SSS+1,234.00SSSS&#x27;</span></span><br></pre></td></tr></table></figure>
-
 <p>整数类型输出格式有6种：</p>
 <ul>
 <li>b：输出整数的二进制形式。</li>
@@ -191,128 +302,133 @@
 <li>d：输出整数的十进制形式。</li>
 <li>o：输出整数的八进制形式。</li>
 <li>x：输出整数的小写十六进制形式。</li>
-<li>X：输出整数的大写十六进制形式。  </li>
+<li>X：输出整数的大写十六进制形式。</li>
 </ul>
 <p>浮点数类型输出格式有4种：</p>
 <ul>
 <li>e：输出浮点数对应的小写字母e的指数形式。</li>
 <li>E：输出浮点数对应的小写字母e的指数形式。</li>
 <li>f：输出浮点数的标准浮点形式。</li>
-<li>%：输出浮点数的百分形式。  </li>
+<li>%：输出浮点数的百分形式。</li>
 </ul>
-<h2 id="format方法"><a href="#format方法" class="headerlink" title="format方法"></a><code>format</code>方法</h2><p><code>format()</code>方法和<code>str.format()</code>方法用法差不多，只不过，<code>format()</code>方法中槽的内部只有格式控制标记，没有参数序号和引导符号。  </p>
+<h2 id="format方法"><code>format</code>方法</h2>
+<p><code>format()</code>方法和<code>str.format()</code>方法用法差不多，只不过，<code>format()</code>方法中槽的内部只有格式控制标记，没有参数序号和引导符号。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>format(<span class="string">&#x27;aksfhakefhk&#x27;</span>,<span class="string">&#x27;&lt;20&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;aksfhakefhk  </span></span><br><span class="line"><span class="string">&gt;&gt;&gt; format(&#x27;</span>lfajlajl<span class="string">&#x27;, &#x27;</span>*&gt;<span class="number">30</span><span class="string">&#x27;)    # 右对齐，填充*</span></span><br><span class="line"><span class="string">&#x27;</span>**********************lfajlajl<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="f-string方法"><a href="#f-string方法" class="headerlink" title="f-string方法"></a><code>f-string</code>方法</h2><p>f-string就是以f’’开头的字符串，字符串内容和format方法中的格式一样，但是可以直接将变量带入到字符串中，可读性进一步增加，例如：  </p>
+<h2 id="f-string方法"><code>f-string</code>方法</h2>
+<p>f-string就是以f''开头的字符串，字符串内容和format方法中的格式一样，但是可以直接将变量带入到字符串中，可读性进一步增加，例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">amount = <span class="number">1234</span></span><br><span class="line"><span class="string">f&#x27;请转账给我<span class="subst">&#123;amount:,<span class="number">.2</span>f&#125;</span>元&#x27;</span>  <span class="comment"># &#x27;请转账给我1,234.00元&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="方法"><a href="#方法" class="headerlink" title="%方法"></a><code>%</code>方法</h2><p>%方法类似于C和Fortran语言中的格式化输入输出，%s表示格式化为字符串，%d表示格式化为数字。  </p>
-<p>例如：  </p>
+<h2 id="方法"><code>%</code>方法</h2>
+<p>%方法类似于C和Fortran语言中的格式化输入输出，%s表示格式化为字符串，%d表示格式化为数字。</p>
+<p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;I&#x27;m %s. I&#x27;m %d year old&quot;</span> % (<span class="string">&#x27;jeason&#x27;</span>, <span class="number">23</span>))</span><br></pre></td></tr></table></figure>
-<p>格式化字符串时，Python使用一个字符串作为<strong>模板</strong>。模板中有<strong>格式符</strong>，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。在模板和tuple之间，有一个%号分隔，它代表了<strong>格式化操作</strong>  </p>
-<p>格式符为真实值预留位置，并控制显示的格式。格式符可以包含有一个类型码，用以控制显示的类型，如下:  </p>
+<p>格式化字符串时，Python使用一个字符串作为<strong>模板</strong>。模板中有<strong>格式符</strong>，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。在模板和tuple之间，有一个%号分隔，它代表了<strong>格式化操作</strong></p>
+<p>格式符为真实值预留位置，并控制显示的格式。格式符可以包含有一个类型码，用以控制显示的类型，如下:</p>
 <table>
 <thead>
-<tr>
-<th align="center">格式符</th>
-<th align="center">意义</th>
+<tr class="header">
+<th style="text-align: center;">格式符</th>
+<th style="text-align: center;">意义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">%s</td>
-<td align="center">字符串 (采用str()的显示)</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">%s</td>
+<td style="text-align: center;">字符串 (采用str()的显示)</td>
 </tr>
-<tr>
-<td align="center">%r</td>
-<td align="center">字符串 (采用repr()的显示)</td>
+<tr class="even">
+<td style="text-align: center;">%r</td>
+<td style="text-align: center;">字符串 (采用repr()的显示)</td>
 </tr>
-<tr>
-<td align="center">%c</td>
-<td align="center">单个字符</td>
+<tr class="odd">
+<td style="text-align: center;">%c</td>
+<td style="text-align: center;">单个字符</td>
 </tr>
-<tr>
-<td align="center">%b</td>
-<td align="center">二进制整数</td>
+<tr class="even">
+<td style="text-align: center;">%b</td>
+<td style="text-align: center;">二进制整数</td>
 </tr>
-<tr>
-<td align="center">%d</td>
-<td align="center">十进制整数</td>
+<tr class="odd">
+<td style="text-align: center;">%d</td>
+<td style="text-align: center;">十进制整数</td>
 </tr>
-<tr>
-<td align="center">%i</td>
-<td align="center">十进制整数</td>
+<tr class="even">
+<td style="text-align: center;">%i</td>
+<td style="text-align: center;">十进制整数</td>
 </tr>
-<tr>
-<td align="center">%o</td>
-<td align="center">八进制整数</td>
+<tr class="odd">
+<td style="text-align: center;">%o</td>
+<td style="text-align: center;">八进制整数</td>
 </tr>
-<tr>
-<td align="center">%x</td>
-<td align="center">十六进制整数</td>
+<tr class="even">
+<td style="text-align: center;">%x</td>
+<td style="text-align: center;">十六进制整数</td>
 </tr>
-<tr>
-<td align="center">%e</td>
-<td align="center">指数 (基底写为e)</td>
+<tr class="odd">
+<td style="text-align: center;">%e</td>
+<td style="text-align: center;">指数 (基底写为e)</td>
 </tr>
-<tr>
-<td align="center">%E</td>
-<td align="center">指数 (基底写为E)</td>
+<tr class="even">
+<td style="text-align: center;">%E</td>
+<td style="text-align: center;">指数 (基底写为E)</td>
 </tr>
-<tr>
-<td align="center">%f</td>
-<td align="center">浮点数</td>
+<tr class="odd">
+<td style="text-align: center;">%f</td>
+<td style="text-align: center;">浮点数</td>
 </tr>
-<tr>
-<td align="center">%F</td>
-<td align="center">浮点数，与上相同</td>
+<tr class="even">
+<td style="text-align: center;">%F</td>
+<td style="text-align: center;">浮点数，与上相同</td>
 </tr>
-<tr>
-<td align="center">%g</td>
-<td align="center">指数(e)或浮点数 (根据显示长度)</td>
+<tr class="odd">
+<td style="text-align: center;">%g</td>
+<td style="text-align: center;">指数(e)或浮点数 (根据显示长度)</td>
 </tr>
-<tr>
-<td align="center">%G</td>
-<td align="center">指数(E)或浮点数 (根据显示长度)</td>
+<tr class="even">
+<td style="text-align: center;">%G</td>
+<td style="text-align: center;">指数(E)或浮点数 (根据显示长度)</td>
 </tr>
-<tr>
-<td align="center">%%</td>
-<td align="center">字符”%”</td>
+<tr class="odd">
+<td style="text-align: center;">%%</td>
+<td style="text-align: center;">字符"%"</td>
 </tr>
-</tbody></table>
-<p>除了对数据类型的指定，%操作符也支持更复杂的格式控制：  </p>
+</tbody>
+</table>
+<p>除了对数据类型的指定，%操作符也支持更复杂的格式控制：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%[数据名称][对齐标志][宽度].[精度]类型</span><br></pre></td></tr></table></figure>
-
 <table>
 <thead>
-<tr>
-<th align="center">类型</th>
-<th align="center">说明</th>
+<tr class="header">
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">数据名称</td>
-<td align="center">数据名称用于字典赋值，如果不是就不用写</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">数据名称</td>
+<td style="text-align: center;">数据名称用于字典赋值，如果不是就不用写</td>
 </tr>
-<tr>
-<td align="center">对齐标志</td>
-<td align="center">可以有+,-,’ ‘或0。+表示右对齐。-表示左对齐。’ ‘为一个空格，表示在正数的左侧填充一个空格，从而与负数对齐。0表示使用0填充。</td>
+<tr class="even">
+<td style="text-align: center;">对齐标志</td>
+<td style="text-align: center;">可以有+,-,' '或0。+表示右对齐。-表示左对齐。' '为一个空格，表示在正数的左侧填充一个空格，从而与负数对齐。0表示使用0填充。</td>
 </tr>
-<tr>
-<td align="center">宽度</td>
-<td align="center">格式化后的字符长度，如果不够用0或者空格补齐</td>
+<tr class="odd">
+<td style="text-align: center;">宽度</td>
+<td style="text-align: center;">格式化后的字符长度，如果不够用0或者空格补齐</td>
 </tr>
-<tr>
-<td align="center">精度</td>
-<td align="center">小数点后的位数</td>
+<tr class="even">
+<td style="text-align: center;">精度</td>
+<td style="text-align: center;">小数点后的位数</td>
 </tr>
-<tr>
-<td align="center">类型</td>
-<td align="center">数据类型</td>
+<tr class="odd">
+<td style="text-align: center;">类型</td>
+<td style="text-align: center;">数据类型</td>
 </tr>
-</tbody></table>
-<hr>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/vamei/archive/2013/03/12/2954938.html">Python补充05 字符串格式化 (%操作符)</a>  </p>
-<p><a target="_blank" rel="noopener" href="https://www.zhouzying.cn/84.html">python中的字符串的格式化</a>  </p>
+</tbody>
+</table>
+<hr />
+<h3 id="reference">Reference</h3>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/vamei/archive/2013/03/12/2954938.html">Python补充05 字符串格式化 (%操作符)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhouzying.cn/84.html">python中的字符串的格式化</a></p>
 
       </div>
       
@@ -358,7 +474,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#str-format-%E6%96%B9%E6%B3%95"><span class="toc-text">str.format()方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#format%E6%96%B9%E6%B3%95"><span class="toc-text">format方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#f-string%E6%96%B9%E6%B3%95"><span class="toc-text">f-string方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-text">%方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#str.format%E6%96%B9%E6%B3%95"><span class="toc-text">str.format()方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#format%E6%96%B9%E6%B3%95"><span class="toc-text">format方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#f-string%E6%96%B9%E6%B3%95"><span class="toc-text">f-string方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-text">%方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
     </div>
   </div>
 

@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,51 +234,63 @@
           
       </div>
       <div class="markdown-body">
-        <p><img src="/images/single-cell-i/Workflow.png" alt="workflow">  </p>
-<p>这是一个经典的单细胞分析流程，主要分为以下几个步骤：  </p>
-<h2 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h2><p>在正式分析之前，关于实验问题的探讨是很有必要的，<strong>最重要的一个就是技术的选择：</strong>  </p>
+        <p><img src="/images/single-cell-i/Workflow.png" /></p>
+<p>这是一个经典的单细胞分析流程，主要分为以下几个步骤：</p>
+<h2 id="实验设计">实验设计</h2>
+<p>在正式分析之前，关于实验问题的探讨是很有必要的，<strong>最重要的一个就是技术的选择：</strong></p>
 <ul>
 <li><strong>Droplet-based</strong>: 10X Genomics, inDrop, Drop-seq</li>
 <li>Plate-based with unique molecular identifiers (<strong>UMIs</strong>): CEL-seq, MARS-seq</li>
 <li>Plate-based with <strong>reads</strong>: Smart-seq2</li>
-<li>Other: sci-RNA-seq, Seq-Well  </li>
+<li>Other: sci-RNA-seq, Seq-Well</li>
 </ul>
-<p>每种方法都有优劣（Mereu et al. 2019; Ziegenhain et al. 2017)，目前以10X为代表的droplet-based方法由于高通量和低细胞成本成为了约定俗成的技术；Plate-based方法可以捕获其他的一些表型信息（如细胞形态），另外可以根据实验目的进行调整，灵活性比较好；Read-based方法可以覆盖全转录本，在分析可变剪切、外显子突变等方面很有用；UMI-based方法可以减轻PCR扩增偏差。  </p>
-<p><strong>下一个问题就是：到底要捕获多少细胞？测序要测多深？</strong>  </p>
-<p>答案很清晰：  As much as you can afford to spend.  </p>
-<p>再补充一下这个答案就是：想要发现罕见细胞类群，就要多获得细胞；想要探索潜在的微小差异，就要加大测序深度。目前常用的droplet-based仪器可以捕获1万到10万细胞，测序深度是每个细胞1000到10000 UMIs，在经济条件一定的前提下，它们之间一般是成反比。另外它还要权衡高细胞捕获通量和影响捕获效率的“双细胞比例”。  </p>
-<p><strong>实验设计和常规转录组类似</strong>，也是要考虑一个实验条件下多个生物重复，而且实验条件最好不要混杂批次。需要注意的是：生物重复不是指的单个细胞，而是指的提供细胞的供体（donors）或者细胞培养体系（cultures）   </p>
-<h2 id="获得表达矩阵"><a href="#获得表达矩阵" class="headerlink" title="获得表达矩阵"></a>获得表达矩阵</h2><p>和常规转录组一样，单细胞转录组也是需要得到表达矩阵，才能进行下游分析。表达矩阵包含的信息就是：每个细胞中比对到每个基因的UMIs或者reads数。有一点需要注意：<strong>它的定量方法和具体的实验技术相关</strong>  </p>
+<p>每种方法都有优劣（Mereu et al. 2019; Ziegenhain et al. 2017)，目前以10X为代表的droplet-based方法由于高通量和低细胞成本成为了约定俗成的技术；Plate-based方法可以捕获其他的一些表型信息（如细胞形态），另外可以根据实验目的进行调整，灵活性比较好；Read-based方法可以覆盖全转录本，在分析可变剪切、外显子突变等方面很有用；UMI-based方法可以减轻PCR扩增偏差。</p>
+<p><strong>下一个问题就是：到底要捕获多少细胞？测序要测多深？</strong></p>
+<p>答案很清晰： As much as you can afford to spend.</p>
+<p>再补充一下这个答案就是：想要发现罕见细胞类群，就要多获得细胞；想要探索潜在的微小差异，就要加大测序深度。目前常用的droplet-based仪器可以捕获1万到10万细胞，测序深度是每个细胞1000到10000 UMIs，在经济条件一定的前提下，它们之间一般是成反比。另外它还要权衡高细胞捕获通量和影响捕获效率的“双细胞比例”。</p>
+<p><strong>实验设计和常规转录组类似</strong>，也是要考虑一个实验条件下多个生物重复，而且实验条件最好不要混杂批次。需要注意的是：生物重复不是指的单个细胞，而是指的提供细胞的供体（donors）或者细胞培养体系（cultures）</p>
+<h2 id="获得表达矩阵">获得表达矩阵</h2>
+<p>和常规转录组一样，单细胞转录组也是需要得到表达矩阵，才能进行下游分析。表达矩阵包含的信息就是：每个细胞中比对到每个基因的UMIs或者reads数。有一点需要注意：<strong>它的定量方法和具体的实验技术相关</strong></p>
 <ul>
-<li>10X的数据：使用<code>CellRanger</code> 软件，基于STAR比对到参考基因组，然后统计每个基因的UMIs数量  </li>
-<li>Pseudo-alignment方法（如<code>alevin</code>）：不需要比对参考基因组，节省时间、内存  </li>
-<li>对于一些高度multiplexed的方法：可以使用<code>scPipe</code> 包：提供了一套综合的分析流程，利用<code>Rsubread</code>比对，然后统计每个基因的UMIs数量  </li>
-<li>CEL-seq、CEL-seq2数据：<code>scruff</code> 包可以专门分析  </li>
+<li>10X的数据：使用<code>CellRanger</code> 软件，基于STAR比对到参考基因组，然后统计每个基因的UMIs数量<br />
+</li>
+<li>Pseudo-alignment方法（如<code>alevin</code>）：不需要比对参考基因组，节省时间、内存<br />
+</li>
+<li>对于一些高度multiplexed的方法：可以使用<code>scPipe</code> 包：提供了一套综合的分析流程，利用<code>Rsubread</code>比对，然后统计每个基因的UMIs数量<br />
+</li>
+<li>CEL-seq、CEL-seq2数据：<code>scruff</code> 包可以专门分析<br />
+</li>
 <li>read-based方法：可以使用常规bulk 转录组定量的流程（比如smartseq2就可以用hisat2+featureCounts）</li>
-<li>任何包含spike-in转录本的数据：spike-in序列都要在比对、定量之前加到参考基因组中  </li>
+<li>任何包含spike-in转录本的数据：spike-in序列都要在比对、定量之前加到参考基因组中</li>
 </ul>
 <blockquote>
-<p>multiplexed：翻译叫做”多路复用“，即：large numbers of libraries to be pooled and sequenced simultaneously during a single run，可以节省成本和时间  </p>
+<p>multiplexed：翻译叫做”多路复用“，即：large numbers of libraries to be pooled and sequenced simultaneously during a single run，可以节省成本和时间</p>
 </blockquote>
-<p>定量结束后，一般是先导入表达矩阵然后创建一个<code>SingleCellExperiment</code>对象（例如：<code>read.table() + SingleCellExperiment()</code>）。除此以外，还有一些特定的文件格式需要用特定的包，比如DropletUtils可以分析10X数据，<code>tximport/tximeta</code> 可以分析pseudo-alignment数据  </p>
-<p><strong>需要注意的点</strong>：  </p>
+<p>定量结束后，一般是先导入表达矩阵然后创建一个<code>SingleCellExperiment</code>对象（例如：<code>read.table() + SingleCellExperiment()</code>）。除此以外，还有一些特定的文件格式需要用特定的包，比如DropletUtils可以分析10X数据，<code>tximport/tximeta</code> 可以分析pseudo-alignment数据</p>
+<p><strong>需要注意的点</strong>：</p>
 <ul>
 <li>一些定量工具会统计表达矩阵中的reads比对率，会存在一些未必对的情况。尽管这些信息可以用作质控，但这些数值如果被误认为是表达量信息，那么就会干扰下游分析。因此在进行下游分析之前，这部分信息可以去掉或者保存在<code>colData</code>中</li>
-<li>如果分析的是人类数据并且加入了ERCC，<strong>我们很多时候直接用<code>^ERCC</code>在行名中进行正则匹配，但是这时要小心</strong>，因为<strong>ERCC基因家族在人类基因组注释中确实存在</strong>，很有可能将真的基因作为外源转录本进行分析。这个问题可以通过将表达矩阵的行名设置为Ensembl,或Entrez来解决   </li>
+<li>如果分析的是人类数据并且加入了ERCC，<strong>我们很多时候直接用<code>^ERCC</code>在行名中进行正则匹配，但是这时要小心</strong>，因为<strong>ERCC基因家族在人类基因组注释中确实存在</strong>，很有可能将真的基因作为外源转录本进行分析。这个问题可以通过将表达矩阵的行名设置为Ensembl,或Entrez来解决</li>
 </ul>
-<h2 id="数据处理与下游分析"><a href="#数据处理与下游分析" class="headerlink" title="数据处理与下游分析"></a>数据处理与下游分析</h2><ol>
-<li><strong>quality control</strong>：去掉低质量细胞。这些细胞可能在建库环节被破坏，可能没有被有效捕获（这就是所谓的“dropout”）。一般会统计：每个细胞的全部count数、spike-in或线粒体reads比例、检测到基因的数量  </li>
-<li><strong>normalized expression value</strong>：为了减小细胞文库的偏差（可能由于细胞捕获效率不同、测序深度的差异而造成文库大小差异），把细胞们放在同一起跑线上，才能进行下面的细胞相似性比较，后面再根据相似性进行细胞分群。一般是基于log转换（当然有的函数也涉及了一些size factor的计算），从而对均值-方差进行校正  </li>
-<li><strong>feature selection</strong>：一般选取高变异基因（Highly Variable Genes）进行后续分析，使用HVGs不用全部基因的原因一是为了减少计算量，二是减少不感兴趣基因（比如在细胞之间没什么差异）对分析产生的噪音  </li>
-<li><strong>dimensionality reduction</strong>：让数据更“紧凑”，一般是线性降维PCA+非线性降维tSNE/umap。PCA一般是先获得初步的低维数据（可能会挑出几十个主成分），然后传给t-SNE进一步压缩，进行可视化  </li>
-<li><strong>clustering</strong>：根据细胞归一化后的表达量相似性分成组，然后根据每个组marker基因（可理解为这一群细胞的标志性基因）的差异表达对分群进行生物学定义  </li>
+<h2 id="数据处理与下游分析">数据处理与下游分析</h2>
+<ol type="1">
+<li><strong>quality control</strong>：去掉低质量细胞。这些细胞可能在建库环节被破坏，可能没有被有效捕获（这就是所谓的“dropout”）。一般会统计：每个细胞的全部count数、spike-in或线粒体reads比例、检测到基因的数量<br />
+</li>
+<li><strong>normalized expression value</strong>：为了减小细胞文库的偏差（可能由于细胞捕获效率不同、测序深度的差异而造成文库大小差异），把细胞们放在同一起跑线上，才能进行下面的细胞相似性比较，后面再根据相似性进行细胞分群。一般是基于log转换（当然有的函数也涉及了一些size factor的计算），从而对均值-方差进行校正<br />
+</li>
+<li><strong>feature selection</strong>：一般选取高变异基因（Highly Variable Genes）进行后续分析，使用HVGs不用全部基因的原因一是为了减少计算量，二是减少不感兴趣基因（比如在细胞之间没什么差异）对分析产生的噪音<br />
+</li>
+<li><strong>dimensionality reduction</strong>：让数据更“紧凑”，一般是线性降维PCA+非线性降维tSNE/umap。PCA一般是先获得初步的低维数据（可能会挑出几十个主成分），然后传给t-SNE进一步压缩，进行可视化<br />
+</li>
+<li><strong>clustering</strong>：根据细胞归一化后的表达量相似性分成组，然后根据每个组marker基因（可理解为这一群细胞的标志性基因）的差异表达对分群进行生物学定义</li>
 </ol>
-<h2 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h2><p>用<code>scRNAseq</code>包的droplet-based的视网膜数据【Macosko et al. (2015)】进行演示。</p>
+<h2 id="演示">演示</h2>
+<p>用<code>scRNAseq</code>包的droplet-based的视网膜数据【Macosko et al. (2015)】进行演示。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(scRNAseq)</span><br><span class="line">sce &lt;- MacoskoRetinaData()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Quality control.</span></span><br><span class="line"><span class="keyword">library</span>(scater)</span><br><span class="line">is.mito &lt;- grepl(<span class="string">&quot;^MT-&quot;</span>, rownames(sce))</span><br><span class="line">qcstats &lt;- perCellQCMetrics(sce, subsets=list(Mito=is.mito))</span><br><span class="line">filtered &lt;- quickPerCellQC(qcstats, percent_subsets=<span class="string">&quot;subsets_Mito_percent&quot;</span>)</span><br><span class="line">sce &lt;- sce[, !filtered$discard]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Normalization.</span></span><br><span class="line">sce &lt;- logNormCounts(sce)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Feature selection.</span></span><br><span class="line"><span class="keyword">library</span>(scran)</span><br><span class="line">dec &lt;- modelGeneVar(sce)</span><br><span class="line">hvg &lt;- getTopHVGs(dec, prop=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Dimensionality reduction.</span></span><br><span class="line">set.seed(<span class="number">1234</span>)</span><br><span class="line">sce &lt;- runPCA(sce, ncomponents=<span class="number">25</span>, subset_row=hvg)</span><br><span class="line">sce &lt;- runUMAP(sce, dimred = <span class="string">&#x27;PCA&#x27;</span>, external_neighbors=<span class="literal">TRUE</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Clustering.</span></span><br><span class="line">g &lt;- buildSNNGraph(sce, use.dimred = <span class="string">&#x27;PCA&#x27;</span>)</span><br><span class="line">colLabels(sce) &lt;- factor(igraph::cluster_louvain(g)$membership)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Visualization.</span></span><br><span class="line">plotUMAP(sce, colour_by=<span class="string">&quot;label&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/single-cell-i/quick-start-umap-1.png" alt="umap">  </p>
-<hr>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a target="_blank" rel="noopener" href="https://osca.bioconductor.org/">Orchestrating Single-Cell Analysis with Bioconductor</a>  </p>
+<p><img src="/images/single-cell-i/quick-start-umap-1.png" /></p>
+<hr />
+<h4 id="reference">Reference</h4>
+<p><a target="_blank" rel="noopener" href="https://osca.bioconductor.org/">Orchestrating Single-Cell Analysis with Bioconductor</a></p>
       </div>
       
         <div class="prev-or-next">
@@ -210,7 +335,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1"><span class="toc-text">实验设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%BE%97%E8%A1%A8%E8%BE%BE%E7%9F%A9%E9%98%B5"><span class="toc-text">获得表达矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E4%B8%8B%E6%B8%B8%E5%88%86%E6%9E%90"><span class="toc-text">数据处理与下游分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%94%E7%A4%BA"><span class="toc-text">演示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1"><span class="toc-text">实验设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%BE%97%E8%A1%A8%E8%BE%BE%E7%9F%A9%E9%98%B5"><span class="toc-text">获得表达矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E4%B8%8B%E6%B8%B8%E5%88%86%E6%9E%90"><span class="toc-text">数据处理与下游分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%94%E7%A4%BA"><span class="toc-text">演示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#reference"><span class="toc-text">Reference</span></a></li></ol></li></ol></li></ol>
     </div>
   </div>
 

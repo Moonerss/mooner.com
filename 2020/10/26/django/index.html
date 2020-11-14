@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,16 +234,17 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在对Django项目进行移植时，由于生成项目的时候是将依赖和解释信息以绝对路径的方式写入配置文件的，<br>所以从一台电脑移植到另一台电脑，直接通过拷贝的方式是行不通的，正确的做法是将依赖模块写入requirements.txt文件中，<br>这样在别人使用我们的项目时，不需要再一个个去安装所需模块，只需安装依赖文件即可。  </p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="使用-pip-freeze"><a href="#使用-pip-freeze" class="headerlink" title="使用 pip freeze"></a>使用 <code>pip freeze</code></h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在项目根目录中，打开终端执行以下命令</span></span><br><span class="line"><span class="comment"># 生成 requirements.txt 文件</span></span><br><span class="line">pip freeze &gt; requirements.txt</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-
+        <h2 id="背景">背景</h2>
+<p>在对Django项目进行移植时，由于生成项目的时候是将依赖和解释信息以绝对路径的方式写入配置文件的， 所以从一台电脑移植到另一台电脑，直接通过拷贝的方式是行不通的，正确的做法是将依赖模块写入requirements.txt文件中， 这样在别人使用我们的项目时，不需要再一个个去安装所需模块，只需安装依赖文件即可。</p>
+<h2 id="解决方法">解决方法</h2>
+<h3 id="使用-pip-freeze">使用 <code>pip freeze</code></h3>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在项目根目录中，打开终端执行以下命令</span></span><br><span class="line"><span class="comment"># 生成 requirements.txt 文件</span></span><br><span class="line">pip freeze &gt; requirements.txt</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>该方法最好是在虚拟环境下进行的，否则会将整个环境中的包都列出来。  </p>
+<p>该方法最好是在虚拟环境下进行的，否则会将整个环境中的包都列出来。</p>
 </blockquote>
-<h3 id="使用-pipreqs"><a href="#使用-pipreqs" class="headerlink" title="使用 pipreqs"></a>使用 <code>pipreqs</code></h3><p>有时候并不需要将整个虚拟环境所有依赖都导出，有可能有几十上百个模块，而本项目只依赖其中几个，那么这时仅导出本项目所依赖文件即可。  </p>
+<h3 id="使用-pipreqs">使用 <code>pipreqs</code></h3>
+<p>有时候并不需要将整个虚拟环境所有依赖都导出，有可能有几十上百个模块，而本项目只依赖其中几个，那么这时仅导出本项目所依赖文件即可。</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install pipreqs</span><br><span class="line">pipreqs /var/www/project  --encoding=utf8 <span class="comment">#项目目录</span></span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-
-
 
       </div>
       

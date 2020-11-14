@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,50 +234,82 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在实际的应用过程中，我们往往需要计算两个变量之间的相关性。但是有一个问题————一般会有两类变量：连续型变量(continuous variable) 和 分类变量（categorical variable）。因此我们需要各自不同的统计度量来计算两两之间的相关性（continuous-continuous, categorical-categorical, continuous-categorical）  </p>
-<p>而相关性问题又可以分成两个不同的子问题，即：  </p>
-<ol>
-<li>检验两个变量之间是否显著相关;  </li>
-<li>定量两个变量之间的关联性  </li>
+        <h2 id="背景">背景</h2>
+<p>在实际的应用过程中，我们往往需要计算两个变量之间的相关性。但是有一个问题————一般会有两类变量：连续型变量(continuous variable) 和 分类变量（categorical variable）。因此我们需要各自不同的统计度量来计算两两之间的相关性（continuous-continuous, categorical-categorical, continuous-categorical）</p>
+<p>而相关性问题又可以分成两个不同的子问题，即：</p>
+<ol type="1">
+<li>检验两个变量之间是否显著相关;<br />
+</li>
+<li>定量两个变量之间的关联性</li>
 </ol>
-<h2 id="categorical-categorical"><a href="#categorical-categorical" class="headerlink" title="categorical-categorical"></a>categorical-categorical</h2><p>当比较两个分类变量时，我们可以通过计算分类的频率从而构建出列联表。比如：我们想要知道性别（Gender）和获得基金资助（Grant）之间是否存在相关性。可能数据包含两列：(1) Gender（Male/Female）(2) Grant （Yes/No）。通过计算他们各自的频率可以得到列联表    </p>
+<h2 id="categorical-categorical">categorical-categorical</h2>
+<p>当比较两个分类变量时，我们可以通过计算分类的频率从而构建出列联表。比如：我们想要知道性别（Gender）和获得基金资助（Grant）之间是否存在相关性。可能数据包含两列：(1) Gender（Male/Female）(2) Grant （Yes/No）。通过计算他们各自的频率可以得到列联表</p>
 <table>
-    <tr>
-        <td> </td>
-        <td> </td>
-        <th colspan="2">Gender</th>
-    </tr>
-    <tr>
-        <td> </td>
-        <td> </td>
-        <td>Male</td>
-        <td>Female</td>
-    </tr>
-    <tr>
-        <th rowspan="2">Grant</th>
-        <td>Yes</td>
-        <td>100</td>
-        <td>40</td>
-    </tr>
-    <tr>
-        <td>No</td>
-        <td>600</td>
-        <td>500</td>
-    </tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<th colspan="2">
+Gender
+</th>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+Male
+</td>
+<td>
+Female
+</td>
+</tr>
+<tr>
+<th rowspan="2">
+Grant
+</th>
+<td>
+Yes
+</td>
+<td>
+100
+</td>
+<td>
+40
+</td>
+</tr>
+<tr>
+<td>
+No
+</td>
+<td>
+600
+</td>
+<td>
+500
+</td>
+</tr>
 </table>
-
-
-<p>通常情况下，我们一般使用卡方检验去检验两者之间是否有显著的相关性，然而我们去衡量两者之间的关系强弱的时候可以使用以下统计量：  </p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Goodman_and_Kruskal's_lambda">Goodman Kruskal’s lambda</a>  </li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Phi_coefficient">Phi co-efficient</a> (uses chi-squared statistic)  </li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cram%C3%A9r's_V">Cramer’s V</a> (uses chi-squared statistic)  </li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Tschuprow's_T">Tschuprow’s <em>T</em></a> (uses chi-squared statistic)  </li>
-<li><a target="_blank" rel="noopener" href="http://www.statisticshowto.com/contingency-coefficient/">Contingency coefficient C</a> (uses chi-squared statistic)  </li>
+<p>通常情况下，我们一般使用卡方检验去检验两者之间是否有显著的相关性，然而我们去衡量两者之间的关系强弱的时候可以使用以下统计量：</p>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Goodman_and_Kruskal&#39;s_lambda">Goodman Kruskal’s lambda</a><br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Phi_coefficient">Phi co-efficient</a> (uses chi-squared statistic)<br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cramér&#39;s_V">Cramer’s V</a> (uses chi-squared statistic)<br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Tschuprow&#39;s_T">Tschuprow’s <em>T</em></a> (uses chi-squared statistic)<br />
+</li>
+<li><a target="_blank" rel="noopener" href="http://www.statisticshowto.com/contingency-coefficient/">Contingency coefficient C</a> (uses chi-squared statistic)</li>
 </ol>
-<h2 id="continuous-categorical"><a href="#continuous-categorical" class="headerlink" title="continuous-categorical"></a><strong>continuous</strong>-<strong>categorical</strong></h2><p>对于此类事件，计算相关性的方法主要分为以下三种：  </p>
-<h3 id="Point-biserial-Correlation"><a href="#Point-biserial-Correlation" class="headerlink" title="Point biserial Correlation"></a><strong>Point biserial Correlation</strong></h3><p><code>point biserial</code>相关系数是皮尔森相关系数的特例。需要</p>
-<h3 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a><strong>Logistic Regression</strong></h3><h3 id="Kruskal-Wallis-H-Test"><a href="#Kruskal-Wallis-H-Test" class="headerlink" title="Kruskal-Wallis H Test"></a><strong>Kruskal-Wallis H Test</strong></h3>
+<h2 id="continuous-categorical"><strong>continuous</strong>-<strong>categorical</strong></h2>
+<p>对于此类事件，计算相关性的方法主要分为以下三种：</p>
+<h3 id="point-biserial-correlation"><strong>Point biserial Correlation</strong></h3>
+<p><code>point biserial</code>相关系数是皮尔森相关系数的特例。需要</p>
+<h3 id="logistic-regression"><strong>Logistic Regression</strong></h3>
+<h3 id="kruskal-wallis-h-test"><strong>Kruskal-Wallis H Test</strong></h3>
       </div>
       
         <div class="prev-or-next">
@@ -209,7 +354,7 @@
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#categorical-categorical"><span class="toc-text">categorical-categorical</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#continuous-categorical"><span class="toc-text">continuous-categorical</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Point-biserial-Correlation"><span class="toc-text">Point biserial Correlation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Logistic-Regression"><span class="toc-text">Logistic Regression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kruskal-Wallis-H-Test"><span class="toc-text">Kruskal-Wallis H Test</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#categorical-categorical"><span class="toc-text">categorical-categorical</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#continuous-categorical"><span class="toc-text">continuous-categorical</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#point-biserial-correlation"><span class="toc-text">Point biserial Correlation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logistic-regression"><span class="toc-text">Logistic Regression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kruskal-wallis-h-test"><span class="toc-text">Kruskal-Wallis H Test</span></a></li></ol></li></ol>
     </div>
   </div>
 

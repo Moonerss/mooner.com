@@ -37,11 +37,124 @@
 
   
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
 
@@ -121,24 +234,19 @@
           
       </div>
       <div class="markdown-body">
-        <p>使用telnet或SSH远程登录linux时，如果连接非正常中断，重新连接时，系统将开一个新的session，无法恢复原来的 session.screen命令可以解决这个问题。Screen工具是一个终端多路转接器，在本质上，这意味着你能够使用一个单一的终端窗口运行多终端的应用。  </p>
-<p>screen命令介绍   </p>
-<ol>
-<li>screen -S  创建一个screen（可以用screen -S ID，打开一个指定的ID session）</li>
-<li>screen -ls 显示所有的screen会话  </li>
-<li>screen -d  脱离当前screen ,返回正常shell  </li>
-<li>screen -r  进入指定screen  </li>
-<li>screen -S SEEION_NAME -X quit 删除镜像  </li>
-</ol>
-<p>Screen 操作快捷键  </p>
-<ul>
-<li>ctrl-a c：创建一个新的 Shell  </li>
-<li>ctrl-a ctrl-a：在 Shell 间切换  </li>
-<li>ctrl-a n：切换到下一个 Shell  </li>
-<li>ctrl-a p：切换到上一个 Shell  </li>
-<li>ctrl-a 0…9：同样是切换各个 Shell  </li>
-<li>ctrl-a d：退出 Screen 会话  </li>
-</ul>
+        <p>使用telnet或SSH远程登录linux时，如果连接非正常中断，重新连接时，系统将开一个新的session，无法恢复原来的 session.screen命令可以解决这个问题。Screen工具是一个终端多路转接器，在本质上，这意味着你能够使用一个单一的终端窗口运行多终端的应用。</p>
+<p>screen命令介绍<br />
+1. screen -S 创建一个screen（可以用screen -S ID，打开一个指定的ID session） 2. screen -ls 显示所有的screen会话<br />
+3. screen -d 脱离当前screen ,返回正常shell<br />
+4. screen -r 进入指定screen<br />
+5. screen -S SEEION_NAME -X quit 删除镜像</p>
+<p>Screen 操作快捷键<br />
++ ctrl-a c：创建一个新的 Shell<br />
++ ctrl-a ctrl-a：在 Shell 间切换<br />
++ ctrl-a n：切换到下一个 Shell<br />
++ ctrl-a p：切换到上一个 Shell<br />
++ ctrl-a 0…9：同样是切换各个 Shell<br />
++ ctrl-a d：退出 Screen 会话</p>
       </div>
       
         <div class="prev-or-next">
