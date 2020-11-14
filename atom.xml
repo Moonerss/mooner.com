@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-12T01:28:24.135Z</updated>
+  <updated>2020-11-14T06:21:03.032Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Time-dependent ROC 曲线</title>
+    <link href="http://example.com/2020/11/13/timeROC/"/>
+    <id>http://example.com/2020/11/13/timeROC/</id>
+    <published>2020-11-13T11:08:22.000Z</published>
+    <updated>2020-11-14T06:21:03.032Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+    <category term="R" scheme="http://example.com/tags/R/"/>
+    
+    <category term="ROC" scheme="http://example.com/tags/ROC/"/>
+    
+  </entry>
   
   <entry>
     <title>Conda使用指南（安装部署篇）</title>
@@ -483,25 +508,6 @@
     
     
     <category term="stats" scheme="http://example.com/tags/stats/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Orchestrating Single-Cell Analysis (一)</title>
-    <link href="http://example.com/2020/08/10/single-cell-ii/"/>
-    <id>http://example.com/2020/08/10/single-cell-ii/</id>
-    <published>2020-08-09T16:00:00.000Z</published>
-    <updated>2020-11-14T01:35:06.111Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;单细胞数据结构&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
-    
-    
-    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
     
   </entry>
   
