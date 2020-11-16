@@ -6,10 +6,8 @@
   <meta name="author" content="zchengsite, 1451426471@qq.com" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
-    <meta name="robots" content="noindex" />
   
-  
-  <title>Hexo</title>
+  <title>SSH连接自动断开问题 | Hexo</title>
 
   
     <link rel="apple-touch-icon" href="/images/favicon.png">
@@ -201,151 +199,154 @@ mjx-container[display="true"] + br {
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="Hemberg-lab单细胞转录组数据分析（三）">
-        <div class="time-m-d">2020-09-28</div>
-        <div class="title">
-          <a href="/2020/09/28/hemberg-lab3/">
-            
-              
-                <span>Hemberg-lab单细胞转录组数据分析（三）</span>
-              
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">SSH连接自动断开问题</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-11-16
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/git/" title="git">
+                    <b>#</b> git
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/ssh/" title="ssh">
+                    <b>#</b> ssh
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="测序质控软件trim_galore安装">
-        <div class="time-m-d">2020-09-23</div>
-        <div class="title">
-          <a href="/2020/09/23/trim-galore/">
-            
-              
-                <span>测序质控软件trim_galore安装</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h2 id="背景">背景</h2>
+<p>平时在命令行下ssh连接了远程服务器，经常才几分钟没操作就被自动断线了，不能进行任何操作，其实这是因为ssh没有设置心跳检测，可以通过以下两种方法解决。</p>
+<ul>
+<li><p>本地机最常用的方法</p>
+<p>依赖ssh客户端定时发送心跳检测，配置/etc/ssh/ssh_config文件，在末尾添加上：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ServerAliveInterval 20</span><br><span class="line">ServerAliveCountMax 999</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>每隔20秒向服务器发出一次心跳检测，若超过999次请求都没有成功，就主动断开与服务器端的连接。</p>
+</blockquote></li>
+<li><p>适用于服务器端</p>
+<p>依赖ssh服务器端定时发送心跳检测，配置/etc/ssh/sshd_config文件(注意：这里是sshd_config，不是ssh_config)，在末尾添加上:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ClientAliveInterval 30</span><br><span class="line">ClientAliveCountMax 6</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>每隔30秒向客户端发出一次心跳检测，若超过6次请求都没有成功，就会主动断开与客户端的连接。</p>
+</blockquote>
+<p>设置了ssh的心跳检测后，重启ssh服务才能生效，执行命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure></li>
+</ul>
+
       </div>
-    
-      <div class="post-item" title="FastQC安装与使用">
-        <div class="time-m-d">2020-09-23</div>
-        <div class="title">
-          <a href="/2020/09/23/fastqc/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>FastQC安装与使用</span>
-              
+              <a href="/2020/11/13/timeROC/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-11-16
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/git/" title="git">
+                        <b>#</b> git
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/ssh/" title="ssh">
+                        <b>#</b> ssh
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="ggplot2常用theme参数参考">
-        <div class="time-m-d">2020-09-23</div>
-        <div class="title">
-          <a href="/2020/09/23/ggplottheme/">
-            
-              
-                <span>ggplot2常用theme参数参考</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="Hemberg-lab单细胞转录组数据分析（二）">
-        <div class="time-m-d">2020-09-23</div>
-        <div class="title">
-          <a href="/2020/09/23/hemberg-lab2/">
-            
-              
-                <span>Hemberg-lab单细胞转录组数据分析（二）</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="GO富集圈圈图">
-        <div class="time-m-d">2020-09-23</div>
-        <div class="title">
-          <a href="/2020/09/23/goplot/">
-            
-              
-                <span>GO富集圈圈图</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="ggplot2小部件参考">
-        <div class="time-m-d">2020-09-22</div>
-        <div class="title">
-          <a href="/2020/09/22/ggplot2/">
-            
-              
-                <span>ggplot2小部件参考</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="WGCNA教程">
-        <div class="time-m-d">2020-08-15</div>
-        <div class="title">
-          <a href="/2020/08/15/wgcna/">
-            
-              
-                <span>WGCNA教程</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Orchestrating Single-Cell Analysis (二)">
-        <div class="time-m-d">2020-08-12</div>
-        <div class="title">
-          <a href="/2020/08/12/single-cell-i/">
-            
-              
-                <span>Orchestrating Single-Cell Analysis (二)</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="scRNA的细胞质控">
-        <div class="time-m-d">2020-08-12</div>
-        <div class="title">
-          <a href="/2020/08/12/quality-control/">
-            
-              
-                <span>scRNA的细胞质控</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-      <a href="/"><i class="iconfont icon-angleleft"></i></a>
-    
-    <span class="page-num">2 / 10</span>
-    
-      <a href="/page/3/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         <div class="footer">
   <div class="social">

@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-16T00:13:35.781Z</updated>
+  <updated>2020-11-16T06:22:31.103Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SSH连接自动断开问题</title>
+    <link href="http://example.com/2020/11/16/ssh/"/>
+    <id>http://example.com/2020/11/16/ssh/</id>
+    <published>2020-11-16T06:18:37.000Z</published>
+    <updated>2020-11-16T06:22:31.103Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+    <category term="git" scheme="http://example.com/tags/git/"/>
+    
+    <category term="ssh" scheme="http://example.com/tags/ssh/"/>
+    
+  </entry>
   
   <entry>
     <title>Time-dependent ROC 曲线</title>
@@ -489,25 +514,6 @@
     
     
     <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>单尾还是双尾检验</title>
-    <link href="http://example.com/2020/08/10/one-tail/"/>
-    <id>http://example.com/2020/08/10/one-tail/</id>
-    <published>2020-08-09T16:00:00.000Z</published>
-    <updated>2020-11-14T01:35:45.036Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;单侧检验 or 双侧检验？</summary>
-    
-    
-    
-    <category term="statistics" scheme="http://example.com/categories/statistics/"/>
-    
-    
-    <category term="stats" scheme="http://example.com/tags/stats/"/>
     
   </entry>
   
