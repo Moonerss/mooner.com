@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-16T06:22:31.103Z</updated>
+  <updated>2020-11-20T06:54:11.398Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SCENT包Debug</title>
+    <link href="http://example.com/2020/11/20/SCENT/"/>
+    <id>http://example.com/2020/11/20/SCENT/</id>
+    <published>2020-11-20T06:36:12.000Z</published>
+    <updated>2020-11-20T06:54:11.398Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+&lt;p&gt;使用&lt;code&gt;SCENT&lt;/code&gt;包进行分析时出现如下错误：&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Debug" scheme="http://example.com/tags/Debug/"/>
+    
+  </entry>
   
   <entry>
     <title>SSH连接自动断开问题</title>
@@ -488,25 +513,6 @@
     
     
     <summary type="html">&lt;p&gt;scRNA-seq analysis workflow&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
-    
-    
-    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>scRNA的细胞质控</title>
-    <link href="http://example.com/2020/08/12/quality-control/"/>
-    <id>http://example.com/2020/08/12/quality-control/</id>
-    <published>2020-08-11T16:00:00.000Z</published>
-    <updated>2020-09-19T00:20:14.191Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Quality Control&lt;/p&gt;</summary>
     
     
     
