@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>一致性聚类(Consensus Clustering) | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">一致性聚类(Consensus Clustering)</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2020-11-24
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/clustering/" title="clustering">
+                    <b>#</b> clustering
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="背景">背景</h2>
+<p>Consensus Clustering(<strong>一致性聚类</strong>)，无监督聚类方法，是一种常见的癌症亚型分类研究方法（如乳腺癌中的PAM50），可根据不同组学数据集将样本区分成几个亚型，从而发现新的疾病亚型或者对不同亚型进行比较分析。<br />一致性聚类方法包括从一组项目中进行次抽样，例如微阵列，并确定特定簇计数（k）的簇。然后，对共识值，两个项目占在同一子样本中发生的次数中有相同的聚类，计算并存储在每个k的对称一致矩阵中。<br /></p>
+<h2 id="为什么用一致性聚类">为什么用一致性聚类</h2>
+<h3 id="传统方法的不足">传统方法的不足</h3>
+<ul>
+<li>对于传统的聚类方法，不能提供“客观的”分类数目的标准和分类边界，如：Hierarchical Clustering。</li>
+<li>它需要我们给出一个预定的分类数目，并且我们无法根据分类的结果去比较不同分类数目下结果的差异，如：K-means Clustering。</li>
+</ul>
+<h3 id="一致性聚类优势">一致性聚类优势</h3>
+<ul>
+<li>一致聚类通过基于重采样(resample)的方法来验证聚类合理性<br />
+</li>
+<li>一致聚类方法的主要目的是评估聚类的稳定性</li>
+</ul>
+<h2 id="一致性聚类的基本原理假设">一致性聚类的基本原理假设</h2>
+<p>从原数据集不同的子类中提取出的样本构成一个新的数据集，并且从同一个子类中有不同的样本被提取出来，那么在新数据集上聚类分析之后的结果，无论是聚类的数目还是类内样本都应该和原数据集相差不大。因此所得到的聚类相对于抽样变异越稳定，我们越可以相信这一样的聚类代表了一个真实的子类结构。重采样的方法可以打乱原始数据集，这样对每一次重采样的样本进行聚类分析然后再综合评估多次聚类分析的结果给出一致性(Consensus)的评估。</p>
+<h2 id="代码实现">代码实现</h2>
+<p>在R中，可以通过 <code>ConsensusClusterPlus</code> 包实现一致性聚类的操作，具体参考<a target="_blank" rel="noopener" href="https://bioconductor.org/packages/release/bioc/vignettes/ConsensusClusterPlus/inst/doc/ConsensusClusterPlus.pdf">ConsensusClusterPlus (Tutorial)</a></p>
+<p>首先导入数据并进行预处理：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##使用ALL示例数据</span></span><br><span class="line"><span class="keyword">library</span>(ALL)</span><br><span class="line">data(ALL)</span><br><span class="line">d=exprs(ALL)</span><br><span class="line">d[<span class="number">1</span>:<span class="number">5</span>,<span class="number">1</span>:<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">             <span class="number">01005</span>    <span class="number">01010</span>    <span class="number">03002</span>    <span class="number">04006</span>    <span class="number">04007</span></span><br><span class="line">1000_at   <span class="number">7.597323</span> <span class="number">7.479445</span> <span class="number">7.567593</span> <span class="number">7.384684</span> <span class="number">7.905312</span></span><br><span class="line">1001_at   <span class="number">5.046194</span> <span class="number">4.932537</span> <span class="number">4.799294</span> <span class="number">4.922627</span> <span class="number">4.844565</span></span><br><span class="line">1002_f_at <span class="number">3.900466</span> <span class="number">4.208155</span> <span class="number">3.886169</span> <span class="number">4.206798</span> <span class="number">3.416923</span></span><br><span class="line">1003_s_at <span class="number">5.903856</span> <span class="number">6.169024</span> <span class="number">5.860459</span> <span class="number">6.116890</span> <span class="number">5.687997</span></span><br><span class="line">1004_at   <span class="number">5.925260</span> <span class="number">5.912780</span> <span class="number">5.893209</span> <span class="number">6.170245</span> <span class="number">5.615210</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 筛选前5000高变异的基因</span></span><br><span class="line">mads=apply(d,<span class="number">1</span>,mad)</span><br><span class="line">d=d[rev(order(mads))[<span class="number">1</span>:<span class="number">5000</span>],]</span><br><span class="line"></span><br><span class="line"><span class="comment">#sweep函数减去中位数进行标准化</span></span><br><span class="line">d = sweep(d,<span class="number">1</span>, apply(d,<span class="number">1</span>,median,na.rm=<span class="literal">T</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#一步完成一致性聚类</span></span><br><span class="line"><span class="comment">## 最大聚类个数为6，随即次数为50次，随机样本比例为80%</span></span><br><span class="line"><span class="keyword">library</span>(ConsensusClusterPlus)</span><br><span class="line">title=tempdir()</span><br><span class="line">results = ConsensusClusterPlus(d,maxK=<span class="number">6</span>,reps=<span class="number">50</span>,pItem=<span class="number">0.8</span>,pFeature=<span class="number">1</span>,</span><br><span class="line"> title=title,clusterAlg=<span class="string">&quot;hc&quot;</span>,distance=<span class="string">&quot;pearson&quot;</span>,seed=<span class="number">1262118388.71279</span>,plot=<span class="string">&quot;png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>结果查询：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#输出K=2时的一致性矩阵</span></span><br><span class="line">results[[<span class="number">2</span>]][[<span class="string">&quot;consensusMatrix&quot;</span>]][<span class="number">1</span>:<span class="number">5</span>,<span class="number">1</span>:<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">          [,<span class="number">1</span>]      [,<span class="number">2</span>]      [,<span class="number">3</span>]      [,<span class="number">4</span>]     [,<span class="number">5</span>]</span><br><span class="line">[<span class="number">1</span>,] <span class="number">1.0000000</span> <span class="number">1.0000000</span> <span class="number">0.8947368</span> <span class="number">1.0000000</span> <span class="number">1.000000</span></span><br><span class="line">[<span class="number">2</span>,] <span class="number">1.0000000</span> <span class="number">1.0000000</span> <span class="number">0.9142857</span> <span class="number">1.0000000</span> <span class="number">1.000000</span></span><br><span class="line">[<span class="number">3</span>,] <span class="number">0.8947368</span> <span class="number">0.9142857</span> <span class="number">1.0000000</span> <span class="number">0.8857143</span> <span class="number">0.969697</span></span><br><span class="line">[<span class="number">4</span>,] <span class="number">1.0000000</span> <span class="number">1.0000000</span> <span class="number">0.8857143</span> <span class="number">1.0000000</span> <span class="number">1.000000</span></span><br><span class="line">[<span class="number">5</span>,] <span class="number">1.0000000</span> <span class="number">1.0000000</span> <span class="number">0.9696970</span> <span class="number">1.0000000</span> <span class="number">1.000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#hclust选项</span></span><br><span class="line">results[[<span class="number">2</span>]][[<span class="string">&quot;consensusTree&quot;</span>]]</span><br><span class="line"></span><br><span class="line">Call:</span><br><span class="line">hclust(d = as.dist(<span class="number">1</span> - fm), method = finalLinkage)</span><br><span class="line"></span><br><span class="line">Cluster method   : average </span><br><span class="line">Number of objects: <span class="number">128</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#样本分类</span></span><br><span class="line">results[[<span class="number">2</span>]][[<span class="string">&quot;consensusClass&quot;</span>]][<span class="number">1</span>:<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="number">01005</span> <span class="number">01010</span> <span class="number">03002</span> <span class="number">04006</span> <span class="number">04007</span> </span><br><span class="line">    <span class="number">1</span>     <span class="number">1</span>     <span class="number">1</span>     <span class="number">1</span>     <span class="number">1</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#计算聚类一致性 (cluster-consensus) 和样品一致性 (item-consensus)</span></span><br><span class="line">icl &lt;- calcICL(results, title = title,</span><br><span class="line">               plot = <span class="string">&quot;png&quot;</span>)</span><br><span class="line"><span class="comment">## 返回了具有两个元素的list，然后分别查看一下</span></span><br><span class="line">dim(icl[[<span class="string">&quot;clusterConsensus&quot;</span>]])</span><br><span class="line"> [<span class="number">1</span>] <span class="number">20</span>  <span class="number">3</span></span><br><span class="line">icl[[<span class="string">&quot;clusterConsensus&quot;</span>]] </span><br><span class="line"></span><br><span class="line">dim(icl[[<span class="string">&quot;itemConsensus&quot;</span>]])</span><br><span class="line"> [<span class="number">1</span>] <span class="number">2560</span>    <span class="number">4</span></span><br><span class="line">icl[[<span class="string">&quot;itemConsensus&quot;</span>]][<span class="number">1</span>:<span class="number">5</span>,] </span><br></pre></td></tr></table></figure>
+<h2 id="结果解读">结果解读</h2>
+<h3 id="一致性矩阵">一致性矩阵</h3>
+<p><img src="/images/Consensus/pic1.png" /></p>
+<p>以上图为例是聚类k=6的结果，这个图叫做CM plots，其目的是展示分类情况，找到最“干净”的一张图（也就是白的方块中尽量不掺杂蓝色），就是分类效果最好的一类。</p>
+<h3 id="一致性累积分布函数图">一致性累积分布函数图</h3>
+<p><img src="/images/Consensus/pic2.png" /><br />该图叫做经验累积分布函数曲线(Empirical cumulative distribution function),简称CDF。</p>
+<blockquote>
+<p>Empirical cumulative distribution function (CDF) plots display consensus distributions for each k . The purpose of the CDF plot is to find the k at which the distribution reaches an approximate maximum, which indicates a maximum stability and after which divisions are equivalent to random picks rather than true cluster structure.</p>
+</blockquote>
+<p>一般选取最佳k值的方法是考虑CDF下降坡度相对最小的曲线对应的k值</p>
+<h3 id="delta-area-plot">Delta Area Plot</h3>
+<p><img src="/images/Consensus/pic3.png" /><br />根据此图，一般选取拐点处的k值作为最佳分类数。</p>
+<blockquote>
+<p>The delta area score (y-axis) indicates the relative increase in cluster stability.</p>
+</blockquote>
+<h3 id="tracking-plot">Tracking Plot</h3>
+<p><img src="/images/Consensus/pic4.png" /><br />这个图从行（k）开始看，展示了不同聚类数(k)下，每个sample(列)都被分为了哪一类。比如，k=2时，样本分为浅蓝色和深蓝色的两类。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/11/20/SCENT/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2020-11-24
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/clustering/" title="clustering">
+                        <b>#</b> clustering
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E4%B8%80%E8%87%B4%E6%80%A7%E8%81%9A%E7%B1%BB"><span class="toc-text">为什么用一致性聚类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="toc-text">传统方法的不足</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E8%81%9A%E7%B1%BB%E4%BC%98%E5%8A%BF"><span class="toc-text">一致性聚类优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E8%81%9A%E7%B1%BB%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%81%87%E8%AE%BE"><span class="toc-text">一致性聚类的基本原理假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB"><span class="toc-text">结果解读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E7%9F%A9%E9%98%B5"><span class="toc-text">一致性矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E5%9B%BE"><span class="toc-text">一致性累积分布函数图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delta-area-plot"><span class="toc-text">Delta Area Plot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tracking-plot"><span class="toc-text">Tracking Plot</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>
