@@ -235,61 +235,54 @@ mjx-container[display="true"] + br {
       </div>
       <div class="markdown-body">
         <h2 id="数据结构">数据结构</h2>
-<p>R 语言的<strong>基础数据结构</strong>可以按照<strong>维度</strong>来划分(1 维、 2 维...n 维)；也可以按照它们<strong>所包含的数据类型是否相同</strong>来划分。 这样就产生了五种数据类型，它们是数据分析中最常用的：</p>
+<p>R 语言的<strong>基础数据结构</strong>可以按照<strong>维度</strong>来划分(1 维、 2 维…n 维)；也可以按照它们<strong>所包含的数据类型是否相同</strong>来划分。 这样就产生了五种数据类型，它们是数据分析中最常用的：</p>
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: center;"></th>
-<th style="text-align: center;">Homogeneous</th>
-<th style="text-align: center;">Heterogeneous</th>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Homogeneous</th>
+<th style="text-align:center">Heterogeneous</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: center;">1d</td>
-<td style="text-align: center;">Atomic vector</td>
-<td style="text-align: center;">List</td>
+<tr>
+<td style="text-align:center">1d</td>
+<td style="text-align:center">Atomic vector</td>
+<td style="text-align:center">List</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;">2d</td>
-<td style="text-align: center;">Matrix</td>
-<td style="text-align: center;">Data frame</td>
+<tr>
+<td style="text-align:center">2d</td>
+<td style="text-align:center">Matrix</td>
+<td style="text-align:center">Data frame</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;">nd</td>
-<td style="text-align: center;">Array</td>
-<td style="text-align: center;"></td>
+<tr>
+<td style="text-align:center">nd</td>
+<td style="text-align:center">Array</td>
+<td style="text-align:center"></td>
 </tr>
 </tbody>
 </table>
-<h3 id="向量vector">向量（vector）</h3>
+<h3 id="向量（vector）">向量（vector）</h3>
 <p>向量包括：原子向量 （Atomic vector） 和列表 （List）。兩者都属于<strong>一维数据</strong>， 两者的区别在于： <strong>原子向量中的所有元素都必须是相同的类型；而列表中的元素可以是不同的类型</strong></p>
 <blockquote>
 <p><code>is.vector()</code>并不能测试一个对象是不是向量。 相反，仅当对象是除了名字以外，不包含其它属性时，它才返回 <code>TRUE</code>。 所以，请使用 <code>is.atomic(x) || is.list(x)</code> 来测试一个对象是不是向量。</p>
 </blockquote>
 <p>向量具有三个共同属性：</p>
-<ol type="1">
-<li><strong>类型</strong>， <code>typeof()</code>，它是什么<br />
-</li>
-<li><strong>长度</strong>， <code>length()</code>，它包含有多少元素<br />
-</li>
+<ol>
+<li><strong>类型</strong>， <code>typeof()</code>，它是什么</li>
+<li><strong>长度</strong>， <code>length()</code>，它包含有多少元素</li>
 <li><strong>属性</strong>， <code>attributes()</code>，额外的任意元数据</li>
 </ol>
-<h4 id="原子向量-atomic-vector">原子向量 (Atomic vector)</h4>
+<h4 id="原子向量-Atomic-vector">原子向量 (Atomic vector)</h4>
 <ul>
-<li>原子向量类型：<strong>逻辑类型</strong> (logical)、 <strong>整数类型</strong> (integer)、 <strong>双精度数值类型</strong> (double)、 <strong>字符类型</strong> (character)、 复数类型 (complex)、 raw类型。<br />
-</li>
-<li>缺失值用 <code>NA</code> 表示，是一个长度为1的逻辑向量，NA可根据所处整体环境强制转换成正确的类型，或者使用 <code>NA_real_</code>(双精度浮点数向量)、 <code>NA_integer_</code> 和 <code>NA_character_</code> 来创建一系列确定类型的 <code>NA</code><br />
-</li>
-<li><code>typeof</code> 确定具体的数据类型，<code>is</code>开头的函数（如：<code>is.integer</code>）来确定是否属于某一特定类型<br />
-</li>
-<li><code>is.atomic()</code> 是检测原子向量最通用的<br />
-</li>
-<li>强制转换：一个原子向量中的所有元素都必须是相同的类型。 所以，当你试图合并不同类型的数据时，将向最灵活的类型进行强制转换。 以灵活程度排序，从小到大依次为：逻辑、 整数、双精度浮点数和字符。<br />
-</li>
+<li>原子向量类型：<strong>逻辑类型</strong> (logical)、 <strong>整数类型</strong> (integer)、 <strong>双精度数值类型</strong> (double)、 <strong>字符类型</strong> (character)、 复数类型 (complex)、 raw类型。</li>
+<li>缺失值用 <code>NA</code> 表示，是一个长度为1的逻辑向量，NA可根据所处整体环境强制转换成正确的类型，或者使用 <code>NA_real_</code>(双精度浮点数向量)、 <code>NA_integer_</code> 和 <code>NA_character_</code> 来创建一系列确定类型的 <code>NA</code></li>
+<li><code>typeof</code> 确定具体的数据类型，<code>is</code>开头的函数（如：<code>is.integer</code>）来确定是否属于某一特定类型</li>
+<li><code>is.atomic()</code> 是检测原子向量最通用的</li>
+<li>强制转换：一个原子向量中的所有元素都必须是相同的类型。 所以，当你试图合并不同类型的数据时，将向最灵活的类型进行强制转换。 以灵活程度排序，从小到大依次为：逻辑、 整数、双精度浮点数和字符。</li>
 <li>如果转换遇到歧义，则需要使用 <code>as.character()</code>、 <code>as.double()</code>、 <code>as.integer()</code>或者 <code>as.logical()</code>等函数，进行明确的强制转换。</li>
 </ul>
-<h4 id="列表list">列表(List)</h4>
+<h4 id="列表-List">列表(List)</h4>
 <p>c()可以将几个向量合并成一个。 如果原子向量和列表同时存在，那么在合并之前， c()会将原子向量强制转换成列表</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">x &lt;- list(list(<span class="number">1</span>, <span class="number">2</span>), c(<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">y &lt;- c(list(<span class="number">1</span>, <span class="number">2</span>), c(<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">str(x)</span><br><span class="line"><span class="comment">#&gt; List of 2</span></span><br><span class="line"><span class="comment">#&gt; $ :List of 2</span></span><br><span class="line"><span class="comment">#&gt; ..$ : num 1</span></span><br><span class="line"><span class="comment">#&gt; ..$ : num 2</span></span><br><span class="line"><span class="comment">#&gt; $ : num [1:2] 3 4</span></span><br><span class="line">str(y)</span><br><span class="line"><span class="comment">#&gt; List of 4</span></span><br><span class="line"><span class="comment">#&gt; $ : num 1</span></span><br><span class="line"><span class="comment">#&gt; $ : num 2</span></span><br><span class="line"><span class="comment">#&gt; $ : num 3</span></span><br><span class="line"><span class="comment">#&gt; $ : num 4</span></span><br></pre></td></tr></table></figure>
 <p>列表用来建立 R 语言中的许多更加复杂的数据结构。 比如， <strong>数据框</strong>和其他复杂对象</p>
@@ -297,28 +290,28 @@ mjx-container[display="true"] + br {
 <blockquote>
 <p>这里说明一点：data.frame是比list更为复杂的数据结构</p>
 </blockquote>
-<h3 id="属性attributes">属性(Attributes)</h3>
+<h3 id="属性-Attributes">属性(Attributes)</h3>
 <p>所有的对象都可以拥有任意多个附加属性， 附加属性用来存取与该对象相关的元数据。 属性可以看做是已命名的列表(带有不重复的名字)。 属性可以使用 <code>attr()</code>函数一个一个的访问，也可以使用 attributes()函数一次性访问。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">y &lt;- <span class="number">1</span>:<span class="number">10</span></span><br><span class="line">attr(y, <span class="string">&quot;my_attribute&quot;</span>) &lt;- <span class="string">&quot;This is a vector&quot;</span></span><br><span class="line">attr(y, <span class="string">&quot;alpha&quot;</span>) &lt;- <span class="string">&quot;This is a vector&quot;</span></span><br><span class="line">attr(y, <span class="string">&quot;my_attribute&quot;</span>)</span><br><span class="line"><span class="comment">#&gt; [1] &quot;This is a vector&quot;</span></span><br><span class="line">attributes(y)</span><br><span class="line"><span class="comment">#&gt; $my_attribute</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;This is a vector&quot;</span></span><br><span class="line"><span class="comment">#&gt; </span></span><br><span class="line"><span class="comment">#&gt; $alpha</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;This is a vector&quot;</span></span><br><span class="line">attr(y, <span class="string">&quot;my_attribute&quot;</span>) &lt;- <span class="string">&quot;alpha&quot;</span></span><br><span class="line">attributes(y)</span><br><span class="line"><span class="comment">#&gt; $my_attribute</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;alpha&quot;</span></span><br><span class="line"><span class="comment">#&gt; </span></span><br><span class="line"><span class="comment">#&gt; $alpha</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;This is a vector&quot;</span></span><br></pre></td></tr></table></figure>
 <p><code>structure()</code> 函数返回一个带有属性的对象， 也可以用来修改属性</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">structure(y, alpha = <span class="string">&quot;alpha&quot;</span>)</span><br><span class="line"><span class="comment">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span></span><br><span class="line"><span class="comment">#&gt; attr(,&quot;my_attribute&quot;)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;alpha&quot;</span></span><br><span class="line"><span class="comment">#&gt; attr(,&quot;alpha&quot;)</span></span><br><span class="line"><span class="comment">#&gt; [1] &quot;alpha&quot;</span></span><br></pre></td></tr></table></figure>
 <p>默认情况下，当修改向量时，数据的大多数属性会丢失，但有三种重要的属性不会丢失：<strong>名字</strong>(name)，<strong>维度</strong>(dimension)，<strong>类</strong>(class)</p>
 <blockquote>
-<p>三个特殊属性需要使用特定函数<code>names(x)</code>、 <code>class(x)</code>和 <code>dim(x)</code> 访问，而不是 <code>attr(x, "names")</code>、 <code>attr(x, "class")</code> 和 <code>attr(x, "dim")</code></p>
+<p>三个特殊属性需要使用特定函数<code>names(x)</code>、 <code>class(x)</code>和 <code>dim(x)</code> 访问，而不是 <code>attr(x, &quot;names&quot;)</code>、 <code>attr(x, &quot;class&quot;)</code> 和 <code>attr(x, &quot;dim&quot;)</code></p>
 </blockquote>
-<h3 id="数据框data-frame">数据框(data frame)</h3>
+<h3 id="数据框-data-frame">数据框(data frame)</h3>
 <p>数据框是<strong>由等长向量构成的列表</strong>。 它也是二维结构，所以它具有<strong>矩阵</strong>和<strong>列表</strong>双重属性。也就是说，数据框拥有 <code>names()</code>、 <code>colnames()</code>和 <code>rownames()</code>，尽管 <code>names()</code>和 <code>colnames()</code>对数据框来说是一样的。 数据框的 <code>length()</code>是列表的长度，所以和 <code>ncol()</code>相同； <code>nrow()</code>则得到行数。</p>
 <p>由于数据框是一个包含向量的列表，所以数据框的某个是列表类型是有可能的：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df &lt;- data.frame(x = <span class="number">1</span>:<span class="number">3</span>)</span><br><span class="line">df$y &lt;- list(<span class="number">1</span>:<span class="number">2</span>, <span class="number">1</span>:<span class="number">3</span>, <span class="number">1</span>:<span class="number">4</span>)</span><br><span class="line">df</span><br><span class="line"><span class="comment">#&gt; x y</span></span><br><span class="line"><span class="comment">#&gt; 1 1 1, 2</span></span><br><span class="line"><span class="comment">#&gt; 2 2 1, 2, 3</span></span><br><span class="line"><span class="comment">#&gt; 3 3 1, 2, 3, 4</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>当把列表传入 <code>data.frame()</code>函数时，该函数将试图把列表的每一个元素都放到单独的一列中。一种绕开的方法是使用 <code>I()</code>函数，它使得 <code>data.frame()</code>把列表看成一个整体单元</p>
 </blockquote>
-<h3 id="r中的对象">R中的对象</h3>
-<h4 id="s3对象">S3对象</h4>
+<h3 id="R中的对象">R中的对象</h3>
+<h4 id="S3对象">S3对象</h4>
 <p>S3 对象是由原子向量、数组和列表组成的，所以你可以使用上面描述的技术对 S3 对象进行取子集操作。 你可以通过 <code>str()</code>函数获得的它们的结构信息。</p>
-<h4 id="s4对象">S4对象</h4>
+<h4 id="S4对象">S4对象</h4>
 <p>对 S4 对象来说，有另外两种取子集操作符: <code>@</code>(相当于<code>$</code>)和 <code>slot()</code>(相当于<code>[[</code>)。 <code>@</code>比<code>$</code>更加严格，如果槽(slot)不存在，那么它会返回错误。</p>
-<hr />
+<hr>
 <p><a target="_blank" rel="noopener" href="http://adv-r.had.co.nz/">Advanced R</a></p>
 
       </div>
@@ -365,7 +358,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8Fvector"><span class="toc-text">向量（vector）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E5%90%91%E9%87%8F-atomic-vector"><span class="toc-text">原子向量 (Atomic vector)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8list"><span class="toc-text">列表(List)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7attributes"><span class="toc-text">属性(Attributes)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A1%86data-frame"><span class="toc-text">数据框(data frame)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#r%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">R中的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#s3%E5%AF%B9%E8%B1%A1"><span class="toc-text">S3对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#s4%E5%AF%B9%E8%B1%A1"><span class="toc-text">S4对象</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%EF%BC%88vector%EF%BC%89"><span class="toc-text">向量（vector）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E5%90%91%E9%87%8F-Atomic-vector"><span class="toc-text">原子向量 (Atomic vector)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8-List"><span class="toc-text">列表(List)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7-Attributes"><span class="toc-text">属性(Attributes)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A1%86-data-frame"><span class="toc-text">数据框(data frame)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">R中的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#S3%E5%AF%B9%E8%B1%A1"><span class="toc-text">S3对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#S4%E5%AF%B9%E8%B1%A1"><span class="toc-text">S4对象</span></a></li></ol></li></ol></li></ol>
     </div>
   </div>
 

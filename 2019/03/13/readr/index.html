@@ -245,21 +245,19 @@ mjx-container[display="true"] + br {
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The easiest way to get readr is to install the whole tidyverse:</span></span><br><span class="line">install.packages(<span class="string">&quot;tidyverse&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Alternatively, install just readr:</span></span><br><span class="line">install.packages(<span class="string">&quot;readr&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Or the the development version from GitHub:</span></span><br><span class="line"><span class="comment"># install.packages(&quot;devtools&quot;)</span></span><br><span class="line">devtools::install_github(<span class="string">&quot;tidyverse/readr&quot;</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="使用指南">使用指南</h3>
 <h4 id="数据读入">数据读入</h4>
-<p>使用<code>readr</code>读取数据需要指定两个内容： 1. 整个文件的格式（csv、tsv、fwf）<br />
-2. 文件中每一列的特定属性（double、integer、numeric）</p>
+<p>使用<code>readr</code>读取数据需要指定两个内容：</p>
+<ol>
+<li>整个文件的格式（csv、tsv、fwf）</li>
+<li>文件中每一列的特定属性（double、integer、numeric）</li>
+</ol>
 <p>一般来说<code>readr</code>会自动猜测每一列的属性，并且自动赋予其最合适的数据类型</p>
 <p><code>readr</code>提供了七个<code>read_*</code>函数，来适应不同格式文件的读取：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_delim.html"><code>read_csv()</code></a>: 逗号分隔符文件（csv）<br />
-</li>
-<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_delim.html"><code>read_tsv()</code></a>: tab分隔符文件（tsv）<br />
-</li>
-<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_delim.html"><code>read_delim()</code></a>: 自定义分隔符文件<br />
-</li>
-<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_fwf.html"><code>read_fwf()</code></a>: 固定宽度的文件<br />
-</li>
-<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_table.html"><code>read_table()</code></a>: 空格分隔符的文件,类似于<code>read.table()</code><br />
-</li>
+<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_delim.html"><code>read_csv()</code></a>: 逗号分隔符文件（csv）</li>
+<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_delim.html"><code>read_tsv()</code></a>: tab分隔符文件（tsv）</li>
+<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_delim.html"><code>read_delim()</code></a>: 自定义分隔符文件</li>
+<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_fwf.html"><code>read_fwf()</code></a>: 固定宽度的文件</li>
+<li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_table.html"><code>read_table()</code></a>: 空格分隔符的文件,类似于<code>read.table()</code></li>
 <li><a target="_blank" rel="noopener" href="https://readr.tidyverse.org/reference/read_log.html"><code>read_log()</code></a>: 读取web log 文件</li>
 </ul>
 <blockquote>
@@ -293,67 +291,67 @@ mjx-container[display="true"] + br {
 <p>常用的属性设置和缩写如下：</p>
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: center;">属性</th>
-<th style="text-align: center;">简写</th>
-<th style="text-align: center;">备注</th>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">简写</th>
+<th style="text-align:center">备注</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: center;"><code>col_logical()</code></td>
-<td style="text-align: center;"><code>l</code></td>
-<td style="text-align: center;">containing only T, F, TRUE or FALSE</td>
+<tr>
+<td style="text-align:center"><code>col_logical()</code></td>
+<td style="text-align:center"><code>l</code></td>
+<td style="text-align:center">containing only T, F, TRUE or FALSE</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"><code>col_integer()</code></td>
-<td style="text-align: center;"><code>i</code></td>
-<td style="text-align: center;">integers</td>
+<tr>
+<td style="text-align:center"><code>col_integer()</code></td>
+<td style="text-align:center"><code>i</code></td>
+<td style="text-align:center">integers</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"><code>col_double()</code></td>
-<td style="text-align: center;"><code>d</code></td>
-<td style="text-align: center;">doubles</td>
+<tr>
+<td style="text-align:center"><code>col_double()</code></td>
+<td style="text-align:center"><code>d</code></td>
+<td style="text-align:center">doubles</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"><code>col_character()</code></td>
-<td style="text-align: center;"><code>c</code></td>
-<td style="text-align: center;">everything else</td>
+<tr>
+<td style="text-align:center"><code>col_character()</code></td>
+<td style="text-align:center"><code>c</code></td>
+<td style="text-align:center">everything else</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"><code>col_factor(levels, ordered)</code></td>
-<td style="text-align: center;"><code>f</code></td>
-<td style="text-align: center;">a fixed set of values</td>
+<tr>
+<td style="text-align:center"><code>col_factor(levels, ordered)</code></td>
+<td style="text-align:center"><code>f</code></td>
+<td style="text-align:center">a fixed set of values</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"><code>col_date(format = "")</code></td>
-<td style="text-align: center;"><code>D</code></td>
-<td style="text-align: center;">with the locale’s date_format</td>
+<tr>
+<td style="text-align:center"><code>col_date(format = &quot;&quot;)</code></td>
+<td style="text-align:center"><code>D</code></td>
+<td style="text-align:center">with the locale’s date_format</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"><code>col_time(format = "")</code></td>
-<td style="text-align: center;"><code>t</code></td>
-<td style="text-align: center;">with the locale’s time_format</td>
+<tr>
+<td style="text-align:center"><code>col_time(format = &quot;&quot;)</code></td>
+<td style="text-align:center"><code>t</code></td>
+<td style="text-align:center">with the locale’s time_format</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"><code>col_datetime(format = "")</code></td>
-<td style="text-align: center;"><code>T</code></td>
-<td style="text-align: center;">ISO8601 date times</td>
+<tr>
+<td style="text-align:center"><code>col_datetime(format = &quot;&quot;)</code></td>
+<td style="text-align:center"><code>T</code></td>
+<td style="text-align:center">ISO8601 date times</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"><code>col_number()</code></td>
-<td style="text-align: center;"><code>n</code></td>
-<td style="text-align: center;">numbers</td>
+<tr>
+<td style="text-align:center"><code>col_number()</code></td>
+<td style="text-align:center"><code>n</code></td>
+<td style="text-align:center">numbers</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"><code>col_skip()</code></td>
-<td style="text-align: center;"><code>_</code> or <code>-</code></td>
-<td style="text-align: center;">don’t import this column</td>
+<tr>
+<td style="text-align:center"><code>col_skip()</code></td>
+<td style="text-align:center"><code>_</code> or <code>-</code></td>
+<td style="text-align:center">don’t import this column</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"><code>col_guess()</code></td>
-<td style="text-align: center;"><code>?</code></td>
-<td style="text-align: center;">parse using the “best” type based on the input</td>
+<tr>
+<td style="text-align:center"><code>col_guess()</code></td>
+<td style="text-align:center"><code>?</code></td>
+<td style="text-align:center">parse using the “best” type based on the input</td>
 </tr>
 </tbody>
 </table>

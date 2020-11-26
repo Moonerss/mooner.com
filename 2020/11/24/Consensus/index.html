@@ -244,8 +244,7 @@ mjx-container[display="true"] + br {
 </ul>
 <h3 id="一致性聚类优势">一致性聚类优势</h3>
 <ul>
-<li>一致聚类通过基于重采样(resample)的方法来验证聚类合理性<br />
-</li>
+<li>一致聚类通过基于重采样(resample)的方法来验证聚类合理性</li>
 <li>一致聚类方法的主要目的是评估聚类的稳定性</li>
 </ul>
 <h2 id="一致性聚类的基本原理假设">一致性聚类的基本原理假设</h2>
@@ -258,21 +257,21 @@ mjx-container[display="true"] + br {
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#输出K=2时的一致性矩阵</span></span><br><span class="line">results[[<span class="number">2</span>]][[<span class="string">&quot;consensusMatrix&quot;</span>]][<span class="number">1</span>:<span class="number">5</span>,<span class="number">1</span>:<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">          [,<span class="number">1</span>]      [,<span class="number">2</span>]      [,<span class="number">3</span>]      [,<span class="number">4</span>]     [,<span class="number">5</span>]</span><br><span class="line">[<span class="number">1</span>,] <span class="number">1.0000000</span> <span class="number">1.0000000</span> <span class="number">0.8947368</span> <span class="number">1.0000000</span> <span class="number">1.000000</span></span><br><span class="line">[<span class="number">2</span>,] <span class="number">1.0000000</span> <span class="number">1.0000000</span> <span class="number">0.9142857</span> <span class="number">1.0000000</span> <span class="number">1.000000</span></span><br><span class="line">[<span class="number">3</span>,] <span class="number">0.8947368</span> <span class="number">0.9142857</span> <span class="number">1.0000000</span> <span class="number">0.8857143</span> <span class="number">0.969697</span></span><br><span class="line">[<span class="number">4</span>,] <span class="number">1.0000000</span> <span class="number">1.0000000</span> <span class="number">0.8857143</span> <span class="number">1.0000000</span> <span class="number">1.000000</span></span><br><span class="line">[<span class="number">5</span>,] <span class="number">1.0000000</span> <span class="number">1.0000000</span> <span class="number">0.9696970</span> <span class="number">1.0000000</span> <span class="number">1.000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#hclust选项</span></span><br><span class="line">results[[<span class="number">2</span>]][[<span class="string">&quot;consensusTree&quot;</span>]]</span><br><span class="line"></span><br><span class="line">Call:</span><br><span class="line">hclust(d = as.dist(<span class="number">1</span> - fm), method = finalLinkage)</span><br><span class="line"></span><br><span class="line">Cluster method   : average </span><br><span class="line">Number of objects: <span class="number">128</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#样本分类</span></span><br><span class="line">results[[<span class="number">2</span>]][[<span class="string">&quot;consensusClass&quot;</span>]][<span class="number">1</span>:<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="number">01005</span> <span class="number">01010</span> <span class="number">03002</span> <span class="number">04006</span> <span class="number">04007</span> </span><br><span class="line">    <span class="number">1</span>     <span class="number">1</span>     <span class="number">1</span>     <span class="number">1</span>     <span class="number">1</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#计算聚类一致性 (cluster-consensus) 和样品一致性 (item-consensus)</span></span><br><span class="line">icl &lt;- calcICL(results, title = title,</span><br><span class="line">               plot = <span class="string">&quot;png&quot;</span>)</span><br><span class="line"><span class="comment">## 返回了具有两个元素的list，然后分别查看一下</span></span><br><span class="line">dim(icl[[<span class="string">&quot;clusterConsensus&quot;</span>]])</span><br><span class="line"> [<span class="number">1</span>] <span class="number">20</span>  <span class="number">3</span></span><br><span class="line">icl[[<span class="string">&quot;clusterConsensus&quot;</span>]] </span><br><span class="line"></span><br><span class="line">dim(icl[[<span class="string">&quot;itemConsensus&quot;</span>]])</span><br><span class="line"> [<span class="number">1</span>] <span class="number">2560</span>    <span class="number">4</span></span><br><span class="line">icl[[<span class="string">&quot;itemConsensus&quot;</span>]][<span class="number">1</span>:<span class="number">5</span>,] </span><br></pre></td></tr></table></figure>
 <h2 id="结果解读">结果解读</h2>
 <h3 id="一致性矩阵">一致性矩阵</h3>
-<p><img src="/images/Consensus/pic1.png" /></p>
+<p><img src="/images/Consensus/pic1.png" alt=""></p>
 <p>以上图为例是聚类k=6的结果，这个图叫做CM plots，其目的是展示分类情况，找到最“干净”的一张图（也就是白的方块中尽量不掺杂蓝色），就是分类效果最好的一类。</p>
 <h3 id="一致性累积分布函数图">一致性累积分布函数图</h3>
-<p><img src="/images/Consensus/pic2.png" /><br />该图叫做经验累积分布函数曲线(Empirical cumulative distribution function),简称CDF。</p>
+<p><img src="/images/Consensus/pic2.png" alt=""><br />该图叫做经验累积分布函数曲线(Empirical cumulative distribution function),简称CDF。</p>
 <blockquote>
 <p>Empirical cumulative distribution function (CDF) plots display consensus distributions for each k . The purpose of the CDF plot is to find the k at which the distribution reaches an approximate maximum, which indicates a maximum stability and after which divisions are equivalent to random picks rather than true cluster structure.</p>
 </blockquote>
 <p>一般选取最佳k值的方法是考虑CDF下降坡度相对最小的曲线对应的k值</p>
-<h3 id="delta-area-plot">Delta Area Plot</h3>
-<p><img src="/images/Consensus/pic3.png" /><br />根据此图，一般选取拐点处的k值作为最佳分类数。</p>
+<h3 id="Delta-Area-Plot">Delta Area Plot</h3>
+<p><img src="/images/Consensus/pic3.png" alt=""><br />根据此图，一般选取拐点处的k值作为最佳分类数。</p>
 <blockquote>
 <p>The delta area score (y-axis) indicates the relative increase in cluster stability.</p>
 </blockquote>
-<h3 id="tracking-plot">Tracking Plot</h3>
-<p><img src="/images/Consensus/pic4.png" /><br />这个图从行（k）开始看，展示了不同聚类数(k)下，每个sample(列)都被分为了哪一类。比如，k=2时，样本分为浅蓝色和深蓝色的两类。</p>
+<h3 id="Tracking-Plot">Tracking Plot</h3>
+<p><img src="/images/Consensus/pic4.png" alt=""><br />这个图从行（k）开始看，展示了不同聚类数(k)下，每个sample(列)都被分为了哪一类。比如，k=2时，样本分为浅蓝色和深蓝色的两类。</p>
 
       </div>
       
@@ -305,6 +304,11 @@ mjx-container[display="true"] + br {
           </div>
           <div class="post-foot-prev">
             
+              <a href="/2020/11/26/ssgsea/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -313,7 +317,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E4%B8%80%E8%87%B4%E6%80%A7%E8%81%9A%E7%B1%BB"><span class="toc-text">为什么用一致性聚类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="toc-text">传统方法的不足</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E8%81%9A%E7%B1%BB%E4%BC%98%E5%8A%BF"><span class="toc-text">一致性聚类优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E8%81%9A%E7%B1%BB%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%81%87%E8%AE%BE"><span class="toc-text">一致性聚类的基本原理假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB"><span class="toc-text">结果解读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E7%9F%A9%E9%98%B5"><span class="toc-text">一致性矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E5%9B%BE"><span class="toc-text">一致性累积分布函数图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delta-area-plot"><span class="toc-text">Delta Area Plot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tracking-plot"><span class="toc-text">Tracking Plot</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E4%B8%80%E8%87%B4%E6%80%A7%E8%81%9A%E7%B1%BB"><span class="toc-text">为什么用一致性聚类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="toc-text">传统方法的不足</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E8%81%9A%E7%B1%BB%E4%BC%98%E5%8A%BF"><span class="toc-text">一致性聚类优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E8%81%9A%E7%B1%BB%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%81%87%E8%AE%BE"><span class="toc-text">一致性聚类的基本原理假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB"><span class="toc-text">结果解读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E7%9F%A9%E9%98%B5"><span class="toc-text">一致性矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E5%9B%BE"><span class="toc-text">一致性累积分布函数图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delta-Area-Plot"><span class="toc-text">Delta Area Plot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tracking-Plot"><span class="toc-text">Tracking Plot</span></a></li></ol></li></ol>
     </div>
   </div>
 

@@ -234,7 +234,7 @@ mjx-container[display="true"] + br {
           
       </div>
       <div class="markdown-body">
-        <h2 id="r的并行运算">R的并行运算</h2>
+        <h2 id="R的并行运算">R的并行运算</h2>
 <p>R作为主要流行的统计分析软件之一，其处理数据一般都是单线程的。随着数据量的增大，R运行的时间会大大增加；为了充分发挥计算机的性能和进一步提升R运行速度，使用并行运算不失为一种有效的手段。</p>
 <p>简单的说R的并行化计算其实没有改变其整个并行环境，而是先启动N个附属进程，然后将数据分割成N块在N个核上进行运行，等待附属进程结束返回结果。与单线程运算相比，会大大节省运算时间</p>
 <h3 id="parallel">parallel</h3>
@@ -245,8 +245,8 @@ mjx-container[display="true"] + br {
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(furrr)</span><br><span class="line"><span class="keyword">library</span>(tictoc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># This should take 6 seconds in total running sequentially</span></span><br><span class="line">plan(sequential)</span><br><span class="line">tic()</span><br><span class="line">nothingness &lt;- future_map(c(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), ~Sys.sleep(.x))</span><br><span class="line">toc()</span><br><span class="line"><span class="comment">#&gt; 6.08 sec elapsed</span></span><br><span class="line"><span class="comment"># This should take ~2 seconds running in parallel, with a little overhead</span></span><br><span class="line">plan(multiprocess)</span><br><span class="line">tic()</span><br><span class="line">nothingness &lt;- future_map(c(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), ~Sys.sleep(.x))</span><br><span class="line">toc()</span><br><span class="line"><span class="comment">#&gt; 2.212 sec elapsed</span></span><br></pre></td></tr></table></figure>
 <p>与<code>parallel</code>相比更喜欢<code>furrr</code>的傻瓜式操作，且其与其他R包的交互使用更为方便。</p>
 <h3 id="其他">其他</h3>
-<p>其他一些并行相关的R包：<br />
-<a target="_blank" rel="noopener" href="https://github.com/HenrikBengtsson/future">future</a> : 强大的分布式处理并行包<br />
+<p>其他一些并行相关的R包：<br>
+<a target="_blank" rel="noopener" href="https://github.com/HenrikBengtsson/future">future</a> : 强大的分布式处理并行包<br>
 <a target="_blank" rel="noopener" href="https://github.com/HenrikBengtsson/future.apply">future.apply</a> : 基于<code>future</code>包开发的<code>*apply</code>家族函数并行包</p>
 
       </div>
@@ -293,7 +293,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#r%E7%9A%84%E5%B9%B6%E8%A1%8C%E8%BF%90%E7%AE%97"><span class="toc-text">R的并行运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel"><span class="toc-text">parallel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#furrr"><span class="toc-text">furrr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#R%E7%9A%84%E5%B9%B6%E8%A1%8C%E8%BF%90%E7%AE%97"><span class="toc-text">R的并行运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel"><span class="toc-text">parallel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#furrr"><span class="toc-text">furrr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li></ol>
     </div>
   </div>
 

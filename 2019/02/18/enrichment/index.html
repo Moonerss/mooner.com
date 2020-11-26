@@ -239,7 +239,7 @@ mjx-container[display="true"] + br {
 <h2 id="介绍">介绍</h2>
 <p><strong>基因集</strong>，即 gene set，是一群具有某一特征的基因构成的集合，比如这些基因可能是出现在同一条通路（pathway）中，或者是具有相同的生物学功能。假如现在有一堆基因，如果想要知道这些基因是属于哪一条生物学通路，或者具有什么样的功能我们应该怎么办？这时候就需要使用到富集分析。</p>
 <h2 id="富集分析方法">富集分析方法</h2>
-<h3 id="oraover-representation-analysis过表达分析最常使用">ORA(Over Representation Analysis)：过表达分析【最常使用】</h3>
+<h3 id="ORA-Over-Representation-Analysis-：过表达分析【最常使用】">ORA(Over Representation Analysis)：过表达分析【最常使用】</h3>
 <h4 id="原理">原理</h4>
 <p>ORA其实可以通过黑白球问题来解释，假设现在有一堆球，包括m个黑球和n个白球；现在我从这一堆球中取出W个，那么最后要看的是这W个球中是黑色的多还是白色的多，即这W个球中主要富集黑色还是白色。</p>
 <blockquote>
@@ -250,16 +250,16 @@ mjx-container[display="true"] + br {
 <blockquote>
 <p>实际上超几何分布是不放回的抽样，而二项分布是有放回的抽样，因此一般来说二项分布检验可以作为一个近似的估计</p>
 </blockquote>
-<h3 id="fcsfunctional-class-scoring-功能集打分法">FCS(Functional Class Scoring) 功能集打分法</h3>
+<h3 id="FCS-Functional-Class-Scoring-功能集打分法">FCS(Functional Class Scoring) 功能集打分法</h3>
 <p>该种方法已经不再强调单个基因的出现与否对富集造成的显著影响，而考虑到基因的表达等微量变化的叠加对于整个富集过程的影响。</p>
 <h4 id="具体方法">具体方法</h4>
 <p>要求的输入是一个排序的基因列表和一个基因集合，不需要设置阈值。计算单个基因表达水平的统计值，采用如衡量差异基因的ANOVA、Q-statistic、t检验、Z-score、信噪比，进行打分或排序，或者直接使用排序好的基因表达谱。同一通路上所有基因的表达水平统计值进行整合，汇集成单个通路水平的分数或统计值，采用基因水平统计的和、均值或中位数，Wilcoxon rank sum, Maxmean statistic, Kolmogorov-Smirnov statistic。对通路水平的显著性进行评估：利用重抽样(bootstrap)的统计学方法</p>
 <blockquote>
 <p>该方法考虑了基因表达量的差异，相对于ORA来说更加细致化</p>
 </blockquote>
-<h3 id="ptpathway-topology通路拓扑学">PT(Pathway Topology)通路拓扑学</h3>
+<h3 id="PT-Pathway-Topology-通路拓扑学">PT(Pathway Topology)通路拓扑学</h3>
 <p>在通路的富集分析中，一般上游基因的表达水平改变要显著大于下游基因对整个通路的影响。PT方法就是把基因在通路中的位置，和其他基因的互作和调控关系结合在一起，评估每个基因对通路的贡献并算出权重，然后把权重整合到富集分析。</p>
-<h3 id="ntnetwork-topology网络拓扑学">NT(Network topology)网络拓扑学</h3>
+<h3 id="NT-Network-topology-网络拓扑学">NT(Network topology)网络拓扑学</h3>
 <p>利用现有的全基因组范围的生物网络，提取数据库的基因相互作用关系（如：基因连接度、基因在网络中的距离），把基因的生物学属性整合到功能分析。利用网络拓扑结构来计算基因对特定生物通路的重要性并给予相应的权重，再利用传统的ORA 或 FCS 方法来评估特定生物通路的富集程度，如GANPA 和 LEGO。</p>
 <h2 id="总结">总结</h2>
 <p>在富集分析中，使用最多的应该是Over Representation Analysis，常见的GO富集分析和KEGG富集都是基于Over Representation Analysis</p>
@@ -307,7 +307,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%8C%E9%9B%86%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95"><span class="toc-text">富集分析方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#oraover-representation-analysis%E8%BF%87%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90%E6%9C%80%E5%B8%B8%E4%BD%BF%E7%94%A8"><span class="toc-text">ORA(Over Representation Analysis)：过表达分析【最常使用】</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%96%B9%E6%B3%95"><span class="toc-text">常用统计学方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fcsfunctional-class-scoring-%E5%8A%9F%E8%83%BD%E9%9B%86%E6%89%93%E5%88%86%E6%B3%95"><span class="toc-text">FCS(Functional Class Scoring) 功能集打分法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%96%B9%E6%B3%95"><span class="toc-text">具体方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ptpathway-topology%E9%80%9A%E8%B7%AF%E6%8B%93%E6%89%91%E5%AD%A6"><span class="toc-text">PT(Pathway Topology)通路拓扑学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ntnetwork-topology%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E5%AD%A6"><span class="toc-text">NT(Network topology)网络拓扑学</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%8C%E9%9B%86%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95"><span class="toc-text">富集分析方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ORA-Over-Representation-Analysis-%EF%BC%9A%E8%BF%87%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90%E3%80%90%E6%9C%80%E5%B8%B8%E4%BD%BF%E7%94%A8%E3%80%91"><span class="toc-text">ORA(Over Representation Analysis)：过表达分析【最常使用】</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%96%B9%E6%B3%95"><span class="toc-text">常用统计学方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FCS-Functional-Class-Scoring-%E5%8A%9F%E8%83%BD%E9%9B%86%E6%89%93%E5%88%86%E6%B3%95"><span class="toc-text">FCS(Functional Class Scoring) 功能集打分法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%96%B9%E6%B3%95"><span class="toc-text">具体方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PT-Pathway-Topology-%E9%80%9A%E8%B7%AF%E6%8B%93%E6%89%91%E5%AD%A6"><span class="toc-text">PT(Pathway Topology)通路拓扑学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NT-Network-topology-%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E5%AD%A6"><span class="toc-text">NT(Network topology)网络拓扑学</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </div>
 

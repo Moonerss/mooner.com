@@ -237,14 +237,14 @@ mjx-container[display="true"] + br {
         <h2 id="背景">背景</h2>
 <p>在R语言中，载入R包函数有两个：<code>library()</code> 和 <code>require()</code>，但是两者之间又存在很大的不同</p>
 <h2 id="区别">区别</h2>
-<ol type="1">
+<ol>
 <li>在初始环境下载入一个R包，如果这个包不存在，执行<code>library()</code>会提示Error，并且停止运行；执行<code>require()</code>会提示Warning，继续执行运算</li>
 </ol>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(<span class="string">&quot;abc&quot;</span>)</span><br><span class="line">Error <span class="keyword">in</span> <span class="keyword">library</span>(<span class="string">&quot;abc&quot;</span>) : there is no package called <span class="string">&#x27;abc&#x27;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span>(<span class="string">&quot;abc&quot;</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Loading required package: abc</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Warning in library(package, lib.loc &#x3D; lib.loc, character.only &#x3D; TRUE, logical.return &#x3D; TRUE, :</span><br><span class="line">## there is no package called &#39;abc&#39;</span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
+<ol start="2">
 <li>在载入的包不存在时，<code>library()</code>只停止运算，只会显示错误提示，没有返回值；<code>require()</code>会返回一个逻辑值</li>
 </ol>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test &lt;- <span class="keyword">library</span>(<span class="string">&quot;abc&quot;</span>)</span><br><span class="line">Error <span class="keyword">in</span> <span class="keyword">library</span>(<span class="string">&quot;abc&quot;</span>) : there is no package called <span class="string">&#x27;abc</span></span><br><span class="line"><span class="string">test #显示错误提示</span></span><br><span class="line"><span class="string">Error: object &#x27;</span>test<span class="string">&#x27; not found</span></span><br></pre></td></tr></table></figure>

@@ -234,17 +234,17 @@ mjx-container[display="true"] + br {
           
       </div>
       <div class="markdown-body">
-        <h2 id="git的基本使用方法">Git的基本使用方法</h2>
-<h2 id="git简介">Git简介</h2>
+        <h2 id="Git的基本使用方法">Git的基本使用方法</h2>
+<h2 id="Git简介">Git简介</h2>
 <p>Git是一个功能强大的分布是版本控制系统，由linux系统的创始人Linus创建，用于优化管理linux源码。Git具有强大的分支管理能力，对于代码集成管理具有超越其他集中式版本控制系统的优势。</p>
-<h2 id="git安装">Git安装</h2>
+<h2 id="Git安装">Git安装</h2>
 <p>在windows上安装Git，只需要从Git官网下载<a target="_blank" rel="noopener" href="https://git-scm.com/">安装程序</a>，按照默认选项安装即可。</p>
 <p>最终，安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p>
 <p>安装完成后需要进行一步设置，在Git Bash中输入命令行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
 <p>因为Git是分布式版本控制系统，所以，每个电脑必须有自己的ID：你的名字和Email地址。</p>
 <p>注意<code>git config</code>命令的<code>--global</code>参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
-<h3 id="git的基本原理">Git的基本原理</h3>
+<h3 id="Git的基本原理">Git的基本原理</h3>
 <p>在Git中,主要有两部分组成：工作区和版本库，而版本库又分为暂存区和分支。</p>
 <p>当你创建编辑一个文件后，首先需要将文件从工作区添加到版本库的暂存区，然后再从暂存区提交的Git的分支系统上。</p>
 <blockquote>
@@ -272,47 +272,45 @@ mjx-container[display="true"] + br {
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add file1.txt</span><br><span class="line">git add file2.txt</span><br><span class="line">git add file3.txt</span><br><span class="line">git commit -m <span class="string">&quot;add 3 files.&quot;</span></span><br></pre></td></tr></table></figure>
 <h3 id="添加远程仓库">添加远程仓库</h3>
 <p>当你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，使两个仓库能够远程同步，以下操作可以帮你实现</p>
-<ol type="1">
-<li>首先需要在远端github账户中创建自己的仓库<br />
-</li>
+<ol>
+<li>首先需要在远端github账户中创建自己的仓库</li>
 <li>在本地使用git命令添加远程仓库</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin &lt;adress&gt; <span class="comment">#最后是远程仓库地址</span></span><br></pre></td></tr></table></figure>
 <p>添加后，远程库的名字就是<code>origin</code>，这是Git默认的叫法，也可以改成别的，但是<code>origin</code>这个名字一看就知道是远程库</p>
-<ol start="3" type="1">
+<ol start="3">
 <li>然后就可以向远端仓库<code>push</code>文件</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
 <p>这条命令实际上是把本地<code>master</code>分支推送到远程仓库上，使用<code>-u</code>参数Git不但会把本地的<code>master</code>分支内容推送的远程新的<code>master</code>分支，还会把本地的<code>maste</code>r分支和远程的<code>master</code>分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
-<h3 id="git的基本命令">Git的基本命令</h3>
+<h3 id="Git的基本命令">Git的基本命令</h3>
 <h4 id="添加文件">添加文件</h4>
 <ul>
-<li>使用命令<code>git add &lt;file&gt;</code>，注意，可反复多次使用，添加多个文件；<br />
-</li>
+<li>使用命令<code>git add &lt;file&gt;</code>，注意，可反复多次使用，添加多个文件；</li>
 <li>使用命令<code>git commit -m &lt;message&gt;</code> 提交文件到仓库，添加提交注释信息</li>
 </ul>
 <h4 id="状态查看">状态查看</h4>
 <p><code>git status</code>查看repository的状态，<code>git diff</code>查看修改了哪些内容</p>
 <h4 id="文件修改">文件修改</h4>
 <ul>
-<li><code>git status</code>可以查看当前版本库中文件的提交状态<br />
-</li>
+<li><code>git status</code>可以查看当前版本库中文件的提交状态</li>
 <li><code>git rm</code>可以删除某一文件</li>
 </ul>
 <h4 id="版本退回">版本退回</h4>
 <ul>
-<li><p><code>git reset</code>命令可以使文件退回之前的版本或者从之前的版本回到修改后的版本</p>
+<li>
+<p><code>git reset</code>命令可以使文件退回之前的版本或者从之前的版本回到修改后的版本</p>
 <blockquote>
 <p>在Git中，用<code>HEAD</code>表示当前版本，上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个^比较容易数不过来，所以写成<code>HEAD~100</code>。</p>
 </blockquote>
 <ul>
-<li><code>git log</code>命令可以查看提交历史，以便确定要回退到哪个版本。<br />
-</li>
+<li><code>git log</code>命令可以查看提交历史，以便确定要回退到哪个版本。</li>
 <li><code>git reflog</code>可以查看命令历史，以便确定要回到未来的哪个版本。</li>
 </ul>
 <blockquote>
 <p>回退到以前的版本A之后，用<code>git log</code>命令就找不到A之后的版本了，如果想回到之后的版本，需要<code>git reset --hard commitID</code>，但是如果不记得<code>commitID</code>,可以用<code>git reflog</code>，它记录了每一个命令</p>
-</blockquote></li>
+</blockquote>
+</li>
 </ul>
 <h3 id="常用的git命令">常用的git命令</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">git init <span class="comment">#使当前目录变成可以管理的版本仓库（git repository)</span></span><br><span class="line">git add filename <span class="comment">#将文件添加到版本仓库</span></span><br><span class="line">git commit -m <span class="string">&quot;description&quot;</span> <span class="comment">#把文件提交到仓库</span></span><br><span class="line">git status <span class="comment">#查看repository的状态</span></span><br><span class="line">git diff <span class="comment">#查看修改了哪些内容</span></span><br><span class="line">git <span class="built_in">log</span> <span class="comment">#查看提交日志</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=oneline <span class="comment">#简洁地显示提交日志</span></span><br><span class="line">git reset --hard HEAD~&lt;3&gt; <span class="comment">#回退到某个版本，比如这里回退到第前3个版本</span></span><br><span class="line">git reset --hard &lt;commit ID&gt; <span class="comment">#回退到特定ID的版本</span></span><br><span class="line">git reflog <span class="comment">#记录了每个命令，可以用来查看每个操作的编号</span></span><br><span class="line">git checkout -b &lt;branch&gt; <span class="comment">#创建并切换分支</span></span><br><span class="line">git branch <span class="comment">#查看当前分支</span></span><br></pre></td></tr></table></figure>
@@ -360,7 +358,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">Git的基本使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E7%AE%80%E4%BB%8B"><span class="toc-text">Git简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E5%AE%89%E8%A3%85"><span class="toc-text">Git安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">Git的基本原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">本地仓库的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-text">创建仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93"><span class="toc-text">初始化仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E4%BB%93%E5%BA%93"><span class="toc-text">添加文件到仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">添加远程仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-text">Git的基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="toc-text">添加文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%9F%A5%E7%9C%8B"><span class="toc-text">状态查看</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="toc-text">文件修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E9%80%80%E5%9B%9E"><span class="toc-text">版本退回</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84git%E5%91%BD%E4%BB%A4"><span class="toc-text">常用的git命令</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">Git的基本使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E7%AE%80%E4%BB%8B"><span class="toc-text">Git简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%AE%89%E8%A3%85"><span class="toc-text">Git安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">Git的基本原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">本地仓库的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-text">创建仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93"><span class="toc-text">初始化仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E4%BB%93%E5%BA%93"><span class="toc-text">添加文件到仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">添加远程仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-text">Git的基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="toc-text">添加文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%9F%A5%E7%9C%8B"><span class="toc-text">状态查看</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="toc-text">文件修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E9%80%80%E5%9B%9E"><span class="toc-text">版本退回</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84git%E5%91%BD%E4%BB%A4"><span class="toc-text">常用的git命令</span></a></li></ol></li></ol>
     </div>
   </div>
 

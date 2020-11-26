@@ -237,14 +237,11 @@ mjx-container[display="true"] + br {
         <h2 id="背景">背景</h2>
 <p><strong>Docker</strong> 是一个开源的应用容器引擎，基于 <strong>Go 语言</strong> 并遵从 <code>Apache2.0</code> 协议开源。</p>
 <p><strong>Docker</strong> 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</p>
-<h3 id="docker的应用场景">Docker的应用场景</h3>
+<h3 id="Docker的应用场景">Docker的应用场景</h3>
 <ul>
-<li>Web 应用的自动化打包和发布。<br />
-</li>
-<li>自动化测试和持续集成、发布。<br />
-</li>
-<li>在服务型环境中部署和调整数据库或其他的后台应用。<br />
-</li>
+<li>Web 应用的自动化打包和发布。</li>
+<li>自动化测试和持续集成、发布。</li>
+<li>在服务型环境中部署和调整数据库或其他的后台应用。</li>
 <li>从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。</li>
 </ul>
 <h2 id="docker-安装">docker 安装</h2>
@@ -259,20 +256,21 @@ mjx-container[display="true"] + br {
 <p>最后安装</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker --version</span><br><span class="line"><span class="comment">## Docker version 19.03.11, build 42e35e61f3</span></span><br></pre></td></tr></table></figure>
-<h2 id="hello-world">Hello world</h2>
+<h2 id="Hello-world">Hello world</h2>
 <p><code>Docker</code> 允许你在容器内运行应用程序， 使用 <code>docker run</code> 命令来在容器内运行一个应用程序。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run ubuntu:15.10 /bin/<span class="built_in">echo</span> <span class="string">&quot;Hello world&quot;</span></span><br><span class="line"><span class="comment">## hello world</span></span><br></pre></td></tr></table></figure>
-<p>参数解析：<br />
-+ <strong>docker</strong> : Docker 的执行命令<br />
-+ <strong>run</strong> : 与<code>docker</code>命令组合运行一个特定的容器<br />
-+ <strong>ubuntu:15.10</strong> : 指定要运行的镜像，<code>Docker</code> 首先从本地主机上查找镜像是否存在，如果不存在，<code>Docker</code> 就会从镜像仓库 <code>Docker Hub</code> 下载公共镜像。<br />
-+ <strong>/bin/echo "Hello world"</strong> : 在启动的容器里执行的命令</p>
-<p>连起来就是：<code>Docker 以 ubuntu15.10 镜像创建一个新容器，然后在容器里执行 bin/echo "Hello world"，然后输出结果。</code></p>
+<p>参数解析：</p>
+<ul>
+<li><strong>docker</strong> : Docker 的执行命令</li>
+<li><strong>run</strong> : 与<code>docker</code>命令组合运行一个特定的容器</li>
+<li><strong>ubuntu:15.10</strong> : 指定要运行的镜像，<code>Docker</code> 首先从本地主机上查找镜像是否存在，如果不存在，<code>Docker</code> 就会从镜像仓库 <code>Docker Hub</code> 下载公共镜像。</li>
+<li><strong>/bin/echo “Hello world”</strong> : 在启动的容器里执行的命令</li>
+</ul>
+<p>连起来就是：<code>Docker 以 ubuntu15.10 镜像创建一个新容器，然后在容器里执行 bin/echo &quot;Hello world&quot;，然后输出结果。</code></p>
 <h2 id="交互运行">交互运行</h2>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-11-ubuntu:~$ sudo docker run -i -t ubuntu:15.10 /bin/bash</span><br><span class="line">root@2401df9ef044:/<span class="comment"># </span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><strong>-t</strong>: 在新容器内指定一个伪终端或终端。<br />
-</li>
+<li><strong>-t</strong>: 在新容器内指定一个伪终端或终端。</li>
 <li><strong>-i</strong>: 允许你对容器内的标准输入进行交互。</li>
 </ul>
 <p>通过运行 <code>exit</code> 命令或者使用 <code>CTRL+D</code> 来退出容器。</p>
@@ -283,29 +281,25 @@ mjx-container[display="true"] + br {
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-11-ubuntu:~$ sudo docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES</span><br><span class="line">9db349c97280        ubuntu:15.10        <span class="string">&quot;/bin/sh -c &#x27;while t…&quot;</span>   11 seconds ago      Up 10 seconds                           tender_black</span><br></pre></td></tr></table></figure>
 <p>输出详情介绍:</p>
 <ul>
-<li><strong>CONTAINER ID</strong>: 容器 ID。<br />
-</li>
-<li><strong>IMAGE</strong>: 使用的镜像。<br />
-</li>
-<li><strong>COMMAND</strong>: 启动容器时运行的命令。<br />
-</li>
-<li><strong>CREATED</strong>: 容器的创建时间。<br />
-</li>
-<li><strong>STATUS</strong>: 容器状态。<br />
-</li>
-<li><strong>PORTS</strong>: 容器的端口信息和使用的连接类型（tcp）。<br />
-</li>
+<li><strong>CONTAINER ID</strong>: 容器 ID。</li>
+<li><strong>IMAGE</strong>: 使用的镜像。</li>
+<li><strong>COMMAND</strong>: 启动容器时运行的命令。</li>
+<li><strong>CREATED</strong>: 容器的创建时间。</li>
+<li><strong>STATUS</strong>: 容器状态。</li>
+<li><strong>PORTS</strong>: 容器的端口信息和使用的连接类型（tcp\udp）。</li>
 <li><strong>NAMES</strong>: 自动分配的容器名称。</li>
 </ul>
 <blockquote>
-<p>docker 运行有七种状态<br />
-+ created（已创建）<br />
-+ restarting（重启中）<br />
-+ running（运行中）<br />
-+ removing（迁移中）<br />
-+ paused（暂停）<br />
-+ exited（停止）<br />
-+ dead（死亡）</p>
+<p>docker 运行有七种状态</p>
+<ul>
+<li>created（已创建）</li>
+<li>restarting（重启中）</li>
+<li>running（运行中）</li>
+<li>removing（迁移中）</li>
+<li>paused（暂停）</li>
+<li>exited（停止）</li>
+<li>dead（死亡）</li>
+</ul>
 </blockquote>
 <p>使用<code>docker logs</code>查看输出结果</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-11-ubuntu:~$ sudo docker logs tender_black</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
@@ -313,10 +307,12 @@ mjx-container[display="true"] + br {
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-11-ubuntu:~$ sudo docker stop tender_black</span><br><span class="line">tender_black</span><br></pre></td></tr></table></figure>
 <h2 id="docker-用户">docker 用户</h2>
 <p>docker进程使用Unix Socket而不是TCP端口。而默认情况下，Unix socket属于root用户，需要root权限才能访问。</p>
-<p>解决方案：<br />
-1. 使用sudo获取管理员权限，运行docker命令<br />
-2. docker守护进程启动的时候，会默认赋予名字为docker的用户组读写Unix socket的权限，因此只要创建docker用户组，并将当前用户加入到docker用户组中，那么当前用户就有权限访问Unix socket了，进而也就可以执行docker相关命令<br />
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd docker     <span class="comment">#添加docker用户组</span></span><br><span class="line">sudo gpasswd -a <span class="variable">$USER</span> docker     <span class="comment">#将登陆用户加入到docker用户组中</span></span><br><span class="line">newgrp docker     <span class="comment">#更新用户组</span></span><br><span class="line">docker ps    <span class="comment">#测试docker命令是否可以使用sudo正常使用</span></span><br></pre></td></tr></table></figure></p>
+<p>解决方案：</p>
+<ol>
+<li>使用sudo获取管理员权限，运行docker命令</li>
+<li>docker守护进程启动的时候，会默认赋予名字为docker的用户组读写Unix socket的权限，因此只要创建docker用户组，并将当前用户加入到docker用户组中，那么当前用户就有权限访问Unix socket了，进而也就可以执行docker相关命令<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd docker     <span class="comment">#添加docker用户组</span></span><br><span class="line">sudo gpasswd -a <span class="variable">$USER</span> docker     <span class="comment">#将登陆用户加入到docker用户组中</span></span><br><span class="line">newgrp docker     <span class="comment">#更新用户组</span></span><br><span class="line">docker ps    <span class="comment">#测试docker命令是否可以使用sudo正常使用</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
       </div>
       
         <div class="prev-or-next">
@@ -361,7 +357,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">Docker的应用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E5%AE%89%E8%A3%85"><span class="toc-text">docker 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hello-world"><span class="toc-text">Hello world</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E8%BF%90%E8%A1%8C"><span class="toc-text">交互运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="toc-text">后台运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E7%94%A8%E6%88%B7"><span class="toc-text">docker 用户</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">Docker的应用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E5%AE%89%E8%A3%85"><span class="toc-text">docker 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hello-world"><span class="toc-text">Hello world</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E8%BF%90%E8%A1%8C"><span class="toc-text">交互运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="toc-text">后台运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E7%94%A8%E6%88%B7"><span class="toc-text">docker 用户</span></a></li></ol>
     </div>
   </div>
 

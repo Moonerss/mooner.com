@@ -242,15 +242,15 @@ mjx-container[display="true"] + br {
       <div class="markdown-body">
         <h2 id="背景">背景</h2>
 <p>Rstudio作为一个R编程的神器竟然在Ubuntu中不能输入中文，经过搜索发现RStudio软件不能使用系统自带的QT5，因此需要我们自己编译安装qt5相关的库，但是由于Rstudio版本的不断更新，每个版本的解决方案都并不能完全兼容，下边记录集中看到的解决方案：</p>
-<h3 id="方案一">方案一：</h3>
+<h3 id="方案一：">方案一：</h3>
 <p>在shell中输入如下命令，将相关插件软连接到RStudio的插件中。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/lib/$(dpkg-architecture -qDEB_BUILD_MULTIARCH)/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so /usr/lib/rstudio/bin/plugins/platforminputcontexts/</span><br></pre></td></tr></table></figure>
-<h3 id="方案二">方案二：</h3>
+<h3 id="方案二：">方案二：</h3>
 <p>同样在shell中输入如下命令，下载相关插件并安装。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget [url=http://ikuya.info/tmp/fcitx-qt5-rstudio-qt542+2.tar.gz]http://ikuya.info/tmp/fcitx-qt5-rstudio-qt542+2.tar.gz[/url]</span><br><span class="line">tar xf fcitx-qt5-rstudio-qt542+2.tar.gz</span><br><span class="line">sudo apt install ./fcitx-frontend-qt5-rstudio_1.0.5-1ubuntu1~qt542+2_amd64.deb ./libfcitx-qt5-1-rstudio_1.0.5-1ubuntu1~qt542+2_amd64.deb</span><br></pre></td></tr></table></figure>
-<h3 id="方案三">方案三：</h3>
-<p>方法来自Github上，https://github.com/JackieMium/my_blog/issues/12 。作者将编译好的<code>libfcitxplatforminputcontextplugin.so</code> 复制到<code>usr/lib/rstudio/plugins/platforminputcontexts</code>路径下。然后删除<code>libQt5*</code>，<code>qt.conf</code>文件。</p>
-<h3 id="方案四">方案四：</h3>
+<h3 id="方案三：">方案三：</h3>
+<p>方法来自Github上，<a target="_blank" rel="noopener" href="https://github.com/JackieMium/my_blog/issues/12">https://github.com/JackieMium/my_blog/issues/12</a> 。作者将编译好的<code>libfcitxplatforminputcontextplugin.so</code> 复制到<code>usr/lib/rstudio/plugins/platforminputcontexts</code>路径下。然后删除<code>libQt5*</code>，<code>qt.conf</code>文件。</p>
+<h3 id="方案四：">方案四：</h3>
 <blockquote>
 <p>该方案适用于Rstudio（Version 1.2.1335）</p>
 </blockquote>
@@ -258,13 +258,13 @@ mjx-container[display="true"] + br {
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/lib/$(dpkg-architecture -qDEB_BUILD_MULTIARCH)/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so  /usr/lib/rstudio/plugins/platforminputcontexts</span><br></pre></td></tr></table></figure>
 <p>在/usr/lib/rstudio/bin的路径下找到qt.conf文件（注意：不同版本路径可能会有所差别），修改qt.conf的内容，添加刚才链接使用的路径：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Paths]</span><br><span class="line">Prefix = /usr/lib/rstudio/</span><br><span class="line">Prefix = ../</span><br></pre></td></tr></table></figure>
-<p>随着版本的更新，可能之前版本的解决方案会不适用，因此。。。<br />
+<p>随着版本的更新，可能之前版本的解决方案会不适用，因此。。。<br>
 持续更新ing</p>
-<hr />
+<hr>
 <h3 id="参考">参考</h3>
-<p>https://support.rstudio.com/hc/en-us/articles/205605748-Using-RStudio-0-99-with-Fctix-on-Linux</p>
-<p>https://blog.csdn.net/wukong1981/article/details/89484408</p>
-<p>https://github.com/JackieMium/my_blog/issues/12</p>
+<p><a target="_blank" rel="noopener" href="https://support.rstudio.com/hc/en-us/articles/205605748-Using-RStudio-0-99-with-Fctix-on-Linux">https://support.rstudio.com/hc/en-us/articles/205605748-Using-RStudio-0-99-with-Fctix-on-Linux</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wukong1981/article/details/89484408">https://blog.csdn.net/wukong1981/article/details/89484408</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/JackieMium/my_blog/issues/12">https://github.com/JackieMium/my_blog/issues/12</a></p>
 
       </div>
       
@@ -316,7 +316,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80"><span class="toc-text">方案一：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C"><span class="toc-text">方案二：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%89"><span class="toc-text">方案三：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E5%9B%9B"><span class="toc-text">方案四：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9A"><span class="toc-text">方案一：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A"><span class="toc-text">方案二：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%89%EF%BC%9A"><span class="toc-text">方案三：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E5%9B%9B%EF%BC%9A"><span class="toc-text">方案四：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol>
     </div>
   </div>
 

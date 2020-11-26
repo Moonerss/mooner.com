@@ -234,7 +234,7 @@ mjx-container[display="true"] + br {
           
       </div>
       <div class="markdown-body">
-        <h1 id="r语言的integer0">R语言的<code>integer(0)</code></h1>
+        <h1>R语言的<code>integer(0)</code></h1>
 <h2 id="举个例子">举个例子</h2>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;x1=c(<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">&gt;which(x1==<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">integer(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">&gt; length(integer(<span class="number">0</span>))</span><br><span class="line">[<span class="number">1</span>] <span class="number">0</span></span><br></pre></td></tr></table></figure>
 <p>可以看出当<code>which()</code> 函数没有符合条件的返回值时会返回<code>integer(0)</code></p>
@@ -242,13 +242,15 @@ mjx-container[display="true"] + br {
 <blockquote>
 <p><code>integer(0)</code>是一个整数向量，长度为0；<code>NULL</code> 表示的是空的意思</p>
 </blockquote>
-<h2 id="integer0numeric0logical0nullna-的区别"><code>integer(0)</code>，<code>numeric(0)</code>，<code>logical(0)</code>，<code>NULL</code>，<code>NA</code> 的区别</h2>
+<h2 id="integer-0-，numeric-0-，logical-0-，NULL，NA-的区别"><code>integer(0)</code>，<code>numeric(0)</code>，<code>logical(0)</code>，<code>NULL</code>，<code>NA</code> 的区别</h2>
 <p><code>logical(0)</code> 不等于 <code>numeric(0)</code>。两者都不是<code>NULL</code>值，即<code>is.null(logical(0))</code>和<code>is.null(numeric(0))</code>都会返回FALSE。<strong>说明长度为零的值有时却不会为空值，<code>NULL</code>的定义是函数中没有被赋值的参数，特征就是没有值</strong>。如何区分<code>NULL</code>和<code>NA</code>？很简单，后者的logical length是1，而前者的logical length是0，意思是假如用<code>is.logical</code>判断NA的逻辑值，得到的结果是TRUE。<code>NA</code>可以为正无穷或负无穷，但<code>NULL</code>永远代表的是没有这个值，一个空集的概念。</p>
 <blockquote>
-<p>总的来说：<br />
-1. <code>numeric(0) == numeric(0)</code>和<code>numeric(0) != numeric(0)</code>，返回TRUE。<br />
-2. <code>logical(0)</code>, <code>numeric(0)</code>, <code>NULL</code>，返回FALSE。<br />
-3. <code>is.logical(NA)</code>，返回TRUE。</p>
+<p>总的来说：</p>
+<ol>
+<li><code>numeric(0) == numeric(0)</code>和<code>numeric(0) != numeric(0)</code>，返回TRUE。</li>
+<li><code>logical(0)</code>, <code>numeric(0)</code>, <code>NULL</code>，返回FALSE。</li>
+<li><code>is.logical(NA)</code>，返回TRUE。</li>
+</ol>
 </blockquote>
 
       </div>
@@ -295,7 +297,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#r%E8%AF%AD%E8%A8%80%E7%9A%84integer0"><span class="toc-text">R语言的integer(0)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BE%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-text">举个例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#integer0numeric0logical0nullna-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">integer(0)，numeric(0)，logical(0)，NULL，NA 的区别</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">R语言的integer(0)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BE%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-text">举个例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#integer-0-%EF%BC%8Cnumeric-0-%EF%BC%8Clogical-0-%EF%BC%8CNULL%EF%BC%8CNA-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">integer(0)，numeric(0)，logical(0)，NULL，NA 的区别</span></a></li></ol></li></ol>
     </div>
   </div>
 

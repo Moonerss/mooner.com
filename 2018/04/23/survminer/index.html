@@ -246,18 +246,28 @@ mjx-container[display="true"] + br {
 <p><code>conf.int</code> 是否绘制置信区间，逻辑向量</p>
 <p><code>pval</code> 是否给出p值逻辑值，数字或字符串。如果逻辑和TRUE，p值将被添加到图上。如果是numeric，则将使用此参数传递的值替换computet的p值。如果是字符，则自定义的字符串会出现在图上。</p>
 <p><code>surv.median.line</code> 在中位生存时绘制水平/垂直线。允许的值包括c（“none”，“hv”，“h”，“v”）中的一个。</p>
-<p><code>risk.table</code> 允许的值有：<br />
-+ 是否显示风险表的TRUE或FALSE。 默认值为FALSE。</p>
+<p><code>risk.table</code> 允许的值有：</p>
 <ul>
-<li><p>“absolute” 或者”percentage” 。分别显示绝对数量和风险对象的百分比。</p></li>
-<li><p>“abs_pct”显示绝对数量和百分比。</p></li>
-<li><p>“nrisk_cumcensor” 和 “nrisk_cumevents”。分别显示风险数量和审查和事件的累计数量。</p></li>
-<li><p>tables.height 数值在[0，1]之间，指定主要存活图下所有表的一般高度。</p></li>
+<li>
+<p>是否显示风险表的TRUE或FALSE。 默认值为FALSE。</p>
+</li>
+<li>
+<p>“absolute” 或者”percentage” 。分别显示绝对数量和风险对象的百分比。</p>
+</li>
+<li>
+<p>“abs_pct”显示绝对数量和百分比。</p>
+</li>
+<li>
+<p>“nrisk_cumcensor” 和 “nrisk_cumevents”。分别显示风险数量和审查和事件的累计数量。</p>
+</li>
+<li>
+<p>tables.height 数值在[0，1]之间，指定主要存活图下所有表的一般高度。</p>
+</li>
 </ul>
 <p><code>ggtheme</code> 使用的ggplot2主题的名字。</p>
-<h3 id="图例标题标签和位置">图例标题，标签和位置</h3>
+<h3 id="图例标题，标签和位置">图例标题，标签和位置</h3>
 <p><code>title</code> 主标题</p>
-<p><code>xlab</code>,<code>ylab</code> x,y轴标签</p>
+<p><code>xlab</code>,<code> ylab</code> x,y轴标签</p>
 <p><code>legend</code> 指定图例位置的字符。允许的值是（“top”，“bottom”，“left”，“right”，“none”）之一。也可使 用数字表示</p>
 <p><code>legend.title</code> 图例的title</p>
 <p><code>legend.labs</code> 图例的标签</p>
@@ -265,14 +275,10 @@ mjx-container[display="true"] + br {
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span>(<span class="string">&quot;survival&quot;</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Loading required package: survival</span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fit&lt;- survfit(Surv(time, status) ~ sex, data = lung)</span><br><span class="line"><span class="comment"># Drawing survival curves</span></span><br><span class="line">ggsurvplot(fit)</span><br></pre></td></tr></table></figure>
-<figure>
-<img src="/images/survminer/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" /><figcaption aria-hidden="true">plot of chunk unnamed-chunk-3</figcaption>
-</figure>
+<p><img src="/images/survminer/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"></p>
 <p>添加risk.table</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add risk table and change risk table y text colors by strata</span></span><br><span class="line">ggsurvplot(fit, pval = <span class="literal">TRUE</span>, conf.int = <span class="literal">TRUE</span>,</span><br><span class="line">           risk.table = <span class="literal">TRUE</span>, risk.table.y.text.col = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
-<figure>
-<img src="/images/survminer/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" /><figcaption aria-hidden="true">plot of chunk unnamed-chunk-4</figcaption>
-</figure>
+<p><img src="/images/survminer/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"></p>
       </div>
       
         <div class="prev-or-next">
@@ -312,7 +318,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0"><span class="toc-text">主要参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E4%BE%8B%E6%A0%87%E9%A2%98%E6%A0%87%E7%AD%BE%E5%92%8C%E4%BD%8D%E7%BD%AE"><span class="toc-text">图例标题，标签和位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-text">例子</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0"><span class="toc-text">主要参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E4%BE%8B%E6%A0%87%E9%A2%98%EF%BC%8C%E6%A0%87%E7%AD%BE%E5%92%8C%E4%BD%8D%E7%BD%AE"><span class="toc-text">图例标题，标签和位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-text">例子</span></a></li></ol>
     </div>
   </div>
 

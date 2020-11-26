@@ -236,37 +236,41 @@ mjx-container[display="true"] + br {
       <div class="markdown-body">
         <p>当我们需要一些NGS数据时，一般会想到去NCBI或者EBI的数据库中下载。但是当我们使用wget进行下载时，真的是慢到令人发指。这时我们可以使用Aspera来下载NGS数据，来加速数据的下载。</p>
 <h2 id="安装">安装</h2>
-<ol type="1">
-<li><p>根据电脑版本下载对应aspera connect server，下载地址：https://www.ibm.com/products/aspera/downloads</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ./download</span><br><span class="line">wget http://download.asperasoft.com/download/sw/connect/3.7.4/aspera-connect-3.7.4.147727-linux-64.tar.gz</span><br></pre></td></tr></table></figure></li>
-<li><p>下载获得的是shell脚本，解压安装</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxf aspera-connect-3.7.4.147727-linux-64.tar.gz</span><br><span class="line">bash aspera-connect-3.7.4.147727-linux-64.sh</span><br></pre></td></tr></table></figure></li>
-<li><p>安装后找到home目录下的会有一个.aspera目录，里边包含密钥等信息，可以将其添加入环境变量中</p>
+<ol>
+<li>
+<p>根据电脑版本下载对应aspera connect server，下载地址：<a target="_blank" rel="noopener" href="https://www.ibm.com/products/aspera/downloads">https://www.ibm.com/products/aspera/downloads</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ./download</span><br><span class="line">wget http://download.asperasoft.com/download/sw/connect/3.7.4/aspera-connect-3.7.4.147727-linux-64.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>下载获得的是shell脚本，解压安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxf aspera-connect-3.7.4.147727-linux-64.tar.gz</span><br><span class="line">bash aspera-connect-3.7.4.147727-linux-64.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>安装后找到home目录下的会有一个.aspera目录，里边包含密钥等信息，可以将其添加入环境变量中</p>
 <blockquote>
 <p>在.aspera的目录，有两个文件比较重要: 一个是ascp的可执行文件<code>~/.aspera/connect/bin/ascp</code>，另一个ascp的密钥文件<code>~/.aspera/connect/etc/asperaweb_id_dsa.putty</code>,可以把密钥备份到home目录当中</p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;PATH=$PATH:/home/jeason/.aspera/connect/bin/&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line">cp ~/.aspera/connect/etc/asperaweb_id_dsa.putty ~/</span><br><span class="line"><span class="built_in">source</span> .bashrc</span><br></pre></td></tr></table></figure>
-<p>重新source配置文件生效</p></li>
-<li><p>使用<code>ascp --help</code>参看命令参数</p>
+<p>重新source配置文件生效</p>
+</li>
+<li>
+<p>使用<code>ascp --help</code>参看命令参数</p>
 <p>常见参数：</p>
 <ul>
-<li><code>-v</code> verbose mode 唠叨模式，能让你实时知道程序在干啥，方便查错。<br />
-</li>
-<li><code>-T</code> 取消加密，否则有时候数据下载不了 。<br />
-</li>
-<li><code>-i</code> 提供私钥文件的地址，我也不知道干嘛的，反正不能少，地址一般是~/.aspera/connect/etc中的asperaweb_id_dsa.openssh文件<br />
-</li>
-<li><code>-l</code> 设置最大传输速度，一般200m到500m，如果不设置，反而速度会比较低，可能有个较低的默认值<br />
-</li>
+<li><code>-v</code> verbose mode 唠叨模式，能让你实时知道程序在干啥，方便查错。</li>
+<li><code>-T</code> 取消加密，否则有时候数据下载不了 。</li>
+<li><code>-i</code> 提供私钥文件的地址，我也不知道干嘛的，反正不能少，地址一般是~/.aspera/connect/etc中的asperaweb_id_dsa.openssh文件</li>
+<li><code>-l</code> 设置最大传输速度，一般200m到500m，如果不设置，反而速度会比较低，可能有个较低的默认值</li>
 <li><code>-k</code> 断点续传，一般设置为值1</li>
-</ul></li>
+</ul>
+</li>
 </ol>
 <h2 id="下载sra数据">下载sra数据</h2>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ascp -T -i ~/.aspera/connect/etc/asperaweb_id_dsa.openssh  -k 1 -l 200m anonftp@ftp-private.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR620/SRR6208854/SRR6208854.sra ./</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>SRA数据库下载：首先记住，数据的存放地址是<code>ftp-private.ncbi.nlm.nih.gov</code>，SRA在Aspera的用户名是<code>anonftp</code></p>
 </blockquote>
-<h2 id="aspera批量下载sra文件">Aspera批量下载SRA文件</h2>
+<h2 id="Aspera批量下载SRA文件">Aspera批量下载SRA文件</h2>
 <p>很多时候需要同时下载多个SRA文件，ascp命令提供参数<code>--file-list</code>，用于批量下载SRA文件。</p>
 <p>可以将下载列表写入sra.txt文件中，然后进行批量下载</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;sra&#x2F;sra-instant&#x2F;reads&#x2F;ByRun&#x2F;sra&#x2F;SRR&#x2F;SRR623&#x2F;SRR6232298&#x2F;SRR6232298.sra</span><br><span class="line">&#x2F;sra&#x2F;sra-instant&#x2F;reads&#x2F;ByRun&#x2F;sra&#x2F;SRR&#x2F;SRR623&#x2F;SRR6232299&#x2F;SRR6232299.sra</span><br></pre></td></tr></table></figure>
@@ -328,7 +332,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE"><span class="toc-text">下载sra数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#aspera%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BDsra%E6%96%87%E4%BB%B6"><span class="toc-text">Aspera批量下载SRA文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E9%94%99"><span class="toc-text">报错</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE"><span class="toc-text">下载sra数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Aspera%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BDSRA%E6%96%87%E4%BB%B6"><span class="toc-text">Aspera批量下载SRA文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E9%94%99"><span class="toc-text">报错</span></a></li></ol>
     </div>
   </div>
 

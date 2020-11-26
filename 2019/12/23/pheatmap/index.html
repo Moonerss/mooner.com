@@ -242,101 +242,103 @@ mjx-container[display="true"] + br {
       <div class="markdown-body">
         <h2 id="pheatmap包">pheatmap包</h2>
 <h3 id="简介">简介</h3>
-<p>官方介绍：<br />
+<p>官方介绍：<br>
 A function to draw clustered heatmaps where one has better control over some graphical parameters such as cell size, etc</p>
 <p>实际上，pheatmap是 Pretty Heatmaps 的缩写，是我认为目前最好用的绘制聚类热图的R包（尽管有很多其他的函数。。。）</p>
 <h3 id="使用方法">使用方法</h3>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">pheatmap(mat, color = colorRampPalette(rev(brewer.pal(n = <span class="number">7</span>, name =</span><br><span class="line">  <span class="string">&quot;RdYlBu&quot;</span>)))(<span class="number">100</span>), kmeans_k = <span class="literal">NA</span>, breaks = <span class="literal">NA</span>, border_color = <span class="string">&quot;grey60&quot;</span>,</span><br><span class="line">  cellwidth = <span class="literal">NA</span>, cellheight = <span class="literal">NA</span>, scale = <span class="string">&quot;none&quot;</span>, cluster_rows = <span class="literal">TRUE</span>,</span><br><span class="line">  cluster_cols = <span class="literal">TRUE</span>, clustering_distance_rows = <span class="string">&quot;euclidean&quot;</span>,</span><br><span class="line">  clustering_distance_cols = <span class="string">&quot;euclidean&quot;</span>, clustering_method = <span class="string">&quot;complete&quot;</span>,</span><br><span class="line">  clustering_callback = identity2, cutree_rows = <span class="literal">NA</span>, cutree_cols = <span class="literal">NA</span>,</span><br><span class="line">  treeheight_row = ifelse((class(cluster_rows) == <span class="string">&quot;hclust&quot;</span>) || cluster_rows,</span><br><span class="line">  <span class="number">50</span>, <span class="number">0</span>), treeheight_col = ifelse((class(cluster_cols) == <span class="string">&quot;hclust&quot;</span>) ||</span><br><span class="line">  cluster_cols, <span class="number">50</span>, <span class="number">0</span>), legend = <span class="literal">TRUE</span>, legend_breaks = <span class="literal">NA</span>,</span><br><span class="line">  legend_labels = <span class="literal">NA</span>, annotation_row = <span class="literal">NA</span>, annotation_col = <span class="literal">NA</span>,</span><br><span class="line">  annotation = <span class="literal">NA</span>, annotation_colors = <span class="literal">NA</span>, annotation_legend = <span class="literal">TRUE</span>,</span><br><span class="line">  annotation_names_row = <span class="literal">TRUE</span>, annotation_names_col = <span class="literal">TRUE</span>,</span><br><span class="line">  drop_levels = <span class="literal">TRUE</span>, show_rownames = <span class="literal">T</span>, show_colnames = <span class="literal">T</span>, main = <span class="literal">NA</span>,</span><br><span class="line">  fontsize = <span class="number">10</span>, fontsize_row = fontsize, fontsize_col = fontsize,</span><br><span class="line">  angle_col = c(<span class="string">&quot;270&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;45&quot;</span>, <span class="string">&quot;90&quot;</span>, <span class="string">&quot;315&quot;</span>), display_numbers = <span class="literal">F</span>,</span><br><span class="line">  number_format = <span class="string">&quot;%.2f&quot;</span>, number_color = <span class="string">&quot;grey30&quot;</span>, fontsize_number = <span class="number">0.8</span></span><br><span class="line">  * fontsize, gaps_row = <span class="literal">NULL</span>, gaps_col = <span class="literal">NULL</span>, labels_row = <span class="literal">NULL</span>,</span><br><span class="line">  labels_col = <span class="literal">NULL</span>, filename = <span class="literal">NA</span>, width = <span class="literal">NA</span>, height = <span class="literal">NA</span>,</span><br><span class="line">  silent = <span class="literal">FALSE</span>, na_col = <span class="string">&quot;#DDDDDD&quot;</span>, <span class="keyword">...</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="常用参数介绍">常用参数介绍</h3>
 <h4 id="图形参数设置">图形参数设置</h4>
-<p><font color = 'blue'><strong>main</strong></font>: 图的标题<br />
-<font color = 'blue'><strong>color</strong></font>: 表示颜色，赋值渐变颜色调色板<code>colorRampPalette</code>属性，选择“绿，黑，红”渐变，分为100个等级,，例：<code>color = colorRampPalette(c(“navy”, “white”, “firebrick3”))(100)</code><br />
-<font color = 'blue'><strong>sclae</strong></font>: 表示值均一化的方向，或者按照行或列，或者没有，值可以是"row", “column” 或者"none"<br />
-<font color = 'blue'><strong>margins</strong></font>: 表示页边空白的大小<br />
-<font color = 'blue'><strong>fontsize</strong></font>: 表示图中的字体大小<br />
-<font color = 'blue'><strong>fontsize_row</strong></font>: 行名的字体大小<br />
-<font color = 'blue'><strong>fontsize_col</strong></font>: 列名的字体大小<br />
-<font color = 'blue'><strong>breaks</strong></font>: 一个数字序列向量，涵盖数据中值的范围，用来定义图例中color_bar的范围<br />
-<font color = 'blue'><strong>angle_col</strong></font>: 列标签旋转的角度 (0, 45, 90, 270 and 315)<br />
-<font color = 'blue'><strong>labels_row</strong></font>: 向量，用来替代原来的行名<br />
+<p><font color = 'blue'><strong>main</strong></font>: 图的标题<br>
+<font color = 'blue'><strong>color</strong></font>: 表示颜色，赋值渐变颜色调色板<code>colorRampPalette</code>属性，选择“绿，黑，红”渐变，分为100个等级,，例：<code>color = colorRampPalette(c(“navy”, “white”, “firebrick3”))(100)</code><br>
+<font color = 'blue'><strong>sclae</strong></font>: 表示值均一化的方向，或者按照行或列，或者没有，值可以是&quot;row&quot;, “column” 或者&quot;none&quot;<br>
+<font color = 'blue'><strong>margins</strong></font>: 表示页边空白的大小<br>
+<font color = 'blue'><strong>fontsize</strong></font>: 表示图中的字体大小<br>
+<font color = 'blue'><strong>fontsize_row</strong></font>: 行名的字体大小<br>
+<font color = 'blue'><strong>fontsize_col</strong></font>: 列名的字体大小<br>
+<font color = 'blue'><strong>breaks</strong></font>: 一个数字序列向量，涵盖数据中值的范围，用来定义图例中color_bar的范围<br>
+<font color = 'blue'><strong>angle_col</strong></font>: 列标签旋转的角度 (0, 45, 90, 270 and 315)<br>
+<font color = 'blue'><strong>labels_row</strong></font>: 向量，用来替代原来的行名<br>
 <font color = 'blue'><strong>labels_col</strong></font>: 向量，用来替代原来的列名</p>
 <h4 id="聚类参数设置">聚类参数设置</h4>
-<p><font color = 'blue'><strong>kmeans_k</strong></font>: 对行进行kmean聚类的个数，如果不设置，则不对行进行聚类<br />
-<font color = 'blue'><strong>cluster_cols</strong></font>: 表示进行列的聚类，值可以是FALSE或TRUE<br />
-<font color = 'blue'><strong>cluster_rows</strong></font>: 是否进行行的聚类，值可以是FALSE或TRUE<br />
-<font color = 'blue'><strong>treeheight_row</strong></font>: 设置row方向的聚类树高<br />
-<font color = 'blue'><strong>treeheight_col</strong></font>: 设置col方向的聚类树高<br />
-<font color = 'blue'><strong>clustering_distance_rows</strong></font>: 表示行距离度量的方法<br />
-<font color = 'blue'><strong>clustering_distance_cols</strong></font>: 表示列距离度量的方法<br />
-<font color = 'blue'><strong>clustering_method</strong></font>: 表示聚类方法，值可以是hclust的任何一种，如"ward.D",“single”, “complete”, “average”, “mcquitty”, “median”, “centroid”, “ward.D2”<br />
-<font color = 'blue'><strong>cutree_rows</strong></font>: 一致性聚类中行聚类的数量，如果没有进行聚类就忽略<br />
+<p><font color = 'blue'><strong>kmeans_k</strong></font>: 对行进行kmean聚类的个数，如果不设置，则不对行进行聚类<br>
+<font color = 'blue'><strong>cluster_cols</strong></font>: 表示进行列的聚类，值可以是FALSE或TRUE<br>
+<font color = 'blue'><strong>cluster_rows</strong></font>: 是否进行行的聚类，值可以是FALSE或TRUE<br>
+<font color = 'blue'><strong>treeheight_row</strong></font>: 设置row方向的聚类树高<br>
+<font color = 'blue'><strong>treeheight_col</strong></font>: 设置col方向的聚类树高<br>
+<font color = 'blue'><strong>clustering_distance_rows</strong></font>: 表示行距离度量的方法<br>
+<font color = 'blue'><strong>clustering_distance_cols</strong></font>: 表示列距离度量的方法<br>
+<font color = 'blue'><strong>clustering_method</strong></font>: 表示聚类方法，值可以是hclust的任何一种，如&quot;ward.D&quot;,“single”, “complete”, “average”, “mcquitty”, “median”, “centroid”, “ward.D2”<br>
+<font color = 'blue'><strong>cutree_rows</strong></font>: 一致性聚类中行聚类的数量，如果没有进行聚类就忽略<br>
 <font color = 'blue'><strong>cutree_cols</strong></font>: 一致性聚类中列聚类的数量，如果没有进行聚类就忽略</p>
 <h4 id="图例参数设置">图例参数设置</h4>
-<p><font color = 'blue'><strong>legend</strong></font>: TRUE或者FALSE，表示是否显示图例<br />
-<font color = 'blue'><strong>legend_breaks</strong></font>: 设置图例的断点，格式：vector<br />
+<p><font color = 'blue'><strong>legend</strong></font>: TRUE或者FALSE，表示是否显示图例<br>
+<font color = 'blue'><strong>legend_breaks</strong></font>: 设置图例的断点，格式：vector<br>
 <font color = 'blue'><strong>legend_labels</strong></font>: legend_breaks对应的标签，例：legend_breaks = -1:4, legend_labels = c(“0”,“1e-4”, “1e-3”, “1e-2”, “1e-1”, “1”)</p>
 <h4 id="单元格参数设置">单元格参数设置</h4>
-<p><font color = 'blue'><strong>border_color</strong></font>: 单元格边框的颜色，如果不需要则设为NA<br />
-<font color = 'blue'><strong>cellwidth</strong></font>: 单元格的宽度，默认NA，为适应画布大小<br />
-<font color = 'blue'><strong>cellheight</strong></font>: 单元格的高度，默认NA，为适应画布大小<br />
+<p><font color = 'blue'><strong>border_color</strong></font>: 单元格边框的颜色，如果不需要则设为NA<br>
+<font color = 'blue'><strong>cellwidth</strong></font>: 单元格的宽度，默认NA，为适应画布大小<br>
+<font color = 'blue'><strong>cellheight</strong></font>: 单元格的高度，默认NA，为适应画布大小<br>
 <font color = 'blue'><strong>na_col</strong></font>: 指定矩阵中NA值的单元格的颜色</p>
 <h4 id="单元格内字的设置">单元格内字的设置</h4>
-<p><font color = 'blue'><strong>display_numbers</strong></font>: 单元格中是否标注数值，如果是matrix，则用matrix中的值代替原始值<br />
-<font color = 'blue'><strong>number_color</strong></font>: 字的颜色<br />
-<font color = 'blue'><strong>number_format</strong></font>: 单元格中标注数值的格式<br />
+<p><font color = 'blue'><strong>display_numbers</strong></font>: 单元格中是否标注数值，如果是matrix，则用matrix中的值代替原始值<br>
+<font color = 'blue'><strong>number_color</strong></font>: 字的颜色<br>
+<font color = 'blue'><strong>number_format</strong></font>: 单元格中标注数值的格式<br>
 <font color = 'blue'><strong>fontsize_number</strong></font>: 单元格中显示的数字的字体大小</p>
 <h4 id="热图分割参数设置">热图分割参数设置</h4>
-<p><font color = 'blue'><strong>cutree_rows</strong></font>: 基于层次聚类（使用cutree）划分行的簇数（如果未聚集行，则忽略参数）<br />
-<font color = 'blue'><strong>cutree_cols</strong></font>: 基于层次聚类（使用cutree）划分列的簇数<br />
-<font color = 'blue'><strong>gaps_row</strong></font>: 向量，指出在未进行行聚类时，在哪里对热图进行分割<br />
+<p><font color = 'blue'><strong>cutree_rows</strong></font>: 基于层次聚类（使用cutree）划分行的簇数（如果未聚集行，则忽略参数）<br>
+<font color = 'blue'><strong>cutree_cols</strong></font>: 基于层次聚类（使用cutree）划分列的簇数<br>
+<font color = 'blue'><strong>gaps_row</strong></font>: 向量，指出在未进行行聚类时，在哪里对热图进行分割<br>
 <font color = 'blue'><strong>gaps_col</strong></font>: 向量，指出在未进行列聚类时，在哪里对热图进行分割</p>
 <h4 id="行列注释参数设置">行列注释参数设置</h4>
-<p><font color = 'blue'><strong>annotation_row</strong></font>: 行的分组信息，需要使用相应的行名称来匹配数据和注释中的行，注意之后颜色设置会考虑离散值还是连续值，格式要求为数据框<br />
-<font color = 'blue'><strong>annotation_col</strong></font>: 同上，列的分组信息<br />
-<font color = 'blue'><strong>annotation_colors</strong></font>: 用于手动指定annotation_row和annotation_col track颜色的列表。<br />
-<font color = 'blue'><strong>annotation_names_row</strong></font>: boolean值，显示是否应绘制行注释track的名称。<br />
+<p><font color = 'blue'><strong>annotation_row</strong></font>: 行的分组信息，需要使用相应的行名称来匹配数据和注释中的行，注意之后颜色设置会考虑离散值还是连续值，格式要求为数据框<br>
+<font color = 'blue'><strong>annotation_col</strong></font>: 同上，列的分组信息<br>
+<font color = 'blue'><strong>annotation_colors</strong></font>: 用于手动指定annotation_row和annotation_col track颜色的列表。<br>
+<font color = 'blue'><strong>annotation_names_row</strong></font>: boolean值，显示是否应绘制行注释track的名称。<br>
 <font color = 'blue'><strong>anotation_names_col</strong></font>:  同上，显示是否应绘制列注释track的名称。</p>
 <h4 id="输出图形设置">输出图形设置</h4>
-<p><font color = 'blue'><strong>filename</strong></font>: 要保存图的名字<br />
-<font color = 'blue'><strong>width</strong></font>: 输出图片的宽度（单位英寸）<br />
-<font color = 'blue'><strong>height</strong></font>: 输出图片的高度（单位英寸）<br />
+<p><font color = 'blue'><strong>filename</strong></font>: 要保存图的名字<br>
+<font color = 'blue'><strong>width</strong></font>: 输出图片的宽度（单位英寸）<br>
+<font color = 'blue'><strong>height</strong></font>: 输出图片的高度（单位英寸）<br>
 <font color = 'blue'><strong>silent</strong></font>: 不绘制图形，只输出<code>gtable</code>对象</p>
 <h3 id="实例介绍">实例介绍</h3>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create test matrix</span></span><br><span class="line">&gt; test = matrix(rnorm(<span class="number">200</span>), <span class="number">20</span>, <span class="number">10</span>)</span><br><span class="line">&gt; test[<span class="number">1</span>:<span class="number">10</span>, seq(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>)] = test[<span class="number">1</span>:<span class="number">10</span>, seq(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>)] + <span class="number">3</span></span><br><span class="line">&gt; test[<span class="number">11</span>:<span class="number">20</span>, seq(<span class="number">2</span>, <span class="number">10</span>, <span class="number">2</span>)] = test[<span class="number">11</span>:<span class="number">20</span>, seq(<span class="number">2</span>, <span class="number">10</span>, <span class="number">2</span>)] + <span class="number">2</span></span><br><span class="line">&gt; test[<span class="number">15</span>:<span class="number">20</span>, seq(<span class="number">2</span>, <span class="number">10</span>, <span class="number">2</span>)] = test[<span class="number">15</span>:<span class="number">20</span>, seq(<span class="number">2</span>, <span class="number">10</span>, <span class="number">2</span>)] + <span class="number">4</span></span><br><span class="line">&gt; colnames(test) = paste(<span class="string">&quot;Test&quot;</span>, <span class="number">1</span>:<span class="number">10</span>, sep = <span class="string">&quot;&quot;</span>)</span><br><span class="line">&gt; rownames(test) = paste(<span class="string">&quot;Gene&quot;</span>, <span class="number">1</span>:<span class="number">20</span>, sep = <span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">library</span>(pheatmap)</span><br><span class="line">&gt; pheatmap(test)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/pheatmap/heatmap1.png" /></p>
+<p><img src="/images/pheatmap/heatmap1.png" alt=""></p>
 <blockquote>
 <p>默认参数是对行列均进行聚类（可设置cluster_row = F, cluster_col = F不进行聚类；如果聚类了，还可以通过设置treeheight_row=0, treeheight_col=0不显示聚类树），矩阵没有进行标准化（标准化参数为scale），热图的每个小块之间以灰色隔开（参数border_color），legend显示在右上方；热图的颜色可利用参数color调整</p>
 </blockquote>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test,kmeans_k = <span class="number">2</span>) <span class="comment"># 对行进行kmeans聚类 </span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/pheatmap/heatmap2.png" /></p>
+<p><img src="/images/pheatmap/heatmap2.png" alt=""></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test, display_numbers = <span class="literal">TRUE</span>)</span><br><span class="line">&gt; pheatmap(test, display_numbers = <span class="literal">TRUE</span>, number_format = <span class="string">&quot;\%.1e&quot;</span>)</span><br><span class="line">&gt; pheatmap(test, display_numbers = matrix(ifelse(test &gt; <span class="number">5</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;&quot;</span>), nrow(test))) <span class="comment"># 可以设置显示的内容</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/pheatmap/heatmap3.png" /></p>
+<p><img src="/images/pheatmap/heatmap3.png" alt=""></p>
 <blockquote>
-<p>display_numbers将数值显示在热图的格子中，可通过number_format设置数值的格式，较常用的有"%.2f"（保留小数点后两位），"%.1e"（科学计数法显示，保留小数点后一位），number_color设置显示内容的颜色，fontsize_number设置字体的大小。</p>
+<p>display_numbers将数值显示在热图的格子中，可通过number_format设置数值的格式，较常用的有&quot;%.2f&quot;（保留小数点后两位），“%.1e”（科学计数法显示，保留小数点后一位），number_color设置显示内容的颜色，fontsize_number设置字体的大小。</p>
 </blockquote>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test, cluster_row = <span class="literal">FALSE</span>, legend_breaks = -<span class="number">1</span>:<span class="number">4</span>, legend_labels = c(<span class="string">&quot;0&quot;</span>, <span class="string">&quot;1e-4&quot;</span>, <span class="string">&quot;1e-3&quot;</span>, <span class="string">&quot;1e-2&quot;</span>, <span class="string">&quot;1e-1&quot;</span>, <span class="string">&quot;1&quot;</span>)) <span class="comment"># 自己设置图例</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/pheatmap/heatmap4.png" /></p>
+<p><img src="/images/pheatmap/heatmap4.png" alt=""></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test, cellwidth = <span class="number">15</span>, cellheight = <span class="number">12</span>, fontsize = <span class="number">8</span>, main = <span class="string">&quot;Example heatmap&quot;</span>, filename = <span class="string">&quot;test.pdf&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/pheatmap/heatmap5.png" /></p>
+<p><img src="/images/pheatmap/heatmap5.png" alt=""></p>
 <blockquote>
 <p>main可设置热图的标题，fontsize设置字体大小，filename可直接将热图存出，支持格式png, pdf, tiff, bmp, jpeg，并且可以通过width, height设置图片的大小</p>
 </blockquote>
 <p>对行、列添加注释分组信息</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; annotation_col = data.frame(CellType = factor(rep(c(<span class="string">&quot;CT1&quot;</span>, <span class="string">&quot;CT2&quot;</span>), <span class="number">5</span>)), Time = <span class="number">1</span>:<span class="number">5</span>)</span><br><span class="line">&gt; rownames(annotation_col) = paste(<span class="string">&quot;Test&quot;</span>, <span class="number">1</span>:<span class="number">10</span>, sep = <span class="string">&quot;&quot;</span>)</span><br><span class="line">&gt; annotation_row = data.frame(GeneClass = factor(rep(c(<span class="string">&quot;Path1&quot;</span>, <span class="string">&quot;Path2&quot;</span>, <span class="string">&quot;Path3&quot;</span>), c(<span class="number">10</span>, <span class="number">4</span>, <span class="number">6</span>))))</span><br><span class="line">&gt; rownames(annotation_row) = paste(<span class="string">&quot;Gene&quot;</span>, <span class="number">1</span>:<span class="number">20</span>, sep = <span class="string">&quot;&quot;</span>)</span><br><span class="line">&gt; pheatmap(test, annotation_col = annotation_col, annotation_row = annotation_row)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/pheatmap/heatmap6.png" /></p>
+<p><img src="/images/pheatmap/heatmap6.png" alt=""></p>
 <p>同样可以自己设置各个分组注释信息的颜色</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; ann_colors = list(Time = c(<span class="string">&quot;white&quot;</span>, <span class="string">&quot;firebrick&quot;</span>),</span><br><span class="line">    CellType = c(CT1 = <span class="string">&quot;#1B9E77&quot;</span>, CT2 = <span class="string">&quot;#D95F02&quot;</span>),</span><br><span class="line">    GeneClass = c(Path1 = <span class="string">&quot;#7570B3&quot;</span>, Path2 = <span class="string">&quot;#E7298A&quot;</span>, Path3 = <span class="string">&quot;#66A61E&quot;</span>)) <span class="comment"># 如果是连续型变量会形成渐变色，如：Time</span></span><br><span class="line">&gt; pheatmap(test, annotation_col = annotation_col, annotation_row = annotation_row, annotation_colors = ann_colors)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/pheatmap/heatmap7.png" /></p>
-<p>对于聚类图，可以使用<code>cutree_rows</code>, <code>cutree_cols</code>设置热图分割<br />
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test,cutree_rows=<span class="number">3</span>,cutree_cols=<span class="number">2</span>)</span><br></pre></td></tr></table></figure> <img src="/images/pheatmap/heatmap8.png" /></p>
-<p>对于未进行聚类的图，可以使用<code>gaps_row</code>, <code>gaps_col</code>自己设定要分隔开的位置<br />
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test, annotation_col = annotation_col, cluster_rows = <span class="literal">FALSE</span>, gaps_row = c(<span class="number">10</span>, <span class="number">14</span>), cutree_col = <span class="number">2</span>)</span><br></pre></td></tr></table></figure> <img src="/images/pheatmap/heatmap9.png" /></p>
-<h3 id="pheatmap函数返回结果">pheatmap()函数返回结果</h3>
+<p><img src="/images/pheatmap/heatmap7.png" alt=""></p>
+<p>对于聚类图，可以使用<code>cutree_rows</code>, <code>cutree_cols</code>设置热图分割</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test,cutree_rows=<span class="number">3</span>,cutree_cols=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/pheatmap/heatmap8.png" alt=""></p>
+<p>对于未进行聚类的图，可以使用<code>gaps_row</code>, <code>gaps_col</code>自己设定要分隔开的位置</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test, annotation_col = annotation_col, cluster_rows = <span class="literal">FALSE</span>, gaps_row = c(<span class="number">10</span>, <span class="number">14</span>), cutree_col = <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/pheatmap/heatmap9.png" alt=""></p>
+<h3 id="pheatmap-函数返回结果">pheatmap()函数返回结果</h3>
 <p>返回一个<code>pheatmap</code>对象，但是该对象中包含以下内容：</p>
-<p><font color = 'blue'><strong>tree_row</strong></font> : 行聚类得到的<code>hclust</code>对象<br />
-<font color = 'blue'><strong>tree_row</strong></font> : 列聚类得到的<code>hclust</code>对象<br />
-<font color = 'blue'><strong>kmeans</strong></font>   : kmeans聚类的k值<br />
+<p><font color = 'blue'><strong>tree_row</strong></font> : 行聚类得到的<code>hclust</code>对象<br>
+<font color = 'blue'><strong>tree_row</strong></font> : 列聚类得到的<code>hclust</code>对象<br>
+<font color = 'blue'><strong>kmeans</strong></font>   : kmeans聚类的k值<br>
 <font color = 'blue'><strong>gtable</strong></font>     : 热图的<code>gtable</code>对象，可以用来与其他<code>ggplot2</code>对象进行组合绘图</p>
 
       </div>
@@ -389,7 +391,7 @@ A function to draw clustered heatmaps where one has better control over some gra
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pheatmap%E5%8C%85"><span class="toc-text">pheatmap包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">常用参数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">图形参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%9A%E7%B1%BB%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">聚类参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E4%BE%8B%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">图例参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%A0%BC%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">单元格参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%A0%BC%E5%86%85%E5%AD%97%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="toc-text">单元格内字的设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E5%9B%BE%E5%88%86%E5%89%B2%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">热图分割参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E6%B3%A8%E9%87%8A%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">行列注释参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%9B%BE%E5%BD%A2%E8%AE%BE%E7%BD%AE"><span class="toc-text">输出图形设置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%8B%E7%BB%8D"><span class="toc-text">实例介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pheatmap%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="toc-text">pheatmap()函数返回结果</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pheatmap%E5%8C%85"><span class="toc-text">pheatmap包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">常用参数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">图形参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%9A%E7%B1%BB%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">聚类参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E4%BE%8B%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">图例参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%A0%BC%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">单元格参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%A0%BC%E5%86%85%E5%AD%97%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="toc-text">单元格内字的设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E5%9B%BE%E5%88%86%E5%89%B2%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">热图分割参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E6%B3%A8%E9%87%8A%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">行列注释参数设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%9B%BE%E5%BD%A2%E8%AE%BE%E7%BD%AE"><span class="toc-text">输出图形设置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%8B%E7%BB%8D"><span class="toc-text">实例介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pheatmap-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="toc-text">pheatmap()函数返回结果</span></a></li></ol></li></ol>
     </div>
   </div>
 
