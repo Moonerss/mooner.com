@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="author" content="zchengsite, 1451426471@qq.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <title>lasso回归筛选构建生存模型 | Hexo</title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/mooner.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">mooner</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">lasso回归筛选构建生存模型</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2021-03-07
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/lasso/" title="lasso">
+                    <b>#</b> lasso
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/cox/" title="cox">
+                    <b>#</b> cox
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="背景">背景</h2>
+<p>在进行预后分析的过程中，往往会从大量的遗传特征中筛选有效的变量进行预后标志的构建。一般的构建过程会通过单因素cox和多因素cox等进行特征的过滤和变量筛选，然而这样的筛选过程有时候仍然会剩余较多的变量，这对后期预后标志的构建和使用会造成一定的困扰。因此需要一些更为有效的方法对得到的特征进行更加有效的过滤，其中lasso回归目前已经被广泛的运用到预后特征的筛选过程中。</p>
+<h2 id="lasso-回归">lasso 回归</h2>
+<p>lasso(Least Absolute Shrinkage and Selection Operator)回归是一种正则化回归(regularized regression)，它是在在最小二乘的基础上增加了一个罚分项来对估计参数进行压缩，当参数缩小到小于一个阈值的时候，就令它变为0，从而选择出对因变量影响较大的自变量并计算出相应的回归系数，最终能得到一个比较精简的模型。LASSO方法在处理存在多重共线性的样本数据时有明显的优势。</p>
+<blockquote>
+<p>lasso回归简单的讲就是一种变量筛选的回归，保留最具影响力的变量，将其他影响较小的变量过滤掉。</p>
+</blockquote>
+<p>LASSO回归的特点是在拟合广义线性模型的同时进行变量筛选(variable selection)和复杂度调整(regularization)。因此,不论因变量(dependent/response varaible)是连续的(continuous),还是二元或者多元离散的（discrete）,都可以用LASSO回归建模然后预测。这也是lasso可以运用于预后变量筛选的原因。</p>
+<p>LASSO回归的复杂度主要由参数λ(lambda)来控制.lambda越大,对变量较多的线性模型的惩罚力度就越大.最终获得一个变量较少的模型。</p>
+<p>另外还有一个参数α(alpha)用来控制高度相关性模型的性状。LASSO回归时,alpha设置为1。</p>
+<h2 id="lasso回归的r实现">lasso回归的R实现</h2>
+<p>lasso回归在R语言中可以使用<code>glmnet</code>包中的<code>glmnet</code>函数进行实现，该包同时还包含了岭回归、弹性网络回归的计算。</p>
+<p>其常用的参数如下：</p>
+<ul>
+<li><code>x</code>: 自变量数据集,需要为matrix格式,行为观测值，列为变量。<br>
+</li>
+<li><code>y</code>: 因变量数据集,需要为matrix格式,只有一列。<br>
+</li>
+<li><code>family</code>: 应变量类型.如果时连续性变量(也就是要做回归分析),<code>family</code>应该为<code>gussian</code>(高斯分布/正态分布)或者<code>poisson</code>(泊松分布)。如果为二分类不连续变量(factor类型,且只有两个levels),应设置为<code>binomial</code>。如果为多分类不连续变量(factor类型,且多个levels),则应设置为<code>multinomial</code>。如果设置为<code>cox</code>,则<code>y</code>应当为一个两列的matrix,列名分别为<code>time</code>和<code>status</code>,<code>time</code>为存活时间,<code>status</code>为结局状态(1代表死亡,0代表还未死亡)。<br>
+</li>
+<li><code>alpha</code>: 在LASSO回归中,将其设置为1。<br>
+</li>
+<li><code>nlambda</code>: 选取多少个lambda进行优化,默认为100.也就是使用100个lambda值拟合出100个系数不同的模型。<br>
+</li>
+<li><code>lambda</code>: 提供lambda值,如果设置该值(一个或者多个),则会覆盖掉自动选择的lambda值。<br>
+</li>
+<li><code>standardize</code>: 是否对数据进行标准化(scale),默认为TRUE.如果自己做过<code>scale</code>标化,这里需要设置为FALSE。</li>
+</ul>
+<h2 id="lasso-cox进行变量筛选">lasso cox进行变量筛选</h2>
+<p>使用R包自带的数据进行操作：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## library package</span></span><br><span class="line"><span class="keyword">library</span>(glmnet)</span><br><span class="line"></span><br><span class="line"><span class="comment">## load example data</span></span><br><span class="line">data(CoxExample)</span><br></pre></td></tr></table></figure>
+<p>这个数据中共包含两个数据一个是包含30个基因在1000个病人样本中的表达矩阵，另一个是每个患者的生存状态和生存时间，生存时间以年为单位，如下：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(x[,<span class="number">1</span>:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##            [,1]       [,2]        [,3]</span><br><span class="line">## [1,] -0.8767670 -0.6135224 -0.56757380</span><br><span class="line">## [2,] -0.7463894 -1.7519457  0.28545898</span><br><span class="line">## [3,]  1.3759148 -0.2641132  0.88727408</span><br><span class="line">## [4,]  0.2375820  0.7859162 -0.89670281</span><br><span class="line">## [5,]  0.1086275  0.4665686 -0.57637261</span><br><span class="line">## [6,]  1.2027213 -0.4187073 -0.05735193</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head(y)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##            time status</span><br><span class="line">## [1,] 1.76877757      1</span><br><span class="line">## [2,] 0.54528404      1</span><br><span class="line">## [3,] 0.04485918      0</span><br><span class="line">## [4,] 0.85032298      0</span><br><span class="line">## [5,] 0.61488426      1</span><br><span class="line">## [6,] 0.29860939      0</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## reshape the data</span></span><br><span class="line">rownames(x) &lt;- paste0(<span class="string">"patient"</span>, <span class="number">1</span>:<span class="number">1000</span>)</span><br><span class="line">colnames(x) &lt;- paste0(<span class="string">'gene'</span>, <span class="number">1</span>:<span class="number">30</span>)</span><br><span class="line">rownames(y) &lt;- paste0(<span class="string">'patient'</span>, <span class="number">1</span>:<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Construct cox object</span></span><br><span class="line"><span class="keyword">library</span>(survival)</span><br><span class="line">cox_fit &lt;- Surv(y[, <span class="string">'time'</span>], y[, <span class="string">'status'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">## lasso cox regression</span></span><br><span class="line">fit &lt;- glmnet(x, cox_fit, family = <span class="string">"cox"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## plot the picture</span></span><br><span class="line">plot(fit, label = <span class="literal">T</span>)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/lasso/unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11"><figcaption aria-hidden="true">plot of chunk unnamed-chunk-11</figcaption>
+</figure>
+<p>lasso回归最重要的是选择合适的λ值，可以通过<code>cv.glmnet</code>函数实现</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cvfit &lt;- cv.glmnet(x, cox_fit, family = <span class="string">"cox"</span>, nfolds = <span class="number">10</span>)</span><br><span class="line">plot(cvfit)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/lasso/unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12"><figcaption aria-hidden="true">plot of chunk unnamed-chunk-12</figcaption>
+</figure>
+<p>一般可以采用两个内置函数<code>cvfit$lambda.min</code>和 <code>cvfit$lambda.1se</code>提取最佳的lambda值</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## choose the optimal lambda</span></span><br><span class="line">cvfit$lambda.min</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 0.01452734</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cvfit$lambda.1se</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 0.0368321</span><br></pre></td></tr></table></figure>
+<p>保留lambda最佳值处的结果，采用<code>coef</code>函数提取具有系数的结果，即筛选之后的特征</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fit_coef &lt;- coef(cvfit, s = cvfit$lambda.1se)</span><br><span class="line">fit_coef</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">## 30 x 1 sparse Matrix of class "dgCMatrix"</span><br><span class="line">##                  1</span><br><span class="line">## gene1   0.41905187</span><br><span class="line">## gene2  -0.12484193</span><br><span class="line">## gene3  -0.16652849</span><br><span class="line">## gene4   0.12790688</span><br><span class="line">## gene5  -0.14144376</span><br><span class="line">## gene6  -0.42771578</span><br><span class="line">## gene7   0.27727379</span><br><span class="line">## gene8   0.05780711</span><br><span class="line">## gene9   0.38552188</span><br><span class="line">## gene10  0.06912816</span><br><span class="line">## gene11  .         </span><br><span class="line">## gene12  .         </span><br><span class="line">## gene13  .         </span><br><span class="line">## gene14  .         </span><br><span class="line">## gene15  .         </span><br><span class="line">## gene16  .         </span><br><span class="line">## gene17  .         </span><br><span class="line">## gene18  .         </span><br><span class="line">## gene19  .         </span><br><span class="line">## gene20  .         </span><br><span class="line">## gene21  .         </span><br><span class="line">## gene22  .         </span><br><span class="line">## gene23  .         </span><br><span class="line">## gene24  .         </span><br><span class="line">## gene25  .         </span><br><span class="line">## gene26  .         </span><br><span class="line">## gene27  .         </span><br><span class="line">## gene28  .         </span><br><span class="line">## gene29  .         </span><br><span class="line">## gene30  .</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## extract genes</span></span><br><span class="line">fit_out &lt;- fit_coef[which(fit_coef != <span class="number">0</span>),]</span><br><span class="line">fit_out</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">##       gene1       gene2       gene3       gene4       gene5 </span><br><span class="line">##  0.41905187 -0.12484193 -0.16652849  0.12790688 -0.14144376 </span><br><span class="line">##       gene6       gene7       gene8       gene9      gene10 </span><br><span class="line">## -0.42771578  0.27727379  0.05780711  0.38552188  0.06912816</span><br></pre></td></tr></table></figure>
+<p>至此，筛选出最终需要保留的变量特征。</p>
+<h2 id="reference">Reference</h2>
+<p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/1224/13/68068867_881784589.shtml">用R进行Lasso regr ess ion回归分析</a><br>
+<a target="_blank" rel="noopener" href="https://image.hanspub.org/Html/3-2580332_24328.htm">基于Cox比例风险回归模型、LASSO与生存树的乳腺癌预后</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/12/19/tpm/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2021-03-07
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/lasso/" title="lasso">
+                        <b>#</b> lasso
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/cox/" title="cox">
+                        <b>#</b> cox
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lasso-%E5%9B%9E%E5%BD%92"><span class="toc-text">lasso 回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lasso%E5%9B%9E%E5%BD%92%E7%9A%84r%E5%AE%9E%E7%8E%B0"><span class="toc-text">lasso回归的R实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lasso-cox%E8%BF%9B%E8%A1%8C%E5%8F%98%E9%87%8F%E7%AD%9B%E9%80%89"><span class="toc-text">lasso cox进行变量筛选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-text">Reference</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <div id="vcomments"></div>
+
+  <script>
+    new Valine({
+      el: '#vcomments',
+      appId: 'DdMocNMQxnEQcChwW38b0JVQ-gzGzoHsz',
+      appKey: 'ETFXPtdWGEvlSfsH7RwSMzAf',
+      placeholder: 'Welcome!',
+      avatar: 'retro',
+      lang: 'zh-CN'
+    })
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Moonerss">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/Moonerss">Copyright © mooner 2020</a>
+    </div>
+  
+    <div class="footer-more">
+      <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search ...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

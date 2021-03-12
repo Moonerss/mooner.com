@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-26T08:27:10.254Z</updated>
+  <updated>2021-03-08T00:56:06.052Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>lasso回归筛选构建生存模型</title>
+    <link href="http://example.com/2021/03/07/lasso/"/>
+    <id>http://example.com/2021/03/07/lasso/</id>
+    <published>2021-03-07T08:34:35.000Z</published>
+    <updated>2021-03-08T00:56:06.052Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+    <category term="lasso" scheme="http://example.com/tags/lasso/"/>
+    
+    <category term="cox" scheme="http://example.com/tags/cox/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Count、TPM、RPKM和FPKM转换</title>
+    <link href="http://example.com/2020/12/19/tpm/"/>
+    <id>http://example.com/2020/12/19/tpm/</id>
+    <published>2020-12-19T00:59:58.000Z</published>
+    <updated>2020-12-19T01:28:31.515Z</updated>
+    
+    
+    
+    
+    
+    <category term="NGS" scheme="http://example.com/tags/NGS/"/>
+    
+  </entry>
   
   <entry>
     <title>基于表达数据评估免疫浸润ssGSEA</title>
@@ -151,7 +191,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;关于-Conda&quot;&gt;关于 Conda&lt;/h2&gt;
+    <summary type="html">&lt;h2 id=&quot;关于-conda&quot;&gt;关于 Conda&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Conda is an open source package management system and environment management system that</summary>
         
@@ -205,7 +245,8 @@
       
         
         
-    <summary type="html">&lt;h2</summary>
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+&lt;p&gt;在对Django项目进行移植时，由于生成项目的时候是将依赖和解释信息以绝对路径的方式写入配置文件的， 所以从一台电脑移植到另一台电脑，直接通过拷贝的方式是行不通的，正确的做法是将依赖模块写入requirements.txt文件中，</summary>
         
       
     
@@ -252,7 +293,8 @@
         
         
     <summary type="html">&lt;p&gt;当我们需要一些NGS数据时，一般会想到去NCBI或者EBI的数据库中下载。但是当我们使用wget进行下载时，真的是慢到令人发指。这时我们可以使用Aspera来下载NGS数据，来加速数据的下载。&lt;/p&gt;
-&lt;h2</summary>
+&lt;h2 id=&quot;安装&quot;&gt;安装&lt;/h2&gt;
+&lt;ol</summary>
         
       
     
@@ -325,8 +367,8 @@
       
         
         
-    <summary type="html">&lt;h1&gt;UMI表达定量 (UMI)&lt;/h1&gt;
-&lt;h2 id=&quot;UMI表达定量-UMI&quot;&gt;UMI表达定量 (UMI)&lt;/h2&gt;
+    <summary type="html">&lt;h1 id=&quot;umi表达定量-umi&quot;&gt;UMI表达定量 (UMI)&lt;/h1&gt;
+&lt;h2 id=&quot;umi表达定量-umi-1&quot;&gt;UMI表达定量 (UMI)&lt;/h2&gt;
 &lt;h3</summary>
         
       
@@ -379,7 +421,7 @@
         
     <summary type="html">&lt;p&gt;&lt;code&gt;trim_galore&lt;/code&gt;可以用来对原始的测序数据进行质控&lt;/p&gt;
 &lt;p&gt;安装&lt;code&gt;trim_galore&lt;/code&gt;需要提前安装两个依赖软件：&lt;code&gt;Fastqc&lt;/code&gt;和&lt;code&gt;cutadapt&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;</summary>
+&lt;p</summary>
         
       
     
@@ -406,8 +448,7 @@
         
     <summary type="html">&lt;p&gt;FastQC是一款用于对RNA-seq数据进行质量检测和控制的软件（对单细胞和bulk的测序数据都适用）&lt;/p&gt;
 &lt;h2 id=&quot;fastqc安装&quot;&gt;fastqc安装&lt;/h2&gt;
-&lt;p&gt;首先需要从官网下载FastQC的安装文件&lt;br&gt;
-&lt;a</summary>
+&lt;p&gt;首先需要从官网下载FastQC的安装文件&lt;br</summary>
         
       
     
@@ -432,8 +473,8 @@
       
         
         
-    <summary type="html">&lt;p&gt;大佬总结的ggplot2常用调节参数&lt;br&gt;
-&lt;img src=&quot;/images/ggplottheme/20200627183728.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    <summary type="html">&lt;p&gt;大佬总结的ggplot2常用调节参数&lt;br /&gt;
+&lt;img src=&quot;/images/ggplottheme/20200627183728.png&quot; /&gt;&lt;br /&gt;
 &lt;img src=&quot;/images/ggplottheme/20200627183936.png&quot;</summary>
         
       
@@ -463,7 +504,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;scRNA-seq原始数据处理&quot;&gt;scRNA-seq原始数据处理&lt;/h2&gt;
+    <summary type="html">&lt;h2 id=&quot;scrna-seq原始数据处理&quot;&gt;scRNA-seq原始数据处理&lt;/h2&gt;
 &lt;h3</summary>
         
       
@@ -474,62 +515,6 @@
     
     
     <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GO富集圈圈图</title>
-    <link href="http://example.com/2020/09/23/goplot/"/>
-    <id>http://example.com/2020/09/23/goplot/</id>
-    <published>2020-09-23T07:20:41.000Z</published>
-    <updated>2020-11-14T01:39:37.269Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;绘制GO富集的圈圈图实例&quot;&gt;绘制GO富集的圈圈图实例&lt;/h2&gt;
-&lt;p&gt;载入R包&lt;/p&gt;
-&lt;figure class=&quot;highlight r&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    
-    <category term="R" scheme="http://example.com/tags/R/"/>
-    
-    <category term="enrichment" scheme="http://example.com/tags/enrichment/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ggplot2小部件参考</title>
-    <link href="http://example.com/2020/09/22/ggplot2/"/>
-    <id>http://example.com/2020/09/22/ggplot2/</id>
-    <published>2020-09-22T08:44:55.000Z</published>
-    <updated>2020-10-29T10:31:47.180Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;添加原件&quot;&gt;添加原件&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;添加竖线或者横线&lt;/p&gt;
-&lt;figure class=&quot;highlight r&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
-        
-      
-    
-    
-    
-    
-    <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
     
   </entry>
   

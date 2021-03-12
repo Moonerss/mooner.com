@@ -243,14 +243,7 @@ mjx-container[display="true"] + br {
 <p>函数<code>list.dirs()</code>只列出路径下所有目录,默认是递归进行的</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.dirs(path = <span class="string">&quot;.&quot;</span>, full.names = <span class="literal">TRUE</span>, recursive = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
 <p>参数介绍：</p>
-<p><code>path</code> 路径，如不填则默认为当前工作路径，即<code>getwd()</code>得到的路径；<br>
-<code>pattern</code> 正则表达式，若<code>pattern</code>不为<code>NULL</code>，返回文件（目录）名满足该正则表达式的文件（目录）；<br>
-<code>all.files </code>若为<code>FALSE</code>则不显示隐藏文件（目录），若为<code>TRUE</code>则返回所有文件（目录）；<br>
-<code>full.names</code> 若为<code>FALSE</code>则只返回文件（目录）名，若为<code>TRUE</code>则返回文件（目录）路径；<br>
-<code>recursive</code> 若为<code>FALSE</code>则只返回该路径的子级文件（目录），若为<code>TRUE</code>则递归返回所有子、孙文件（目录）；<br>
-<code>ignore.case</code> 若为<code>TRUE</code>则在匹配pattern时不区分大小写；<br>
-<code>include.dirs</code> 在recursive为TURE，即显示所有子、孙文件时，若<code>include.dirs</code>为FALSE则只列出最终端的文件名，而不列出中间层级的目录名；<br>
-<code>no.. </code>若为TRUE，则不显示“.”和“…”。</p>
+<p><code>path</code> 路径，如不填则默认为当前工作路径，即<code>getwd()</code>得到的路径； <code>pattern</code> 正则表达式，若<code>pattern</code>不为<code>NULL</code>，返回文件（目录）名满足该正则表达式的文件（目录）； <code>all.files</code>若为<code>FALSE</code>则不显示隐藏文件（目录），若为<code>TRUE</code>则返回所有文件（目录）； <code>full.names</code> 若为<code>FALSE</code>则只返回文件（目录）名，若为<code>TRUE</code>则返回文件（目录）路径； <code>recursive</code> 若为<code>FALSE</code>则只返回该路径的子级文件（目录），若为<code>TRUE</code>则递归返回所有子、孙文件（目录）； <code>ignore.case</code> 若为<code>TRUE</code>则在匹配pattern时不区分大小写； <code>include.dirs</code> 在recursive为TURE，即显示所有子、孙文件时，若<code>include.dirs</code>为FALSE则只列出最终端的文件名，而不列出中间层级的目录名； <code>no..</code>若为TRUE，则不显示“.”和“..”。</p>
 <h3 id="查看目录的权限">查看目录的权限</h3>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; file.info(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">  size isdir mode               mtime               ctime               atime exe</span><br><span class="line">.    <span class="number">0</span>  <span class="literal">TRUE</span>  <span class="number">555</span> <span class="number">2019</span>-<span class="number">03</span>-<span class="number">13</span> <span class="number">08</span>:<span class="number">10</span>:<span class="number">19</span> <span class="number">2018</span>-<span class="number">10</span>-<span class="number">13</span> <span class="number">17</span>:<span class="number">14</span>:<span class="number">40</span> <span class="number">2019</span>-<span class="number">04</span>-<span class="number">01</span> <span class="number">18</span>:<span class="number">54</span>:<span class="number">24</span>  no</span><br></pre></td></tr></table></figure>
 <h3 id="创建目录">创建目录</h3>
@@ -262,12 +255,9 @@ mjx-container[display="true"] + br {
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; file.exists(<span class="string">&quot;a&quot;</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="literal">FALSE</span></span><br></pre></td></tr></table></figure>
 <h4 id="检查目录的权限">检查目录的权限</h4>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; df &lt;- dir(file.path(R.home(), <span class="string">&quot;bin&quot;</span>), full.names = <span class="literal">T</span>)</span><br><span class="line">&gt; file.access(df, mode = <span class="number">0</span>) == <span class="number">0</span></span><br><span class="line">  D:/Rcore/bin/config.sh       D:/Rcore/bin/R.exe D:/Rcore/bin/Rscript.exe </span><br><span class="line">                    <span class="literal">TRUE</span>                     <span class="literal">TRUE</span>                     <span class="literal">TRUE</span> </span><br><span class="line">        D:/Rcore/bin/x64 </span><br><span class="line">                    <span class="literal">TRUE</span></span><br></pre></td></tr></table></figure>
-<p>mode = 0, 检查文件或目录是否存在<br>
-mode = 1, 检查文件或目录是否可执行<br>
-mode = 2, 检查文件或目录是否可写<br>
-mode = 4, 检查文件或目录是否可读</p>
+<p>mode = 0, 检查文件或目录是否存在 mode = 1, 检查文件或目录是否可执行 mode = 2, 检查文件或目录是否可写 mode = 4, 检查文件或目录是否可读</p>
 <blockquote>
-<p>file.access()返回的是逻辑值，<a target="_blank" rel="noopener" href="http://file.info">file.info</a>()返回的是详细的权限信息</p>
+<p>file.access()返回的是逻辑值，file.info()返回的是详细的权限信息</p>
 </blockquote>
 <h4 id="修改目录权限">修改目录权限</h4>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Sys.chmod(list.dirs(<span class="string">&quot;.&quot;</span>), <span class="string">&quot;777&quot;</span>)</span><br><span class="line">f &lt;- list.files(<span class="string">&quot;.&quot;</span>, all.files = <span class="literal">TRUE</span>, full.names = <span class="literal">TRUE</span>, recursive = <span class="literal">TRUE</span>)</span><br><span class="line">Sys.chmod(f, (file.info(f)$mode | <span class="string">&quot;664&quot;</span>))</span><br></pre></td></tr></table></figure>
@@ -278,8 +268,8 @@ mode = 4, 检查文件或目录是否可读</p>
 <h4 id="其他功能">其他功能</h4>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拼接目录字符串</span></span><br><span class="line">&gt; file.path(<span class="string">&quot;p1&quot;</span>,<span class="string">&quot;p2&quot;</span>,<span class="string">&quot;p3&quot;</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">&quot;p1/p2/p3&quot;</span></span><br><span class="line"><span class="comment"># 最底层子目录或文件名</span></span><br><span class="line">&gt; filename&lt;-<span class="string">&#x27;C:/test/lalala.txt&#x27;</span></span><br><span class="line">&gt; basename(filename)</span><br><span class="line">[<span class="number">1</span>] <span class="string">&quot;lalala.txt&quot;</span></span><br><span class="line"><span class="comment"># 最底层子目录</span></span><br><span class="line">&gt; dirname(filename)r</span><br><span class="line">[<span class="number">1</span>] <span class="string">&quot;C:/test&quot;</span></span><br><span class="line"><span class="comment"># 转换扩展路径</span></span><br><span class="line">&gt; path.expand(<span class="string">&quot;~/foo&quot;</span>)</span><br><span class="line">[<span class="number">1</span>] <span class="string">&quot;/home/conan/foo&quot;</span></span><br></pre></td></tr></table></figure>
 <h2 id="常规文件操作">常规文件操作</h2>
-<p>cat(“file A\n”, file=”A”) #创建一个文件A，文件内容是’file A’,’\n’表示换行，这是一个很好的习惯</p>
-<p>cat(“file B\n”, file=”B”) #创建一个文件B</p>
+<p>cat(“file A”, file=”A”) #创建一个文件A，文件内容是’file A’,’’表示换行，这是一个很好的习惯</p>
+<p>cat(“file B”, file=”B”) #创建一个文件B</p>
 <p>file.append(“A”, “B”) #将文件B的内容附到A内容的后面，注意没有空行</p>
 <p>file.create(“A”) #创建一个文件A, 注意会覆盖原来的文件</p>
 <p>file.append(“A”, rep(“B”, 10)) #将文件B的内容复制10便，并先后附到文件A内容后</p>

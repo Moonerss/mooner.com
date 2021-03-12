@@ -234,7 +234,7 @@ mjx-container[display="true"] + br {
           
       </div>
       <div class="markdown-body">
-        <h2 id="typeof-class-mode-storage-mode-的区别"><code>typeof</code> <code>class</code> <code>mode</code> <code>storage.mode</code> 的区别</h2>
+        <h2 id="typeof-class-mode-storage.mode-的区别"><code>typeof</code> <code>class</code> <code>mode</code> <code>storage.mode</code> 的区别</h2>
 <h3 id="class"><code>class</code></h3>
 <p>根据 <code>class</code> 函数的帮助文档可知：</p>
 <blockquote>
@@ -252,15 +252,18 @@ mjx-container[display="true"] + br {
 </blockquote>
 <h4 id="基本类型情况">基本类型情况</h4>
 <ul>
-<li>对于单个值或者向量，<code>class</code> 返回隐式属性（与 <code>mode</code> 结果一致）；如：numeric，character</li>
-<li>对于矩阵，数组，日期，因子，<code>class</code> 返回matrix，array，Date，factor</li>
-<li>对于数据框，<code>class</code> 返回data.frame</li>
+<li>对于单个值或者向量，<code>class</code> 返回隐式属性（与 <code>mode</code> 结果一致）；如：numeric，character<br />
+</li>
+<li>对于矩阵，数组，日期，因子，<code>class</code> 返回matrix，array，Date，factor<br />
+</li>
+<li>对于数据框，<code>class</code> 返回data.frame<br />
+</li>
 <li>对于列表，<code>class</code> 返回list</li>
 </ul>
-<h3 id="mode-storage-mode-typeof"><code>mode</code> <code>storage.mode</code> <code>typeof</code></h3>
+<h3 id="mode-storage.mode-typeof"><code>mode</code> <code>storage.mode</code> <code>typeof</code></h3>
 <p><code>mode</code>、 <code>storage.mode</code>、 <code>typeof</code> 是同一类别的函数，它们识别的是<strong>对象在内存中的存储类型</strong>，即返回的是R中的<strong>基本数据类型</strong></p>
 <blockquote>
-<p>R中的基本数据类型：“logical”, “integer”, “double”, “complex”, “raw”,“character”, “list”, “expression”, “name”, “symbol” 和 “function”</p>
+<p>R中的基本数据类型："logical", "integer", "double", "complex", "raw","character", "list", "expression", "name", "symbol" 和 "function"</p>
 </blockquote>
 <p>对于 <code>mode</code>、 <code>storage.mode</code>、 <code>typeof</code> 三个函数来说，mode 是比较旧的版本，typeof 是更新的、也是更细的一种形式；三个函数检测的精细程度为：<code>mode</code> &gt; <code>storage.mode</code> &gt; <code>typeof</code></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mode(<span class="number">1</span>:<span class="number">5</span>) <span class="comment"># numeric</span></span><br><span class="line">storage.mode(<span class="number">1</span>:<span class="number">5</span>) <span class="comment"># integer</span></span><br><span class="line">typeof(<span class="number">1</span>:<span class="number">5</span>) <span class="comment"># integer</span></span><br><span class="line"></span><br><span class="line">mode(`+`) <span class="comment"># function</span></span><br><span class="line">storage.mode(`+`) <span class="comment"># function</span></span><br><span class="line">typeof(`+`) <span class="comment"># builtin</span></span><br></pre></td></tr></table></figure>
@@ -309,7 +312,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#typeof-class-mode-storage-mode-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">typeof class mode storage.mode 的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#class"><span class="toc-text">class</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%83%85%E5%86%B5"><span class="toc-text">基本类型情况</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mode-storage-mode-typeof"><span class="toc-text">mode storage.mode typeof</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#typeof-class-mode-storage.mode-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">typeof class mode storage.mode 的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#class"><span class="toc-text">class</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%83%85%E5%86%B5"><span class="toc-text">基本类型情况</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mode-storage.mode-typeof"><span class="toc-text">mode storage.mode typeof</span></a></li></ol></li></ol>
     </div>
   </div>
 

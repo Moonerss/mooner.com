@@ -235,8 +235,8 @@ mjx-container[display="true"] + br {
       </div>
       <div class="markdown-body">
         <p>SRAtoolkit是NCBI开发的一个用于SRA文件处理的软件包，包含许多有用的工具。</p>
-<h3 id="下载SRAtoolkit软件包"><strong>下载SRAtoolkit软件包</strong></h3>
-<p>软件包下载地址在NCBI网站：<a target="_blank" rel="noopener" href="https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software">https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software</a></p>
+<h3 id="下载sratoolkit软件包"><strong>下载SRAtoolkit软件包</strong></h3>
+<p>软件包下载地址在NCBI网站：https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software</p>
 <p>目前最新版是2.10.8；有多个操作系统版本，我们选Ubuntu 64bit版；</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -P ~/download https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.8/sratoolkit.2.10.8-ubuntu64.tar.gz</span><br></pre></td></tr></table></figure>
 <h3 id="解压压缩包"><strong>解压压缩包</strong></h3>
@@ -244,17 +244,16 @@ mjx-container[display="true"] + br {
 <h3 id="将sratoolkit安装文件路径加入环境变量"><strong>将sratoolkit安装文件路径加入环境变量</strong></h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export PATH=<span class="variable">$PATH</span>:/home/ubuntu/software/sratoolkit/bin&quot;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
 <p>使用<code>fastq-dump</code>和<code>prefetch</code>进行测试</p>
-<p>更详细步骤和说明，参见官网Documentation：<br>
-<a target="_blank" rel="noopener" href="https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc&amp;f=std">https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc&amp;f=std</a></p>
-<h3 id="下载SRA文件">下载SRA文件</h3>
+<p>更详细步骤和说明，参见官网Documentation： https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc&amp;f=std</p>
+<h3 id="下载sra文件">下载SRA文件</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">prefetch SRR10107270</span><br><span class="line">2020-10-03T06:03:13 prefetch.2.9.6: 1) Downloading <span class="string">&#x27;SRR10107270&#x27;</span>...</span><br><span class="line">2020-10-03T06:03:13 prefetch.2.9.6:  Downloading via https...</span><br><span class="line">2020-10-03T06:09:01 prefetch.2.9.6:  https download succeed</span><br><span class="line">2020-10-03T06:09:01 prefetch.2.9.6: 1) <span class="string">&#x27;SRR10107270&#x27;</span> was downloaded successfully</span><br><span class="line">2020-10-03T06:09:01 prefetch.2.9.6: <span class="string">&#x27;SRR10107270&#x27;</span> has 0 unresolved dependencies</span><br></pre></td></tr></table></figure>
-<h3 id="解压SRA文件">解压SRA文件</h3>
+<h3 id="解压sra文件">解压SRA文件</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> *sra</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line">fastq-dump --split-3 <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 <h3 id="查看文件">查看文件</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br><span class="line">SRR10107270_1.fastq  SRR10107270_2.fastq  SRR10107270.sra</span><br></pre></td></tr></table></figure>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">head SRR10107270_1.fastq</span><br><span class="line">@SRR10107270.1 1 length=72</span><br><span class="line">TCGGGNAGTGCTAGCTCGCGATTCCAGGATGTAGTTAACCTTGAGCACAATTTCATTGACGNNAGCAGCNNN</span><br><span class="line">+SRR10107270.1 1 length=72</span><br><span class="line">AAAAA<span class="comment">#EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE##EEEEEE###</span></span><br><span class="line">@SRR10107270.2 2 length=76</span><br><span class="line">CATGTNATTGTTGTAGGAATCAAAGTCAAACACATTTCGAACTACACTGGAGAGACCTTCANNCGGAAANTNNNGT</span><br><span class="line">+SRR10107270.2 2 length=76</span><br><span class="line">AAAAA<span class="comment">#EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEEEEEEEEEE/EEEEEE##EEEEEA#E###EE</span></span><br><span class="line">@SRR10107270.3 3 length=76</span><br><span class="line">AGACGNTGGAGGATGAAGGGCTGGCTGTTGGGTCTGTTCTTGCTCTAAGGCCACATCCTAGNAAAGCAGGGNNNGT   </span><br></pre></td></tr></table></figure>
 <p>可以看到测序read的读长是七十多bp</p>
-<h3 id=""></h3>
+<h3 id="section"></h3>
 
       </div>
       
@@ -300,7 +299,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDSRAtoolkit%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-text">下载SRAtoolkit软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8B%E5%8E%8B%E7%BC%A9%E5%8C%85"><span class="toc-text">解压压缩包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86sratoolkit%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%8A%A0%E5%85%A5%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">将sratoolkit安装文件路径加入环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDSRA%E6%96%87%E4%BB%B6"><span class="toc-text">下载SRA文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8BSRA%E6%96%87%E4%BB%B6"><span class="toc-text">解压SRA文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6"><span class="toc-text">查看文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDsratoolkit%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-text">下载SRAtoolkit软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8B%E5%8E%8B%E7%BC%A9%E5%8C%85"><span class="toc-text">解压压缩包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86sratoolkit%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%8A%A0%E5%85%A5%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">将sratoolkit安装文件路径加入环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDsra%E6%96%87%E4%BB%B6"><span class="toc-text">下载SRA文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8Bsra%E6%96%87%E4%BB%B6"><span class="toc-text">解压SRA文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6"><span class="toc-text">查看文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#section"><span class="toc-text"></span></a></li></ol>
     </div>
   </div>
 

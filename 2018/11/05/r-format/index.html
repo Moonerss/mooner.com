@@ -235,61 +235,51 @@ mjx-container[display="true"] + br {
       </div>
       <div class="markdown-body">
         <p>R语言是一门主要用于统计计算和绘图的高级编程语言. 在使用R时，好的代码编写和注释规范，可以提高代码的可读性和工作效率. 然而，什么样的规范更有利于我们自己使用和第三方解读？在此，建议使用《来自Google的R语言编码风格指南》一文中推荐的代码写作风格，这个规则是由Google的R用户群体协同设计而成.</p>
-<h2 id="概要-R编码风格约定">概要: R编码风格约定</h2>
-<ol>
-<li><a href="#%E6%96%87%E4%BB%B6%E5%91%BD%E5%90%8D">文件命名</a>: 以 .R (大写) 结尾</li>
-<li><a href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%91%BD%E5%90%8D">标识符命名</a>: <a target="_blank" rel="noopener" href="http://variable.name">variable.name</a>, FunctionName, kConstantName</li>
-<li><a href="#%E5%8D%95%E8%A1%8C%E9%95%BF%E5%BA%A6">单行长度</a>: 不超过80个字符</li>
-<li><a href="#%E7%BC%A9%E8%BF%9B">缩进</a>: 两个空格, 不使用制表符</li>
-<li><a href="#%E7%A9%BA%E7%99%BD">空白</a></li>
-<li><a href="#%E8%8A%B1%E6%8B%AC%E5%8F%B7">花括号</a>: 前括号不折行写, 后括号独占一行</li>
-<li><a href="#%E8%B5%8B%E5%80%BC">赋值符号</a>: 使用 &lt;-, 而非 =</li>
-<li><a href="#%E5%88%86%E5%8F%B7">分号</a>: 不要用</li>
-<li><a href="#%E6%80%BB%E4%BD%93%E5%B8%83%E5%B1%80%E5%92%8C%E9%A1%BA%E5%BA%8F">总体布局和顺序</a></li>
-<li><a href="#%E6%B3%A8%E9%87%8A%E5%87%86%E5%88%99">注释准则</a>: 所有注释以 # 开始, 后接一个空格; 行内注释需要在 # 前加两个空格</li>
-<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E8%B0%83%E7%94%A8">函数的定义和调用</a></li>
-<li><a href="#%E5%87%BD%E6%95%B0%E6%96%87%E6%A1%A3">函数文档</a></li>
-<li><a href="#%E7%A4%BA%E4%BE%8B%E5%87%BD%E6%95%B0">示例函数</a></li>
-<li><a href="#TODO%E4%B9%A6%E5%86%99%E9%A3%8E%E6%A0%BC">TODO书写风格</a>: TODO(您的用户名)</li>
+<h2 id="概要-r编码风格约定">概要: R编码风格约定</h2>
+<ol type="1">
+<li><a href="#文件命名">文件命名</a>: 以 .R (大写) 结尾</li>
+<li><a href="#标识符命名">标识符命名</a>: variable.name, FunctionName, kConstantName</li>
+<li><a href="#单行长度">单行长度</a>: 不超过80个字符</li>
+<li><a href="#缩进">缩进</a>: 两个空格, 不使用制表符</li>
+<li><a href="#空白">空白</a></li>
+<li><a href="#花括号">花括号</a>: 前括号不折行写, 后括号独占一行</li>
+<li><a href="#赋值">赋值符号</a>: 使用 &lt;-, 而非 =</li>
+<li><a href="#分号">分号</a>: 不要用</li>
+<li><a href="#总体布局和顺序">总体布局和顺序</a></li>
+<li><a href="#注释准则">注释准则</a>: 所有注释以 # 开始, 后接一个空格; 行内注释需要在 # 前加两个空格</li>
+<li><a href="#函数的定义和调用">函数的定义和调用</a></li>
+<li><a href="#函数文档">函数文档</a></li>
+<li><a href="#示例函数">示例函数</a></li>
+<li><a href="#TODO书写风格">TODO书写风格</a>: TODO(您的用户名)</li>
 </ol>
-<h3 id="1-表示和命名">1. 表示和命名</h3>
+<h3 id="表示和命名">1. 表示和命名</h3>
 <h4 id="文件命名">文件命名</h4>
-<p>文件名应以 .R (大写) 结尾, 文件名本身要有意义.<br>
-如: <font color = "green">predict_ad_revenue.R</font></p>
+<p>文件名应以 .R (大写) 结尾, 文件名本身要有意义. 如: <font color = "green">predict_ad_revenue.R</font></p>
 <h4 id="标识符命名">标识符命名</h4>
 <p>在标识符中不要使用下划线 ( _ ) 或连字符 ( - ). 标识符应根据如下惯例命名. 变量名应使用点 (.) 分隔所有的小写字母或单词; 函数名首字母大写, 不用点分隔 (所含单词首字母大写); 常数命名规则同函数, 但需使用一个 k 开头.</p>
 <ul>
-<li>变量命名<br>
-正例: <font color = "green">avg.clicks</font><br>
-反例: <font color = "red">avg_Clicks , avgClicks</font></li>
-<li>FunctionName<br>
-正例: <font color = "green">CalculateAvgClicks</font><br>
-反例: <font color = "red">calculate_avg_clicks , calculateAvgClicks</font><br>
-函数命名应为动词或动词性短语.</li>
+<li>变量命名 正例: <font color = "green">avg.clicks</font> 反例: <font color = "red">avg_Clicks , avgClicks</font></li>
+<li>FunctionName 正例: <font color = "green">CalculateAvgClicks</font> 反例: <font color = "red">calculate_avg_clicks , calculateAvgClicks</font> 函数命名应为动词或动词性短语.</li>
 </ul>
 <p><em>例外: 当创建一个含类 (class) 属性的对象时, 函数名 (也是constructor) 和类名 (class) 应当匹配 (例如, lm).</em></p>
 <ul>
 <li><font color = "green">kConstantName</font></li>
 </ul>
-<h3 id="2-语法">2. 语法</h3>
+<h3 id="语法">2. 语法</h3>
 <h4 id="单行长度">单行长度</h4>
 <p>最大单行长度为 80 个字符.</p>
 <h4 id="缩进">缩进</h4>
-<p>使用两个空格来缩进代码. 永远不要使用制表符或混合使用二者.<br>
-<em>例外: 当括号内发生折行时, 所折行与括号内的第一个字符对齐.</em></p>
+<p>使用两个空格来缩进代码. 永远不要使用制表符或混合使用二者. <em>例外: 当括号内发生折行时, 所折行与括号内的第一个字符对齐.</em></p>
 <h4 id="空白">空白</h4>
-<p>在所有二元操作符 (=, +, -, &lt;-, 等等) 的两侧加上空格.<br>
-<em>例外: 在函数调用中传递参数时 = 两边的空格可加可不加</em>.</p>
+<p>在所有二元操作符 (=, +, -, &lt;-, 等等) 的两侧加上空格. <em>例外: 在函数调用中传递参数时 = 两边的空格可加可不加</em>.</p>
 <p>不可在逗号前加空格, 逗号后总须加空格.</p>
 <p>例如:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tabPrior &lt;- table(df[df$daysFromOpt &lt; <span class="number">0</span>, <span class="string">&quot;campaignid&quot;</span>])</span><br><span class="line">        total &lt;- sum(x[, <span class="number">1</span>])</span><br><span class="line">        total &lt;- sum(x[<span class="number">1</span>, ])</span><br></pre></td></tr></table></figure>
-<p>在前括号前加一个空格, 函数调用时除外.<br>
-例如：</p>
+<p>在前括号前加一个空格, 函数调用时除外. 例如：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (debug)</span><br></pre></td></tr></table></figure>
 <p>多加空格 (即, 在行内使用多于一个空格) 也是可以的, 如果这样做能够改善等号或箭头 (&lt;-) 的对齐效果.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plot(x    = xCoord,</span><br><span class="line">     y    = dataMat[, makeColName(metric, ptiles[<span class="number">1</span>], <span class="string">&quot;roiOpt&quot;</span>)],</span><br><span class="line">     ylim = ylim,</span><br><span class="line">     xlab = <span class="string">&quot;dates&quot;</span>,</span><br><span class="line">     ylab = metric,</span><br><span class="line">     main = (paste(metric, <span class="string">&quot; for 3 samples &quot;</span>, sep=<span class="string">&quot;&quot;</span>)))</span><br></pre></td></tr></table></figure>
-<p>不要向圆括号或方括号中的代码两侧加入空格.<br>
-<em>例外: 逗号后总须加空格.</em></p>
+<p>不要向圆括号或方括号中的代码两侧加入空格. <em>例外: 逗号后总须加空格.</em></p>
 <p>以下写法就是错误的：</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( debug )  <span class="comment"># debug 的两边不要加空格</span></span><br><span class="line">x[<span class="number">1</span>,]  <span class="comment"># 需要在逗号后加一个空格</span></span><br></pre></td></tr></table></figure>
 <h4 id="花括号">花括号</h4>
@@ -300,23 +290,22 @@ mjx-container[display="true"] + br {
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (is.null(ylim))</span><br><span class="line">  ylim &lt;- c(<span class="number">0</span>, <span class="number">0.06</span>)</span><br></pre></td></tr></table></figure>
 <p>总在新起的一行开始书写代码块的主体。</p>
 <h4 id="赋值">赋值</h4>
-<p>使用 <code>&lt;-</code> 进行赋值, 不用<code> =</code> 赋值</p>
+<p>使用 <code>&lt;-</code> 进行赋值, 不用<code>=</code> 赋值</p>
 <h4 id="分号">分号</h4>
 <p>不要以分号结束一行, 也不要利用分号在同一行放多于一个命令. (分号是毫无必要的, 并且为了与其他Google编码风格指南保持一致, 此处同样略去.)</p>
-<h3 id="3-代码组织">3. 代码组织</h3>
+<h3 id="代码组织">3. 代码组织</h3>
 <h4 id="总体布局和顺序">总体布局和顺序</h4>
 <p>如果所有人都以相同顺序安排代码内容, 我们就可以更加轻松快速地阅读并理解他人的脚本了.</p>
-<ol>
+<ol type="1">
 <li>版权声明注释</li>
 <li>作者信息注释</li>
 <li>文件描述注释, 包括程序的用途, 输入和输出</li>
 <li><font color = "green">source()</font> 和 <font color = "green">library()</font> 语句</li>
 <li>函数定义</li>
-<li>要执行的语句, 如果有的话 (例如, <font color = "green">print, plot</font>)<br>
-单元测试应在另一个名为 <font color = "green">原始的文件名_unittest.R</font> 的独立文件中进行</li>
+<li>要执行的语句, 如果有的话 (例如, <font color = "green">print, plot</font>) 单元测试应在另一个名为 <font color = "green">原始的文件名_unittest.R</font> 的独立文件中进行</li>
 </ol>
 <h4 id="注释准则">注释准则</h4>
-<p>注释您的代码. 整行注释应以 <code># </code>后接一个空格开始.</p>
+<p>注释您的代码. 整行注释应以 <code>#</code>后接一个空格开始.</p>
 <p>行内短注释应在代码后接两个空格, <code>#</code>, 再接一个空格.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create histogram of frequency of campaigns by pct budget spent.</span></span><br><span class="line">    hist(df$pctSpent,</span><br><span class="line">    breaks = <span class="string">&quot;scott&quot;</span>,  <span class="comment"># method for choosing number of buckets</span></span><br><span class="line">    main   = <span class="string">&quot;Histogram: fraction budget spent by campaignid&quot;</span>,</span><br><span class="line">    xlab   = <span class="string">&quot;Fraction of budget spent&quot;</span>,</span><br><span class="line">    ylab   = <span class="string">&quot;Frequency (count of campaignids)&quot;</span>)</span><br></pre></td></tr></table></figure>
 <h4 id="函数的定义和调用">函数的定义和调用</h4>
@@ -329,10 +318,9 @@ mjx-container[display="true"] + br {
 <p>函数在定义行下方都应当紧接一个注释区. 这些注释应当由如下内容组成: 此函数的一句话描述; 此函数的参数列表, 用 Args: 表示, 对每个参数的描述 (包括数据类型); 以及对于返回值的描述, 以 Returns: 表示. 这些注释应当描述得足够充分, 这样调用者无须阅读函数中的任何代码即可使用此函数.</p>
 <h4 id="示例函数">示例函数</h4>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">CalculateSampleCovariance &lt;- <span class="keyword">function</span>(x, y, verbose = <span class="literal">TRUE</span>) &#123;</span><br><span class="line">        <span class="comment"># Computes the sample covariance between two vectors.</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Args:</span></span><br><span class="line">        <span class="comment">#   x: One of two vectors whose sample covariance is to be calculated.</span></span><br><span class="line">        <span class="comment">#   y: The other vector. x and y must have the same length, greater than one,</span></span><br><span class="line">        <span class="comment">#      with no missing values.</span></span><br><span class="line">        <span class="comment">#   verbose: If TRUE, prints sample covariance; if not, not. Default is TRUE.</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># Returns:</span></span><br><span class="line">        <span class="comment">#   The sample covariance between x and y.</span></span><br><span class="line">        n &lt;- length(x)</span><br><span class="line">        <span class="comment"># Error handling</span></span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span> || n != length(y)) &#123;</span><br><span class="line">        <span class="keyword">stop</span>(<span class="string">&quot;Arguments x and y have invalid lengths: &quot;</span>,</span><br><span class="line">        length(x), <span class="string">&quot; and &quot;</span>, length(y), <span class="string">&quot;.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">TRUE</span> %<span class="keyword">in</span>% is.na(x) || <span class="literal">TRUE</span> %<span class="keyword">in</span>% is.na(y)) &#123;</span><br><span class="line">        <span class="keyword">stop</span>(<span class="string">&quot; Arguments x and y must not have missing values.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        covariance &lt;- var(x, y)</span><br><span class="line">        <span class="keyword">if</span> (verbose)</span><br><span class="line">        cat(<span class="string">&quot;Covariance = &quot;</span>, round(covariance, <span class="number">4</span>), <span class="string">&quot;.\n&quot;</span>, sep = <span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span>(covariance)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="TODO书写风格">TODO书写风格</h4>
-<p>编码时通篇使用一种一致的风格来书写TODO.<br>
-<font color = "green">TODO(您的用户名): 所要采取行动的明确描述</font></p>
-<hr>
+<h4 id="todo书写风格">TODO书写风格</h4>
+<p>编码时通篇使用一种一致的风格来书写TODO. <font color = "green">TODO(您的用户名): 所要采取行动的明确描述</font></p>
+<hr />
 <p><strong>Reference：</strong></p>
 <p><a target="_blank" rel="noopener" href="https://nanx.me/rstyle/">来自Google的R语言编码风格指南</a></p>
       </div>
@@ -379,7 +367,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%A6%81-R%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E7%BA%A6%E5%AE%9A"><span class="toc-text">概要: R编码风格约定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%91%BD%E5%90%8D"><span class="toc-text">1. 表示和命名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%91%BD%E5%90%8D"><span class="toc-text">文件命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%91%BD%E5%90%8D"><span class="toc-text">标识符命名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AF%AD%E6%B3%95"><span class="toc-text">2. 语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E8%A1%8C%E9%95%BF%E5%BA%A6"><span class="toc-text">单行长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%A9%E8%BF%9B"><span class="toc-text">缩进</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E7%99%BD"><span class="toc-text">空白</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8A%B1%E6%8B%AC%E5%8F%B7"><span class="toc-text">花括号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC"><span class="toc-text">赋值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%8F%B7"><span class="toc-text">分号</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87"><span class="toc-text">3. 代码组织</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E5%B8%83%E5%B1%80%E5%92%8C%E9%A1%BA%E5%BA%8F"><span class="toc-text">总体布局和顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A%E5%87%86%E5%88%99"><span class="toc-text">注释准则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E8%B0%83%E7%94%A8"><span class="toc-text">函数的定义和调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%96%87%E6%A1%A3"><span class="toc-text">函数文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%87%BD%E6%95%B0"><span class="toc-text">示例函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TODO%E4%B9%A6%E5%86%99%E9%A3%8E%E6%A0%BC"><span class="toc-text">TODO书写风格</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%A6%81-r%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E7%BA%A6%E5%AE%9A"><span class="toc-text">概要: R编码风格约定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%91%BD%E5%90%8D"><span class="toc-text">1. 表示和命名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%91%BD%E5%90%8D"><span class="toc-text">文件命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%91%BD%E5%90%8D"><span class="toc-text">标识符命名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">2. 语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E8%A1%8C%E9%95%BF%E5%BA%A6"><span class="toc-text">单行长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%A9%E8%BF%9B"><span class="toc-text">缩进</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E7%99%BD"><span class="toc-text">空白</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8A%B1%E6%8B%AC%E5%8F%B7"><span class="toc-text">花括号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC"><span class="toc-text">赋值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%8F%B7"><span class="toc-text">分号</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87"><span class="toc-text">3. 代码组织</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E5%B8%83%E5%B1%80%E5%92%8C%E9%A1%BA%E5%BA%8F"><span class="toc-text">总体布局和顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A%E5%87%86%E5%88%99"><span class="toc-text">注释准则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E8%B0%83%E7%94%A8"><span class="toc-text">函数的定义和调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%96%87%E6%A1%A3"><span class="toc-text">函数文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%87%BD%E6%95%B0"><span class="toc-text">示例函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#todo%E4%B9%A6%E5%86%99%E9%A3%8E%E6%A0%BC"><span class="toc-text">TODO书写风格</span></a></li></ol></li></ol></li></ol>
     </div>
   </div>
 

@@ -250,7 +250,7 @@ mjx-container[display="true"] + br {
 <p>至此得到每一类免疫细胞基因的富集得分。</p>
 <p>对结果进行展示如下</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(<span class="string">&#x27;tidyverse&#x27;</span>)</span><br><span class="line"><span class="keyword">library</span>(<span class="string">&#x27;ggpubr&#x27;</span>)</span><br><span class="line">mydata &lt;- t(as.data.frame(ssGSEA)) %&gt;% as.data.frame()</span><br><span class="line"><span class="comment"># normal and tumor samples</span></span><br><span class="line">mydata$group &lt;- ifelse(substr(rownames(mydata),<span class="number">14</span>,<span class="number">15</span>) != <span class="string">&#x27;11&#x27;</span>,<span class="string">&#x27;Tumor&#x27;</span>,<span class="string">&#x27;Normal&#x27;</span>)</span><br><span class="line">ggdata &lt;- pivot_longer(data = mydata, cols = !group, names_to = <span class="string">&quot;Cell&quot;</span>, values_to = <span class="string">&quot;Value&quot;</span>)</span><br><span class="line"><span class="comment"># plot</span></span><br><span class="line">ggplot(ggdata,aes(x=Cell,y=Value,fill=group))+</span><br><span class="line">  geom_boxplot(width=<span class="number">0.7</span>,size=<span class="number">0.3</span>,outlier.color = <span class="literal">NA</span>)+</span><br><span class="line">  theme_bw()+</span><br><span class="line">  theme(panel.grid = element_blank())+</span><br><span class="line">  stat_compare_means(symnum.args = list(cutpoints = c(<span class="number">0</span>,<span class="number">0.001</span>, <span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">1</span>), </span><br><span class="line">                                        symbols = c(<span class="string">&quot;***&quot;</span>, <span class="string">&quot;**&quot;</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;ns&quot;</span>)),</span><br><span class="line">                     label = <span class="string">&quot;p.signif&quot;</span>)+</span><br><span class="line">  theme(axis.text.x = element_text(angle = <span class="number">60</span>,hjust = <span class="number">1</span>))+</span><br><span class="line">  theme(legend.position = <span class="string">&#x27;top&#x27;</span>)+</span><br><span class="line">  xlab(<span class="string">&#x27;&#x27;</span>)+ylab(<span class="string">&#x27;Infiltration Abundance&#x27;</span>)+</span><br><span class="line">  labs(fill=<span class="string">&#x27;Group&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/ssgsea/ssgsea.png" alt=""></p>
+<p><img src="/images/ssgsea/ssgsea.png" /></p>
 
       </div>
       
@@ -282,6 +282,11 @@ mjx-container[display="true"] + br {
               
           </div>
           <div class="post-foot-prev">
+            
+              <a href="/2020/12/19/tpm/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
             
           </div>
         </div>

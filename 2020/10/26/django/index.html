@@ -235,9 +235,7 @@ mjx-container[display="true"] + br {
       </div>
       <div class="markdown-body">
         <h2 id="背景">背景</h2>
-<p>在对Django项目进行移植时，由于生成项目的时候是将依赖和解释信息以绝对路径的方式写入配置文件的，<br>
-所以从一台电脑移植到另一台电脑，直接通过拷贝的方式是行不通的，正确的做法是将依赖模块写入requirements.txt文件中，<br>
-这样在别人使用我们的项目时，不需要再一个个去安装所需模块，只需安装依赖文件即可。</p>
+<p>在对Django项目进行移植时，由于生成项目的时候是将依赖和解释信息以绝对路径的方式写入配置文件的， 所以从一台电脑移植到另一台电脑，直接通过拷贝的方式是行不通的，正确的做法是将依赖模块写入requirements.txt文件中， 这样在别人使用我们的项目时，不需要再一个个去安装所需模块，只需安装依赖文件即可。</p>
 <h2 id="解决方法">解决方法</h2>
 <h3 id="使用-pip-freeze">使用 <code>pip freeze</code></h3>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在项目根目录中，打开终端执行以下命令</span></span><br><span class="line"><span class="comment"># 生成 requirements.txt 文件</span></span><br><span class="line">pip freeze &gt; requirements.txt</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>

@@ -261,10 +261,10 @@ mjx-container[display="true"] + br {
 <blockquote>
 <p>sep的优先级应该是高于collapse参数的，因此是先执行sep的操作，再执行collpase</p>
 </blockquote>
-<h3 id="paste0-函数">paste0()函数</h3>
+<h3 id="paste0函数">paste0()函数</h3>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paste (<span class="keyword">...</span>, sep = <span class="string">&quot; &quot;</span>, collapse = <span class="literal">NULL</span>)</span><br><span class="line">paste0(<span class="keyword">...</span>, collapse = <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
 <p>两者对比不难发现：</p>
-<p><code>paste0(..., collapse)</code> 等同于 <code>paste(..., sep = &quot;&quot;, collapse)</code>, 效率更高些，其他用法相同</p>
+<p><code>paste0(..., collapse)</code> 等同于 <code>paste(..., sep = "", collapse)</code>, 效率更高些，其他用法相同</p>
       </div>
       
         <div class="prev-or-next">
@@ -309,7 +309,7 @@ mjx-container[display="true"] + br {
   <div class="post-catalog" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%94%A8%E6%B3%95"><span class="toc-text">函数用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="toc-text">用法详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%B1%95%E7%A4%BA"><span class="toc-text">案例展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#paste0-%E5%87%BD%E6%95%B0"><span class="toc-text">paste0()函数</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%94%A8%E6%B3%95"><span class="toc-text">函数用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="toc-text">用法详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%B1%95%E7%A4%BA"><span class="toc-text">案例展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#paste0%E5%87%BD%E6%95%B0"><span class="toc-text">paste0()函数</span></a></li></ol>
     </div>
   </div>
 
