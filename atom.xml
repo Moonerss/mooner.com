@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-03-08T00:56:06.052Z</updated>
+  <updated>2021-03-31T07:42:34.147Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从sra提取fastq文件</title>
+    <link href="http://example.com/2021/03/31/fastq-dump/"/>
+    <id>http://example.com/2021/03/31/fastq-dump/</id>
+    <published>2021-03-31T06:58:59.000Z</published>
+    <updated>2021-03-31T07:42:34.147Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;code&gt;fastq-dump&lt;/code&gt;是SRAtoolkit中使用频率很高的命令，用于从SRA文件中拆解提取fastq文件。具体用法如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    
+    <category term="sequencing" scheme="http://example.com/tags/sequencing/"/>
+    
+  </entry>
   
   <entry>
     <title>lasso回归筛选构建生存模型</title>
@@ -489,32 +513,6 @@
     <category term="R" scheme="http://example.com/tags/R/"/>
     
     <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hemberg-lab单细胞转录组数据分析（二）</title>
-    <link href="http://example.com/2020/09/23/hemberg-lab2/"/>
-    <id>http://example.com/2020/09/23/hemberg-lab2/</id>
-    <published>2020-09-23T08:04:50.000Z</published>
-    <updated>2020-09-26T12:34:09.193Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;scrna-seq原始数据处理&quot;&gt;scRNA-seq原始数据处理&lt;/h2&gt;
-&lt;h3</summary>
-        
-      
-    
-    
-    
-    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
-    
-    
-    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
     
   </entry>
   
