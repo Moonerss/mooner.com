@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>FindMarkers的差异</title>
+      <link href="2021/04/07/findmarker/"/>
+      <url>2021/04/07/findmarker/</url>
+      
+        <content type="html"><![CDATA[<p>在<code>Seurat</code>包中，共有三个寻找差异表达基因的函数：<code>FindMarkers</code>、<code>FindAllMarkers</code>、<code>FindConservedMarkers</code>。</p><p>三者具有不同的作用，具体如下：</p><ul><li><code>FindMarkers</code>：寻找在两个不同的细胞亚群之间差异的基因（必须给定特定的细胞群体），在比较两组细胞之间的差异时使用；</li><li><code>FindAllMarkers</code>：寻找在每个细胞亚群中表达并且与其他所有亚群都差异的基因（不需要给定特定的细胞群体），识别的是全体细胞亚群各自的特征；</li><li><code>FindConservedMarkers</code>：寻找在两个特定细胞亚群之间保守的基因，也就是说这些基因在这两个亚群中的表达是相似的，但是与其他的亚群之间显著差异；</li></ul><blockquote><p>总结：</p><p><code>FindAllMarkers</code>适用于在大多数时候寻找细胞亚群的marker基因；<code>FindMarkers</code>适合比较两个亚群之间的差异；<code>FindConservedMarkers</code>获取两个亚群之间的关联。</p></blockquote><p>参考：</p><p><a href="https://www.biostars.org/p/409790/"><strong>FindConservedMarkers vs FindMarkers vs FindAllMarkers Seurat</strong></a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> SingleCell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>No visible binding for global variable</title>
       <link href="2021/04/07/visible-binding/"/>
       <url>2021/04/07/visible-binding/</url>

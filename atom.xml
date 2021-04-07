@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-04-07T07:46:14.433Z</updated>
+  <updated>2021-04-07T08:18:34.527Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FindMarkers的差异</title>
+    <link href="http://example.com/2021/04/07/findmarker/"/>
+    <id>http://example.com/2021/04/07/findmarker/</id>
+    <published>2021-04-07T08:06:57.000Z</published>
+    <updated>2021-04-07T08:18:34.527Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在&lt;code&gt;Seurat&lt;/code&gt;包中，共有三个寻找差异表达基因的函数：&lt;code&gt;FindMarkers&lt;/code&gt;、&lt;code&gt;FindAllMarkers&lt;/code&gt;、&lt;code&gt;FindConservedMarkers&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;三者</summary>
+        
+      
+    
+    
+    
+    
+    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
+    
+  </entry>
   
   <entry>
     <title>No visible binding for global variable</title>
@@ -479,33 +503,6 @@
     
     
     <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>测序质控软件trim_galore安装</title>
-    <link href="http://example.com/2020/09/23/trim-galore/"/>
-    <id>http://example.com/2020/09/23/trim-galore/</id>
-    <published>2020-09-23T12:58:22.000Z</published>
-    <updated>2020-10-03T10:49:11.531Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;code&gt;trim_galore&lt;/code&gt;可以用来对原始的测序数据进行质控&lt;/p&gt;
-&lt;p&gt;安装&lt;code&gt;trim_galore&lt;/code&gt;需要提前安装两个依赖软件：&lt;code&gt;Fastqc&lt;/code&gt;和&lt;code&gt;cutadapt&lt;/code&gt;&lt;/p&gt;
-&lt;p</summary>
-        
-      
-    
-    
-    
-    <category term="software" scheme="http://example.com/categories/software/"/>
-    
-    
-    <category term="software" scheme="http://example.com/tags/software/"/>
     
   </entry>
   
