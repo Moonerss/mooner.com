@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-03-31T07:42:34.147Z</updated>
+  <updated>2021-04-07T07:46:14.433Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>No visible binding for global variable</title>
+    <link href="http://example.com/2021/04/07/visible-binding/"/>
+    <id>http://example.com/2021/04/07/visible-binding/</id>
+    <published>2021-04-07T07:27:03.000Z</published>
+    <updated>2021-04-07T07:46:14.433Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在开发R包的过程中，使用&lt;code&gt;R CMD check&lt;/code&gt;进行检测时，出现许多的&lt;code&gt;NOTE&lt;/code&gt;:&lt;/p&gt;
+&lt;figure class=&quot;highlight r&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    
+    <category term="R" scheme="http://example.com/tags/R/"/>
+    
+    <category term="packages" scheme="http://example.com/tags/packages/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用linux命令使用汇总</title>
+    <link href="http://example.com/2021/03/31/oneline/"/>
+    <id>http://example.com/2021/03/31/oneline/</id>
+    <published>2021-03-31T07:56:36.000Z</published>
+    <updated>2021-03-31T08:14:34.663Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;wget&lt;/code&gt;下载文件&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="http://example.com/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>从sra提取fastq文件</title>
@@ -455,64 +506,6 @@
     
     
     <category term="software" scheme="http://example.com/tags/software/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FastQC安装与使用</title>
-    <link href="http://example.com/2020/09/23/fastqc/"/>
-    <id>http://example.com/2020/09/23/fastqc/</id>
-    <published>2020-09-23T11:58:13.000Z</published>
-    <updated>2020-10-03T08:10:54.469Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;FastQC是一款用于对RNA-seq数据进行质量检测和控制的软件（对单细胞和bulk的测序数据都适用）&lt;/p&gt;
-&lt;h2 id=&quot;fastqc安装&quot;&gt;fastqc安装&lt;/h2&gt;
-&lt;p&gt;首先需要从官网下载FastQC的安装文件&lt;br</summary>
-        
-      
-    
-    
-    
-    <category term="software" scheme="http://example.com/categories/software/"/>
-    
-    
-    <category term="software" scheme="http://example.com/tags/software/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ggplot2常用theme参数参考</title>
-    <link href="http://example.com/2020/09/23/ggplottheme/"/>
-    <id>http://example.com/2020/09/23/ggplottheme/</id>
-    <published>2020-09-23T08:48:36.000Z</published>
-    <updated>2020-09-23T08:52:09.018Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;大佬总结的ggplot2常用调节参数&lt;br /&gt;
-&lt;img src=&quot;/images/ggplottheme/20200627183728.png&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/images/ggplottheme/20200627183936.png&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="R" scheme="http://example.com/categories/R/"/>
-    
-    <category term="ggplot2" scheme="http://example.com/categories/R/ggplot2/"/>
-    
-    
-    <category term="R" scheme="http://example.com/tags/R/"/>
-    
-    <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
     
   </entry>
   

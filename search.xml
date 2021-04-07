@@ -4,6 +4,46 @@
   
     
     <entry>
+      <title>No visible binding for global variable</title>
+      <link href="2021/04/07/visible-binding/"/>
+      <url>2021/04/07/visible-binding/</url>
+      
+        <content type="html"><![CDATA[<p>在开发R包的过程中，使用<code>R CMD check</code>进行检测时，出现许多的<code>NOTE</code>:</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">❯ checking R code <span class="keyword">for</span> possible problems <span class="keyword">...</span> NOTE</span><br><span class="line">  my_fn: no visible binding <span class="keyword">for</span> global variable ‘mpg’</span><br></pre></td></tr></table></figure><p>这些<code>NOTE</code>一般是由于某一个变量并没有在全局环境中声明所导致的，解决的方法有多种，具体思路如下：</p><h3 id="方案一">方案一：</h3><p>使用<code>globalVariables()</code>函数包裹所有的变量进行全局声明，如：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">globalVariables(c(<span class="string">"mpg"</span>, <span class="string">"hp"</span>, <span class="string">"mpg_div_hp"</span>))</span><br></pre></td></tr></table></figure><p>对于一些特殊的语法糖符号也可以使用该方法进行声明，如：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">globalVariables(c(<span class="string">":="</span>, <span class="string">"!!"</span>))</span><br></pre></td></tr></table></figure><h3 id="方案二">方案二：</h3><p>在函数的开始部分对非全局变量进行声明，定义为<code>NULL</code>值</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">my_fn &lt;- <span class="keyword">function</span>() {</span><br><span class="line">  mpg &lt;- hp &lt;- mpg_div_hp &lt;- <span class="literal">NULL</span></span><br><span class="line">  mtcars &lt;- data.table::data.table(mtcars)</span><br><span class="line">  mtcars[, mpg_div_hp := mpg / hp]</span><br><span class="line">  mtcars[]</span><br><span class="line">}</span><br></pre></td></tr></table></figure><h3 id="方案三">方案三：</h3><p>该方法主要适用于<code>tidyverse</code>编程的函数，在函数中引入<code>.data</code>进行声明：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原函数</span></span><br><span class="line">my_fn &lt;- <span class="keyword">function</span>() {</span><br><span class="line">  mtcars %&gt;% </span><br><span class="line">    mutate(mpg_div_hp = mpg / hp)</span><br><span class="line">}</span><br></pre></td></tr></table></figure><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 声明后</span></span><br><span class="line"><span class="comment">#' @importFrom rlang .data</span></span><br><span class="line">my_fn &lt;- <span class="keyword">function</span>() {</span><br><span class="line">  mtcars %&gt;% </span><br><span class="line">    mutate(mpg_div_hp = .data$mpg / .data$hp)</span><br><span class="line">}</span><br></pre></td></tr></table></figure><h3 id="reference">Reference：</h3><p><a href="https://www.r-bloggers.com/2019/08/no-visible-binding-for-global-variable/">No visible binding for global variable</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> R </tag>
+            
+            <tag> packages </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>常用linux命令使用汇总</title>
+      <link href="2021/03/31/oneline/"/>
+      <url>2021/03/31/oneline/</url>
+      
+        <content type="html"><![CDATA[<ol type="1"><li><p><code>wget</code>下载文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O filename -c http://path</span><br></pre></td></tr></table></figure><blockquote><p><code>-O</code> 设置下载路径和文件名字</p><p><code>-c</code> 断点续传</p><p><code>-b</code>后台下载</p></blockquote></li><li><p><code>axel</code>下载文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axel -n threads -o filename http://path</span><br></pre></td></tr></table></figure><blockquote><p><code>-n</code> 设置线程数</p><p><code>-o</code> 设置下载路径和文件名字</p><p>如果下载中断可以再执行下载命令即可恢复上次的下载进度。</p></blockquote></li><li><p><code>curl</code>下载文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o filename http://path</span><br></pre></td></tr></table></figure><blockquote><p><code>-o</code> 设置下载路径和文件名字</p><p><code>-C</code> 断点续传</p></blockquote></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>从sra提取fastq文件</title>
       <link href="2021/03/31/fastq-dump/"/>
       <url>2021/03/31/fastq-dump/</url>
