@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-04-07T08:18:34.527Z</updated>
+  <updated>2021-04-13T06:18:41.047Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>流量结构分布图——桑基图(Sankey)</title>
+    <link href="http://example.com/2021/04/13/sankey/"/>
+    <id>http://example.com/2021/04/13/sankey/</id>
+    <published>2021-04-13T02:59:22.000Z</published>
+    <updated>2021-04-13T06:18:41.047Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;桑基图&quot;&gt;桑基图&lt;/h2&gt;
+&lt;p&gt;桑基图 (Sankey Diagram)，是一种特定类型的流图，用于描述一组值到另一组值的流向。图中延伸的分支的宽度对应数据流量的大小，通常应用于能源、材料成分、金融等数据的可视化分析。因1898年Matthew Henry</summary>
+        
+      
+    
+    
+    
+    
+    <category term="ggplot2" scheme="http://example.com/tags/ggplot2/"/>
+    
+  </entry>
   
   <entry>
     <title>FindMarkers的差异</title>
@@ -469,31 +493,6 @@
     <summary type="html">&lt;h1 id=&quot;umi表达定量-umi&quot;&gt;UMI表达定量 (UMI)&lt;/h1&gt;
 &lt;h2 id=&quot;umi表达定量-umi-1&quot;&gt;UMI表达定量 (UMI)&lt;/h2&gt;
 &lt;h3</summary>
-        
-      
-    
-    
-    
-    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
-    
-    
-    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hemberg-lab单细胞转录组数据分析（三）</title>
-    <link href="http://example.com/2020/09/28/hemberg-lab3/"/>
-    <id>http://example.com/2020/09/28/hemberg-lab3/</id>
-    <published>2020-09-28T07:47:07.000Z</published>
-    <updated>2020-09-28T11:50:21.595Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;我们使用 Tabula Muris最开始释放的数据做为测试数据来完成完整的单细胞数据分析。&lt;code&gt;The Tabula</summary>
         
       
     
