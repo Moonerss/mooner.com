@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-04-13T06:18:41.047Z</updated>
+  <updated>2021-04-20T02:23:22.579Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>给R一点颜色看看</title>
+    <link href="http://example.com/2021/04/20/message/"/>
+    <id>http://example.com/2021/04/20/message/</id>
+    <published>2021-04-20T00:43:58.000Z</published>
+    <updated>2021-04-20T02:23:22.579Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在R中，程序运行时会输出一些提示性的文字，这对于使用者来说是比较重要的。这些文字能够帮助使用者获得必要的信息，从而对程序进行把握。在普通情况下我们一般会使用&lt;code&gt;cat()&lt;/code&gt;、&lt;code&gt;message()&lt;/code&gt;等函数输出提示信息，然而这样输出的都</summary>
+        
+      
+    
+    
+    
+    
+    <category term="R" scheme="http://example.com/tags/R/"/>
+    
+  </entry>
   
   <entry>
     <title>流量结构分布图——桑基图(Sankey)</title>
@@ -466,33 +489,6 @@
         
         
     <summary type="html">&lt;h2</summary>
-        
-      
-    
-    
-    
-    <category term="SingleCell" scheme="http://example.com/categories/SingleCell/"/>
-    
-    
-    <category term="SingleCell" scheme="http://example.com/tags/SingleCell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hemberg-lab单细胞转录组数据分析（四）</title>
-    <link href="http://example.com/2020/09/28/hemberg-lab4/"/>
-    <id>http://example.com/2020/09/28/hemberg-lab4/</id>
-    <published>2020-09-28T11:40:47.000Z</published>
-    <updated>2020-09-28T12:34:53.605Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;umi表达定量-umi&quot;&gt;UMI表达定量 (UMI)&lt;/h1&gt;
-&lt;h2 id=&quot;umi表达定量-umi-1&quot;&gt;UMI表达定量 (UMI)&lt;/h2&gt;
-&lt;h3</summary>
         
       
     
